@@ -1,0 +1,34 @@
+syntax = "proto3";
+package container;
+option go_package = "github.com/nspcc-dev/neofs-proto/container";
+
+import "github.com/nspcc-dev/netmap/selector.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.stable_marshaler_all) = true;
+
+// The Container service definition.
+message Container {
+    // OwnerID is a wallet address.
+    bytes OwnerID              = 1 [(gogoproto.customtype) = "OwnerID", (gogoproto.nullable) = false];
+    // Salt is a nonce for unique container id calculation.
+    bytes Salt                 = 2 [(gogoproto.customtype) = "UUID",    (gogoproto.nullable) = false];
+    // Capacity defines amount of data that can be stored in the container (doesn't used for now).
+    uint64 Capacity            = 3;
+    // Rules define storage policy for the object inside the container.
+    netmap.PlacementRule Rules = 4 [(gogoproto.nullable) = false];
+    // Container ACL.
+    AccessControlList List     = 5 [(gogoproto.nullable) = false];
+}
+
+message AccessGroup {
+    // Group access mode.
+    uint32 AccessMode         = 1;
+    // Group members.
+    repeated bytes UserGroup  = 2 [(gogoproto.customtype) = "OwnerID", (gogoproto.nullable) = false];
+}
+
+message AccessControlList {
+    // List of access groups.
+    repeated AccessGroup List = 1 [(gogoproto.nullable) = false];
+}
