@@ -55,15 +55,6 @@ Bootstrap package defines:
 Decimal defines custom decimal implementation which is used in accounting
 operations.
 
-### Hash
-
-Hash package defines homomorphic hash type.
-
-### Internal
-
-Internal package defines constant error type and proto interface for custom
-protobuf structures. 
-
 ### Object
 
 Object package defines service and structures for object operations. Object is 
