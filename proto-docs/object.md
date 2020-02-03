@@ -63,7 +63,7 @@ rpc Get(GetRequest) returns (stream GetResponse);
 rpc Put(stream PutRequest) returns (PutResponse);
 rpc Delete(DeleteRequest) returns (DeleteResponse);
 rpc Head(HeadRequest) returns (HeadResponse);
-rpc Search(SearchRequest) returns (SearchResponse);
+rpc Search(SearchRequest) returns (stream SearchResponse);
 rpc GetRange(GetRangeRequest) returns (GetRangeResponse);
 rpc GetRangeHash(GetRangeHashRequest) returns (GetRangeHashResponse);
 
@@ -112,7 +112,8 @@ headers are also present.
 
 Search objects in container. Version of query language format SHOULD BE
 set to 1. Search query represented in serialized format (see query
-package).
+package). Requested list can be restored by concatenation of addresses
+from all messages. Addresses from resulting list are expected to be unique.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
