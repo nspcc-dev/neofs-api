@@ -64,7 +64,7 @@ rpc Put(stream PutRequest) returns (PutResponse);
 rpc Delete(DeleteRequest) returns (DeleteResponse);
 rpc Head(HeadRequest) returns (HeadResponse);
 rpc Search(SearchRequest) returns (stream SearchResponse);
-rpc GetRange(GetRangeRequest) returns (GetRangeResponse);
+rpc GetRange(GetRangeRequest) returns (stream GetRangeResponse);
 rpc GetRangeHash(GetRangeHashRequest) returns (GetRangeHashResponse);
 
 ```
@@ -120,8 +120,7 @@ from all messages. Addresses from resulting list are expected to be unique.
 | Search | [SearchRequest](#object.SearchRequest) | [SearchResponse](#object.SearchResponse) |
 #### Method GetRange
 
-GetRange of data payload. Ranges are set of pairs (offset, length).
-Fragments order in response corresponds to ranges order in request.
+GetRange of data payload. Range is a pair (offset, length).
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
