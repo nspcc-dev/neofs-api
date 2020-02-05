@@ -196,7 +196,7 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
-| Ranges | [Range](#object.Range) | repeated | Ranges of object's payload to return |
+| Range | [Range](#object.Range) |  | Range of object's payload to return |
 | Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
 | Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
 
