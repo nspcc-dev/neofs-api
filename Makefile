@@ -1,4 +1,4 @@
-NETMAP_VERSION=v1.6.1
+NETMAP_VERSION=v1.7.0
 GOGOPROTO_VERSION=v1.3.1
 
 NETMAP_URL=https://github.com/nspcc-dev/netmap/archive/$(NETMAP_VERSION).tar.gz
