@@ -112,8 +112,7 @@ headers are also present.
 
 Search objects in container. Version of query language format SHOULD BE
 set to 1. Search query represented in serialized format (see query
-package). Requested list can be restored by concatenation of addresses
-from all messages. Addresses from resulting list are expected to be unique.
+package).
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -121,6 +120,8 @@ from all messages. Addresses from resulting list are expected to be unique.
 #### Method GetRange
 
 GetRange of data payload. Range is a pair (offset, length).
+Requested range can be restored by concatenation of all chunks
+keeping receiving order.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -160,6 +161,10 @@ DeleteResponse is empty because we cannot guarantee permanent object removal
 in distributed system.
 
 
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
+
 
 <a name="object.GetRangeHashRequest"></a>
 
@@ -185,6 +190,7 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Hashes | [bytes](#bytes) | repeated | Hashes is a homomorphic hashes of all ranges |
+| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
 
 <a name="object.GetRangeRequest"></a>
@@ -210,6 +216,7 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Fragment | [bytes](#bytes) |  | Fragment of object's payload |
+| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
 
 <a name="object.GetRequest"></a>
@@ -236,6 +243,7 @@ in distributed system.
 | ----- | ---- | ----- | ----------- |
 | object | [Object](#object.Object) |  | Object header and some payload |
 | Chunk | [bytes](#bytes) |  | Chunk of remaining payload |
+| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
 
 <a name="object.HeadRequest"></a>
@@ -262,6 +270,7 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Object | [Object](#object.Object) |  | Object without payload |
+| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
 
 <a name="object.PutRequest"></a>
@@ -299,6 +308,7 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
+| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
 
 <a name="object.SearchRequest"></a>
@@ -325,6 +335,7 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Addresses | [refs.Address](#refs.Address) | repeated | Addresses of found objects |
+| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
  <!-- end messages -->
 
