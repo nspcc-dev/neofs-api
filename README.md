@@ -16,7 +16,7 @@ repository. Use them to integrate applications with NeoFS.
 
 This repository contains:
 
-- 11 protocol buffers packages,
+- 12 protocol buffers packages,
 - [auto-generated docs](proto-docs) for protocol buffers,
 - [manually written docs](docs) for developers (to be done). 
 
@@ -33,6 +33,9 @@ See:
 - [Accounting service](proto-docs/accounting.md#accounting.Accounting)
 - [Withdraw service](proto-docs/accounting.md#accounting.Withdraw)
 
+#### ACL
+
+ACL package defines targets of access control rules.
 
 #### Bootstrap
 
