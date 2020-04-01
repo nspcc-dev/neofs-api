@@ -56,6 +56,10 @@ See:
 
 - [Container service](proto-docs/container.md#container.Service)
 
+#### Decimal
+
+Decimal defines structure for encoding assets amount.
+
 #### Object
 
 Object is the storage unit in NeoFS. Object package defines structure of the
