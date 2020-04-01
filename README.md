@@ -1,104 +1,103 @@
-# NeoFS-proto 
+# NeoFS-API
 
-NeoFS-proto repository contains implementation of core NeoFS structures that
-can be used for integration with NeoFS. 
+NeoFS-API repository contains language-agnostic 
+[protocol buffers](https://developers.google.com/protocol-buffers) definitions
+of neofs-node structures and services. 
 
 ## Description
 
-Repository contains 13 packages that implement NeoFS core structures. These
-packages mostly contain protobuf files with service and structure definitions 
-or NeoFS core types with complemented functions. 
+NeoFS-API repository is the basis for language-specific libraries, e.g.:
 
-There is a auto-generated documentation for protobuf files in [docs](proto-docs).
+- [neofs-api-go](https://github.com/nspcc-dev/neofs-api-go)
+- [neofs-api-csharp](https://github.com/nspcc-dev/neofs-api-csharp)
 
-### Accounting
+These libraries contain compiled protocol buffers code, defined in this
+repository. Use them to integrate applications with NeoFS.
 
-Accounting package defines services and structures for accounting operations: 
-balance request and `cheque` operations for withdraw. `Cheque` is a structure
-with inner ring signatures, which approve that user can withdraw requested
-amount of assets. NeoFS smart contract takes binary formatted `cheque` as a 
-parameter in withdraw call. 
+This repository contains:
 
-#### API
-Accounting package defines: 
+- 11 protocol buffers packages,
+- [auto-generated docs](proto-docs) for protocol buffers,
+- [manually written docs](docs) for developers (to be done). 
+
+
+### Protocol packages
+
+#### Accounting
+
+Accounting package defines services and structures for balance request and 
+`cheque` operations.
+
+See:
+
 - [Accounting service](proto-docs/accounting.md#accounting.Accounting)
 - [Withdraw service](proto-docs/accounting.md#accounting.Withdraw)
 
 
-### Bootstrap
+#### Bootstrap
 
-Bootstrap package defines bootstrap service which is used by storage nodes to
-connect to the storage network. 
+Bootstrap package defines bootstrap service that connects storage nodes
+to the network. 
 
-#### API
-Bootstrap package defines:
+See:
+
 - [Bootstrap service](proto-docs/bootstrap.md#bootstrap.Bootstrap)
 
 
-### Chain
+#### Container
 
-Chain package contains util functions for operations with NEO Blockchain types:
-wallet addresses, script-hashes. 
+Container package defines service and structure of containers. NeoFS stores
+objects within the registered container according to a specified storage policy.
 
-### Container
+See:
 
-Container package defines service and structures for operations with containers.
-Objects in NeoFS are stored in containers. Container defines storage 
-policy for the objects. 
-
-#### API
-Bootstrap package defines:
 - [Container service](proto-docs/container.md#container.Service)
 
-### Decimal
+#### Object
 
-Decimal defines custom decimal implementation which is used in accounting
-operations.
+Object is the storage unit in NeoFS. Object package defines structure of the
+object and service requests.
 
-### Object
+See:
 
-Object package defines service and structures for object operations. Object is 
-a core storage structure in NeoFS. Package contains detailed information
-about object internal structure.
-
-#### API
-Object package defines:
 - [Object service](proto-docs/object.md#object.Service)
 
-### Query
+#### Query
 
 Query package defines structure for object search requests. 
 
-### Refs
+#### Refs
 
-Refs package defines core identity types: Object ID, Container ID, etc.
+Refs package defines identity types: object id, container id, etc.
 
-### Service
+#### Service
 
-Service package defines util structure and functions for all NeoFS services
-operations: TTL and request signature management, node roles, epoch retriever. 
+Service package defines utility structures for all public API requests: 
+TTL, request signature, etc.
 
-### Session
+#### Session
 
-Session package defines service and structures for session obtain. Object
-operations require an established session with pair of session keys signed by 
-owner of the object. 
+Session package defines service and structures to setup session between
+the node and the client. Session token is required in some object service
+requests. Node uses session private key to re-sign new objects and requests.
 
-#### API
-Session package defines:
+See:
+
 - [Session service](proto-docs/session.md#session.Session)
 
-### State
+#### State
 
 State package defines service and structures for metrics gathering. 
 
-#### API
-State package defines:
+See:
+
 - [Status service](proto-docs/state.md#state.Status)
 
-## Contributing
+#### StorageGroup
 
-At this moment, we do not accept contributions. 
+Storagegroup package defines structure that contains meta data for data audit. 
+This meta data stored as a header in the NeoFS object.
+
 
 ## License
 
