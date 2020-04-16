@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.7.0] - 2020-04-16
+
+### Added
+
+- Numerical field CopiesNumber into object.PutRequest.PutHeader message.
+
 ## [0.6.1] - 2020-04-15
 
 ### Added
@@ -24,3 +30,4 @@
 [0.5.0]: https://github.com/nspcc-dev/neofs-api/releases/tag/v0.5.0
 [0.6.0]: https://github.com/nspcc-dev/neofs-api/compare/v0.5.0...v0.6.0
 [0.6.1]: https://github.com/nspcc-dev/neofs-api/compare/v0.6.0...v0.6.1
+[0.7.0]: https://github.com/nspcc-dev/neofs-api/compare/v0.6.1...v0.7.0
