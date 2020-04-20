@@ -7,21 +7,21 @@ GOGOPROTO_URL=https://github.com/gogo/protobuf/archive/$(GOGOPROTO_VERSION).tar.
 .PHONY: deps docgen
 
 deps:
-	@echo "=> Prepare"
+	@echo "⇒ Prepare"
 	@rm -rf ./vendor/github.com/gogo/protobuf
 	@rm -rf ./vendor/github.com/nspcc-dev/netmap
 	@mkdir -p ./vendor/github.com/gogo/protobuf
 	@mkdir -p ./vendor/github.com/nspcc-dev/netmap
 
-	@echo "=> Download"
+	@echo "⇒ Download"
 	@curl -sL -o ./vendor/gogo.tar.gz $(GOGOPROTO_URL)
 	@curl -sL -o ./vendor/netmap.tar.gz $(NETMAP_URL)
 
-	@echo "=> Vendoring"
+	@echo "⇒ Vendoring"
 	@tar -xzf ./vendor/gogo.tar.gz --strip-components 1 -C ./vendor/github.com/gogo/protobuf
 	@tar -xzf ./vendor/netmap.tar.gz --strip-components 1 -C ./vendor/github.com/nspcc-dev/netmap
 
-	@echo "=> Cleanup"
+	@echo "⇒ Cleanup"
 	@rm ./vendor/gogo.tar.gz
 	@rm ./vendor/netmap.tar.gz
 
