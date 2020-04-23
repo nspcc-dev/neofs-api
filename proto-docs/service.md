@@ -43,6 +43,7 @@ RequestMetaHeader contains information about request meta headers
 | TTL | [uint32](#uint32) |  | TTL must be larger than zero, it decreased in every NeoFS Node |
 | Epoch | [uint64](#uint64) |  | Epoch for user can be empty, because node sets epoch to the actual value |
 | Version | [uint32](#uint32) |  | Version defines protocol version TODO: not used for now, should be implemented in future |
+| Raw | [bool](#bool) |  | Raw determines whether the request is raw or not |
 
 
 <a name="service.ResponseMetaHeader"></a>
