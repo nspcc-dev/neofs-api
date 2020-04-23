@@ -14,7 +14,6 @@
 
   - Messages
     - [RequestVerificationHeader](#service.RequestVerificationHeader)
-    - [RequestVerificationHeader.Sign](#service.RequestVerificationHeader.Sign)
     - [RequestVerificationHeader.Signature](#service.RequestVerificationHeader.Signature)
     
 
@@ -85,18 +84,6 @@ RequestVerificationHeader is a set of signatures of every NeoFS Node that proces
 | Signatures | [RequestVerificationHeader.Signature](#service.RequestVerificationHeader.Signature) | repeated | Signatures is a set of signatures of every passed NeoFS Node |
 
 
-<a name="service.RequestVerificationHeader.Sign"></a>
-
-### Message RequestVerificationHeader.Sign
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| Sign | [bytes](#bytes) |  | Sign is signature of the request or session key. |
-| Peer | [bytes](#bytes) |  | Peer is compressed public key used for signature. |
-
-
 <a name="service.RequestVerificationHeader.Signature"></a>
 
 ### Message RequestVerificationHeader.Signature
@@ -105,8 +92,8 @@ RequestVerificationHeader is a set of signatures of every NeoFS Node that proces
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Sign | [RequestVerificationHeader.Sign](#service.RequestVerificationHeader.Sign) |  | Sign is a signature and public key of the request. |
-| Origin | [RequestVerificationHeader.Sign](#service.RequestVerificationHeader.Sign) |  | Origin used for requests, when trusted node changes it and re-sign with session key. If session key used for signature request, then Origin should contain public key of user and signed session key. |
+| Sign | [bytes](#bytes) |  | Sign is signature of the request or session key. |
+| Peer | [bytes](#bytes) |  | Peer is compressed public key used for signature. |
 
  <!-- end messages -->
 
