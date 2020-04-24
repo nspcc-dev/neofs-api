@@ -5,7 +5,6 @@ option csharp_namespace = "NeoFS.API.Object";
 
 import "refs/types.proto";
 import "object/types.proto";
-import "session/types.proto";
 import "service/meta.proto";
 import "service/verify.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
@@ -83,7 +82,7 @@ message PutRequest {
         // Object with at least container id and owner id fields
         Object Object       = 1;
         // Token with session public key and user's signature
-        session.Token Token = 2;
+        service.Token Token = 2;
         // Number of the object copies to store within the RPC call (zero is processed according to the placement rules)
         uint32 CopiesNumber = 3;
     }
@@ -113,7 +112,7 @@ message DeleteRequest {
     // OwnerID is a wallet address
     bytes OwnerID                            = 2 [(gogoproto.nullable) = false, (gogoproto.customtype) = "OwnerID"];
     // Token with session public key and user's signature
-    session.Token Token                      = 3;
+    service.Token Token                      = 3;
     // RequestMetaHeader contains information about request meta headers (should be embedded into message)
     service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
     // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
