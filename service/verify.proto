@@ -68,8 +68,8 @@ message Token {
         bytes SessionKey = 7;
     }
 
-    // Info is a grouped information about token
-    Info info = 1 [(gogoproto.embed) = true, (gogoproto.nullable) = false, (gogoproto.customname) = "Info"];
+    // TokenInfo is a grouped information about token
+    Info TokenInfo = 1 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
 
     // Signature is a signature of session token information
     bytes Signature = 8;
