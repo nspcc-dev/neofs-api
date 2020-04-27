@@ -376,7 +376,7 @@ in distributed system.
 | UserHeader | [UserHeader](#object.UserHeader) |  | UserHeader is a set of KV headers defined by user |
 | Transform | [Transform](#object.Transform) |  | Transform defines transform operation (e.g. payload split) |
 | Tombstone | [Tombstone](#object.Tombstone) |  | Tombstone header that set up in deleted objects |
-| Token | [service.Token](#service.Token) |  | Token header that contains session token |
+| Token | [service.Token](#service.Token) |  | Token header contains token of the session within which the object was created |
 | HomoHash | [bytes](#bytes) |  | HomoHash is a homomorphic hash of original object payload |
 | PayloadChecksum | [bytes](#bytes) |  | PayloadChecksum of actual object's payload |
 | Integrity | [IntegrityHeader](#object.IntegrityHeader) |  | Integrity header with checksum of all above headers in the object |
