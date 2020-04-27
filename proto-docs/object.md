@@ -149,7 +149,6 @@ calculated for XORed data.
 | ----- | ---- | ----- | ----------- |
 | Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
 | OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |
-| Token | [service.Token](#service.Token) |  | Token with session public key and user's signature |
 | Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
 | Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
 
@@ -294,7 +293,6 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Object | [Object](#object.Object) |  | Object with at least container id and owner id fields |
-| Token | [service.Token](#service.Token) |  | Token with session public key and user's signature |
 | CopiesNumber | [uint32](#uint32) |  | Number of the object copies to store within the RPC call (zero is processed according to the placement rules) |
 
 
