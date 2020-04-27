@@ -149,7 +149,6 @@ calculated for XORed data.
 | ----- | ---- | ----- | ----------- |
 | Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
 | OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |
-| Token | [service.Token](#service.Token) |  | Token with session public key and user's signature |
 | Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
 | Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
 
@@ -294,7 +293,6 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Object | [Object](#object.Object) |  | Object with at least container id and owner id fields |
-| Token | [service.Token](#service.Token) |  | Token with session public key and user's signature |
 | CopiesNumber | [uint32](#uint32) |  | Number of the object copies to store within the RPC call (zero is processed according to the placement rules) |
 
 
@@ -376,7 +374,7 @@ in distributed system.
 | UserHeader | [UserHeader](#object.UserHeader) |  | UserHeader is a set of KV headers defined by user |
 | Transform | [Transform](#object.Transform) |  | Transform defines transform operation (e.g. payload split) |
 | Tombstone | [Tombstone](#object.Tombstone) |  | Tombstone header that set up in deleted objects |
-| Token | [service.Token](#service.Token) |  | Token header that contains session token |
+| Token | [service.Token](#service.Token) |  | Token header contains token of the session within which the object was created |
 | HomoHash | [bytes](#bytes) |  | HomoHash is a homomorphic hash of original object payload |
 | PayloadChecksum | [bytes](#bytes) |  | PayloadChecksum of actual object's payload |
 | Integrity | [IntegrityHeader](#object.IntegrityHeader) |  | Integrity header with checksum of all above headers in the object |
