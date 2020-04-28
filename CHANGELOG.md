@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.7.2] - 2020-04-28
+
+### Added
+
+- `Raw` boolean field to `service.RequestMetaHeader`.
+- `Token` message field to `service.RequestVerificationHeader`.
+
+### Replaced
+
+- `Token` message from `session` to `service` package.
+- `Signature` message with `Sign` one in `service` package.
+
+### Changed
+
+- `Token` message structure.
+
+### Removed
+
+- `Raw` field from `object.GetRequest` and `object.HeadRequest` messages.
+- `Token` field from `object.PutRequest.PutHeader` and `object.DeleteRequest` messages.
+- `VerificationHeader` message.
+
 ## [0.7.1] - 2020-04-20
 
 ### Added
@@ -38,3 +60,4 @@
 [0.6.1]: https://github.com/nspcc-dev/neofs-api/compare/v0.6.0...v0.6.1
 [0.7.0]: https://github.com/nspcc-dev/neofs-api/compare/v0.6.1...v0.7.0
 [0.7.1]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.0...v0.7.1
+[0.7.2]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.1...v0.7.2
