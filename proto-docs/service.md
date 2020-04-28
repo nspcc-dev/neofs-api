@@ -107,7 +107,7 @@ User token granting rights for object manipulation
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| TokenInfo | [Token.Info](#service.Token.Info) |  | Info is a grouped information about token |
+| TokenInfo | [Token.Info](#service.Token.Info) |  | TokenInfo is a grouped information about token |
 | Signature | [bytes](#bytes) |  | Signature is a signature of session token information |
 
 
