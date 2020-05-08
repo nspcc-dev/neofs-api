@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.7.4] - 2020-05-08
+
+### Added
+
+- `service.TokenLifetime` message.
+
+### Changed
+
+- `service.Token` structure.
+- `session.Session.Create` RPC signature.
+- `session.CreateRequest` structure.
+- `session.CreateResponse` structure.
+
 ## [0.7.3] - 2020-04-28
 
 ### Changed
@@ -68,3 +81,4 @@
 [0.7.1]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.0...v0.7.1
 [0.7.2]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.1...v0.7.2
 [0.7.3]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.2...v0.7.3
+[0.7.4]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.3...v0.7.4
