@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.5] - 2020-05-15
+
+### Added
+
+- `OwnerKey` bytes field to `service.Token.TokenInfo` message.
+
+
 ## [0.7.4] - 2020-05-08
 
 ### Added
@@ -82,3 +89,4 @@
 [0.7.2]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.1...v0.7.2
 [0.7.3]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.2...v0.7.3
 [0.7.4]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.3...v0.7.4
+[0.7.5]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.4...v0.7.5
