@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.0] - 2020-05-16
+
+Bump major release
+
 ## [0.7.5] - 2020-05-15
 
 ### Added
@@ -90,3 +94,4 @@
 [0.7.3]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.2...v0.7.3
 [0.7.4]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.3...v0.7.4
 [0.7.5]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.4...v0.7.5
+[1.0.0]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.5...v1.0.0
