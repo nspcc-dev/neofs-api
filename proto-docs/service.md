@@ -6,6 +6,8 @@
 - [service/meta.proto](#service/meta.proto)
 
   - Messages
+    - [RequestExtendedHeader](#service.RequestExtendedHeader)
+    - [RequestExtendedHeader.KV](#service.RequestExtendedHeader.KV)
     - [RequestMetaHeader](#service.RequestMetaHeader)
     - [ResponseMetaHeader](#service.ResponseMetaHeader)
     
@@ -35,6 +37,29 @@
  <!-- end services -->
 
 
+<a name="service.RequestExtendedHeader"></a>
+
+### Message RequestExtendedHeader
+RequestExtendedHeader contains extended headers of request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Headers | [RequestExtendedHeader.KV](#service.RequestExtendedHeader.KV) | repeated | Headers carries list of key-value headers |
+
+
+<a name="service.RequestExtendedHeader.KV"></a>
+
+### Message RequestExtendedHeader.KV
+KV contains string key-value pair
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| K | [string](#string) |  | K carries extended header key |
+| V | [string](#string) |  | V carries extra header value |
+
+
 <a name="service.RequestMetaHeader"></a>
 
 ### Message RequestMetaHeader
@@ -48,6 +73,7 @@ RequestMetaHeader contains information about request meta headers
 | Epoch | [uint64](#uint64) |  | Epoch for user can be empty, because node sets epoch to the actual value |
 | Version | [uint32](#uint32) |  | Version defines protocol version TODO: not used for now, should be implemented in future |
 | Raw | [bool](#bool) |  | Raw determines whether the request is raw or not |
+| ExtendedHeader | [RequestExtendedHeader](#service.RequestExtendedHeader) |  | ExtendedHeader carries extended headers of the request |
 
 
 <a name="service.ResponseMetaHeader"></a>
