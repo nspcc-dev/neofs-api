@@ -13,6 +13,8 @@
 - [service/verify.proto](#service/verify.proto)
 
   - Messages
+    - [BearerTokenMsg](#service.BearerTokenMsg)
+    - [BearerTokenMsg.Info](#service.BearerTokenMsg.Info)
     - [RequestVerificationHeader](#service.RequestVerificationHeader)
     - [RequestVerificationHeader.Signature](#service.RequestVerificationHeader.Signature)
     - [Token](#service.Token)
@@ -75,6 +77,32 @@ ResponseMetaHeader contains meta information based on request processing by serv
  <!-- end services -->
 
 
+<a name="service.BearerTokenMsg"></a>
+
+### Message BearerTokenMsg
+BearerTokenMsg carries information about request ACL rules with limited lifetime
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| TokenInfo | [BearerTokenMsg.Info](#service.BearerTokenMsg.Info) |  | TokenInfo is a grouped information about token |
+| OwnerKey | [bytes](#bytes) |  | OwnerKey is a public key of the token owner |
+| Signature | [bytes](#bytes) |  | Signature is a signature of token information |
+
+
+<a name="service.BearerTokenMsg.Info"></a>
+
+### Message BearerTokenMsg.Info
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ACLRules | [bytes](#bytes) |  | ACLRules carries a binary representation of the table of extended ACL rules |
+| OwnerID | [bytes](#bytes) |  | OwnerID is an owner of token |
+| ValidUntil | [uint64](#uint64) |  | ValidUntil carries a last epoch of token lifetime |
+
+
 <a name="service.RequestVerificationHeader"></a>
 
 ### Message RequestVerificationHeader
@@ -86,6 +114,7 @@ RequestVerificationHeader is a set of signatures of every NeoFS Node that proces
 | ----- | ---- | ----- | ----------- |
 | Signatures | [RequestVerificationHeader.Signature](#service.RequestVerificationHeader.Signature) | repeated | Signatures is a set of signatures of every passed NeoFS Node |
 | Token | [Token](#service.Token) |  | Token is a token of the session within which the request is sent |
+| Bearer | [BearerTokenMsg](#service.BearerTokenMsg) |  | Bearer is a Bearer token of the request |
 
 
 <a name="service.RequestVerificationHeader.Signature"></a>
