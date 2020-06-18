@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0] - 2020-06-18
+
+### Added
+
+- Extended ACL support in container service.
+- Bearer token support in the object service requests.
+- Extended headers for the requests in `service.RequestMetaHeader`
+
 ## [1.0.0] - 2020-05-16
 
 Bump major release
@@ -95,3 +103,4 @@ Bump major release
 [0.7.4]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.3...v0.7.4
 [0.7.5]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.4...v0.7.5
 [1.0.0]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.5...v1.0.0
+[1.1.0]: https://github.com/nspcc-dev/neofs-api/compare/v1.0.0...v1.1.0
