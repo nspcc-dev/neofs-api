@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.0] - 2020-07-08
+
+### Added
+
+- ```acl.EACLRecord```, ```acl.EACLTable``` messages for the table of extended ACL rules.
+
 ## [1.1.0] - 2020-06-18
 
 ### Added
@@ -104,3 +110,4 @@ Bump major release
 [0.7.5]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.4...v0.7.5
 [1.0.0]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.5...v1.0.0
 [1.1.0]: https://github.com/nspcc-dev/neofs-api/compare/v1.0.0...v1.1.0
+[1.2.0]: https://github.com/nspcc-dev/neofs-api/compare/v1.1.0...v1.2.0
