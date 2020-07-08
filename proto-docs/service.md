@@ -57,7 +57,7 @@ KV contains string key-value pair
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | K | [string](#string) |  | K carries extended header key |
-| V | [string](#string) |  | V carries extra header value |
+| V | [string](#string) |  | V carries extended header value |
 
 
 <a name="service.RequestMetaHeader"></a>
