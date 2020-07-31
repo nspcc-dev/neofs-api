@@ -132,4 +132,6 @@ message GetExtendedACLRequest {
 message GetExtendedACLResponse {
     // EACL that has been requested if it was set up.
     acl.EACLTable EACL = 1;
+    // Signature of stable-marshalled Extended ACL according to RFC-6979.
+    bytes Signature    = 2;
 }
