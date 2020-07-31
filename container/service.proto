@@ -7,7 +7,6 @@ import "acl/types.proto";
 import "service/meta.proto";
 import "service/verify.proto";
 import "container/types.proto";
-import "github.com/nspcc-dev/netmap/selector.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 option (gogoproto.stable_marshaler_all) = true;
@@ -37,21 +36,13 @@ service Service {
 }
 
 message PutRequest {
-    // MessageID is a nonce for uniq container id calculation
-    bytes MessageID                          = 1 [(gogoproto.customtype) = "MessageID", (gogoproto.nullable) = false];
-
-    // Capacity defines amount of data that can be stored in the container (doesn't used for now).
-    uint64 Capacity                          = 2;
-
-    // OwnerID is a wallet address
-    bytes OwnerID                            = 3 [(gogoproto.customtype) = "OwnerID", (gogoproto.nullable) = false];
-
-    // Rules define storage policy for the object inside the container.
-    netmap.PlacementRule rules               = 4 [(gogoproto.nullable) = false];
-
-    // BasicACL of the container.
-    uint32 BasicACL                          = 5;
-
+    // Container to create in NeoFS.
+    container.Container Container = 1;
+    // PublicKey of container owner. It can be public key of the owner
+    // or it can be public key that bound in neofs.id smart-contract.
+    bytes PublicKey = 2;
+    // Signature of stable-marshalled container according to RFC-6979.
+    bytes Signature = 3;
     // RequestMetaHeader contains information about request meta headers (should be embedded into message)
     service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
     // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
