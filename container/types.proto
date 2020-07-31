@@ -8,7 +8,10 @@ import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 option (gogoproto.stable_marshaler_all) = true;
 
-// The Container service definition.
+// Container is a structure that defines object placement behaviour. Objects
+// can be stored only within containers. They define placement rule, attributes
+// and access control information. ID of the container is a 32 byte long
+// SHA256 hash of stable-marshalled container message.
 message Container {
   // OwnerID is a 25 byte NEO3.0 wallet address.
   bytes OwnerID                 = 1;

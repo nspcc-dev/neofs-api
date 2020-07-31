@@ -9,27 +9,35 @@ import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 option (gogoproto.stable_marshaler_all) = true;
 
-// Container service provides API for manipulating with the container.
+// Service provides API to access container smart-contract in morph chain
+// via NeoFS node.
 service Service {
-    // Put request proposes container to the inner ring nodes. They will
-    // accept new container if user has enough deposit. All containers
-    // are accepted by the consensus, therefore it is asynchronous process.
+    // Put invokes 'Put' method in container smart-contract and returns
+    // response immediately. After new block in morph chain, request is verified
+    // by inner ring nodes. After one more block in morph chain, container
+    // added into smart-contract storage.
     rpc Put(PutRequest) returns (PutResponse);
 
-    // Delete container removes it from the inner ring container storage. It
-    // also asynchronous process done by consensus.
+    // Delete invokes 'Delete' method in container smart-contract and returns
+    // response immediately. After new block in morph chain, request is verified
+    // by inner ring nodes. After one more block in morph chain, container
+    // removed from smart-contract storage.
     rpc Delete(DeleteRequest) returns (DeleteResponse);
 
-    // Get container returns container instance
+    // Get returns container from container smart-contract storage.
     rpc Get(GetRequest) returns (GetResponse);
 
-    // List returns all user's containers
+    // List returns all owner's containers from container smart-contract
+    // storage.
     rpc List(ListRequest) returns (ListResponse);
 
-    // SetExtendedACL changes extended ACL rules of the container
+    // SetExtendedACL invokes 'SetEACL' method in container smart-contract and
+    // returns response immediately. After new block in morph chain,
+    // Extended ACL added into smart-contract storage.
     rpc SetExtendedACL(SetExtendedACLRequest) returns (SetExtendedACLResponse);
 
-    // GetExtendedACL returns extended ACL rules of the container
+    // GetExtendedACL returns Extended ACL table and signature from container
+    // smart-contract storage.
     rpc GetExtendedACL(GetExtendedACLRequest) returns (GetExtendedACLResponse);
 }
 
@@ -44,7 +52,7 @@ message PutRequest {
 }
 
 message PutResponse {
-    // CID (container id) is a SHA256 hash of the container structure
+    // ContainerID of the new container.
     bytes ContainerID = 1;
 }
 
@@ -61,22 +69,22 @@ message DeleteResponse { }
 
 
 message GetRequest {
-    // CID (container id) is a SHA256 hash of the container structure
+    // ContainerID of the container to get.
     bytes ContainerID = 1;
 }
 
 message GetResponse {
-    // Container is a structure that contains placement rules and owner id
+    // Container that has been requested.
     container.Container Container = 1;
 }
 
 message ListRequest {
-    // OwnerID is a wallet address
+    // OwnerID is a 25 byte NEO3.0 wallet address.
     bytes OwnerID = 1;
 }
 
 message ListResponse {
-    // CID (container id) is list of SHA256 hashes of the container structures
+    // ContainerIDs of containers that belong to the owner.
     repeated bytes ContainerIDs = 1;
 }
 
