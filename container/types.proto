@@ -21,4 +21,14 @@ message Container {
     // BasicACL with access control rules for owner, system, others and
     // permission bits for bearer token and extended ACL.
     uint32 BasicACL            = 5;
+    // Attributes define any immutable characteristics of container.
+    repeated Attribute Attributes = 6;
+}
+
+// Attribute is a key-value pair of strings.
+message Attribute {
+  // Key of immutable container attribute.
+  string Key   = 1;
+  // Value of immutable container attribute.
+  string Value = 2;
 }
