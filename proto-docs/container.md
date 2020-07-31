@@ -10,8 +10,6 @@
   - Messages
     - [DeleteRequest](#container.DeleteRequest)
     - [DeleteResponse](#container.DeleteResponse)
-    - [ExtendedACLKey](#container.ExtendedACLKey)
-    - [ExtendedACLValue](#container.ExtendedACLValue)
     - [GetExtendedACLRequest](#container.GetExtendedACLRequest)
     - [GetExtendedACLResponse](#container.GetExtendedACLResponse)
     - [GetRequest](#container.GetRequest)
@@ -27,6 +25,7 @@
 - [container/types.proto](#container/types.proto)
 
   - Messages
+    - [Attribute](#container.Attribute)
     - [Container](#container.Container)
     
 
@@ -45,7 +44,8 @@
 <a name="container.Service"></a>
 
 ### Service "container.Service"
-Container service provides API for manipulating with the container.
+Service provides API to access container smart-contract in morph chain
+via NeoFS node.
 
 ```
 rpc Put(PutRequest) returns (PutResponse);
@@ -59,45 +59,52 @@ rpc GetExtendedACL(GetExtendedACLRequest) returns (GetExtendedACLResponse);
 
 #### Method Put
 
-Put request proposes container to the inner ring nodes. They will
-accept new container if user has enough deposit. All containers
-are accepted by the consensus, therefore it is asynchronous process.
+Put invokes 'Put' method in container smart-contract and returns
+response immediately. After new block in morph chain, request is verified
+by inner ring nodes. After one more block in morph chain, container
+added into smart-contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Put | [PutRequest](#container.PutRequest) | [PutResponse](#container.PutResponse) |
 #### Method Delete
 
-Delete container removes it from the inner ring container storage. It
-also asynchronous process done by consensus.
+Delete invokes 'Delete' method in container smart-contract and returns
+response immediately. After new block in morph chain, request is verified
+by inner ring nodes. After one more block in morph chain, container
+removed from smart-contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Delete | [DeleteRequest](#container.DeleteRequest) | [DeleteResponse](#container.DeleteResponse) |
 #### Method Get
 
-Get container returns container instance
+Get returns container from container smart-contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Get | [GetRequest](#container.GetRequest) | [GetResponse](#container.GetResponse) |
 #### Method List
 
-List returns all user's containers
+List returns all owner's containers from container smart-contract
+storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | List | [ListRequest](#container.ListRequest) | [ListResponse](#container.ListResponse) |
 #### Method SetExtendedACL
 
-SetExtendedACL changes extended ACL rules of the container
+SetExtendedACL invokes 'SetEACL' method in container smart-contract and
+returns response immediately. After new block in morph chain,
+Extended ACL added into smart-contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | SetExtendedACL | [SetExtendedACLRequest](#container.SetExtendedACLRequest) | [SetExtendedACLResponse](#container.SetExtendedACLResponse) |
 #### Method GetExtendedACL
 
-GetExtendedACL returns extended ACL rules of the container
+GetExtendedACL returns Extended ACL table and signature from container
+smart-contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -113,9 +120,8 @@ GetExtendedACL returns extended ACL rules of the container
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| CID | [bytes](#bytes) |  | CID (container id) is a SHA256 hash of the container structure |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| ContainerID | [bytes](#bytes) |  | ContainerID of container to delete from NeoFS. |
+| Signature | [bytes](#bytes) |  | Signature of container id according to RFC-6979. |
 
 
 <a name="container.DeleteResponse"></a>
@@ -126,29 +132,6 @@ via consensus in inner ring nodes
 
 
 
-<a name="container.ExtendedACLKey"></a>
-
-### Message ExtendedACLKey
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| ID | [bytes](#bytes) |  | ID (container id) is a SHA256 hash of the container structure |
-
-
-<a name="container.ExtendedACLValue"></a>
-
-### Message ExtendedACLValue
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| EACL | [bytes](#bytes) |  | EACL carries binary representation of the table of extended ACL rules |
-| Signature | [bytes](#bytes) |  | Signature carries EACL field signature |
-
-
 <a name="container.GetExtendedACLRequest"></a>
 
 ### Message GetExtendedACLRequest
@@ -157,9 +140,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Key | [ExtendedACLKey](#container.ExtendedACLKey) |  | Key carries key to extended ACL information |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| ContainerID | [bytes](#bytes) |  | ContainerID of the container that has Extended ACL. |
 
 
 <a name="container.GetExtendedACLResponse"></a>
@@ -170,7 +151,8 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ACL | [ExtendedACLValue](#container.ExtendedACLValue) |  | ACL carries extended ACL information |
+| EACL | [acl.EACLTable](#acl.EACLTable) |  | EACL that has been requested if it was set up. |
+| Signature | [bytes](#bytes) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
 
 
 <a name="container.GetRequest"></a>
@@ -181,9 +163,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| CID | [bytes](#bytes) |  | CID (container id) is a SHA256 hash of the container structure |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| ContainerID | [bytes](#bytes) |  | ContainerID of the container to get. |
 
 
 <a name="container.GetResponse"></a>
@@ -194,7 +174,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Container | [Container](#container.Container) |  | Container is a structure that contains placement rules and owner id |
+| Container | [Container](#container.Container) |  | Container that has been requested. |
 
 
 <a name="container.ListRequest"></a>
@@ -205,9 +185,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| OwnerID | [bytes](#bytes) |  | OwnerID is a 25 byte NEO3.0 wallet address. |
 
 
 <a name="container.ListResponse"></a>
@@ -218,7 +196,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| CID | [bytes](#bytes) | repeated | CID (container id) is list of SHA256 hashes of the container structures |
+| ContainerIDs | [bytes](#bytes) | repeated | ContainerIDs of containers that belong to the owner. |
 
 
 <a name="container.PutRequest"></a>
@@ -229,13 +207,9 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| MessageID | [bytes](#bytes) |  | MessageID is a nonce for uniq container id calculation |
-| Capacity | [uint64](#uint64) |  | Capacity defines amount of data that can be stored in the container (doesn't used for now). |
-| OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |
-| rules | [netmap.PlacementRule](#netmap.PlacementRule) |  | Rules define storage policy for the object inside the container. |
-| BasicACL | [uint32](#uint32) |  | BasicACL of the container. |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| Container | [Container](#container.Container) |  | Container to create in NeoFS. |
+| PublicKey | [bytes](#bytes) |  | PublicKey of container owner. It can be public key of the owner or it can be public key that bound in neofs.id smart-contract. |
+| Signature | [bytes](#bytes) |  | Signature of stable-marshalled container according to RFC-6979. |
 
 
 <a name="container.PutResponse"></a>
@@ -246,7 +220,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| CID | [bytes](#bytes) |  | CID (container id) is a SHA256 hash of the container structure |
+| ContainerID | [bytes](#bytes) |  | ContainerID of the new container. |
 
 
 <a name="container.SetExtendedACLRequest"></a>
@@ -257,10 +231,8 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Key | [ExtendedACLKey](#container.ExtendedACLKey) |  | Key carries key to extended ACL information |
-| Value | [ExtendedACLValue](#container.ExtendedACLValue) |  | Value carries extended ACL information |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| EACL | [acl.EACLTable](#acl.EACLTable) |  | EACL to set for the container. |
+| Signature | [bytes](#bytes) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
 
 
 <a name="container.SetExtendedACLResponse"></a>
@@ -284,19 +256,34 @@ via consensus in inner ring nodes
  <!-- end services -->
 
 
-<a name="container.Container"></a>
+<a name="container.Attribute"></a>
 
-### Message Container
-The Container service definition.
+### Message Attribute
+Attribute is a key-value pair of strings.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address. |
-| Salt | [bytes](#bytes) |  | Salt is a nonce for unique container id calculation. |
-| Capacity | [uint64](#uint64) |  | Capacity defines amount of data that can be stored in the container (doesn't used for now). |
+| Key | [string](#string) |  | Key of immutable container attribute. |
+| Value | [string](#string) |  | Value of immutable container attribute. |
+
+
+<a name="container.Container"></a>
+
+### Message Container
+Container is a structure that defines object placement behaviour. Objects
+can be stored only within containers. They define placement rule, attributes
+and access control information. ID of the container is a 32 byte long
+SHA256 hash of stable-marshalled container message.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| OwnerID | [bytes](#bytes) |  | OwnerID is a 25 byte NEO3.0 wallet address. |
+| Nonce | [bytes](#bytes) |  | Nonce is a 16 byte UUID, used to avoid collisions of container id. |
+| BasicACL | [uint32](#uint32) |  | BasicACL contains access control rules for owner, system, others groups and permission bits for bearer token and Extended ACL. |
+| Attributes | [Attribute](#container.Attribute) | repeated | Attributes define any immutable characteristics of container. |
 | Rules | [netmap.PlacementRule](#netmap.PlacementRule) |  | Rules define storage policy for the object inside the container. |
-| BasicACL | [uint32](#uint32) |  | BasicACL with access control rules for owner, system, others and permission bits for bearer token and extended ACL. |
 
  <!-- end messages -->
 
