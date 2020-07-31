@@ -4,8 +4,6 @@ option go_package = "github.com/nspcc-dev/neofs-api-go/container";
 option csharp_namespace = "NeoFS.API.Container";
 
 import "acl/types.proto";
-import "service/meta.proto";
-import "service/verify.proto";
 import "container/types.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
@@ -43,10 +41,6 @@ message PutRequest {
     bytes PublicKey = 2;
     // Signature of stable-marshalled container according to RFC-6979.
     bytes Signature = 3;
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
 }
 
 message PutResponse {
@@ -59,10 +53,6 @@ message DeleteRequest {
     bytes ContainerID = 1;
     // Signature of container id according to RFC-6979.
     bytes Signature   = 2;
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
 }
 
 // DeleteResponse is empty because delete operation is asynchronous and done
@@ -73,11 +63,6 @@ message DeleteResponse { }
 message GetRequest {
     // CID (container id) is a SHA256 hash of the container structure
     bytes CID                                = 1 [(gogoproto.customtype) = "CID", (gogoproto.nullable) = false];
-
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
 }
 
 message GetResponse {
@@ -88,10 +73,6 @@ message GetResponse {
 message ListRequest {
     // OwnerID is a wallet address
     bytes OwnerID                            = 1 [(gogoproto.customtype) = "OwnerID", (gogoproto.nullable) = false];
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
 }
 
 message ListResponse {
@@ -104,10 +85,6 @@ message SetExtendedACLRequest {
     acl.EACLTable EACL = 1;
     // Signature of stable-marshalled Extended ACL according to RFC-6979.
     bytes Signature    = 2;
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
 }
 
 message SetExtendedACLResponse {}
@@ -115,10 +92,6 @@ message SetExtendedACLResponse {}
 message GetExtendedACLRequest {
     // ContainerID of the container that has Extended ACL.
     bytes ContainerID = 1;
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
 }
 
 message GetExtendedACLResponse {
