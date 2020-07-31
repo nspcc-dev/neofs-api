@@ -55,9 +55,10 @@ message PutResponse {
 }
 
 message DeleteRequest {
-    // CID (container id) is a SHA256 hash of the container structure
-    bytes CID                                = 1 [(gogoproto.customtype) = "CID", (gogoproto.nullable) = false];
-
+    // ContainerID of container to delete from NeoFS.
+    bytes ContainerID = 1;
+    // Signature of container id according to RFC-6979.
+    bytes Signature   = 2;
     // RequestMetaHeader contains information about request meta headers (should be embedded into message)
     service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
     // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
