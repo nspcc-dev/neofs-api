@@ -10,19 +10,17 @@ option (gogoproto.stable_marshaler_all) = true;
 
 // The Container service definition.
 message Container {
-    // OwnerID is a wallet address.
-    bytes OwnerID              = 1 [(gogoproto.customtype) = "OwnerID", (gogoproto.nullable) = false];
-    // Salt is a nonce for unique container id calculation.
-    bytes Salt                 = 2 [(gogoproto.customtype) = "UUID",    (gogoproto.nullable) = false];
-    // Capacity defines amount of data that can be stored in the container (doesn't used for now).
-    uint64 Capacity            = 3;
-    // Rules define storage policy for the object inside the container.
-    netmap.PlacementRule Rules = 4 [(gogoproto.nullable) = false];
-    // BasicACL with access control rules for owner, system, others and
-    // permission bits for bearer token and extended ACL.
-    uint32 BasicACL            = 5;
-    // Attributes define any immutable characteristics of container.
-    repeated Attribute Attributes = 6;
+  // OwnerID is a 25 byte NEO3.0 wallet address.
+  bytes OwnerID                 = 1;
+  // Nonce is a 16 byte UUID, used to avoid collisions of container id.
+  bytes Nonce                   = 2;
+  // BasicACL contains access control rules for owner, system, others groups and
+  // permission bits for bearer token and Extended ACL.
+  uint32 BasicACL               = 3;
+  // Attributes define any immutable characteristics of container.
+  repeated Attribute Attributes = 4;
+  // Rules define storage policy for the object inside the container.
+  netmap.PlacementRule Rules    = 5;
 }
 
 // Attribute is a key-value pair of strings.
