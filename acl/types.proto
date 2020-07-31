@@ -101,6 +101,8 @@ message EACLRecord {
 
 // EACLRecord carries the information about extended ACL rules.
 message EACLTable {
+    // ContainerID of the container that should use given access control rules.
+    bytes ContainerID           = 1 [json_name="ContainerID"];
     // Records carries list of extended ACL rule records.
-    repeated EACLRecord Records = 1 [json_name="Records"];
+    repeated EACLRecord Records = 2 [json_name="Records"];
 }
