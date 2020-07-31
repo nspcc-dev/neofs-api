@@ -3,6 +3,7 @@ package container;
 option go_package = "github.com/nspcc-dev/neofs-api-go/container";
 option csharp_namespace = "NeoFS.API.Container";
 
+import "acl/types.proto";
 import "service/meta.proto";
 import "service/verify.proto";
 import "container/types.proto";
@@ -106,23 +107,11 @@ message ListResponse {
     repeated bytes CID = 1 [(gogoproto.customtype) = "CID", (gogoproto.nullable) = false];
 }
 
-message ExtendedACLKey {
-    // ID (container id) is a SHA256 hash of the container structure
-    bytes ID = 1 [(gogoproto.customtype) = "CID", (gogoproto.nullable) = false];
-}
-
-message ExtendedACLValue {
-    // EACL carries binary representation of the table of extended ACL rules
-    bytes EACL      = 1;
-    // Signature carries EACL field signature
-    bytes Signature = 2;
-}
-
 message SetExtendedACLRequest {
-    // Key carries key to extended ACL information
-    ExtendedACLKey Key                       = 1 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
-    // Value carries extended ACL information
-    ExtendedACLValue Value                   = 2 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
+    // EACL to set for the container.
+    acl.EACLTable EACL = 1;
+    // Signature of stable-marshalled Extended ACL according to RFC-6979.
+    bytes Signature    = 2;
     // RequestMetaHeader contains information about request meta headers (should be embedded into message)
     service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
     // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
@@ -132,8 +121,8 @@ message SetExtendedACLRequest {
 message SetExtendedACLResponse {}
 
 message GetExtendedACLRequest {
-    // Key carries key to extended ACL information
-    ExtendedACLKey Key                       = 1 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
+    // ContainerID of the container that has Extended ACL.
+    bytes ContainerID = 1;
     // RequestMetaHeader contains information about request meta headers (should be embedded into message)
     service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
     // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
@@ -141,6 +130,6 @@ message GetExtendedACLRequest {
 }
 
 message GetExtendedACLResponse {
-    // ACL carries extended ACL information
-    ExtendedACLValue ACL = 1 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
+    // EACL that has been requested if it was set up.
+    acl.EACLTable EACL = 1;
 }
