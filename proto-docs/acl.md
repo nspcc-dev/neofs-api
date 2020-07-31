@@ -73,6 +73,7 @@ EACLRecord carries the information about extended ACL rules.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| ContainerID | [bytes](#bytes) |  | ContainerID of the container that should use given access control rules. |
 | Records | [EACLRecord](#acl.EACLRecord) | repeated | Records carries list of extended ACL rule records. |
 
  <!-- end messages -->
