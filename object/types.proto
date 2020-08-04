@@ -31,6 +31,8 @@ message ExtendedHeader {
     IntegrityHeader Integrity = 9;
     // StorageGroup contains meta information for the data audit
     storagegroup.StorageGroup StorageGroup = 10;
+    // CreationEpoch carries number of NeoFS epoch on which the object was created.
+    uint64 CreationEpoch = 11;
 }
 
 message Tombstone {}
@@ -43,8 +45,6 @@ message SystemHeader {
     refs.Address Address = 2;
     // OwnerID is a wallet address
     bytes OwnerID = 3;
-    // CreationEpoch carries number of NeoFS epoch on which the object was created.
-    uint64 CreationEpoch = 4;
 }
 
 message IntegrityHeader {
