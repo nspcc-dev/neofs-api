@@ -29,14 +29,14 @@
 - [object/types.proto](#object/types.proto)
 
   - Messages
-    - [ExtendedHeader](#object.ExtendedHeader)
-    - [ExtendedHeader.Attribute](#object.ExtendedHeader.Attribute)
-    - [ExtendedHeader.Integrity](#object.ExtendedHeader.Integrity)
-    - [ExtendedHeader.Split](#object.ExtendedHeader.Split)
-    - [ExtendedHeader.Tombstone](#object.ExtendedHeader.Tombstone)
     - [Header](#object.Header)
+    - [Header.Extended](#object.Header.Extended)
+    - [Header.Extended.Attribute](#object.Header.Extended.Attribute)
+    - [Header.Extended.Integrity](#object.Header.Extended.Integrity)
+    - [Header.Extended.Split](#object.Header.Extended.Split)
+    - [Header.Extended.Tombstone](#object.Header.Extended.Tombstone)
+    - [Header.System](#object.Header.System)
     - [Object](#object.Object)
-    - [SystemHeader](#object.SystemHeader)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -359,26 +359,40 @@ in distributed system.
  <!-- end services -->
 
 
-<a name="object.ExtendedHeader"></a>
+<a name="object.Header"></a>
 
-### Message ExtendedHeader
-
+### Message Header
+Header groups the information about the NeoFS object.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| integrity | [ExtendedHeader.Integrity](#object.ExtendedHeader.Integrity) |  | Integrity carries object integrity evidence. |
-| Attributes | [ExtendedHeader.Attribute](#object.ExtendedHeader.Attribute) | repeated | Attributes carries list of the object attributes in a string key-value format. |
+| system | [Header.System](#object.Header.System) |  | System carries the main part of the header. System MUST NOT be NULL. |
+| extended | [Header.Extended](#object.Header.Extended) |  | Extended carries the additional part of the header. |
+
+
+<a name="object.Header.Extended"></a>
+
+### Message Header.Extended
+Extended groups additional information about the object.
+It encapsulates both user and system attributes needed to regulate
+the NeoFS sub-systems.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| integrity | [Header.Extended.Integrity](#object.Header.Extended.Integrity) |  | Integrity carries object integrity evidence. |
+| Attributes | [Header.Extended.Attribute](#object.Header.Extended.Attribute) | repeated | Attributes carries list of the object attributes in a string key-value format. |
 | CreationEpoch | [uint64](#uint64) |  | CreationEpoch carries number of NeoFS epoch on which the object was created. |
-| tombstone | [ExtendedHeader.Tombstone](#object.ExtendedHeader.Tombstone) |  | Tombstone marks the object to be deleted. |
+| tombstone | [Header.Extended.Tombstone](#object.Header.Extended.Tombstone) |  | Tombstone marks the object to be deleted. |
 | HomomorphicHash | [bytes](#bytes) |  | HomomorphicHash carries homomorphic hash of the object payload. |
 | StorageGroup | [storagegroup.StorageGroup](#storagegroup.StorageGroup) |  | StorageGroup carries information about the NeoFS storage group. |
-| split | [ExtendedHeader.Split](#object.ExtendedHeader.Split) |  | Split carries the position of the object in the split hierarchy. |
+| split | [Header.Extended.Split](#object.Header.Extended.Split) |  | Split carries the position of the object in the split hierarchy. |
 
 
-<a name="object.ExtendedHeader.Attribute"></a>
+<a name="object.Header.Extended.Attribute"></a>
 
-### Message ExtendedHeader.Attribute
+### Message Header.Extended.Attribute
 Attribute groups the parameters of the object attributes.
 
 
@@ -388,9 +402,9 @@ Attribute groups the parameters of the object attributes.
 | Value | [string](#string) |  | Value carries the string value of the object attribute. |
 
 
-<a name="object.ExtendedHeader.Integrity"></a>
+<a name="object.Header.Extended.Integrity"></a>
 
-### Message ExtendedHeader.Integrity
+### Message Header.Extended.Integrity
 Integrity groups evidence of the integrity of an object's structure.
 
 
@@ -403,9 +417,9 @@ Integrity groups evidence of the integrity of an object's structure.
 | ChecksumSignature | [bytes](#bytes) |  | ChecksumSignature carries signature of the structure checksum by the object creator. |
 
 
-<a name="object.ExtendedHeader.Split"></a>
+<a name="object.Header.Extended.Split"></a>
 
-### Message ExtendedHeader.Split
+### Message Header.Extended.Split
 Split groups information about spawning the object through a payload splitting.
 
 
@@ -418,23 +432,25 @@ Split groups information about spawning the object through a payload splitting.
 | Origin | [Header](#object.Header) |  | Origin carries the header of the origin object. |
 
 
-<a name="object.ExtendedHeader.Tombstone"></a>
+<a name="object.Header.Extended.Tombstone"></a>
 
-### Message ExtendedHeader.Tombstone
+### Message Header.Extended.Tombstone
 Tombstone groups the options for deleting an object.
 
 
 
-<a name="object.Header"></a>
+<a name="object.Header.System"></a>
 
-### Message Header
-Header groups the information about the NeoFS object.
+### Message Header.System
+System groups mandatory information about the object.
+Message fields are presented in all NeoFS objects.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| SystemHeader | [SystemHeader](#object.SystemHeader) |  | SystemHeader describes system header |
-| ExtendedHeader | [ExtendedHeader](#object.ExtendedHeader) |  | ExtendedHeader carries the additional part of the header. |
+| PayloadLength | [uint64](#uint64) |  | PayloadLength is an object payload length |
+| Address | [refs.Address](#refs.Address) |  | Address carries object address in the NeoFS system. It encapsulates the object and the container identifiers. |
+| OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |
 
 
 <a name="object.Object"></a>
@@ -447,19 +463,6 @@ Header groups the information about the NeoFS object.
 | ----- | ---- | ----- | ----------- |
 | Header | [Header](#object.Header) |  | Header carries the object header. |
 | Payload | [bytes](#bytes) |  | Payload is an object's payload |
-
-
-<a name="object.SystemHeader"></a>
-
-### Message SystemHeader
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| PayloadLength | [uint64](#uint64) |  | PayloadLength is an object payload length |
-| Address | [refs.Address](#refs.Address) |  | Address carries object address in the NeoFS system. It encapsulates the object and the container identifiers. |
-| OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |
 
  <!-- end messages -->
 
