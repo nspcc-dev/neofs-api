@@ -382,7 +382,6 @@ Attribute groups the parameters of the object attributes.
 | Attributes | [Attribute](#object.Attribute) | repeated | Attributes carries list of the object attributes in a string key-value format. |
 | SplitHeader | [SplitHeader](#object.SplitHeader) |  | Split carries the position of the object in the split hierarchy. |
 | Tombstone | [Tombstone](#object.Tombstone) |  | Tombstone header that set up in deleted objects |
-| Token | [service.Token](#service.Token) |  | Token header contains token of the session within which the object was created |
 | HomoHash | [bytes](#bytes) |  | HomoHash is a homomorphic hash of original object payload |
 | Integrity | [IntegrityHeader](#object.IntegrityHeader) |  | Integrity header with checksum of all above headers in the object |
 | StorageGroup | [storagegroup.StorageGroup](#storagegroup.StorageGroup) |  | StorageGroup contains meta information for the data audit |
@@ -411,6 +410,7 @@ Header groups the information about the NeoFS object.
 | ----- | ---- | ----- | ----------- |
 | PayloadChecksum | [bytes](#bytes) |  | PayloadChecksum carries the checksum of object payload bytes. Changing any byte of the payload changes the checksum. It is calculated as a SHA-256 hash over payload bytes. |
 | HeaderChecksum | [bytes](#bytes) |  | HeaderChecksum carries checksum of the object header structure. It covers all object attributes. Changing any field of the object except CreatorKey and ChecksumSignature changes the checksum. PayloadChecksum and HeaderChecksum cannot be merged due to the need to verify the header in the absence of a payload (e.g. in object.Head rpc). It is calculated as a SHA-256 hash over marshaled object header with cut CreatorKey and ChecksumSignature. |
+| SessionToken | [service.Token](#service.Token) |  | SessionToken carries token of the session within which the object was created. If session token is presented in object, it acts as the user's proof of the correctness of the CreatorKey. |
 | CreatorKey | [bytes](#bytes) |  | CreatorKey carries public key of the object creator in a binary format. |
 | ChecksumSignature | [bytes](#bytes) |  | ChecksumSignature is an user's signature of checksum to verify if it is correct |
 
