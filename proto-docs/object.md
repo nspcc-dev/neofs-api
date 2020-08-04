@@ -379,13 +379,13 @@ Attribute groups the parameters of the object attributes.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| Integrity | [IntegrityHeader](#object.IntegrityHeader) |  | Integrity header with checksum of all above headers in the object |
 | Attributes | [Attribute](#object.Attribute) | repeated | Attributes carries list of the object attributes in a string key-value format. |
-| SplitHeader | [SplitHeader](#object.SplitHeader) |  | Split carries the position of the object in the split hierarchy. |
+| CreationEpoch | [uint64](#uint64) |  | CreationEpoch carries number of NeoFS epoch on which the object was created. |
 | Tombstone | [Tombstone](#object.Tombstone) |  | Tombstone header that set up in deleted objects |
 | HomoHash | [bytes](#bytes) |  | HomoHash is a homomorphic hash of original object payload |
-| Integrity | [IntegrityHeader](#object.IntegrityHeader) |  | Integrity header with checksum of all above headers in the object |
 | StorageGroup | [storagegroup.StorageGroup](#storagegroup.StorageGroup) |  | StorageGroup contains meta information for the data audit |
-| CreationEpoch | [uint64](#uint64) |  | CreationEpoch carries number of NeoFS epoch on which the object was created. |
+| SplitHeader | [SplitHeader](#object.SplitHeader) |  | Split carries the position of the object in the split hierarchy. |
 
 
 <a name="object.Header"></a>
