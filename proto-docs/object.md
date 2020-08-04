@@ -380,7 +380,6 @@ Attribute groups the parameters of the object attributes.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Redirect | [refs.Address](#refs.Address) |  | Redirect not used yet |
 | Attribute | [Attribute](#object.Attribute) |  | Attribute is a set of K-V object attributes |
 | SplitHeader | [SplitHeader](#object.SplitHeader) |  | Split carries the position of the object in the split hierarchy. |
 | Tombstone | [Tombstone](#object.Tombstone) |  | Tombstone header that set up in deleted objects |

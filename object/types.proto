@@ -17,8 +17,6 @@ message Attribute {
 }
 
 message ExtendedHeader {
-    // Redirect not used yet
-    refs.Address Redirect = 2;
     // Attribute is a set of K-V object attributes
     Attribute Attribute = 3;
     // Split carries the position of the object in the split hierarchy.
