@@ -17,3 +17,9 @@ message Address {
     // CID is container identifier
     bytes CID      = 2[(gogoproto.customtype) = "CID",      (gogoproto.nullable) = false];
 }
+
+// ObjectID groups information about the NeoFS object identifier.
+message ObjectID {
+    // Value carries the object identifier in a binary format.
+    bytes Value = 1;
+}
