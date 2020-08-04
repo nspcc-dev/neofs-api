@@ -476,7 +476,6 @@ SplitHeader groups information about spawning the object through a payload split
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Version | [uint64](#uint64) |  | Version of the object structure |
 | PayloadLength | [uint64](#uint64) |  | PayloadLength is an object payload length |
 | Address | [refs.Address](#refs.Address) |  | Address carries object address in the NeoFS system. It encapsulates the object and the container identifiers. |
 | OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |

@@ -44,17 +44,15 @@ message ExtendedHeader {
 message Tombstone {}
 
 message SystemHeader {
-    // Version of the object structure
-    uint64 Version       = 1;
     // PayloadLength is an object payload length
-    uint64 PayloadLength = 2;
+    uint64 PayloadLength = 1;
     // Address carries object address in the NeoFS system.
     // It encapsulates the object and the container identifiers.
-    refs.Address Address = 3;
+    refs.Address Address = 2;
     // OwnerID is a wallet address
-    bytes OwnerID = 4;
+    bytes OwnerID = 3;
     // CreationEpoch carries number of NeoFS epoch on which the object was created.
-    uint64 CreationEpoch = 6;
+    uint64 CreationEpoch = 4;
 }
 
 message IntegrityHeader {
