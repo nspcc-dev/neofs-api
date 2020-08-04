@@ -109,13 +109,20 @@ message Transform {
     Type type  = 1;
 }
 
-message Object {
+// Header groups the information about the NeoFS object.
+message Header {
     // SystemHeader describes system header
     SystemHeader SystemHeader = 1;
+
     // ExtendedHeaders describes a set of an extended headers
     repeated ExtendedHeader ExtendedHeaders = 2;
+}
+
+message Object {
+    // Header carries the object header.
+    Header Header = 1;
     // Payload is an object's payload
-    bytes Payload             = 3;
+    bytes Payload = 2;
 }
 
 message PublicKey {
