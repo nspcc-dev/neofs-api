@@ -30,7 +30,6 @@
 
   - Messages
     - [Attribute](#object.Attribute)
-    - [CreationPoint](#object.CreationPoint)
     - [ExtendedHeader](#object.ExtendedHeader)
     - [Header](#object.Header)
     - [IntegrityHeader](#object.IntegrityHeader)
@@ -374,18 +373,6 @@ Attribute groups the parameters of the object attributes.
 | Value | [string](#string) |  | Value carries the string value of the object attribute. |
 
 
-<a name="object.CreationPoint"></a>
-
-### Message CreationPoint
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| UnixTime | [int64](#int64) |  | UnixTime is a date of creation in unixtime format |
-| Epoch | [uint64](#uint64) |  | Epoch is a date of creation in NeoFS epochs |
-
-
 <a name="object.ExtendedHeader"></a>
 
 ### Message ExtendedHeader
@@ -479,7 +466,7 @@ Header groups the information about the NeoFS object.
 | ID | [bytes](#bytes) |  | ID is an object identifier, is a valid UUIDv4 |
 | OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |
 | CID | [bytes](#bytes) |  | CID is a SHA256 hash of the container structure (container identifier) |
-| CreatedAt | [CreationPoint](#object.CreationPoint) |  | CreatedAt is a timestamp of object creation |
+| CreationEpoch | [uint64](#uint64) |  | CreationEpoch carries number of NeoFS epoch on which the object was created. |
 
 
 <a name="object.Tombstone"></a>
