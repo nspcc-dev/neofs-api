@@ -24,8 +24,8 @@ message ExtendedHeader {
         refs.Address Redirect                  = 2;
         // Attribute is a set of K-V object attributes
         Attribute Attribute                    = 3;
-        // Transform defines transform operation (e.g. payload split)
-        Transform Transform                    = 4;
+        // Split carries the position of the object in the split hierarchy.
+        SplitHeader SplitHeader = 4;
         // Tombstone header that set up in deleted objects
         Tombstone Tombstone                    = 5;
         // Token header contains token of the session within which the object was created
@@ -84,20 +84,6 @@ message Link {
     Type type  = 1;
     // ID is an object identifier, is a valid UUIDv4
     bytes ID = 2;
-}
-
-message Transform {
-    enum Type {
-        Unknown = 0;
-        // Split sets when object created after payload split
-        Split   = 1;
-        // Sign sets when object created after re-signing (doesn't used)
-        Sign    = 2;
-        // Mould sets when object created after filling missing headers in the object
-        Mould   = 3;
-    }
-    // Type of object transformation
-    Type type  = 1;
 }
 
 // SplitHeader groups information about spawning the object through a payload splitting.
