@@ -17,20 +17,20 @@ message Attribute {
 }
 
 message ExtendedHeader {
-    // Attributes carries list of the object attributes in a string key-value format.
-    repeated Attribute Attributes = 3;
-    // Split carries the position of the object in the split hierarchy.
-    SplitHeader SplitHeader = 4;
-    // Tombstone header that set up in deleted objects
-    Tombstone Tombstone = 5;
-    // HomoHash is a homomorphic hash of original object payload
-    bytes HomoHash = 7;
     // Integrity header with checksum of all above headers in the object
-    IntegrityHeader Integrity = 9;
-    // StorageGroup contains meta information for the data audit
-    storagegroup.StorageGroup StorageGroup = 10;
+    IntegrityHeader Integrity = 1;
+    // Attributes carries list of the object attributes in a string key-value format.
+    repeated Attribute Attributes = 2;
     // CreationEpoch carries number of NeoFS epoch on which the object was created.
-    uint64 CreationEpoch = 11;
+    uint64 CreationEpoch = 3;
+    // Tombstone header that set up in deleted objects
+    Tombstone Tombstone = 4;
+    // HomoHash is a homomorphic hash of original object payload
+    bytes HomoHash = 5;
+    // StorageGroup contains meta information for the data audit
+    storagegroup.StorageGroup StorageGroup = 6;
+    // Split carries the position of the object in the split hierarchy.
+    SplitHeader SplitHeader = 7;
 }
 
 message Tombstone {}
