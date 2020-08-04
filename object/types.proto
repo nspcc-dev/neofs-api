@@ -57,15 +57,8 @@ message SystemHeader {
     bytes OwnerID = 4;
     // CID is a SHA256 hash of the container structure (container identifier)
     bytes CID = 5;
-    // CreatedAt is a timestamp of object creation
-    CreationPoint CreatedAt = 6;
-}
-
-message CreationPoint {
-    // UnixTime is a date of creation in unixtime format
-    int64 UnixTime = 1;
-    // Epoch is a date of creation in NeoFS epochs
-    uint64 Epoch   = 2;
+    // CreationEpoch carries number of NeoFS epoch on which the object was created.
+    uint64 CreationEpoch = 6;
 }
 
 message IntegrityHeader {
