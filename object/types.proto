@@ -6,9 +6,6 @@ option csharp_namespace = "NeoFS.API.Object";
 import "refs/types.proto";
 import "service/verify.proto";
 import "storagegroup/types.proto";
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-
-option (gogoproto.stable_marshaler_all) = true;
 
 message UserHeader {
     // Key of the user's header
@@ -32,7 +29,7 @@ message Header {
         // Token header contains token of the session within which the object was created
         service.Token Token                    = 6;
         // HomoHash is a homomorphic hash of original object payload
-        bytes HomoHash                         = 7 [(gogoproto.customtype) = "Hash"];
+        bytes HomoHash = 7;
         // PayloadChecksum of actual object's payload
         bytes PayloadChecksum                  = 8;
         // Integrity header with checksum of all above headers in the object
@@ -53,18 +50,16 @@ message SystemHeader {
     uint64 PayloadLength = 2;
 
     // ID is an object identifier, is a valid UUIDv4
-    bytes ID        = 3 [(gogoproto.customtype) = "ID", (gogoproto.nullable) = false];
+    bytes ID = 3;
     // OwnerID is a wallet address
-    bytes OwnerID   = 4 [(gogoproto.customtype) = "OwnerID",  (gogoproto.nullable) = false];
+    bytes OwnerID = 4;
     // CID is a SHA256 hash of the container structure (container identifier)
-    bytes CID       = 5 [(gogoproto.customtype) = "CID",      (gogoproto.nullable) = false];
+    bytes CID = 5;
     // CreatedAt is a timestamp of object creation
-    CreationPoint CreatedAt = 6 [(gogoproto.nullable) = false];
+    CreationPoint CreatedAt = 6;
 }
 
 message CreationPoint {
-    option (gogoproto.goproto_stringer) = false;
-
     // UnixTime is a date of creation in unixtime format
     int64 UnixTime = 1;
     // Epoch is a date of creation in NeoFS epochs
@@ -95,7 +90,7 @@ message Link {
     // Type of link
     Type type  = 1;
     // ID is an object identifier, is a valid UUIDv4
-    bytes ID = 2 [(gogoproto.customtype) = "ID", (gogoproto.nullable) = false];
+    bytes ID = 2;
 }
 
 message Transform {
@@ -114,9 +109,9 @@ message Transform {
 
 message Object {
     // SystemHeader describes system header
-    SystemHeader SystemHeader = 1 [(gogoproto.nullable) = false];
+    SystemHeader SystemHeader = 1;
     // Headers describes a set of an extended headers
-    repeated Header Headers   = 2 [(gogoproto.nullable) = false];
+    repeated Header Headers = 2;
     // Payload is an object's payload
     bytes Payload             = 3;
 }
