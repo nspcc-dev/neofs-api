@@ -384,7 +384,6 @@ Attribute groups the parameters of the object attributes.
 | Tombstone | [Tombstone](#object.Tombstone) |  | Tombstone header that set up in deleted objects |
 | Token | [service.Token](#service.Token) |  | Token header contains token of the session within which the object was created |
 | HomoHash | [bytes](#bytes) |  | HomoHash is a homomorphic hash of original object payload |
-| PayloadChecksum | [bytes](#bytes) |  | PayloadChecksum of actual object's payload |
 | Integrity | [IntegrityHeader](#object.IntegrityHeader) |  | Integrity header with checksum of all above headers in the object |
 | StorageGroup | [storagegroup.StorageGroup](#storagegroup.StorageGroup) |  | StorageGroup contains meta information for the data audit |
 
@@ -409,7 +408,8 @@ Header groups the information about the NeoFS object.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| HeadersChecksum | [bytes](#bytes) |  | HeadersChecksum is a checksum of all above headers in the object |
+| PayloadChecksum | [bytes](#bytes) |  | PayloadChecksum carries the checksum of object payload bytes. Changing any byte of the payload changes the checksum. |
+| HeaderChecksum | [bytes](#bytes) |  | HeaderChecksum carries checksum of the object header structure. It covers all object attributes. Changing any field of the object except CreatorKey and ChecksumSignature changes the checksum. PayloadChecksum and HeaderChecksum cannot be merged due to the need to verify the header in the absence of a payload (e.g. in object.Head rpc). |
 | CreatorKey | [bytes](#bytes) |  | CreatorKey carries public key of the object creator in a binary format. |
 | ChecksumSignature | [bytes](#bytes) |  | ChecksumSignature is an user's signature of checksum to verify if it is correct |
 
