@@ -39,7 +39,6 @@
     - [SplitHeader](#object.SplitHeader)
     - [SystemHeader](#object.SystemHeader)
     - [Tombstone](#object.Tombstone)
-    - [Transform](#object.Transform)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -385,7 +384,7 @@ Attribute groups the parameters of the object attributes.
 | Link | [Link](#object.Link) |  | Link to other objects |
 | Redirect | [refs.Address](#refs.Address) |  | Redirect not used yet |
 | Attribute | [Attribute](#object.Attribute) |  | Attribute is a set of K-V object attributes |
-| Transform | [Transform](#object.Transform) |  | Transform defines transform operation (e.g. payload split) |
+| SplitHeader | [SplitHeader](#object.SplitHeader) |  | Split carries the position of the object in the split hierarchy. |
 | Tombstone | [Tombstone](#object.Tombstone) |  | Tombstone header that set up in deleted objects |
 | Token | [service.Token](#service.Token) |  | Token header contains token of the session within which the object was created |
 | HomoHash | [bytes](#bytes) |  | HomoHash is a homomorphic hash of original object payload |
@@ -490,17 +489,6 @@ SplitHeader groups information about spawning the object through a payload split
 
 
 
-
-<a name="object.Transform"></a>
-
-### Message Transform
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| type | [Transform.Type](#object.Transform.Type) |  | Type of object transformation |
-
  <!-- end messages -->
 
 
@@ -517,20 +505,6 @@ SplitHeader groups information about spawning the object through a payload split
 | Next | 3 | Next object in the linked list created during object transformation |
 | Child | 4 | Child object created during object transformation |
 | StorageGroup | 5 | Object that included into this storage group |
-
-
-
-<a name="object.Transform.Type"></a>
-
-### Transform.Type
-
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| Unknown | 0 |  |
-| Split | 1 | Split sets when object created after payload split |
-| Sign | 2 | Sign sets when object created after re-signing (doesn't used) |
-| Mould | 3 | Mould sets when object created after filling missing headers in the object |
 
 
  <!-- end enums -->
