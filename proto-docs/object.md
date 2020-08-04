@@ -386,6 +386,7 @@ Attribute groups the parameters of the object attributes.
 | HomoHash | [bytes](#bytes) |  | HomoHash is a homomorphic hash of original object payload |
 | Integrity | [IntegrityHeader](#object.IntegrityHeader) |  | Integrity header with checksum of all above headers in the object |
 | StorageGroup | [storagegroup.StorageGroup](#storagegroup.StorageGroup) |  | StorageGroup contains meta information for the data audit |
+| CreationEpoch | [uint64](#uint64) |  | CreationEpoch carries number of NeoFS epoch on which the object was created. |
 
 
 <a name="object.Header"></a>
@@ -452,7 +453,6 @@ SplitHeader groups information about spawning the object through a payload split
 | PayloadLength | [uint64](#uint64) |  | PayloadLength is an object payload length |
 | Address | [refs.Address](#refs.Address) |  | Address carries object address in the NeoFS system. It encapsulates the object and the container identifiers. |
 | OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |
-| CreationEpoch | [uint64](#uint64) |  | CreationEpoch carries number of NeoFS epoch on which the object was created. |
 
 
 <a name="object.Tombstone"></a>
