@@ -29,14 +29,14 @@
 - [object/types.proto](#object/types.proto)
 
   - Messages
-    - [Attribute](#object.Attribute)
     - [ExtendedHeader](#object.ExtendedHeader)
+    - [ExtendedHeader.Attribute](#object.ExtendedHeader.Attribute)
+    - [ExtendedHeader.Integrity](#object.ExtendedHeader.Integrity)
+    - [ExtendedHeader.Split](#object.ExtendedHeader.Split)
+    - [ExtendedHeader.Tombstone](#object.ExtendedHeader.Tombstone)
     - [Header](#object.Header)
-    - [IntegrityHeader](#object.IntegrityHeader)
     - [Object](#object.Object)
-    - [SplitHeader](#object.SplitHeader)
     - [SystemHeader](#object.SystemHeader)
-    - [Tombstone](#object.Tombstone)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -359,9 +359,26 @@ in distributed system.
  <!-- end services -->
 
 
-<a name="object.Attribute"></a>
+<a name="object.ExtendedHeader"></a>
 
-### Message Attribute
+### Message ExtendedHeader
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| integrity | [ExtendedHeader.Integrity](#object.ExtendedHeader.Integrity) |  | Integrity carries object integrity evidence. |
+| Attributes | [ExtendedHeader.Attribute](#object.ExtendedHeader.Attribute) | repeated | Attributes carries list of the object attributes in a string key-value format. |
+| CreationEpoch | [uint64](#uint64) |  | CreationEpoch carries number of NeoFS epoch on which the object was created. |
+| tombstone | [ExtendedHeader.Tombstone](#object.ExtendedHeader.Tombstone) |  | Tombstone marks the object to be deleted. |
+| HomomorphicHash | [bytes](#bytes) |  | HomomorphicHash carries homomorphic hash of the object payload. |
+| StorageGroup | [storagegroup.StorageGroup](#storagegroup.StorageGroup) |  | StorageGroup carries information about the NeoFS storage group. |
+| split | [ExtendedHeader.Split](#object.ExtendedHeader.Split) |  | Split carries the position of the object in the split hierarchy. |
+
+
+<a name="object.ExtendedHeader.Attribute"></a>
+
+### Message ExtendedHeader.Attribute
 Attribute groups the parameters of the object attributes.
 
 
@@ -371,21 +388,41 @@ Attribute groups the parameters of the object attributes.
 | Value | [string](#string) |  | Value carries the string value of the object attribute. |
 
 
-<a name="object.ExtendedHeader"></a>
+<a name="object.ExtendedHeader.Integrity"></a>
 
-### Message ExtendedHeader
-
+### Message ExtendedHeader.Integrity
+Integrity groups evidence of the integrity of an object's structure.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Integrity | [IntegrityHeader](#object.IntegrityHeader) |  | Integrity header with checksum of all above headers in the object |
-| Attributes | [Attribute](#object.Attribute) | repeated | Attributes carries list of the object attributes in a string key-value format. |
-| CreationEpoch | [uint64](#uint64) |  | CreationEpoch carries number of NeoFS epoch on which the object was created. |
-| Tombstone | [Tombstone](#object.Tombstone) |  | Tombstone header that set up in deleted objects |
-| HomoHash | [bytes](#bytes) |  | HomoHash is a homomorphic hash of original object payload |
-| StorageGroup | [storagegroup.StorageGroup](#storagegroup.StorageGroup) |  | StorageGroup contains meta information for the data audit |
-| SplitHeader | [SplitHeader](#object.SplitHeader) |  | Split carries the position of the object in the split hierarchy. |
+| PayloadChecksum | [bytes](#bytes) |  | PayloadChecksum carries the checksum of object payload bytes. Changing any byte of the payload changes the checksum. It is calculated as a SHA-256 hash over payload bytes. |
+| HeaderChecksum | [bytes](#bytes) |  | HeaderChecksum carries checksum of the object header structure. It covers all object attributes. Changing any field of the object except CreatorKey and ChecksumSignature changes the checksum. PayloadChecksum and HeaderChecksum cannot be merged due to the need to verify the header in the absence of a payload (e.g. in object.Head rpc). It is calculated as a SHA-256 hash over marshaled object header with cut CreatorKey and ChecksumSignature. |
+| SessionToken | [service.Token](#service.Token) |  | SessionToken carries token of the session within which the object was created. If session token is presented in object, it acts as the user's proof of the correctness of the CreatorKey. |
+| CreatorKey | [bytes](#bytes) |  | CreatorKey carries public key of the object creator in a binary format. |
+| ChecksumSignature | [bytes](#bytes) |  | ChecksumSignature carries signature of the structure checksum by the object creator. |
+
+
+<a name="object.ExtendedHeader.Split"></a>
+
+### Message ExtendedHeader.Split
+Split groups information about spawning the object through a payload splitting.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Parent | [refs.ObjectID](#refs.ObjectID) |  | Parent carries identifier of the origin object. |
+| Previous | [refs.ObjectID](#refs.ObjectID) |  | Previous carries identifier of the left split neighbor. |
+| Next | [refs.ObjectID](#refs.ObjectID) |  | Previous carries identifier of the right split neighbor. |
+| Children | [refs.ObjectID](#refs.ObjectID) | repeated | Children carries list of identifiers of the objects generated by splitting the current. |
+| Origin | [Header](#object.Header) |  | Origin carries the header of the origin object. |
+
+
+<a name="object.ExtendedHeader.Tombstone"></a>
+
+### Message ExtendedHeader.Tombstone
+Tombstone groups the options for deleting an object.
+
 
 
 <a name="object.Header"></a>
@@ -400,21 +437,6 @@ Header groups the information about the NeoFS object.
 | ExtendedHeader | [ExtendedHeader](#object.ExtendedHeader) |  | ExtendedHeader carries the additional part of the header. |
 
 
-<a name="object.IntegrityHeader"></a>
-
-### Message IntegrityHeader
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| PayloadChecksum | [bytes](#bytes) |  | PayloadChecksum carries the checksum of object payload bytes. Changing any byte of the payload changes the checksum. It is calculated as a SHA-256 hash over payload bytes. |
-| HeaderChecksum | [bytes](#bytes) |  | HeaderChecksum carries checksum of the object header structure. It covers all object attributes. Changing any field of the object except CreatorKey and ChecksumSignature changes the checksum. PayloadChecksum and HeaderChecksum cannot be merged due to the need to verify the header in the absence of a payload (e.g. in object.Head rpc). It is calculated as a SHA-256 hash over marshaled object header with cut CreatorKey and ChecksumSignature. |
-| SessionToken | [service.Token](#service.Token) |  | SessionToken carries token of the session within which the object was created. If session token is presented in object, it acts as the user's proof of the correctness of the CreatorKey. |
-| CreatorKey | [bytes](#bytes) |  | CreatorKey carries public key of the object creator in a binary format. |
-| ChecksumSignature | [bytes](#bytes) |  | ChecksumSignature is an user's signature of checksum to verify if it is correct |
-
-
 <a name="object.Object"></a>
 
 ### Message Object
@@ -425,21 +447,6 @@ Header groups the information about the NeoFS object.
 | ----- | ---- | ----- | ----------- |
 | Header | [Header](#object.Header) |  | Header carries the object header. |
 | Payload | [bytes](#bytes) |  | Payload is an object's payload |
-
-
-<a name="object.SplitHeader"></a>
-
-### Message SplitHeader
-SplitHeader groups information about spawning the object through a payload splitting.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| Parent | [refs.ObjectID](#refs.ObjectID) |  | Parent carries identifier of the origin object. |
-| Previous | [refs.ObjectID](#refs.ObjectID) |  | Previous carries identifier of the left split neighbor. |
-| Next | [refs.ObjectID](#refs.ObjectID) |  | Previous carries identifier of the right split neighbor. |
-| Children | [refs.ObjectID](#refs.ObjectID) | repeated | Children carries list of identifiers of the objects generated by splitting the current. |
-| Origin | [Header](#object.Header) |  | Origin carries the header of the origin object. |
 
 
 <a name="object.SystemHeader"></a>
@@ -453,13 +460,6 @@ SplitHeader groups information about spawning the object through a payload split
 | PayloadLength | [uint64](#uint64) |  | PayloadLength is an object payload length |
 | Address | [refs.Address](#refs.Address) |  | Address carries object address in the NeoFS system. It encapsulates the object and the container identifiers. |
 | OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |
-
-
-<a name="object.Tombstone"></a>
-
-### Message Tombstone
-
-
 
  <!-- end messages -->
 
