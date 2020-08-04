@@ -35,7 +35,7 @@
     - [Header.Extended.Integrity](#object.Header.Extended.Integrity)
     - [Header.Extended.Split](#object.Header.Extended.Split)
     - [Header.Extended.Tombstone](#object.Header.Extended.Tombstone)
-    - [Header.System](#object.Header.System)
+    - [Header.Main](#object.Header.Main)
     - [Object](#object.Object)
     
 
@@ -367,7 +367,7 @@ Header groups the information about the NeoFS object.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| system | [Header.System](#object.Header.System) |  | System carries the main part of the header. System MUST NOT be NULL. |
+| main | [Header.Main](#object.Header.Main) |  | Main carries the main part of the header. Main MUST NOT be NULL. |
 | extended | [Header.Extended](#object.Header.Extended) |  | Extended carries the additional part of the header. |
 
 
@@ -439,10 +439,10 @@ Tombstone groups the options for deleting an object.
 
 
 
-<a name="object.Header.System"></a>
+<a name="object.Header.Main"></a>
 
-### Message Header.System
-System groups mandatory information about the object.
+### Message Header.Main
+Main groups mandatory information about the object.
 Message fields are presented in all NeoFS objects.
 
 
