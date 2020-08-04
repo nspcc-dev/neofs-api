@@ -403,7 +403,7 @@ Header groups the information about the NeoFS object.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | SystemHeader | [SystemHeader](#object.SystemHeader) |  | SystemHeader describes system header |
-| ExtendedHeaders | [ExtendedHeader](#object.ExtendedHeader) | repeated | ExtendedHeaders describes a set of an extended headers |
+| ExtendedHeader | [ExtendedHeader](#object.ExtendedHeader) |  | ExtendedHeader carries the additional part of the header. |
 
 
 <a name="object.IntegrityHeader"></a>

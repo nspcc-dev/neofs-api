@@ -17,30 +17,28 @@ message Attribute {
 }
 
 message ExtendedHeader {
-    oneof Value {
-        // Link to other objects
-        Link Link                              = 1;
-        // Redirect not used yet
-        refs.Address Redirect                  = 2;
-        // Attribute is a set of K-V object attributes
-        Attribute Attribute                    = 3;
-        // Split carries the position of the object in the split hierarchy.
-        SplitHeader SplitHeader = 4;
-        // Tombstone header that set up in deleted objects
-        Tombstone Tombstone                    = 5;
-        // Token header contains token of the session within which the object was created
-        service.Token Token                    = 6;
-        // HomoHash is a homomorphic hash of original object payload
-        bytes HomoHash = 7;
-        // PayloadChecksum of actual object's payload
-        bytes PayloadChecksum                  = 8;
-        // Integrity header with checksum of all above headers in the object
-        IntegrityHeader Integrity              = 9;
-        // StorageGroup contains meta information for the data audit
-        storagegroup.StorageGroup StorageGroup = 10;
-        // PublicKey of owner of the object. Key is used for verification and can be based on NeoID or x509 cert.
-        PublicKey PublicKey                    = 11;
-    }
+    // Link to other objects
+    Link Link = 1;
+    // Redirect not used yet
+    refs.Address Redirect = 2;
+    // Attribute is a set of K-V object attributes
+    Attribute Attribute = 3;
+    // Split carries the position of the object in the split hierarchy.
+    SplitHeader SplitHeader = 4;
+    // Tombstone header that set up in deleted objects
+    Tombstone Tombstone = 5;
+    // Token header contains token of the session within which the object was created
+    service.Token Token = 6;
+    // HomoHash is a homomorphic hash of original object payload
+    bytes HomoHash = 7;
+    // PayloadChecksum of actual object's payload
+    bytes PayloadChecksum = 8;
+    // Integrity header with checksum of all above headers in the object
+    IntegrityHeader Integrity = 9;
+    // StorageGroup contains meta information for the data audit
+    storagegroup.StorageGroup StorageGroup = 10;
+    // PublicKey of owner of the object. Key is used for verification and can be based on NeoID or x509 cert.
+    PublicKey PublicKey = 11;
 }
 
 message Tombstone {}
@@ -109,8 +107,8 @@ message Header {
     // SystemHeader describes system header
     SystemHeader SystemHeader = 1;
 
-    // ExtendedHeaders describes a set of an extended headers
-    repeated ExtendedHeader ExtendedHeaders = 2;
+    // ExtendedHeader carries the additional part of the header.
+    ExtendedHeader ExtendedHeader = 2;
 }
 
 message Object {
