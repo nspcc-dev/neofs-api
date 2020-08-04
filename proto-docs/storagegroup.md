@@ -34,6 +34,7 @@
 | ValidationDataSize | [uint64](#uint64) |  | ValidationDataSize is size of the all object's payloads included into storage group |
 | ValidationHash | [bytes](#bytes) |  | ValidationHash is homomorphic hash of all object's payloads included into storage group |
 | lifetime | [StorageGroup.Lifetime](#storagegroup.StorageGroup.Lifetime) |  | Lifetime is time until storage group is valid |
+| Members | [refs.ObjectID](#refs.ObjectID) | repeated | Members carries the list of identifiers of the object storage group members. The list is strictly ordered. |
 
 
 <a name="storagegroup.StorageGroup.Lifetime"></a>
