@@ -16,7 +16,7 @@ message Attribute {
     string Value = 2;
 }
 
-message Header {
+message ExtendedHeader {
     oneof Value {
         // Link to other objects
         Link Link                              = 1;
@@ -112,8 +112,8 @@ message Transform {
 message Object {
     // SystemHeader describes system header
     SystemHeader SystemHeader = 1;
-    // Headers describes a set of an extended headers
-    repeated Header Headers = 2;
+    // ExtendedHeaders describes a set of an extended headers
+    repeated ExtendedHeader ExtendedHeaders = 2;
     // Payload is an object's payload
     bytes Payload             = 3;
 }
