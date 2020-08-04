@@ -31,7 +31,7 @@
   - Messages
     - [Attribute](#object.Attribute)
     - [CreationPoint](#object.CreationPoint)
-    - [Header](#object.Header)
+    - [ExtendedHeader](#object.ExtendedHeader)
     - [IntegrityHeader](#object.IntegrityHeader)
     - [Link](#object.Link)
     - [Object](#object.Object)
@@ -385,9 +385,9 @@ Attribute groups the parameters of the object attributes.
 | Epoch | [uint64](#uint64) |  | Epoch is a date of creation in NeoFS epochs |
 
 
-<a name="object.Header"></a>
+<a name="object.ExtendedHeader"></a>
 
-### Message Header
+### Message ExtendedHeader
 
 
 
@@ -439,7 +439,7 @@ Attribute groups the parameters of the object attributes.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | SystemHeader | [SystemHeader](#object.SystemHeader) |  | SystemHeader describes system header |
-| Headers | [Header](#object.Header) | repeated | Headers describes a set of an extended headers |
+| ExtendedHeaders | [ExtendedHeader](#object.ExtendedHeader) | repeated | ExtendedHeaders describes a set of an extended headers |
 | Payload | [bytes](#bytes) |  | Payload is an object's payload |
 
 
