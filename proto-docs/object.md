@@ -463,9 +463,8 @@ Header groups the information about the NeoFS object.
 | ----- | ---- | ----- | ----------- |
 | Version | [uint64](#uint64) |  | Version of the object structure |
 | PayloadLength | [uint64](#uint64) |  | PayloadLength is an object payload length |
-| ID | [bytes](#bytes) |  | ID is an object identifier, is a valid UUIDv4 |
+| Address | [refs.Address](#refs.Address) |  | Address carries object address in the NeoFS system. It encapsulates the object and the container identifiers. |
 | OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |
-| CID | [bytes](#bytes) |  | CID is a SHA256 hash of the container structure (container identifier) |
 | CreationEpoch | [uint64](#uint64) |  | CreationEpoch carries number of NeoFS epoch on which the object was created. |
 
 

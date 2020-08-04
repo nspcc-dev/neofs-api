@@ -50,13 +50,11 @@ message SystemHeader {
     uint64 Version       = 1;
     // PayloadLength is an object payload length
     uint64 PayloadLength = 2;
-
-    // ID is an object identifier, is a valid UUIDv4
-    bytes ID = 3;
+    // Address carries object address in the NeoFS system.
+    // It encapsulates the object and the container identifiers.
+    refs.Address Address = 3;
     // OwnerID is a wallet address
     bytes OwnerID = 4;
-    // CID is a SHA256 hash of the container structure (container identifier)
-    bytes CID = 5;
     // CreationEpoch carries number of NeoFS epoch on which the object was created.
     uint64 CreationEpoch = 6;
 }
