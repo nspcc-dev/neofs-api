@@ -17,8 +17,8 @@ message Attribute {
 }
 
 message ExtendedHeader {
-    // Attribute is a set of K-V object attributes
-    Attribute Attribute = 3;
+    // Attributes carries list of the object attributes in a string key-value format.
+    repeated Attribute Attributes = 3;
     // Split carries the position of the object in the split hierarchy.
     SplitHeader SplitHeader = 4;
     // Tombstone header that set up in deleted objects
