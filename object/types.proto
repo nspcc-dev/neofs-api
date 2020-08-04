@@ -33,8 +33,6 @@ message ExtendedHeader {
     IntegrityHeader Integrity = 9;
     // StorageGroup contains meta information for the data audit
     storagegroup.StorageGroup StorageGroup = 10;
-    // PublicKey of owner of the object. Key is used for verification and can be based on NeoID or x509 cert.
-    PublicKey PublicKey = 11;
 }
 
 message Tombstone {}
@@ -54,8 +52,10 @@ message SystemHeader {
 message IntegrityHeader {
     // HeadersChecksum is a checksum of all above headers in the object
     bytes HeadersChecksum   = 1;
+    // CreatorKey carries public key of the object creator in a binary format.
+    bytes CreatorKey = 2;
     // ChecksumSignature is an user's signature of checksum to verify if it is correct
-    bytes ChecksumSignature = 2;
+    bytes ChecksumSignature = 3;
 }
 
 // SplitHeader groups information about spawning the object through a payload splitting.
@@ -90,9 +90,4 @@ message Object {
     Header Header = 1;
     // Payload is an object's payload
     bytes Payload = 2;
-}
-
-message PublicKey {
-    // Value contains marshaled ecdsa public key
-    bytes Value = 1;
 }

@@ -34,7 +34,6 @@
     - [Header](#object.Header)
     - [IntegrityHeader](#object.IntegrityHeader)
     - [Object](#object.Object)
-    - [PublicKey](#object.PublicKey)
     - [SplitHeader](#object.SplitHeader)
     - [SystemHeader](#object.SystemHeader)
     - [Tombstone](#object.Tombstone)
@@ -388,7 +387,6 @@ Attribute groups the parameters of the object attributes.
 | PayloadChecksum | [bytes](#bytes) |  | PayloadChecksum of actual object's payload |
 | Integrity | [IntegrityHeader](#object.IntegrityHeader) |  | Integrity header with checksum of all above headers in the object |
 | StorageGroup | [storagegroup.StorageGroup](#storagegroup.StorageGroup) |  | StorageGroup contains meta information for the data audit |
-| PublicKey | [PublicKey](#object.PublicKey) |  | PublicKey of owner of the object. Key is used for verification and can be based on NeoID or x509 cert. |
 
 
 <a name="object.Header"></a>
@@ -412,6 +410,7 @@ Header groups the information about the NeoFS object.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | HeadersChecksum | [bytes](#bytes) |  | HeadersChecksum is a checksum of all above headers in the object |
+| CreatorKey | [bytes](#bytes) |  | CreatorKey carries public key of the object creator in a binary format. |
 | ChecksumSignature | [bytes](#bytes) |  | ChecksumSignature is an user's signature of checksum to verify if it is correct |
 
 
@@ -425,17 +424,6 @@ Header groups the information about the NeoFS object.
 | ----- | ---- | ----- | ----------- |
 | Header | [Header](#object.Header) |  | Header carries the object header. |
 | Payload | [bytes](#bytes) |  | Payload is an object's payload |
-
-
-<a name="object.PublicKey"></a>
-
-### Message PublicKey
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| Value | [bytes](#bytes) |  | Value contains marshaled ecdsa public key |
 
 
 <a name="object.SplitHeader"></a>
@@ -474,7 +462,6 @@ SplitHeader groups information about spawning the object through a payload split
 
 
  <!-- end messages -->
-
 
  <!-- end enums -->
 
