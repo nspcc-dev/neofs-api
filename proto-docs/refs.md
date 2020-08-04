@@ -7,6 +7,7 @@
 
   - Messages
     - [Address](#refs.Address)
+    - [ObjectID](#refs.ObjectID)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -32,6 +33,17 @@ Address of object (container id + object id)
 | ----- | ---- | ----- | ----------- |
 | ObjectID | [bytes](#bytes) |  | ObjectID is an object identifier, valid UUIDv4 represented in bytes |
 | CID | [bytes](#bytes) |  | CID is container identifier |
+
+
+<a name="refs.ObjectID"></a>
+
+### Message ObjectID
+ObjectID groups information about the NeoFS object identifier.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Value | [bytes](#bytes) |  | Value carries the object identifier in a binary format. |
 
  <!-- end messages -->
 
