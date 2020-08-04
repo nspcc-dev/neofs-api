@@ -448,21 +448,22 @@ Message fields are presented in all NeoFS objects.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| PayloadLength | [uint64](#uint64) |  | PayloadLength is an object payload length |
+| PayloadLength | [uint64](#uint64) |  | PayloadLength carries length of the object payload. Each object has a fixed payload length since it's immutable. |
 | Address | [refs.Address](#refs.Address) |  | Address carries object address in the NeoFS system. It encapsulates the object and the container identifiers. |
-| OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |
+| OwnerID | [bytes](#bytes) |  | OwnerID carries identifier the object owner in a binary format. |
 
 
 <a name="object.Object"></a>
 
 ### Message Object
-
+Object groups the information about the NeoFS object.
+It consists of payload data with additional service information.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Header | [Header](#object.Header) |  | Header carries the object header. |
-| Payload | [bytes](#bytes) |  | Payload is an object's payload |
+| Payload | [bytes](#bytes) |  | Payload carries the object payload bytes. |
 
  <!-- end messages -->
 

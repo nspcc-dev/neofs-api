@@ -12,12 +12,13 @@ message Header {
     // System groups mandatory information about the object.
     // Message fields are presented in all NeoFS objects.
     message System {
-        // PayloadLength is an object payload length
+        // PayloadLength carries length of the object payload.
+        // Each object has a fixed payload length since it's immutable.
         uint64 PayloadLength = 1;
         // Address carries object address in the NeoFS system.
         // It encapsulates the object and the container identifiers.
         refs.Address Address = 2;
-        // OwnerID is a wallet address
+        // OwnerID carries identifier the object owner in a binary format.
         bytes OwnerID = 3;
     }
     // System carries the main part of the header.
@@ -102,9 +103,11 @@ message Header {
     Extended extended = 2;
 }
 
+// Object groups the information about the NeoFS object.
+// It consists of payload data with additional service information.
 message Object {
     // Header carries the object header.
     Header Header = 1;
-    // Payload is an object's payload
+    // Payload carries the object payload bytes.
     bytes Payload = 2;
 }
