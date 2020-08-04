@@ -12,8 +12,8 @@ option (gogoproto.goproto_stringer_all) = false;
 
 // Address of object (container id + object id)
 message Address {
-    // ObjectID is an object identifier, valid UUIDv4 represented in bytes
-    bytes ObjectID = 1[(gogoproto.customtype) = "ObjectID", (gogoproto.nullable) = false];
+    // ObjectID carries object identifier.
+    ObjectID ObjectID = 1;
     // CID is container identifier
     bytes CID      = 2[(gogoproto.customtype) = "CID",      (gogoproto.nullable) = false];
 }

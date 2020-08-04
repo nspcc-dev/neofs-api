@@ -31,7 +31,7 @@ Address of object (container id + object id)
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ObjectID | [bytes](#bytes) |  | ObjectID is an object identifier, valid UUIDv4 represented in bytes |
+| ObjectID | [ObjectID](#refs.ObjectID) |  | ObjectID carries object identifier. |
 | CID | [bytes](#bytes) |  | CID is container identifier |
 
 
