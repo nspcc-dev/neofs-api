@@ -23,8 +23,6 @@ message ExtendedHeader {
     SplitHeader SplitHeader = 4;
     // Tombstone header that set up in deleted objects
     Tombstone Tombstone = 5;
-    // Token header contains token of the session within which the object was created
-    service.Token Token = 6;
     // HomoHash is a homomorphic hash of original object payload
     bytes HomoHash = 7;
     // Integrity header with checksum of all above headers in the object
@@ -60,10 +58,14 @@ message IntegrityHeader {
     // It is calculated as a SHA-256 hash over marshaled object header
     // with cut CreatorKey and ChecksumSignature.
     bytes HeaderChecksum = 2;
+    // SessionToken carries token of the session within which the object was created.
+    // If session token is presented in object, it acts as the user's proof of the
+    // correctness of the CreatorKey.
+    service.Token SessionToken = 3;
     // CreatorKey carries public key of the object creator in a binary format.
-    bytes CreatorKey = 3;
+    bytes CreatorKey = 4;
     // ChecksumSignature is an user's signature of checksum to verify if it is correct
-    bytes ChecksumSignature = 4;
+    bytes ChecksumSignature = 5;
 }
 
 // SplitHeader groups information about spawning the object through a payload splitting.
