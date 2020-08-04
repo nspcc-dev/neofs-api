@@ -7,10 +7,12 @@ import "refs/types.proto";
 import "service/verify.proto";
 import "storagegroup/types.proto";
 
-message UserHeader {
-    // Key of the user's header
-    string Key   = 1;
-    // Value of the user's header
+// Attribute groups the parameters of the object attributes.
+message Attribute {
+    // Key carries the string key to the object attribute.
+    string Key = 1;
+
+    // Value carries the string value of the object attribute.
     string Value = 2;
 }
 
@@ -20,8 +22,8 @@ message Header {
         Link Link                              = 1;
         // Redirect not used yet
         refs.Address Redirect                  = 2;
-        // UserHeader is a set of KV headers defined by user
-        UserHeader UserHeader                  = 3;
+        // Attribute is a set of K-V object attributes
+        Attribute Attribute                    = 3;
         // Transform defines transform operation (e.g. payload split)
         Transform Transform                    = 4;
         // Tombstone header that set up in deleted objects
