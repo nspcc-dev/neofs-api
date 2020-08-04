@@ -33,7 +33,6 @@
     - [ExtendedHeader](#object.ExtendedHeader)
     - [Header](#object.Header)
     - [IntegrityHeader](#object.IntegrityHeader)
-    - [Link](#object.Link)
     - [Object](#object.Object)
     - [PublicKey](#object.PublicKey)
     - [SplitHeader](#object.SplitHeader)
@@ -381,7 +380,6 @@ Attribute groups the parameters of the object attributes.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Link | [Link](#object.Link) |  | Link to other objects |
 | Redirect | [refs.Address](#refs.Address) |  | Redirect not used yet |
 | Attribute | [Attribute](#object.Attribute) |  | Attribute is a set of K-V object attributes |
 | SplitHeader | [SplitHeader](#object.SplitHeader) |  | Split carries the position of the object in the split hierarchy. |
@@ -416,18 +414,6 @@ Header groups the information about the NeoFS object.
 | ----- | ---- | ----- | ----------- |
 | HeadersChecksum | [bytes](#bytes) |  | HeadersChecksum is a checksum of all above headers in the object |
 | ChecksumSignature | [bytes](#bytes) |  | ChecksumSignature is an user's signature of checksum to verify if it is correct |
-
-
-<a name="object.Link"></a>
-
-### Message Link
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| type | [Link.Type](#object.Link.Type) |  | Type of link |
-| ID | [bytes](#bytes) |  | ID is an object identifier, is a valid UUIDv4 |
 
 
 <a name="object.Object"></a>
@@ -489,21 +475,6 @@ SplitHeader groups information about spawning the object through a payload split
 
 
  <!-- end messages -->
-
-
-<a name="object.Link.Type"></a>
-
-### Link.Type
-
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| Unknown | 0 |  |
-| Parent | 1 | Parent object created during object transformation |
-| Previous | 2 | Previous object in the linked list created during object transformation |
-| Next | 3 | Next object in the linked list created during object transformation |
-| Child | 4 | Child object created during object transformation |
-| StorageGroup | 5 | Object that included into this storage group |
 
 
  <!-- end enums -->
