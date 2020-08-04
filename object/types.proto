@@ -27,8 +27,6 @@ message ExtendedHeader {
     service.Token Token = 6;
     // HomoHash is a homomorphic hash of original object payload
     bytes HomoHash = 7;
-    // PayloadChecksum of actual object's payload
-    bytes PayloadChecksum = 8;
     // Integrity header with checksum of all above headers in the object
     IntegrityHeader Integrity = 9;
     // StorageGroup contains meta information for the data audit
@@ -50,12 +48,22 @@ message SystemHeader {
 }
 
 message IntegrityHeader {
-    // HeadersChecksum is a checksum of all above headers in the object
-    bytes HeadersChecksum   = 1;
+    // PayloadChecksum carries the checksum of object payload bytes.
+    // Changing any byte of the payload changes the checksum.
+    // It is calculated as a SHA-256 hash over payload bytes.
+    bytes PayloadChecksum = 1;
+    // HeaderChecksum carries checksum of the object header structure.
+    // It covers all object attributes. Changing any field of the object except
+    // CreatorKey and ChecksumSignature changes the checksum.
+    // PayloadChecksum and HeaderChecksum cannot be merged due to the need
+    // to verify the header in the absence of a payload (e.g. in object.Head rpc).
+    // It is calculated as a SHA-256 hash over marshaled object header
+    // with cut CreatorKey and ChecksumSignature.
+    bytes HeaderChecksum = 2;
     // CreatorKey carries public key of the object creator in a binary format.
-    bytes CreatorKey = 2;
+    bytes CreatorKey = 3;
     // ChecksumSignature is an user's signature of checksum to verify if it is correct
-    bytes ChecksumSignature = 3;
+    bytes ChecksumSignature = 4;
 }
 
 // SplitHeader groups information about spawning the object through a payload splitting.
