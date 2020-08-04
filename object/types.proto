@@ -10,13 +10,6 @@ import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 option (gogoproto.stable_marshaler_all) = true;
 
-message Range {
-    // Offset of the data range
-    uint64 Offset = 1;
-    // Length of the data range
-    uint64 Length = 2;
-}
-
 message UserHeader {
     // Key of the user's header
     string Key   = 1;

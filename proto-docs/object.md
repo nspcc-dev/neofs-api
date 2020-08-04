@@ -21,6 +21,7 @@
     - [PutRequest](#object.PutRequest)
     - [PutRequest.PutHeader](#object.PutRequest.PutHeader)
     - [PutResponse](#object.PutResponse)
+    - [Range](#object.Range)
     - [SearchRequest](#object.SearchRequest)
     - [SearchResponse](#object.SearchResponse)
     
@@ -34,7 +35,6 @@
     - [Link](#object.Link)
     - [Object](#object.Object)
     - [PublicKey](#object.PublicKey)
-    - [Range](#object.Range)
     - [SystemHeader](#object.SystemHeader)
     - [Tombstone](#object.Tombstone)
     - [Transform](#object.Transform)
@@ -308,6 +308,18 @@ in distributed system.
 | Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
 
+<a name="object.Range"></a>
+
+### Message Range
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Offset | [uint64](#uint64) |  | Offset of the data range |
+| Length | [uint64](#uint64) |  | Length of the data range |
+
+
 <a name="object.SearchRequest"></a>
 
 ### Message SearchRequest
@@ -428,18 +440,6 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Value | [bytes](#bytes) |  | Value contains marshaled ecdsa public key |
-
-
-<a name="object.Range"></a>
-
-### Message Range
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| Offset | [uint64](#uint64) |  | Offset of the data range |
-| Length | [uint64](#uint64) |  | Length of the data range |
 
 
 <a name="object.SystemHeader"></a>

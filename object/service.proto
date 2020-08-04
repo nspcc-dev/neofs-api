@@ -157,6 +157,13 @@ message SearchResponse {
     service.ResponseMetaHeader Meta = 99 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
 }
 
+message Range {
+    // Offset of the data range
+    uint64 Offset = 1;
+    // Length of the data range
+    uint64 Length = 2;
+}
+
 message GetRangeRequest {
     // Address of object (container id + object id)
     refs.Address Address                     = 1 [(gogoproto.nullable) = false];
