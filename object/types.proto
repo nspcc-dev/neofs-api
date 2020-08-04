@@ -17,8 +17,6 @@ message Attribute {
 }
 
 message ExtendedHeader {
-    // Link to other objects
-    Link Link = 1;
     // Redirect not used yet
     refs.Address Redirect = 2;
     // Attribute is a set of K-V object attributes
@@ -60,26 +58,6 @@ message IntegrityHeader {
     bytes HeadersChecksum   = 1;
     // ChecksumSignature is an user's signature of checksum to verify if it is correct
     bytes ChecksumSignature = 2;
-}
-
-message Link {
-    enum Type {
-        Unknown      = 0;
-        // Parent object created during object transformation
-        Parent       = 1;
-        // Previous object in the linked list created during object transformation
-        Previous     = 2;
-        // Next object in the linked list created during object transformation
-        Next         = 3;
-        // Child object created during object transformation
-        Child        = 4;
-        // Object that included into this storage group
-        StorageGroup = 5;
-    }
-    // Type of link
-    Type type  = 1;
-    // ID is an object identifier, is a valid UUIDv4
-    bytes ID = 2;
 }
 
 // SplitHeader groups information about spawning the object through a payload splitting.
