@@ -32,6 +32,7 @@
     - [Attribute](#object.Attribute)
     - [CreationPoint](#object.CreationPoint)
     - [ExtendedHeader](#object.ExtendedHeader)
+    - [Header](#object.Header)
     - [IntegrityHeader](#object.IntegrityHeader)
     - [Link](#object.Link)
     - [Object](#object.Object)
@@ -406,6 +407,18 @@ Attribute groups the parameters of the object attributes.
 | PublicKey | [PublicKey](#object.PublicKey) |  | PublicKey of owner of the object. Key is used for verification and can be based on NeoID or x509 cert. |
 
 
+<a name="object.Header"></a>
+
+### Message Header
+Header groups the information about the NeoFS object.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| SystemHeader | [SystemHeader](#object.SystemHeader) |  | SystemHeader describes system header |
+| ExtendedHeaders | [ExtendedHeader](#object.ExtendedHeader) | repeated | ExtendedHeaders describes a set of an extended headers |
+
+
 <a name="object.IntegrityHeader"></a>
 
 ### Message IntegrityHeader
@@ -438,8 +451,7 @@ Attribute groups the parameters of the object attributes.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| SystemHeader | [SystemHeader](#object.SystemHeader) |  | SystemHeader describes system header |
-| ExtendedHeaders | [ExtendedHeader](#object.ExtendedHeader) | repeated | ExtendedHeaders describes a set of an extended headers |
+| Header | [Header](#object.Header) |  | Header carries the object header. |
 | Payload | [bytes](#bytes) |  | Payload is an object's payload |
 
 
