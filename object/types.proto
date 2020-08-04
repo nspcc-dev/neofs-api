@@ -1,5 +1,7 @@
 syntax = "proto3";
+
 package object;
+
 option go_package = "github.com/nspcc-dev/neofs-api-go/object";
 option csharp_namespace = "NeoFS.API.Object";
 
@@ -21,6 +23,7 @@ message Header {
         // OwnerID carries identifier the object owner in a binary format.
         bytes OwnerID = 3;
     }
+
     // Main carries the main part of the header.
     // Main MUST NOT be NULL.
     Main main = 1;
@@ -35,6 +38,7 @@ message Header {
             // Changing any byte of the payload changes the checksum.
             // It is calculated as a SHA-256 hash over payload bytes.
             bytes PayloadChecksum = 1;
+
             // HeaderChecksum carries checksum of the object header structure.
             // It covers all object attributes. Changing any field of the object except
             // CreatorKey and ChecksumSignature changes the checksum.
@@ -43,15 +47,19 @@ message Header {
             // It is calculated as a SHA-256 hash over marshaled object header
             // with cut CreatorKey and ChecksumSignature.
             bytes HeaderChecksum = 2;
+
             // SessionToken carries token of the session within which the object was created.
             // If session token is presented in object, it acts as the user's proof of the
             // correctness of the CreatorKey.
             service.Token SessionToken = 3;
+
             // CreatorKey carries public key of the object creator in a binary format.
             bytes CreatorKey = 4;
+
             // ChecksumSignature carries signature of the structure checksum by the object creator.
             bytes ChecksumSignature = 5;
         }
+
         // Integrity carries object integrity evidence.
         Integrity integrity = 1;
 
@@ -63,18 +71,23 @@ message Header {
             // Value carries the string value of the object attribute.
             string Value = 2;
         }
+
         // Attributes carries list of the object attributes in a string key-value format.
         repeated Attribute Attributes = 2;
+
         // CreationEpoch carries number of NeoFS epoch on which the object was created.
         uint64 CreationEpoch = 3;
 
         // Tombstone groups the options for deleting an object.
         message Tombstone {
         }
+
         // Tombstone marks the object to be deleted.
         Tombstone tombstone = 4;
+
         // HomomorphicHash carries homomorphic hash of the object payload.
         bytes HomomorphicHash = 5;
+
         // StorageGroup carries information about the NeoFS storage group.
         storagegroup.StorageGroup StorageGroup = 6;
 
@@ -95,6 +108,7 @@ message Header {
             // Origin carries the header of the origin object.
             Header Origin = 5;
         }
+
         // Split carries the position of the object in the split hierarchy.
         Split split = 7;
     }
@@ -108,6 +122,7 @@ message Header {
 message Object {
     // Header carries the object header.
     Header Header = 1;
+
     // Payload carries the object payload bytes.
     bytes Payload = 2;
 }
