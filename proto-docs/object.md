@@ -29,6 +29,7 @@
 - [object/types.proto](#object/types.proto)
 
   - Messages
+    - [Attribute](#object.Attribute)
     - [CreationPoint](#object.CreationPoint)
     - [Header](#object.Header)
     - [IntegrityHeader](#object.IntegrityHeader)
@@ -38,7 +39,6 @@
     - [SystemHeader](#object.SystemHeader)
     - [Tombstone](#object.Tombstone)
     - [Transform](#object.Transform)
-    - [UserHeader](#object.UserHeader)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -361,6 +361,18 @@ in distributed system.
  <!-- end services -->
 
 
+<a name="object.Attribute"></a>
+
+### Message Attribute
+Attribute groups the parameters of the object attributes.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Key | [string](#string) |  | Key carries the string key to the object attribute. |
+| Value | [string](#string) |  | Value carries the string value of the object attribute. |
+
+
 <a name="object.CreationPoint"></a>
 
 ### Message CreationPoint
@@ -383,7 +395,7 @@ in distributed system.
 | ----- | ---- | ----- | ----------- |
 | Link | [Link](#object.Link) |  | Link to other objects |
 | Redirect | [refs.Address](#refs.Address) |  | Redirect not used yet |
-| UserHeader | [UserHeader](#object.UserHeader) |  | UserHeader is a set of KV headers defined by user |
+| Attribute | [Attribute](#object.Attribute) |  | Attribute is a set of K-V object attributes |
 | Transform | [Transform](#object.Transform) |  | Transform defines transform operation (e.g. payload split) |
 | Tombstone | [Tombstone](#object.Tombstone) |  | Tombstone header that set up in deleted objects |
 | Token | [service.Token](#service.Token) |  | Token header contains token of the session within which the object was created |
@@ -474,18 +486,6 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | type | [Transform.Type](#object.Transform.Type) |  | Type of object transformation |
-
-
-<a name="object.UserHeader"></a>
-
-### Message UserHeader
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| Key | [string](#string) |  | Key of the user's header |
-| Value | [string](#string) |  | Value of the user's header |
 
  <!-- end messages -->
 
