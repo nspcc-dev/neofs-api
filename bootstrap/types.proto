@@ -3,20 +3,13 @@ package bootstrap;
 option go_package = "github.com/nspcc-dev/neofs-api-go/bootstrap";
 option csharp_namespace = "NeoFS.API.Bootstrap";
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-
-option (gogoproto.stable_marshaler_all) = true;
-
-option (gogoproto.stringer_all) =  false;
-option (gogoproto.goproto_stringer_all) = false;
-
 message NodeInfo {
     // Address is a node [multi-address](https://github.com/multiformats/multiaddr)
-    string Address          = 1 [(gogoproto.jsontag) = "address"];
+    string Address = 1;
     // PubKey is a compressed public key representation in bytes
-    bytes PubKey            = 2 [(gogoproto.jsontag) = "pubkey,omitempty"];
+    bytes PubKey = 2;
     // Options is set of node optional information, such as storage capacity, node location, price and etc
-    repeated string Options = 3 [(gogoproto.jsontag) = "options,omitempty"];
+    repeated string Options = 3;
 
     enum State {
         Unknown = 0;
