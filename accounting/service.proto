@@ -1,5 +1,7 @@
 syntax = "proto3";
+
 package accounting;
+
 option go_package = "github.com/nspcc-dev/neofs-api-go/accounting";
 option csharp_namespace = "NeoFS.API.Accounting";
 
@@ -7,20 +9,30 @@ import "service/meta.proto";
 import "service/verify.proto";
 import "refs/types.proto";
 
-// Accounting is a service that provides access for accounting balance
-// information
+// The service provides methods for obtaining information
+// about the account balance in NeoFS system.
 service Accounting {
-    // Balance returns current balance status of the NeoFS user
-    rpc Balance(BalanceRequest) returns (BalanceResponse);
+    // Returns the amount of funds for the requested NeoFS account.
+    rpc Balance (BalanceRequest) returns (BalanceResponse);
 }
 
+// Message defines the request body of Balance method.
+//
+// To indicate the account for which the balance is requested, its identifier is used.
+//
+// To gain access to the requested information, the request body must be formed according
+// to the requirements from the system specification.
 message BalanceRequest {
-    // OwnerID carries user identifier in NeoFS system.
+    // Carries user identifier in NeoFS system for which the balance is requested.
     refs.OwnerID OwnerID = 1;
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta = 98;
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99;
+
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader MetaHeader = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader VerifyHeader = 99;
 }
 
 // Decimal represents the decimal numbers.
@@ -32,7 +44,10 @@ message Decimal {
     uint32 Precision = 2;
 }
 
+// Message defines the response body of Balance method.
+//
+// The amount of funds is calculated in decimal numbers.
 message BalanceResponse {
-    // Balance contains current account balance state
+    // Carries the amount of funds on the account.
     Decimal Balance = 1;
 }
