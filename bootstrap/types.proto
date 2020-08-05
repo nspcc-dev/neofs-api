@@ -24,6 +24,12 @@ message NodeInfo {
     bytes PubKey            = 2 [(gogoproto.jsontag) = "pubkey,omitempty"];
     // Options is set of node optional information, such as storage capacity, node location, price and etc
     repeated string Options = 3 [(gogoproto.jsontag) = "options,omitempty"];
-    // Status is bitmap status of the node
-    uint64 Status           = 4 [(gogoproto.jsontag) = "status", (gogoproto.nullable) = false, (gogoproto.customtype) = "NodeStatus"];
+
+    enum State {
+        Unknown = 0;
+        Online = 1;
+        Offline = 2;
+    }
+
+    State state = 4;
 }

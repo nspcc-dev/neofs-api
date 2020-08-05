@@ -105,7 +105,7 @@ Node state
 | Address | [string](#string) |  | Address is a node [multi-address](https://github.com/multiformats/multiaddr) |
 | PubKey | [bytes](#bytes) |  | PubKey is a compressed public key representation in bytes |
 | Options | [string](#string) | repeated | Options is set of node optional information, such as storage capacity, node location, price and etc |
-| Status | [uint64](#uint64) |  | Status is bitmap status of the node |
+| state | [NodeInfo.State](#bootstrap.NodeInfo.State) |  |  |
 
 
 <a name="bootstrap.SpreadMap"></a>
@@ -120,6 +120,19 @@ Node state
 | NetMap | [NodeInfo](#bootstrap.NodeInfo) | repeated | NetMap is a set of NodeInfos |
 
  <!-- end messages -->
+
+
+<a name="bootstrap.NodeInfo.State"></a>
+
+### NodeInfo.State
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| Unknown | 0 |  |
+| Online | 1 |  |
+| Offline | 2 |  |
+
 
  <!-- end enums -->
 
