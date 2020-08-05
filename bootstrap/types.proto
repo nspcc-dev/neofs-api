@@ -10,13 +10,6 @@ option (gogoproto.stable_marshaler_all) = true;
 option (gogoproto.stringer_all) =  false;
 option (gogoproto.goproto_stringer_all) = false;
 
-message SpreadMap {
-    // Epoch is current epoch for netmap
-    uint64 Epoch = 1;
-    // NetMap is a set of NodeInfos
-    repeated NodeInfo NetMap = 2 [(gogoproto.nullable) = false];
-}
-
 message NodeInfo {
     // Address is a node [multi-address](https://github.com/multiformats/multiaddr)
     string Address          = 1 [(gogoproto.jsontag) = "address"];

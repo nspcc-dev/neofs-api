@@ -7,7 +7,6 @@
 
   - Messages
     - [NodeInfo](#bootstrap.NodeInfo)
-    - [SpreadMap](#bootstrap.SpreadMap)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -35,18 +34,6 @@
 | PubKey | [bytes](#bytes) |  | PubKey is a compressed public key representation in bytes |
 | Options | [string](#string) | repeated | Options is set of node optional information, such as storage capacity, node location, price and etc |
 | state | [NodeInfo.State](#bootstrap.NodeInfo.State) |  |  |
-
-
-<a name="bootstrap.SpreadMap"></a>
-
-### Message SpreadMap
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| Epoch | [uint64](#uint64) |  | Epoch is current epoch for netmap |
-| NetMap | [NodeInfo](#bootstrap.NodeInfo) | repeated | NetMap is a set of NodeInfos |
 
  <!-- end messages -->
 
