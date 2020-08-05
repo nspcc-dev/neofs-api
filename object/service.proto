@@ -105,8 +105,8 @@ message PutResponse {
 message DeleteRequest {
     // Address of object (container id + object id)
     refs.Address Address                     = 1 [(gogoproto.nullable) = false];
-    // OwnerID is a wallet address
-    bytes OwnerID                            = 2 [(gogoproto.nullable) = false, (gogoproto.customtype) = "OwnerID"];
+    // OwnerID carries identifier of the object owner.
+    refs.OwnerID OwnerID = 2;
     // RequestMetaHeader contains information about request meta headers (should be embedded into message)
     service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
     // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)

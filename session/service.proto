@@ -5,6 +5,7 @@ option csharp_namespace = "NeoFS.API.Session";
 
 import "service/meta.proto";
 import "service/verify.proto";
+import "refs/types.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 option (gogoproto.stable_marshaler_all) = true;
@@ -17,8 +18,8 @@ service Session {
 
 // CreateRequest carries an information necessary for opening a session
 message CreateRequest {
-    // OwnerID carries an identifier of a session initiator
-    bytes OwnerID = 1 [(gogoproto.nullable) = false, (gogoproto.customtype) = "OwnerID"];
+    // OwnerID carries an identifier of a session initiator.
+    refs.OwnerID OwnerID = 1;
 
     // Lifetime carries a lifetime of the session
     service.TokenLifetime Lifetime = 2 [(gogoproto.embed) = true, (gogoproto.nullable) = false];

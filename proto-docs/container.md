@@ -185,7 +185,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| OwnerID | [bytes](#bytes) |  | OwnerID is a 25 byte NEO3.0 wallet address. |
+| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the container owner. |
 
 
 <a name="container.ListResponse"></a>
@@ -279,7 +279,7 @@ SHA256 hash of stable-marshalled container message.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| OwnerID | [bytes](#bytes) |  | OwnerID is a 25 byte NEO3.0 wallet address. |
+| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the container owner. |
 | Nonce | [bytes](#bytes) |  | Nonce is a 16 byte UUID, used to avoid collisions of container id. |
 | BasicACL | [uint32](#uint32) |  | BasicACL contains access control rules for owner, system, others groups and permission bits for bearer token and Extended ACL. |
 | Attributes | [Attribute](#container.Attribute) | repeated | Attributes define any immutable characteristics of container. |

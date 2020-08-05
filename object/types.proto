@@ -19,8 +19,8 @@ message Header {
         // Address carries object address in the NeoFS system.
         // It encapsulates the object and the container identifiers.
         refs.Address Address = 2;
-        // OwnerID carries identifier the object owner in a binary format.
-        bytes OwnerID = 3;
+        // OwnerID carries identifier of the object owner.
+        refs.OwnerID OwnerID = 3;
     }
 
     // Main carries the main part of the header.

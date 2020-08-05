@@ -147,7 +147,7 @@ calculated for XORed data.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
-| OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |
+| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the object owner. |
 | Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
 | Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
 
@@ -458,7 +458,7 @@ Message fields are presented in all NeoFS objects.
 | ----- | ---- | ----- | ----------- |
 | PayloadLength | [uint64](#uint64) |  | PayloadLength carries length of the object payload. Each object has a fixed payload length since it's immutable. |
 | Address | [refs.Address](#refs.Address) |  | Address carries object address in the NeoFS system. It encapsulates the object and the container identifiers. |
-| OwnerID | [bytes](#bytes) |  | OwnerID carries identifier the object owner in a binary format. |
+| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the object owner. |
 
 
 <a name="object.Object"></a>

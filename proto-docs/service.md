@@ -125,7 +125,7 @@ BearerTokenMsg carries information about request ACL rules with limited lifetime
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | ACLRules | [bytes](#bytes) |  | ACLRules carries a binary representation of the table of extended ACL rules |
-| OwnerID | [bytes](#bytes) |  | OwnerID is an owner of token |
+| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the token owner. |
 | ValidUntil | [uint64](#uint64) |  | ValidUntil carries a last epoch of token lifetime |
 
 
@@ -176,7 +176,7 @@ User token granting rights for object manipulation
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | ID | [bytes](#bytes) |  | ID is a token identifier. valid UUIDv4 represented in bytes |
-| OwnerID | [bytes](#bytes) |  | OwnerID is an owner of manipulation object |
+| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the manipulation object owner. |
 | verb | [Token.Info.Verb](#service.Token.Info.Verb) |  | Verb is a type of request for which the token is issued |
 | Address | [refs.Address](#refs.Address) |  | Address is an object address for which token is issued |
 | Lifetime | [TokenLifetime](#service.TokenLifetime) |  | Lifetime is a lifetime of the session |

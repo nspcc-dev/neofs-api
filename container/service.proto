@@ -80,8 +80,8 @@ message GetResponse {
 }
 
 message ListRequest {
-    // OwnerID is a 25 byte NEO3.0 wallet address.
-    bytes OwnerID = 1;
+    // OwnerID carries identifier of the container owner.
+    refs.OwnerID OwnerID = 1;
 }
 
 message ListResponse {

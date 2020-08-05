@@ -52,7 +52,7 @@ CreateRequest carries an information necessary for opening a session
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| OwnerID | [bytes](#bytes) |  | OwnerID carries an identifier of a session initiator |
+| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries an identifier of a session initiator. |
 | Lifetime | [service.TokenLifetime](#service.TokenLifetime) |  | Lifetime carries a lifetime of the session |
 | Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
 | Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
