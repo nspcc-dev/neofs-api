@@ -23,6 +23,8 @@
     - [PutResponse](#object.PutResponse)
     - [Range](#object.Range)
     - [SearchRequest](#object.SearchRequest)
+    - [SearchRequest.Query](#object.SearchRequest.Query)
+    - [SearchRequest.Query.Filter](#object.SearchRequest.Query.Filter)
     - [SearchResponse](#object.SearchResponse)
     
 
@@ -328,10 +330,34 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | ContainerID | [refs.ContainerID](#refs.ContainerID) |  | ContainerID carries search container identifier. |
-| Query | [bytes](#bytes) |  | Query in the binary serialized format |
-| QueryVersion | [uint32](#uint32) |  | QueryVersion is a version of search query format |
+| query | [SearchRequest.Query](#object.SearchRequest.Query) |  |  |
 | Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
 | Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+
+
+<a name="object.SearchRequest.Query"></a>
+
+### Message SearchRequest.Query
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Version | [uint32](#uint32) |  |  |
+| Filters | [SearchRequest.Query.Filter](#object.SearchRequest.Query.Filter) | repeated |  |
+
+
+<a name="object.SearchRequest.Query.Filter"></a>
+
+### Message SearchRequest.Query.Filter
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| matchType | [SearchRequest.Query.Filter.MatchType](#object.SearchRequest.Query.Filter.MatchType) |  |  |
+| Name | [string](#string) |  |  |
+| Value | [string](#string) |  |  |
 
 
 <a name="object.SearchResponse"></a>
@@ -346,6 +372,18 @@ in distributed system.
 | Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
  <!-- end messages -->
+
+
+<a name="object.SearchRequest.Query.Filter.MatchType"></a>
+
+### SearchRequest.Query.Filter.MatchType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| MatchUnknown | 0 |  |
+| StringEqual | 1 |  |
+
 
  <!-- end enums -->
 
