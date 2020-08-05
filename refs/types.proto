@@ -14,8 +14,8 @@ option (gogoproto.goproto_stringer_all) = false;
 message Address {
     // ObjectID carries object identifier.
     ObjectID ObjectID = 1;
-    // CID is container identifier
-    bytes CID      = 2[(gogoproto.customtype) = "CID",      (gogoproto.nullable) = false];
+    // ContainerID carries container identifier.
+    ContainerID ContainerID = 2;
 }
 
 // ObjectID groups information about the NeoFS object identifier.

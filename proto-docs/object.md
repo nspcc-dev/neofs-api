@@ -327,7 +327,7 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerID | [bytes](#bytes) |  | ContainerID for searching the object |
+| ContainerID | [refs.ContainerID](#refs.ContainerID) |  | ContainerID carries search container identifier. |
 | Query | [bytes](#bytes) |  | Query in the binary serialized format |
 | QueryVersion | [uint32](#uint32) |  | QueryVersion is a version of search query format |
 | Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
