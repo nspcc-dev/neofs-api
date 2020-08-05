@@ -25,13 +25,14 @@
 <a name="storagegroup.StorageGroup"></a>
 
 ### Message StorageGroup
-
+StorageGroup groups the information about the NeoFS storage group.
+The storage group consists of objects from single container.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ValidationDataSize | [uint64](#uint64) |  | ValidationDataSize is size of the all object's payloads included into storage group |
-| ValidationHash | [bytes](#bytes) |  | ValidationHash is homomorphic hash of all object's payloads included into storage group |
+| ValidationDataSize | [uint64](#uint64) |  | ValidationDataSize carries the total size of the payloads of the storage group members. |
+| ValidationHash | [bytes](#bytes) |  | ValidationHash carries homomorphic hash from the concatenation of the payloads of the storage group members. The order of concatenation is the same as the order of the members in the Members field. |
 | ExpirationEpoch | [uint64](#uint64) |  | ExpirationEpoch carries last NeoFS epoch number of the storage group lifetime. |
 | Members | [refs.ObjectID](#refs.ObjectID) | repeated | Members carries the list of identifiers of the object storage group members. The list is strictly ordered. |
 
