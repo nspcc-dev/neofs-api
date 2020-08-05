@@ -25,15 +25,15 @@
 <a name="bootstrap.NodeInfo"></a>
 
 ### Message NodeInfo
-
+Groups the information about the NeoFS node.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Address | [string](#string) |  | Address is a node [multi-address](https://github.com/multiformats/multiaddr) |
-| PubKey | [bytes](#bytes) |  | PubKey is a compressed public key representation in bytes |
-| Options | [string](#string) | repeated | Options is set of node optional information, such as storage capacity, node location, price and etc |
-| state | [NodeInfo.State](#bootstrap.NodeInfo.State) |  |  |
+| Address | [string](#string) |  | Carries network address of the NeoFS node. |
+| PublicKey | [bytes](#bytes) |  | Carries public key of the NeoFS node in a binary format. |
+| Options | [string](#string) | repeated | Carries options of the NeoFS node. |
+| state | [NodeInfo.State](#bootstrap.NodeInfo.State) |  | Carries state of the NeoFS node. |
 
  <!-- end messages -->
 
@@ -41,13 +41,13 @@
 <a name="bootstrap.NodeInfo.State"></a>
 
 ### NodeInfo.State
-
+Represents the enumeration of various states of the NeoFS node.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| Unknown | 0 |  |
-| Online | 1 |  |
-| Offline | 2 |  |
+| Unknown | 0 | Undefined state. |
+| Online | 1 | Active state on the network. |
+| Offline | 2 | Network unavailable state. |
 
 
  <!-- end enums -->
