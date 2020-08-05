@@ -7,9 +7,6 @@ import "service/meta.proto";
 import "service/verify.proto";
 import "decimal/decimal.proto";
 import "refs/types.proto";
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-
-option (gogoproto.stable_marshaler_all) = true;
 
 // Accounting is a service that provides access for accounting balance
 // information
@@ -22,9 +19,9 @@ message BalanceRequest {
     // OwnerID carries user identifier in NeoFS system.
     refs.OwnerID OwnerID = 1;
     // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
+    service.RequestMetaHeader Meta = 98;
     // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
+    service.RequestVerificationHeader Verify = 99;
 }
 
 message BalanceResponse {
