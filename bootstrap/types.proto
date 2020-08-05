@@ -13,8 +13,17 @@ message NodeInfo {
     // Carries public key of the NeoFS node in a binary format.
     bytes PublicKey = 2;
 
-    // Carries options of the NeoFS node.
-    repeated string Options = 3;
+    // Groups attributes of the NeoFS node.
+    message Attribute {
+        // Carries string key to the node attribute.
+        string Key = 1;
+
+        // Carries string value of the node attribute.
+        string Value = 2;
+    }
+
+    // // Carries list of the NeoFS node attributes in a string key-value format.
+    repeated Attribute Attributes = 3;
 
     // Represents the enumeration of various states of the NeoFS node.
     enum State {
