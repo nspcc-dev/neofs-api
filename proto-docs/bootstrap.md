@@ -3,14 +3,6 @@
 
 ## Table of Contents
 
-- [bootstrap/service.proto](#bootstrap/service.proto)
- - Services
-    - [Bootstrap](#bootstrap.Bootstrap)
-    
-  - Messages
-    - [Request](#bootstrap.Request)
-    
-
 - [bootstrap/types.proto](#bootstrap/types.proto)
 
   - Messages
@@ -19,69 +11,6 @@
     
 
 - [Scalar Value Types](#scalar-value-types)
-
-
-
-<a name="bootstrap/service.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## bootstrap/service.proto
-
-
-
-
-<a name="bootstrap.Bootstrap"></a>
-
-### Service "bootstrap.Bootstrap"
-Bootstrap service allows neofs-node to connect to the network. Node should
-perform at least one bootstrap request in the epoch to stay in the network
-for the next epoch.
-
-```
-rpc Process(Request) returns (SpreadMap);
-
-```
-
-#### Method Process
-
-Process is method that allows to register node in the network and receive actual netmap
-
-| Name | Input | Output |
-| ---- | ----- | ------ |
-| Process | [Request](#bootstrap.Request) | [SpreadMap](#bootstrap.SpreadMap) |
- <!-- end services -->
-
-
-<a name="bootstrap.Request"></a>
-
-### Message Request
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| type | [int32](#int32) |  | Type is NodeType, can be InnerRingNode (type=1) or StorageNode (type=2) |
-| info | [NodeInfo](#bootstrap.NodeInfo) |  | Info contains information about node |
-| state | [Request.State](#bootstrap.Request.State) |  | State contains node status |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
-
- <!-- end messages -->
-
-
-<a name="bootstrap.Request.State"></a>
-
-### Request.State
-Node state
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| Unknown | 0 | used by default |
-| Online | 1 | used to inform that node online |
-| Offline | 2 | used to inform that node offline |
-
-
- <!-- end enums -->
 
 
 
