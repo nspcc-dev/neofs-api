@@ -7,7 +7,6 @@ option csharp_namespace = "NeoFS.API.Object";
 
 import "refs/types.proto";
 import "service/verify.proto";
-import "storagegroup/types.proto";
 
 // Header groups the information about the NeoFS object.
 message Header {
@@ -88,8 +87,12 @@ message Header {
         // HomomorphicHash carries homomorphic hash of the object payload.
         bytes HomomorphicHash = 5;
 
-        // StorageGroup carries information about the NeoFS storage group.
-        storagegroup.StorageGroup StorageGroup = 6;
+        // StorageGroup groups meta information about a storage group.
+        message StorageGroup {
+        }
+
+        // StorageGroup marks an object containing information about a storage group.
+        StorageGroup storageGroup = 6;
 
         // Split groups information about spawning the object through a payload splitting.
         message Split {
