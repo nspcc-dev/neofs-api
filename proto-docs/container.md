@@ -120,7 +120,7 @@ smart-contract storage.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerID | [bytes](#bytes) |  | ContainerID of container to delete from NeoFS. |
+| ContainerID | [refs.ContainerID](#refs.ContainerID) |  | ContainerID carries identifier of the container to delete from NeoFS. |
 | Signature | [bytes](#bytes) |  | Signature of container id according to RFC-6979. |
 
 
@@ -140,7 +140,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerID | [bytes](#bytes) |  | ContainerID of the container that has Extended ACL. |
+| ContainerID | [refs.ContainerID](#refs.ContainerID) |  | ContainerID carries identifier of the container that has Extended ACL. |
 
 
 <a name="container.GetExtendedACLResponse"></a>
@@ -163,7 +163,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerID | [bytes](#bytes) |  | ContainerID of the container to get. |
+| ContainerID | [refs.ContainerID](#refs.ContainerID) |  | ContainerID carries identifier of the container to get. |
 
 
 <a name="container.GetResponse"></a>
@@ -196,7 +196,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerIDs | [bytes](#bytes) | repeated | ContainerIDs of containers that belong to the owner. |
+| ContainerIDs | [refs.ContainerID](#refs.ContainerID) | repeated | ContainerIDs carries list of identifiers of the containers that belong to the owner. |
 
 
 <a name="container.PutRequest"></a>
@@ -220,7 +220,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerID | [bytes](#bytes) |  | ContainerID of the new container. |
+| ContainerID | [refs.ContainerID](#refs.ContainerID) |  | ContainerID carries identifier of the new container. |
 
 
 <a name="container.SetExtendedACLRequest"></a>

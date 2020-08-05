@@ -33,7 +33,7 @@ Address of object (container id + object id)
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | ObjectID | [ObjectID](#refs.ObjectID) |  | ObjectID carries object identifier. |
-| CID | [bytes](#bytes) |  | CID is container identifier |
+| ContainerID | [ContainerID](#refs.ContainerID) |  | ContainerID carries container identifier. |
 
 
 <a name="refs.ContainerID"></a>

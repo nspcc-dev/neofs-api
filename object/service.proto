@@ -138,8 +138,8 @@ message HeadResponse {
 }
 
 message SearchRequest {
-    // ContainerID for searching the object
-    bytes ContainerID                        = 1 [(gogoproto.nullable) = false, (gogoproto.customtype) = "CID"];
+    // ContainerID carries search container identifier.
+    refs.ContainerID ContainerID = 1;
     // Query in the binary serialized format
     bytes Query                              = 2;
     // QueryVersion is a version of search query format
