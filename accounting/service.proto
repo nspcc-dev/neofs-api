@@ -5,7 +5,6 @@ option csharp_namespace = "NeoFS.API.Accounting";
 
 import "service/meta.proto";
 import "service/verify.proto";
-import "decimal/decimal.proto";
 import "refs/types.proto";
 
 // Accounting is a service that provides access for accounting balance
@@ -24,7 +23,16 @@ message BalanceRequest {
     service.RequestVerificationHeader Verify = 99;
 }
 
+// Decimal represents the decimal numbers.
+message Decimal {
+    // Value carries number value.
+    int64 Value = 1;
+
+    // Precision carries value precision.
+    uint32 Precision = 2;
+}
+
 message BalanceResponse {
     // Balance contains current account balance state
-    decimal.Decimal Balance = 1;
+    Decimal Balance = 1;
 }

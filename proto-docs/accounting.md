@@ -10,6 +10,7 @@
   - Messages
     - [BalanceRequest](#accounting.BalanceRequest)
     - [BalanceResponse](#accounting.BalanceResponse)
+    - [Decimal](#accounting.Decimal)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -66,7 +67,19 @@ Balance returns current balance status of the NeoFS user
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Balance | [decimal.Decimal](#decimal.Decimal) |  | Balance contains current account balance state |
+| Balance | [Decimal](#accounting.Decimal) |  | Balance contains current account balance state |
+
+
+<a name="accounting.Decimal"></a>
+
+### Message Decimal
+Decimal represents the decimal numbers.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Value | [int64](#int64) |  | Value carries number value. |
+| Precision | [uint32](#uint32) |  | Precision carries value precision. |
 
  <!-- end messages -->
 
