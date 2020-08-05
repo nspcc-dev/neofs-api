@@ -4,9 +4,6 @@ option go_package = "github.com/nspcc-dev/neofs-api-go/service";
 option csharp_namespace = "NeoFS.API.Service";
 
 import "refs/types.proto";
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-
-option (gogoproto.stable_marshaler_all) = true;
 
 // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request
 // (should be embedded into message).
@@ -32,7 +29,7 @@ message RequestVerificationHeader {
 message Token {
     message Info {
         // ID is a token identifier. valid UUIDv4 represented in bytes
-        bytes ID = 1 [(gogoproto.customtype) = "TokenID", (gogoproto.nullable) = false];
+        bytes ID = 1;
 
         // OwnerID carries identifier of the manipulation object owner.
         refs.OwnerID OwnerID = 2;
@@ -56,13 +53,13 @@ message Token {
         }
 
         // Verb is a type of request for which the token is issued
-        Verb verb = 3 [(gogoproto.customname) = "Verb"];
+        Verb verb = 3;
 
         // Address is an object address for which token is issued
-        refs.Address Address = 4 [(gogoproto.nullable) = false, (gogoproto.customtype) = "Address"];
+        refs.Address Address = 4;
 
         // Lifetime is a lifetime of the session
-        TokenLifetime Lifetime = 5 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
+        TokenLifetime Lifetime = 5;
 
         // SessionKey is a public key of session key
         bytes SessionKey = 6;
@@ -72,7 +69,7 @@ message Token {
     }
 
     // TokenInfo is a grouped information about token
-    Info TokenInfo = 1 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
+    Info TokenInfo = 1;
 
     // Signature is a signature of session token information
     bytes Signature = 8;
@@ -109,7 +106,7 @@ message BearerTokenMsg {
     }
 
     // TokenInfo is a grouped information about token
-    Info TokenInfo = 1 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
+    Info TokenInfo = 1;
 
     // OwnerKey is a public key of the token owner
     bytes OwnerKey = 2;

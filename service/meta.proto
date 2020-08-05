@@ -3,10 +3,6 @@ package service;
 option go_package = "github.com/nspcc-dev/neofs-api-go/service";
 option csharp_namespace = "NeoFS.API.Service";
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-
-option (gogoproto.stable_marshaler_all) = true;
-
 // RequestMetaHeader contains information about request meta headers
 // (should be embedded into message)
 message RequestMetaHeader {
@@ -20,7 +16,7 @@ message RequestMetaHeader {
     // Raw determines whether the request is raw or not
     bool Raw       = 4;
     // ExtendedHeader carries extended headers of the request
-    RequestExtendedHeader ExtendedHeader = 5 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
+    RequestExtendedHeader ExtendedHeader = 5;
 }
 
 // ResponseMetaHeader contains meta information based on request processing by server
@@ -45,5 +41,5 @@ message RequestExtendedHeader {
     }
 
     // Headers carries list of key-value headers
-    repeated KV Headers = 1 [(gogoproto.nullable) = false];
+    repeated KV Headers = 1;
 }
