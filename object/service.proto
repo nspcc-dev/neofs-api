@@ -140,10 +140,28 @@ message HeadResponse {
 message SearchRequest {
     // ContainerID carries search container identifier.
     refs.ContainerID ContainerID = 1;
-    // Query in the binary serialized format
-    bytes Query                              = 2;
-    // QueryVersion is a version of search query format
-    uint32 QueryVersion                     = 3;
+
+    message Query {
+        uint32 Version = 1;
+
+        message Filter {
+            enum MatchType {
+                MatchUnknown = 0;
+                StringEqual = 1;
+            }
+
+            MatchType matchType = 1;
+
+            string Name = 2;
+
+            string Value = 3;
+        }
+
+        repeated Filter Filters = 2;
+    }
+
+    Query query = 2;
+
     // RequestMetaHeader contains information about request meta headers (should be embedded into message)
     service.RequestMetaHeader Meta           = 98 [(gogoproto.embed) = true, (gogoproto.nullable) = false];
     // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
