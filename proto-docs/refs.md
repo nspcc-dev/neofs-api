@@ -7,6 +7,7 @@
 
   - Messages
     - [Address](#refs.Address)
+    - [ContainerID](#refs.ContainerID)
     - [ObjectID](#refs.ObjectID)
     
 
@@ -33,6 +34,17 @@ Address of object (container id + object id)
 | ----- | ---- | ----- | ----------- |
 | ObjectID | [ObjectID](#refs.ObjectID) |  | ObjectID carries object identifier. |
 | CID | [bytes](#bytes) |  | CID is container identifier |
+
+
+<a name="refs.ContainerID"></a>
+
+### Message ContainerID
+ContainerID groups information about the NeoFS container identifier.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Value | [bytes](#bytes) |  | Value carries the container identifier in a binary format. |
 
 
 <a name="refs.ObjectID"></a>
