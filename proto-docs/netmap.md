@@ -6,6 +6,8 @@
 - [netmap/types.proto](#netmap/types.proto)
 
   - Messages
+    - [NodeInfo](#netmap.NodeInfo)
+    - [NodeInfo.Attribute](#netmap.NodeInfo.Attribute)
     - [PlacementRule](#netmap.PlacementRule)
     - [PlacementRule.SFGroup](#netmap.PlacementRule.SFGroup)
     - [PlacementRule.SFGroup.Filter](#netmap.PlacementRule.SFGroup.Filter)
@@ -25,6 +27,32 @@
 
 
  <!-- end services -->
+
+
+<a name="netmap.NodeInfo"></a>
+
+### Message NodeInfo
+Groups the information about the NeoFS node.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Address | [string](#string) |  | Carries network address of the NeoFS node. |
+| PublicKey | [bytes](#bytes) |  | Carries public key of the NeoFS node in a binary format. |
+| Attributes | [NodeInfo.Attribute](#netmap.NodeInfo.Attribute) | repeated | Carries list of the NeoFS node attributes in a string key-value format. |
+| state | [NodeInfo.State](#netmap.NodeInfo.State) |  | Carries state of the NeoFS node. |
+
+
+<a name="netmap.NodeInfo.Attribute"></a>
+
+### Message NodeInfo.Attribute
+Groups attributes of the NeoFS node.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Key | [string](#string) |  | Carries string key to the node attribute. |
+| Value | [string](#string) |  | Carries string value of the node attribute. |
 
 
 <a name="netmap.PlacementRule"></a>
@@ -100,6 +128,19 @@
 | Key | [string](#string) |  |  |
 
  <!-- end messages -->
+
+
+<a name="netmap.NodeInfo.State"></a>
+
+### NodeInfo.State
+Represents the enumeration of various states of the NeoFS node.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| Unknown | 0 | Undefined state. |
+| Online | 1 | Active state on the network. |
+| Offline | 2 | Network unavailable state. |
+
 
 
 <a name="netmap.PlacementRule.SFGroup.Filter.SimpleFilter.Operation"></a>
