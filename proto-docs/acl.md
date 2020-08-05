@@ -73,7 +73,7 @@ EACLRecord carries the information about extended ACL rules.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerID | [bytes](#bytes) |  | ContainerID of the container that should use given access control rules. |
+| ContainerID | [refs.ContainerID](#refs.ContainerID) |  | Carries identifier of the container that should use given access control rules. |
 | Records | [EACLRecord](#acl.EACLRecord) | repeated | Records carries list of extended ACL rule records. |
 
  <!-- end messages -->
@@ -148,7 +148,6 @@ Target of the access control rule in access control list.
 | User | 1 | User target rule is applied if sender is the owner of the container. |
 | System | 2 | System target rule is applied if sender is the storage node within the container or inner ring node. |
 | Others | 3 | Others target rule is applied if sender is not user or system target. |
-| PubKey | 4 | PubKey target rule is applied if sender has public key provided in extended ACL. |
 
 
  <!-- end enums -->
