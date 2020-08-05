@@ -1,5 +1,7 @@
 syntax = "proto3";
+
 package acl;
+
 option go_package = "github.com/nspcc-dev/neofs-api-go/acl";
 option csharp_namespace = "NeoFS.API.Acl";
 
@@ -11,18 +13,14 @@ enum Target {
     Unknown = 0;
 
     // User target rule is applied if sender is the owner of the container.
-    User    = 1;
+    User = 1;
 
     // System target rule is applied if sender is the storage node within the
     // container or inner ring node.
-    System  = 2;
+    System = 2;
 
     // Others target rule is applied if sender is not user or system target.
-    Others  = 3;
-
-    // PubKey target rule is applied if sender has public key provided in
-    // extended ACL.
-    PubKey  = 4;
+    Others = 3;
 }
 
 // EACLRecord groups information about extended ACL rule.
@@ -102,6 +100,7 @@ message EACLRecord {
 message EACLTable {
     // Carries identifier of the container that should use given access control rules.
     refs.ContainerID ContainerID = 1 [json_name="ContainerID"];
+
     // Records carries list of extended ACL rule records.
     repeated EACLRecord Records = 2 [json_name="Records"];
 }
