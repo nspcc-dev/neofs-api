@@ -7,6 +7,7 @@
 
   - Messages
     - [NodeInfo](#bootstrap.NodeInfo)
+    - [NodeInfo.Attribute](#bootstrap.NodeInfo.Attribute)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -32,8 +33,20 @@ Groups the information about the NeoFS node.
 | ----- | ---- | ----- | ----------- |
 | Address | [string](#string) |  | Carries network address of the NeoFS node. |
 | PublicKey | [bytes](#bytes) |  | Carries public key of the NeoFS node in a binary format. |
-| Options | [string](#string) | repeated | Carries options of the NeoFS node. |
+| Attributes | [NodeInfo.Attribute](#bootstrap.NodeInfo.Attribute) | repeated | Carries list of the NeoFS node attributes in a string key-value format. |
 | state | [NodeInfo.State](#bootstrap.NodeInfo.State) |  | Carries state of the NeoFS node. |
+
+
+<a name="bootstrap.NodeInfo.Attribute"></a>
+
+### Message NodeInfo.Attribute
+Groups attributes of the NeoFS node.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Key | [string](#string) |  | Carries string key to the node attribute. |
+| Value | [string](#string) |  | Carries string value of the node attribute. |
 
  <!-- end messages -->
 
