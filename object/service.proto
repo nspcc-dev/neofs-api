@@ -54,6 +54,10 @@ service Service {
 message GetRequest {
     // Address of object (container id + object id)
     refs.Address Address = 1;
+    // Raw carries the raw option flag of the request.
+    // Raw request is sent to receive only the objects
+    // that are physically stored on the server.
+    bool Raw = 2;
     // RequestMetaHeader contains information about request meta headers (should be embedded into message)
     service.RequestMetaHeader Meta = 98;
     // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
@@ -122,6 +126,10 @@ message HeadRequest {
     refs.Address Address = 1;
     // FullHeaders can be set true for extended headers in the object
     bool FullHeaders                         = 2;
+    // Raw carries the raw option flag of the request.
+    // Raw request is sent to receive only the headers of the objects
+    // that are physically stored on the server.
+    bool Raw = 3;
     // RequestMetaHeader contains information about request meta headers (should be embedded into message)
     service.RequestMetaHeader Meta = 98;
     // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)

@@ -13,8 +13,6 @@ message RequestMetaHeader {
     // Version defines protocol version
     // TODO: not used for now, should be implemented in future
     uint32 Version = 3;
-    // Raw determines whether the request is raw or not
-    bool Raw       = 4;
     // ExtendedHeader carries extended headers of the request
     RequestExtendedHeader ExtendedHeader = 5;
 }

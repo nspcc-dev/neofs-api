@@ -228,6 +228,7 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
+| Raw | [bool](#bool) |  | Raw carries the raw option flag of the request. Raw request is sent to receive only the objects that are physically stored on the server. |
 | Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
 | Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
 
@@ -255,6 +256,7 @@ in distributed system.
 | ----- | ---- | ----- | ----------- |
 | Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
 | FullHeaders | [bool](#bool) |  | FullHeaders can be set true for extended headers in the object |
+| Raw | [bool](#bool) |  | Raw carries the raw option flag of the request. Raw request is sent to receive only the headers of the objects that are physically stored on the server. |
 | Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
 | Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
 
