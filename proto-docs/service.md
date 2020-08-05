@@ -6,9 +6,8 @@
 - [service/meta.proto](#service/meta.proto)
 
   - Messages
-    - [RequestExtendedHeader](#service.RequestExtendedHeader)
-    - [RequestExtendedHeader.KV](#service.RequestExtendedHeader.KV)
     - [RequestMetaHeader](#service.RequestMetaHeader)
+    - [RequestMetaHeader.XHeader](#service.RequestMetaHeader.XHeader)
     
 
 - [service/verify.proto](#service/verify.proto)
@@ -36,42 +35,28 @@
  <!-- end services -->
 
 
-<a name="service.RequestExtendedHeader"></a>
-
-### Message RequestExtendedHeader
-RequestExtendedHeader contains extended headers of request
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| Headers | [RequestExtendedHeader.KV](#service.RequestExtendedHeader.KV) | repeated | Headers carries list of key-value headers |
-
-
-<a name="service.RequestExtendedHeader.KV"></a>
-
-### Message RequestExtendedHeader.KV
-KV contains string key-value pair
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| K | [string](#string) |  | K carries extended header key |
-| V | [string](#string) |  | V carries extended header value |
-
-
 <a name="service.RequestMetaHeader"></a>
 
 ### Message RequestMetaHeader
-RequestMetaHeader contains information about request meta headers
-(should be embedded into message)
+RequestMetaHeader contains information about request meta headers.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| TTL | [uint32](#uint32) |  | TTL must be larger than zero, it decreased in every NeoFS Node |
-| Epoch | [uint64](#uint64) |  | Epoch for user can be empty, because node sets epoch to the actual value |
-| Version | [uint32](#uint32) |  | Version defines protocol version TODO: not used for now, should be implemented in future |
-| ExtendedHeader | [RequestExtendedHeader](#service.RequestExtendedHeader) |  | ExtendedHeader carries extended headers of the request |
+| TTL | [uint32](#uint32) |  | Carries maximum number of nodes in the request route. |
+| XHeaders | [RequestMetaHeader.XHeader](#service.RequestMetaHeader.XHeader) | repeated | Carries request X-Headers. |
+
+
+<a name="service.RequestMetaHeader.XHeader"></a>
+
+### Message RequestMetaHeader.XHeader
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Key | [string](#string) |  | Carries key to the X-Header. |
+| Value | [string](#string) |  | Carries value of the X-Header. |
 
  <!-- end messages -->
 
@@ -117,8 +102,7 @@ BearerTokenMsg carries information about request ACL rules with limited lifetime
 <a name="service.RequestVerificationHeader"></a>
 
 ### Message RequestVerificationHeader
-RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request
-(should be embedded into message).
+RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request.
 
 
 | Field | Type | Label | Description |
@@ -136,8 +120,8 @@ RequestVerificationHeader is a set of signatures of every NeoFS Node that proces
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| Key | [bytes](#bytes) |  | Key is compressed public key used for signature. |
 | Sign | [bytes](#bytes) |  | Sign is signature of the request or session key. |
-| Peer | [bytes](#bytes) |  | Peer is compressed public key used for signature. |
 
 
 <a name="service.Token"></a>
