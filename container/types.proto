@@ -4,7 +4,7 @@ option go_package = "github.com/nspcc-dev/neofs-api-go/container";
 option csharp_namespace = "NeoFS.API.Container";
 
 import "refs/types.proto";
-import "github.com/nspcc-dev/netmap/selector.proto";
+import "netmap/types.proto";
 
 // Container is a structure that defines object placement behaviour. Objects
 // can be stored only within containers. They define placement rule, attributes
