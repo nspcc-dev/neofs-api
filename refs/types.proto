@@ -23,3 +23,9 @@ message ObjectID {
     // Value carries the object identifier in a binary format.
     bytes Value = 1;
 }
+
+// ContainerID groups information about the NeoFS container identifier.
+message ContainerID {
+    // Value carries the container identifier in a binary format.
+    bytes Value = 1;
+}
