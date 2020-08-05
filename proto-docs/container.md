@@ -25,8 +25,8 @@
 - [container/types.proto](#container/types.proto)
 
   - Messages
-    - [Attribute](#container.Attribute)
     - [Container](#container.Container)
+    - [Container.Attribute](#container.Container.Attribute)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -256,18 +256,6 @@ via consensus in inner ring nodes
  <!-- end services -->
 
 
-<a name="container.Attribute"></a>
-
-### Message Attribute
-Attribute is a key-value pair of strings.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| Key | [string](#string) |  | Key of immutable container attribute. |
-| Value | [string](#string) |  | Value of immutable container attribute. |
-
-
 <a name="container.Container"></a>
 
 ### Message Container
@@ -282,8 +270,20 @@ SHA256 hash of stable-marshalled container message.
 | OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the container owner. |
 | Nonce | [bytes](#bytes) |  | Nonce is a 16 byte UUID, used to avoid collisions of container id. |
 | BasicACL | [uint32](#uint32) |  | BasicACL contains access control rules for owner, system, others groups and permission bits for bearer token and Extended ACL. |
-| Attributes | [Attribute](#container.Attribute) | repeated | Attributes define any immutable characteristics of container. |
+| Attributes | [Container.Attribute](#container.Container.Attribute) | repeated | Attributes define any immutable characteristics of container. |
 | Rules | [netmap.PlacementRule](#netmap.PlacementRule) |  | Rules define storage policy for the object inside the container. |
+
+
+<a name="container.Container.Attribute"></a>
+
+### Message Container.Attribute
+Attribute is a key-value pair of strings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Key | [string](#string) |  | Key of immutable container attribute. |
+| Value | [string](#string) |  | Value of immutable container attribute. |
 
  <!-- end messages -->
 
