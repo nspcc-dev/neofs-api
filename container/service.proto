@@ -6,9 +6,6 @@ option csharp_namespace = "NeoFS.API.Container";
 import "acl/types.proto";
 import "container/types.proto";
 import "refs/types.proto";
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-
-option (gogoproto.stable_marshaler_all) = true;
 
 // Service provides API to access container smart-contract in morph chain
 // via NeoFS node.
