@@ -29,3 +29,9 @@ message ContainerID {
     // Value carries the container identifier in a binary format.
     bytes Value = 1;
 }
+
+// OwnerID group information about the owner of the NeoFS container.
+message OwnerID {
+    // Value carries the identifier of the container owner in a binary format.
+    bytes Value = 1;
+}
