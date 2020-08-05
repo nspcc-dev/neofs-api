@@ -19,7 +19,7 @@
     - [HeadRequest](#object.HeadRequest)
     - [HeadResponse](#object.HeadResponse)
     - [PutRequest](#object.PutRequest)
-    - [PutRequest.PutHeader](#object.PutRequest.PutHeader)
+    - [PutRequest.Init](#object.PutRequest.Init)
     - [PutResponse](#object.PutResponse)
     - [Range](#object.Range)
     - [SearchRequest](#object.SearchRequest)
@@ -148,10 +148,10 @@ calculated for XORed data.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
-| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the object owner. |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| Address | [refs.Address](#refs.Address) |  | Carries the address of the object to be deleted. |
+| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | Carries identifier the object owner. |
+| MetaHeader | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| VerifyHeader | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="object.DeleteResponse"></a>
@@ -170,11 +170,11 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
-| Ranges | [Range](#object.Range) | repeated | Ranges of object's payload to calculate homomorphic hash |
-| Salt | [bytes](#bytes) |  | Salt is used to XOR object's payload ranges before hashing, it can be nil |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| Address | [refs.Address](#refs.Address) |  | Carries address of the object that contains the requested payload range. |
+| Ranges | [Range](#object.Range) | repeated | Carries the list of object payload range to calculate homomorphic hash. |
+| Salt | [bytes](#bytes) |  | Carries binary salt to XOR object payload ranges before hash calculation. |
+| MetaHeader | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| VerifyHeader | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="object.GetRangeHashResponse"></a>
@@ -185,7 +185,7 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Hashes | [bytes](#bytes) | repeated | Hashes is a homomorphic hashes of all ranges |
+| HashList | [bytes](#bytes) | repeated | Carries list of homomorphic hashes in a binary format. |
 
 
 <a name="object.GetRangeRequest"></a>
@@ -196,10 +196,10 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
-| Range | [Range](#object.Range) |  | Range of object's payload to return |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| Address | [refs.Address](#refs.Address) |  | Address carries address of the object that contains the requested payload range. |
+| Range | [Range](#object.Range) |  | Range carries the parameters of the requested payload range. |
+| MetaHeader | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| VerifyHeader | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="object.GetRangeResponse"></a>
@@ -210,7 +210,7 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Fragment | [bytes](#bytes) |  | Fragment of object's payload |
+| Chunk | [bytes](#bytes) |  | Carries part of the object payload. |
 
 
 <a name="object.GetRequest"></a>
@@ -221,10 +221,10 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
-| Raw | [bool](#bool) |  | Raw carries the raw option flag of the request. Raw request is sent to receive only the objects that are physically stored on the server. |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| Address | [refs.Address](#refs.Address) |  | Carries the address of the requested object. |
+| Raw | [bool](#bool) |  | Carries the raw option flag of the request. Raw request is sent to receive only the objects that are physically stored on the server. |
+| MetaHeader | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| VerifyHeader | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="object.GetResponse"></a>
@@ -235,8 +235,8 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| object | [Object](#object.Object) |  | Object header and some payload |
-| Chunk | [bytes](#bytes) |  | Chunk of remaining payload |
+| Header | [Header](#object.Header) |  | Carries the object header. |
+| Chunk | [bytes](#bytes) |  | Carries part of the object payload. |
 
 
 <a name="object.HeadRequest"></a>
@@ -247,11 +247,11 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
-| FullHeaders | [bool](#bool) |  | FullHeaders can be set true for extended headers in the object |
-| Raw | [bool](#bool) |  | Raw carries the raw option flag of the request. Raw request is sent to receive only the headers of the objects that are physically stored on the server. |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| Address | [refs.Address](#refs.Address) |  | Carries the address of the object with the requested header. |
+| MainOnly | [bool](#bool) |  | Carries the option to crop header to main part. |
+| Raw | [bool](#bool) |  | Carries the raw option flag of the request. Raw request is sent to receive only the headers of the objects that are physically stored on the server. |
+| MetaHeader | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| VerifyHeader | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="object.HeadResponse"></a>
@@ -262,7 +262,7 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Object | [Object](#object.Object) |  | Object without payload |
+| Header | [Header](#object.Header) |  | Carries the requested object header. |
 
 
 <a name="object.PutRequest"></a>
@@ -273,22 +273,22 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Header | [PutRequest.PutHeader](#object.PutRequest.PutHeader) |  | Header should be the first message in the stream |
-| Chunk | [bytes](#bytes) |  | Chunk should be a remaining message in stream should be chunks |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| init | [PutRequest.Init](#object.PutRequest.Init) |  | Carries the initialization parameters of the object stream. |
+| Chunk | [bytes](#bytes) |  | Carries part of the object payload. |
+| MetaHeader | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| VerifyHeader | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.PutRequest.PutHeader"></a>
+<a name="object.PutRequest.Init"></a>
 
-### Message PutRequest.PutHeader
-
+### Message PutRequest.Init
+Groups initialization parameters of object placement in NeoFS.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Object | [Object](#object.Object) |  | Object with at least container id and owner id fields |
-| CopiesNumber | [uint32](#uint32) |  | Number of the object copies to store within the RPC call (zero is processed according to the placement rules) |
+| Header | [Header](#object.Header) |  | Carries the header of the object to save in the system. |
+| CopiesNumber | [uint32](#uint32) |  | Carries the number of the object copies to store within the RPC call. Default zero value is processed according to the container placement rules. |
 
 
 <a name="object.PutResponse"></a>
@@ -299,19 +299,19 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
+| ObjectID | [refs.ObjectID](#refs.ObjectID) |  | Carries identifier of the saved object. It is used to access an object in the container. |
 
 
 <a name="object.Range"></a>
 
 ### Message Range
-
+Range groups the parameters of object payload range.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Offset | [uint64](#uint64) |  | Offset of the data range |
-| Length | [uint64](#uint64) |  | Length of the data range |
+| Offset | [uint64](#uint64) |  | Carries the offset of the range from the object payload start. |
+| Length | [uint64](#uint64) |  | Carries the length of the object payload range. |
 
 
 <a name="object.SearchRequest"></a>
@@ -322,10 +322,10 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerID | [refs.ContainerID](#refs.ContainerID) |  | ContainerID carries search container identifier. |
+| ContainerID | [refs.ContainerID](#refs.ContainerID) |  | Carries search container identifier. |
 | query | [SearchRequest.Query](#object.SearchRequest.Query) |  |  |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| MetaHeader | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| VerifyHeader | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="object.SearchRequest.Query"></a>
@@ -361,7 +361,7 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Addresses | [refs.Address](#refs.Address) | repeated | Addresses of found objects |
+| IDList | [refs.ObjectID](#refs.ObjectID) | repeated | Carries list of object identifiers that match the search query. |
 
  <!-- end messages -->
 

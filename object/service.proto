@@ -1,5 +1,7 @@
 syntax = "proto3";
+
 package object;
+
 option go_package = "github.com/nspcc-dev/neofs-api-go/object";
 option csharp_namespace = "NeoFS.API.Object";
 
@@ -51,61 +53,84 @@ service Service {
 }
 
 message GetRequest {
-    // Address of object (container id + object id)
+    // Carries the address of the requested object.
     refs.Address Address = 1;
-    // Raw carries the raw option flag of the request.
+
+    // Carries the raw option flag of the request.
     // Raw request is sent to receive only the objects
     // that are physically stored on the server.
     bool Raw = 2;
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta = 98;
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99;
+
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader MetaHeader = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader VerifyHeader = 99;
 }
 
 message GetResponse {
-    oneof R {
-        // Object header and some payload
-        Object object = 1;
-        // Chunk of remaining payload
-        bytes Chunk   = 2;
+    // Carries the single message of the response stream.
+    oneof ObjectPart {
+        // Carries the object header.
+        Header Header = 1;
+
+        // Carries part of the object payload.
+        bytes Chunk = 2;
     }
 }
 
 message PutRequest {
-    message PutHeader {
-        // Object with at least container id and owner id fields
-        Object Object       = 1;
-        // Number of the object copies to store within the RPC call (zero is processed according to the placement rules)
+    // Groups initialization parameters of object placement in NeoFS.
+    message Init {
+        // Carries the header of the object to save in the system.
+        Header Header = 1;
+
+        // Carries the number of the object copies to store
+        // within the RPC call. Default zero value is processed according
+        // to the container placement rules.
         uint32 CopiesNumber = 2;
     }
 
-    oneof R {
-        // Header should be the first message in the stream
-        PutHeader Header = 1;
-        // Chunk should be a remaining message in stream should be chunks
-        bytes Chunk      = 2;
+    // Carries the single part of the query stream.
+    oneof Part {
+        // Carries the initialization parameters of the object stream.
+        Init init = 1;
+
+        // Carries part of the object payload.
+        bytes Chunk = 2;
     }
 
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta = 98;
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99;
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader MetaHeader = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader VerifyHeader = 99;
 }
 
 message PutResponse {
-    // Address of object (container id + object id)
-    refs.Address Address = 1;
+    // Carries identifier of the saved object.
+    // It is used to access an object in the container.
+    refs.ObjectID ObjectID = 1;
 }
+
 message DeleteRequest {
-    // Address of object (container id + object id)
+    // Carries the address of the object to be deleted.
     refs.Address Address = 1;
-    // OwnerID carries identifier of the object owner.
+
+    // Carries identifier the object owner.
     refs.OwnerID OwnerID = 2;
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta = 98;
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99;
+
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader MetaHeader = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader VerifyHeader = 99;
 }
 
 // DeleteResponse is empty because we cannot guarantee permanent object removal
@@ -114,26 +139,33 @@ message DeleteResponse {
 }
 
 message HeadRequest {
-    // Address of object (container id + object id)
+    // Carries the address of the object with the requested header.
     refs.Address Address = 1;
-    // FullHeaders can be set true for extended headers in the object
-    bool FullHeaders                         = 2;
-    // Raw carries the raw option flag of the request.
+
+    // Carries the option to crop header to main part.
+    bool MainOnly = 2;
+
+    // Carries the raw option flag of the request.
     // Raw request is sent to receive only the headers of the objects
     // that are physically stored on the server.
     bool Raw = 3;
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta = 98;
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99;
+
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader MetaHeader = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader VerifyHeader = 99;
 }
+
 message HeadResponse {
-    // Object without payload
-    Object Object = 1;
+    // Carries the requested object header.
+    Header Header = 1;
 }
 
 message SearchRequest {
-    // ContainerID carries search container identifier.
+    // Carries search container identifier.
     refs.ContainerID ContainerID = 1;
 
     message Query {
@@ -157,55 +189,71 @@ message SearchRequest {
 
     Query query = 2;
 
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta = 98;
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99;
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader MetaHeader = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader VerifyHeader = 99;
 }
 
 message SearchResponse {
-    // Addresses of found objects
-    repeated refs.Address Addresses = 1;
+    // Carries list of object identifiers that match the search query.
+    repeated refs.ObjectID IDList = 1;
 }
 
+// Range groups the parameters of object payload range.
 message Range {
-    // Offset of the data range
+    // Carries the offset of the range from the object payload start.
     uint64 Offset = 1;
-    // Length of the data range
+
+    // Carries the length of the object payload range.
     uint64 Length = 2;
 }
 
 message GetRangeRequest {
-    // Address of object (container id + object id)
+    // Address carries address of the object that contains the requested payload range.
     refs.Address Address = 1;
-    // Range of object's payload to return
+
+    // Range carries the parameters of the requested payload range.
     Range Range = 2;
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta = 98;
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99;
+
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader MetaHeader = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader VerifyHeader = 99;
 }
 
 message GetRangeResponse {
-    // Fragment of object's payload
-    bytes Fragment = 1;
+    // Carries part of the object payload.
+    bytes Chunk = 1;
 }
 
 message GetRangeHashRequest {
-    // Address of object (container id + object id)
+    // Carries address of the object that contains the requested payload range.
     refs.Address Address = 1;
-    // Ranges of object's payload to calculate homomorphic hash
+
+    // Carries the list of object payload range to calculate homomorphic hash.
     repeated Range Ranges = 2;
-    // Salt is used to XOR object's payload ranges before hashing, it can be nil
-    bytes Salt                               = 3;
-    // RequestMetaHeader contains information about request meta headers (should be embedded into message)
-    service.RequestMetaHeader Meta = 98;
-    // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message)
-    service.RequestVerificationHeader Verify = 99;
+
+    // Carries binary salt to XOR object payload ranges before hash calculation.
+    bytes Salt = 3;
+
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader MetaHeader = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader VerifyHeader = 99;
 }
 
 message GetRangeHashResponse {
-    // Hashes is a homomorphic hashes of all ranges
-    repeated bytes Hashes = 1;
+    // Carries list of homomorphic hashes in a binary format.
+    repeated bytes HashList = 1;
 }
 
