@@ -28,8 +28,8 @@
 <a name="accounting.Accounting"></a>
 
 ### Service "accounting.Accounting"
-Accounting is a service that provides access for accounting balance
-information
+The service provides methods for obtaining information
+about the account balance in NeoFS system.
 
 ```
 rpc Balance(BalanceRequest) returns (BalanceResponse);
@@ -38,7 +38,7 @@ rpc Balance(BalanceRequest) returns (BalanceResponse);
 
 #### Method Balance
 
-Balance returns current balance status of the NeoFS user
+Returns the amount of funds for the requested NeoFS account.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -49,25 +49,32 @@ Balance returns current balance status of the NeoFS user
 <a name="accounting.BalanceRequest"></a>
 
 ### Message BalanceRequest
+Message defines the request body of Balance method.
 
+To indicate the account for which the balance is requested, its identifier is used.
+
+To gain access to the requested information, the request body must be formed according
+to the requirements from the system specification.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries user identifier in NeoFS system. |
-| Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
-| Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
+| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | Carries user identifier in NeoFS system for which the balance is requested. |
+| MetaHeader | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| VerifyHeader | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="accounting.BalanceResponse"></a>
 
 ### Message BalanceResponse
+Message defines the response body of Balance method.
 
+The amount of funds is calculated in decimal numbers.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Balance | [Decimal](#accounting.Decimal) |  | Balance contains current account balance state |
+| Balance | [Decimal](#accounting.Decimal) |  | Carries the amount of funds on the account. |
 
 
 <a name="accounting.Decimal"></a>
