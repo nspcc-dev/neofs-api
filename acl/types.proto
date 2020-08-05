@@ -4,8 +4,6 @@ option go_package = "github.com/nspcc-dev/neofs-api-go/acl";
 option csharp_namespace = "NeoFS.API.Acl";
 
 import "refs/types.proto";
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-option (gogoproto.stable_marshaler_all) = true;
 
 // Target of the access control rule in access control list.
 enum Target {
@@ -42,7 +40,7 @@ message EACLRecord {
     }
 
     // Operation carries type of operation.
-    Operation operation = 1 [(gogoproto.customname) = "Operation", json_name="Operation"];
+    Operation operation = 1 [json_name = "Operation"];
 
     // Action is an enumeration of EACL actions.
     enum Action {
@@ -52,7 +50,7 @@ message EACLRecord {
     }
 
     // Action carries ACL target action.
-    Action action = 2 [(gogoproto.customname) = "Action", json_name="Action"];
+    Action action = 2 [json_name = "Action"];
 
     // FilterInfo groups information about filter.
     message FilterInfo {
@@ -65,7 +63,7 @@ message EACLRecord {
         }
 
         // Header carries type of header.
-        Header header = 1 [(gogoproto.customname) = "Header", json_name="HeaderType"];
+        Header header = 1 [json_name = "HeaderType"];
 
         // MatchType is an enumeration of match types.
         enum MatchType {
@@ -75,7 +73,7 @@ message EACLRecord {
         }
 
         // MatchType carries type of match.
-        MatchType matchType = 2 [(gogoproto.customname) = "MatchType", json_name="MatchType"];
+        MatchType matchType = 2 [json_name = "MatchType"];
 
         // HeaderName carries name of filtering header.
         string HeaderName = 3 [json_name="Name"];
