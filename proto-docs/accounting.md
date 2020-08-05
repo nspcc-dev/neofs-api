@@ -86,7 +86,7 @@ Balance returns current balance status of the NeoFS user
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| OwnerID | [bytes](#bytes) |  | OwnerID is a wallet address |
+| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries user identifier in NeoFS system. |
 | Meta | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader contains information about request meta headers (should be embedded into message) |
 | Verify | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request (should be embedded into message) |
 

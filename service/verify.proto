@@ -34,8 +34,8 @@ message Token {
         // ID is a token identifier. valid UUIDv4 represented in bytes
         bytes ID = 1 [(gogoproto.customtype) = "TokenID", (gogoproto.nullable) = false];
 
-        // OwnerID is an owner of manipulation object
-        bytes OwnerID = 2 [(gogoproto.customtype) = "OwnerID", (gogoproto.nullable) = false];
+        // OwnerID carries identifier of the manipulation object owner.
+        refs.OwnerID OwnerID = 2;
 
         // Verb is an enumeration of session request types
         enum Verb {
@@ -101,8 +101,8 @@ message BearerTokenMsg {
         // ACLRules carries a binary representation of the table of extended ACL rules
         bytes ACLRules = 1;
 
-        // OwnerID is an owner of token
-        bytes OwnerID = 2 [(gogoproto.customtype) = "OwnerID", (gogoproto.nullable) = false];
+        // OwnerID carries identifier of the token owner.
+        refs.OwnerID OwnerID = 2;
 
         // ValidUntil carries a last epoch of token lifetime
         uint64 ValidUntil = 3;

@@ -3,6 +3,7 @@ package container;
 option go_package = "github.com/nspcc-dev/neofs-api-go/container";
 option csharp_namespace = "NeoFS.API.Container";
 
+import "refs/types.proto";
 import "github.com/nspcc-dev/netmap/selector.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
@@ -13,8 +14,8 @@ option (gogoproto.stable_marshaler_all) = true;
 // and access control information. ID of the container is a 32 byte long
 // SHA256 hash of stable-marshalled container message.
 message Container {
-  // OwnerID is a 25 byte NEO3.0 wallet address.
-  bytes OwnerID                 = 1;
+  // OwnerID carries identifier of the container owner.
+  refs.OwnerID OwnerID = 1;
   // Nonce is a 16 byte UUID, used to avoid collisions of container id.
   bytes Nonce                   = 2;
   // BasicACL contains access control rules for owner, system, others groups and
