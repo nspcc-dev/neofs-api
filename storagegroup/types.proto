@@ -1,5 +1,7 @@
 syntax = "proto3";
+
 package storagegroup;
+
 option go_package = "github.com/nspcc-dev/neofs-api-go/storagegroup";
 option csharp_namespace = "NeoFS.API.StorageGroup";
 
@@ -10,6 +12,7 @@ import "refs/types.proto";
 message StorageGroup {
     // ValidationDataSize carries the total size of the payloads of the storage group members.
     uint64 ValidationDataSize = 1;
+
     // ValidationHash carries homomorphic hash from the concatenation of the payloads of the storage group members.
     // The order of concatenation is the same as the order of the members in the Members field.
     bytes ValidationHash = 2;
