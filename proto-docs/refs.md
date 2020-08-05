@@ -9,6 +9,7 @@
     - [Address](#refs.Address)
     - [ContainerID](#refs.ContainerID)
     - [ObjectID](#refs.ObjectID)
+    - [OwnerID](#refs.OwnerID)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -56,6 +57,17 @@ ObjectID groups information about the NeoFS object identifier.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Value | [bytes](#bytes) |  | Value carries the object identifier in a binary format. |
+
+
+<a name="refs.OwnerID"></a>
+
+### Message OwnerID
+OwnerID group information about the owner of the NeoFS container.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| Value | [bytes](#bytes) |  | Value carries the identifier of the container owner in a binary format. |
 
  <!-- end messages -->
 
