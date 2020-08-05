@@ -7,7 +7,6 @@
 
   - Messages
     - [StorageGroup](#storagegroup.StorageGroup)
-    - [StorageGroup.Lifetime](#storagegroup.StorageGroup.Lifetime)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -33,35 +32,10 @@
 | ----- | ---- | ----- | ----------- |
 | ValidationDataSize | [uint64](#uint64) |  | ValidationDataSize is size of the all object's payloads included into storage group |
 | ValidationHash | [bytes](#bytes) |  | ValidationHash is homomorphic hash of all object's payloads included into storage group |
-| lifetime | [StorageGroup.Lifetime](#storagegroup.StorageGroup.Lifetime) |  | Lifetime is time until storage group is valid |
+| ExpirationEpoch | [uint64](#uint64) |  | ExpirationEpoch carries last NeoFS epoch number of the storage group lifetime. |
 | Members | [refs.ObjectID](#refs.ObjectID) | repeated | Members carries the list of identifiers of the object storage group members. The list is strictly ordered. |
 
-
-<a name="storagegroup.StorageGroup.Lifetime"></a>
-
-### Message StorageGroup.Lifetime
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| unit | [StorageGroup.Lifetime.Unit](#storagegroup.StorageGroup.Lifetime.Unit) |  | Unit is lifetime type |
-| Value | [int64](#int64) |  | Value for lifetime |
-
  <!-- end messages -->
-
-
-<a name="storagegroup.StorageGroup.Lifetime.Unit"></a>
-
-### StorageGroup.Lifetime.Unit
-
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| Unlimited | 0 | Unlimited set if storage group always valid |
-| NeoFSEpoch | 1 | NeoFSEpoch set if storage group is valid until lifetime NeoFS epoch |
-| UnixTime | 2 | UnixTime set if storage group is valid until lifetime unix timestamp |
-
 
  <!-- end enums -->
 
