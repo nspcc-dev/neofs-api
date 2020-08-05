@@ -100,7 +100,6 @@ Balance returns current balance status of the NeoFS user
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Balance | [decimal.Decimal](#decimal.Decimal) |  | Balance contains current account balance state |
-| LockAccounts | [Account](#accounting.Account) | repeated | LockAccounts contains information about locked funds. Locked funds appear when user pays for storage or withdraw assets. |
 
  <!-- end messages -->
 

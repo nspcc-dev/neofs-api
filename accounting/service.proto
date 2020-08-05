@@ -6,7 +6,6 @@ option csharp_namespace = "NeoFS.API.Accounting";
 import "service/meta.proto";
 import "service/verify.proto";
 import "decimal/decimal.proto";
-import "accounting/types.proto";
 import "refs/types.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
@@ -30,8 +29,5 @@ message BalanceRequest {
 
 message BalanceResponse {
     // Balance contains current account balance state
-    decimal.Decimal Balance       = 1;
-    // LockAccounts contains information about locked funds. Locked funds appear
-    // when user pays for storage or withdraw assets.
-    repeated Account LockAccounts = 2;
+    decimal.Decimal Balance = 1;
 }
