@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package netmap;
+
+option go_package = "github.com/nspcc-dev/neofs-api-go/netmap";
+option csharp_namespace = "NeoFS.API.Netmap";
+
+message PlacementRule {
+    uint32 ReplFactor = 1;
+
+    message SFGroup {
+        message Filter {
+            string Key = 1;
+
+            message SimpleFilters {
+                repeated SimpleFilter Filters = 1;
+            }
+
+            message SimpleFilter {
+                enum Operation {
+                    NP = 0;
+                    EQ = 1;
+                    NE = 2;
+                    GT = 3;
+                    GE = 4;
+                    LT = 5;
+                    LE = 6;
+                    OR = 7;
+                    AND = 8;
+                }
+
+                Operation Op = 1;
+
+                oneof Args {
+                    string Value = 2;
+                    SimpleFilters FArgs = 3;
+                }
+            }
+
+            SimpleFilter F = 2;
+        }
+
+        repeated Filter Filters = 1;
+
+        message Selector {
+            uint32 Count = 1;
+            string Key = 2;
+        }
+
+        repeated Selector Selectors = 2;
+
+        repeated uint32 Exclude = 3;
+    }
+
+    repeated SFGroup SFGroups = 2;
+}
