@@ -1,18 +1,20 @@
 syntax = "proto3";
+
 package service;
+
 option go_package = "github.com/nspcc-dev/neofs-api-go/service";
 option csharp_namespace = "NeoFS.API.Service";
 
 import "refs/types.proto";
 
-// RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request
-// (should be embedded into message).
+// RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request.
 message RequestVerificationHeader {
     message Signature {
+        // Key is compressed public key used for signature.
+        bytes Key = 1;
+
         // Sign is signature of the request or session key.
-        bytes Sign = 1;
-        // Peer is compressed public key used for signature.
-        bytes Peer = 2;
+        bytes Sign = 2;
     }
 
     // Signatures is a set of signatures of every passed NeoFS Node
@@ -83,14 +85,6 @@ message TokenLifetime {
     // ValidUntil carries a last epoch of token lifetime
     uint64 ValidUntil = 2;
 }
-
-// TODO: for variable token types and version redefine message
-// Example:
-// message Token {
-//     TokenType TokenType = 1;
-//     uint32 Version = 2;
-//     bytes Data = 3;
-// }
 
 // BearerTokenMsg carries information about request ACL rules with limited lifetime
 message BearerTokenMsg {

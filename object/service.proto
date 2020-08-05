@@ -10,7 +10,6 @@ import "service/verify.proto";
 
 // Object service provides API for manipulating with the object.
 service Service {
-
     // Get the object from container. Response uses gRPC stream. First response
     // message carry object of requested address. Chunk messages are parts of
     // the object's payload if it is needed. All messages except first carry
