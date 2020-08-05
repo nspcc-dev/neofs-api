@@ -71,9 +71,6 @@ message GetResponse {
         // Chunk of remaining payload
         bytes Chunk   = 2;
     }
-
-    // ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message)
-    service.ResponseMetaHeader Meta = 99;
 }
 
 message PutRequest {
@@ -100,8 +97,6 @@ message PutRequest {
 message PutResponse {
     // Address of object (container id + object id)
     refs.Address Address = 1;
-    // ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message)
-    service.ResponseMetaHeader Meta = 99;
 }
 message DeleteRequest {
     // Address of object (container id + object id)
@@ -117,8 +112,6 @@ message DeleteRequest {
 // DeleteResponse is empty because we cannot guarantee permanent object removal
 // in distributed system.
 message DeleteResponse {
-    // ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message)
-    service.ResponseMetaHeader Meta = 99;
 }
 
 message HeadRequest {
@@ -138,8 +131,6 @@ message HeadRequest {
 message HeadResponse {
     // Object without payload
     Object Object = 1;
-    // ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message)
-    service.ResponseMetaHeader Meta = 99;
 }
 
 message SearchRequest {
@@ -176,8 +167,6 @@ message SearchRequest {
 message SearchResponse {
     // Addresses of found objects
     repeated refs.Address Addresses = 1;
-    // ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message)
-    service.ResponseMetaHeader Meta = 99;
 }
 
 message Range {
@@ -201,8 +190,6 @@ message GetRangeRequest {
 message GetRangeResponse {
     // Fragment of object's payload
     bytes Fragment = 1;
-    // ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message)
-    service.ResponseMetaHeader Meta = 99;
 }
 
 message GetRangeHashRequest {
@@ -221,7 +208,5 @@ message GetRangeHashRequest {
 message GetRangeHashResponse {
     // Hashes is a homomorphic hashes of all ranges
     repeated bytes Hashes = 1;
-    // ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message)
-    service.ResponseMetaHeader Meta = 99;
 }
 

@@ -161,10 +161,6 @@ DeleteResponse is empty because we cannot guarantee permanent object removal
 in distributed system.
 
 
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
-
 
 <a name="object.GetRangeHashRequest"></a>
 
@@ -190,7 +186,6 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Hashes | [bytes](#bytes) | repeated | Hashes is a homomorphic hashes of all ranges |
-| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
 
 <a name="object.GetRangeRequest"></a>
@@ -216,7 +211,6 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Fragment | [bytes](#bytes) |  | Fragment of object's payload |
-| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
 
 <a name="object.GetRequest"></a>
@@ -243,7 +237,6 @@ in distributed system.
 | ----- | ---- | ----- | ----------- |
 | object | [Object](#object.Object) |  | Object header and some payload |
 | Chunk | [bytes](#bytes) |  | Chunk of remaining payload |
-| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
 
 <a name="object.HeadRequest"></a>
@@ -270,7 +263,6 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Object | [Object](#object.Object) |  | Object without payload |
-| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
 
 <a name="object.PutRequest"></a>
@@ -308,7 +300,6 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Address | [refs.Address](#refs.Address) |  | Address of object (container id + object id) |
-| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
 
 <a name="object.Range"></a>
@@ -371,7 +362,6 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | Addresses | [refs.Address](#refs.Address) | repeated | Addresses of found objects |
-| Meta | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | ResponseMetaHeader contains meta information based on request processing by server (should be embedded into message) |
 
  <!-- end messages -->
 
