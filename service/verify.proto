@@ -5,6 +5,7 @@ package service;
 option go_package = "github.com/nspcc-dev/neofs-api-go/service";
 option csharp_namespace = "NeoFS.API.Service";
 
+import "acl/types.proto";
 import "refs/types.proto";
 
 // RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request.
@@ -89,8 +90,8 @@ message TokenLifetime {
 // BearerTokenMsg carries information about request ACL rules with limited lifetime
 message BearerTokenMsg {
     message Info {
-        // ACLRules carries a binary representation of the table of extended ACL rules
-        bytes ACLRules = 1;
+        // EACLTable carries table of extended ACL rules.
+        acl.EACLTable EACLTable = 1;
 
         // OwnerID carries identifier of the token owner.
         refs.OwnerID OwnerID = 2;
