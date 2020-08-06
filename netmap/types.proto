@@ -6,14 +6,14 @@ option go_package = "github.com/nspcc-dev/neofs-api-go/netmap";
 option csharp_namespace = "NeoFS.API.Netmap";
 
 message PlacementRule {
-    uint32 ReplFactor = 1;
+    uint32 repl_factor = 1;
 
     message SFGroup {
         message Filter {
-            string Key = 1;
+            string key = 1;
 
             message SimpleFilters {
-                repeated SimpleFilter Filters = 1;
+                repeated SimpleFilter filters = 1;
             }
 
             message SimpleFilter {
@@ -29,62 +29,62 @@ message PlacementRule {
                     AND = 8;
                 }
 
-                Operation Op = 1;
+                Operation op = 1;
 
                 oneof Args {
-                    string Value = 2;
-                    SimpleFilters FArgs = 3;
+                    string value = 2;
+                    SimpleFilters f_args = 3;
                 }
             }
 
-            SimpleFilter F = 2;
+            SimpleFilter f = 2;
         }
 
-        repeated Filter Filters = 1;
+        repeated Filter filters = 1;
 
         message Selector {
-            uint32 Count = 1;
-            string Key = 2;
+            uint32 count = 1;
+            string key = 2;
         }
 
-        repeated Selector Selectors = 2;
+        repeated Selector selectors = 2;
 
-        repeated uint32 Exclude = 3;
+        repeated uint32 exclude = 3;
     }
 
-    repeated SFGroup SFGroups = 2;
+    repeated SFGroup sf_groups = 2;
 }
 
 // Groups the information about the NeoFS node.
 message NodeInfo {
     // Carries network address of the NeoFS node.
-    string Address = 1;
+    string address = 1;
 
     // Carries public key of the NeoFS node in a binary format.
-    bytes PublicKey = 2;
+    bytes public_key = 2;
 
     // Groups attributes of the NeoFS node.
     message Attribute {
         // Carries string key to the node attribute.
-        string Key = 1;
+        string key = 1;
 
         // Carries string value of the node attribute.
-        string Value = 2;
+        string value = 2;
     }
 
-    // // Carries list of the NeoFS node attributes in a string key-value format.
-    repeated Attribute Attributes = 3;
+    // Carries list of the NeoFS node attributes in a string key-value format.
+    repeated Attribute attributes = 3;
 
     // Represents the enumeration of various states of the NeoFS node.
     enum State {
         // Undefined state.
-        Unknown = 0;
+        UNKNOWN = 0;
 
-        // Active state on the network.
-        Online = 1;
+        // Active state in the network.
+        ONLINE = 1;
 
         // Network unavailable state.
-        Offline = 2;
+        OFFLINE = 2;
     }
 
     // Carries state of the NeoFS node.

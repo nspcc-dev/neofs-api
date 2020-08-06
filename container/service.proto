@@ -43,73 +43,72 @@ service Service {
 
 message PutRequest {
     // Container to create in NeoFS.
-    container.Container Container = 1;
+    container.Container container = 1;
 
-    // PublicKey of container owner. It can be public key of the owner
+    // Public Key of container owner. It can be public key of the owner
     // or it can be public key that bound in neofs.id smart-contract.
-    bytes PublicKey = 2;
+    bytes public_key = 2;
 
     // Signature of stable-marshalled container according to RFC-6979.
-    bytes Signature = 3;
+    bytes signature = 3;
 }
 
 message PutResponse {
-    // ContainerID carries identifier of the new container.
-    refs.ContainerID ContainerID = 1;
+    // container_id carries identifier of the new container.
+    refs.ContainerID container_id = 1;
 }
 
 message DeleteRequest {
-    // ContainerID carries identifier of the container to delete from NeoFS.
-    refs.ContainerID ContainerID = 1;
+    // container_id carries identifier of the container to delete from NeoFS.
+    refs.ContainerID container_id = 1;
 
     // Signature of container id according to RFC-6979.
-    bytes Signature = 2;
+    bytes signature = 2;
 }
 
 // DeleteResponse is empty because delete operation is asynchronous and done
 // via consensus in inner ring nodes
 message DeleteResponse {}
 
-
 message GetRequest {
-    // ContainerID carries identifier of the container to get.
-    refs.ContainerID ContainerID = 1;
+    // container_id carries identifier of the container to get.
+    refs.ContainerID container_id = 1;
 }
 
 message GetResponse {
     // Container that has been requested.
-    container.Container Container = 1;
+    container.Container container = 1;
 }
 
 message ListRequest {
-    // OwnerID carries identifier of the container owner.
-    refs.OwnerID OwnerID = 1;
+    // owner_id carries identifier of the container owner.
+    refs.OwnerID owner_id = 1;
 }
 
 message ListResponse {
     // ContainerIDs carries list of identifiers of the containers that belong to the owner.
-    repeated refs.ContainerID ContainerIDs = 1;
+    repeated refs.ContainerID container_ids = 1;
 }
 
 message SetExtendedACLRequest {
-    // EACL to set for the container.
-    acl.EACLTable EACL = 1;
+    // Extended ACL to set for the container.
+    acl.EACLTable eacl = 1;
 
     // Signature of stable-marshalled Extended ACL according to RFC-6979.
-    bytes Signature = 2;
+    bytes signature = 2;
 }
 
 message SetExtendedACLResponse {}
 
 message GetExtendedACLRequest {
-    // ContainerID carries identifier of the container that has Extended ACL.
-    refs.ContainerID ContainerID = 1;
+    // container_id carries identifier of the container that has Extended ACL.
+    refs.ContainerID container_id = 1;
 }
 
 message GetExtendedACLResponse {
-    // EACL that has been requested if it was set up.
-    acl.EACLTable EACL = 1;
+    // Extended ACL that has been requested if it was set up.
+    acl.EACLTable eacl = 1;
 
     // Signature of stable-marshalled Extended ACL according to RFC-6979.
-    bytes Signature = 2;
+    bytes signature = 2;
 }
