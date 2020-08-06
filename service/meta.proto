@@ -8,16 +8,16 @@ option csharp_namespace = "NeoFS.API.Service";
 // RequestMetaHeader contains information about request meta headers.
 message RequestMetaHeader {
     // Carries maximum number of nodes in the request route.
-    uint32 TTL = 1;
+    uint32 ttl = 1;
 
     message XHeader {
         // Carries key to the X-Header.
-        string Key = 1;
+        string key = 1;
 
         // Carries value of the X-Header.
-        string Value = 2;
+        string value = 2;
     }
 
     // Carries request X-Headers.
-    repeated XHeader XHeaders = 2;
+    repeated XHeader x_headers = 2;
 }

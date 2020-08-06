@@ -12,100 +12,100 @@ import "refs/types.proto";
 message RequestVerificationHeader {
     message Signature {
         // Key is compressed public key used for signature.
-        bytes Key = 1;
+        bytes key = 1;
 
         // Sign is signature of the request or session key.
-        bytes Sign = 2;
+        bytes sign = 2;
     }
 
     // Signatures is a set of signatures of every passed NeoFS Node
-    repeated Signature Signatures = 1;
+    repeated Signature signatures = 1;
 
     // Token is a token of the session within which the request is sent
-    Token Token = 2;
+    Token token = 2;
 
     // Bearer is a Bearer token of the request
-    BearerTokenMsg Bearer = 3;
+    BearerTokenMsg bearer = 3;
 }
 
 // User token granting rights for object manipulation
 message Token {
     message Info {
         // ID is a token identifier. valid UUIDv4 represented in bytes
-        bytes ID = 1;
+        bytes id = 1;
 
         // OwnerID carries identifier of the manipulation object owner.
-        refs.OwnerID OwnerID = 2;
+        refs.OwnerID owner_id = 2;
 
         // Verb is an enumeration of session request types
         enum Verb {
             // Put refers to object.Put RPC call
-            Put = 0;
+            PUT = 0;
             // Get refers to object.Get RPC call
-            Get = 1;
+            GET = 1;
             // Head refers to object.Head RPC call
-            Head = 2;
+            HEAD = 2;
             // Search refers to object.Search RPC call
-            Search = 3;
+            SEARCH = 3;
             // Delete refers to object.Delete RPC call
-            Delete = 4;
+            DELETE = 4;
             // Range refers to object.GetRange RPC call
-            Range = 5;
+            RANGE = 5;
             // RangeHash refers to object.GetRangeHash RPC call
-            RangeHash = 6;
+            RANGEHASH = 6;
         }
 
         // Verb is a type of request for which the token is issued
         Verb verb = 3;
 
         // Address is an object address for which token is issued
-        refs.Address Address = 4;
+        refs.Address address = 4;
 
         // Lifetime is a lifetime of the session
-        TokenLifetime Lifetime = 5;
+        TokenLifetime lifetime = 5;
 
         // SessionKey is a public key of session key
-        bytes SessionKey = 6;
+        bytes session_key = 6;
 
         // OwnerKey is a public key of the token owner
-        bytes OwnerKey = 7;
+        bytes owner_key = 7;
     }
 
-    // TokenInfo is a grouped information about token
-    Info TokenInfo = 1;
+    // token_info is a grouped information about token
+    Info token_info = 1;
 
     // Signature is a signature of session token information
-    bytes Signature = 8;
+    bytes signature = 8;
 }
 
 // TokenLifetime carries a group of lifetime parameters of the token
 message TokenLifetime {
-    // Created carries an initial epoch of token lifetime
-    uint64 Created = 1;
+    // created carries an initial epoch of token lifetime
+    uint64 created = 1;
 
-    // ValidUntil carries a last epoch of token lifetime
-    uint64 ValidUntil = 2;
+    // valid_until carries a last epoch of token lifetime
+    uint64 valid_until = 2;
 }
 
 // BearerTokenMsg carries information about request ACL rules with limited lifetime
 message BearerTokenMsg {
     message Info {
         // EACLTable carries table of extended ACL rules.
-        acl.EACLTable EACLTable = 1;
+        acl.EACLTable eacl_table = 1;
 
         // OwnerID carries identifier of the token owner.
-        refs.OwnerID OwnerID = 2;
+        refs.OwnerID owner_id = 2;
 
         // ValidUntil carries a last epoch of token lifetime
-        uint64 ValidUntil = 3;
+        uint64 valid_until = 3;
     }
 
-    // TokenInfo is a grouped information about token
-    Info TokenInfo = 1;
+    // token_info is a grouped information about token
+    Info token_info = 1;
 
-    // OwnerKey is a public key of the token owner
-    bytes OwnerKey = 2;
+    // owner_key is a public key of the token owner
+    bytes owner_key = 2;
 
     // Signature is a signature of token information
-    bytes Signature = 3;
+    bytes signature = 3;
 }
