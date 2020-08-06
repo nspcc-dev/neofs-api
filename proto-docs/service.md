@@ -94,7 +94,7 @@ BearerTokenMsg carries information about request ACL rules with limited lifetime
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ACLRules | [bytes](#bytes) |  | ACLRules carries a binary representation of the table of extended ACL rules |
+| EACLTable | [acl.EACLTable](#acl.EACLTable) |  | EACLTable carries table of extended ACL rules. |
 | OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the token owner. |
 | ValidUntil | [uint64](#uint64) |  | ValidUntil carries a last epoch of token lifetime |
 
