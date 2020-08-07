@@ -33,8 +33,8 @@ Address of object (container id + object id)
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerID | [ContainerID](#refs.ContainerID) |  | ContainerID carries container identifier. |
-| ObjectID | [ObjectID](#refs.ObjectID) |  | ObjectID carries object identifier. |
+| container_id | [ContainerID](#refs.ContainerID) |  | container_id carries container identifier. |
+| object_id | [ObjectID](#refs.ObjectID) |  | object_id carries object identifier. |
 
 
 <a name="refs.ContainerID"></a>
@@ -45,7 +45,7 @@ ContainerID groups information about the NeoFS container identifier.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Value | [bytes](#bytes) |  | Value carries the container identifier in a binary format. |
+| value | [bytes](#bytes) |  | value carries the container identifier in a binary format. |
 
 
 <a name="refs.ObjectID"></a>
@@ -56,7 +56,7 @@ ObjectID groups information about the NeoFS object identifier.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Value | [bytes](#bytes) |  | Value carries the object identifier in a binary format. |
+| value | [bytes](#bytes) |  | value carries the object identifier in a binary format. |
 
 
 <a name="refs.OwnerID"></a>
@@ -67,7 +67,7 @@ OwnerID group information about the owner of the NeoFS container.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Value | [bytes](#bytes) |  | Value carries the identifier of the container owner in a binary format. |
+| value | [bytes](#bytes) |  | value carries the identifier of the container owner in a binary format. |
 
  <!-- end messages -->
 

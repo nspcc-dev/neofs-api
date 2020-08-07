@@ -43,8 +43,8 @@ RequestMetaHeader contains information about request meta headers.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| TTL | [uint32](#uint32) |  | Carries maximum number of nodes in the request route. |
-| XHeaders | [RequestMetaHeader.XHeader](#service.RequestMetaHeader.XHeader) | repeated | Carries request X-Headers. |
+| ttl | [uint32](#uint32) |  | Carries maximum number of nodes in the request route. |
+| x_headers | [RequestMetaHeader.XHeader](#service.RequestMetaHeader.XHeader) | repeated | Carries request X-Headers. |
 
 
 <a name="service.RequestMetaHeader.XHeader"></a>
@@ -55,8 +55,8 @@ RequestMetaHeader contains information about request meta headers.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Key | [string](#string) |  | Carries key to the X-Header. |
-| Value | [string](#string) |  | Carries value of the X-Header. |
+| key | [string](#string) |  | Carries key to the X-Header. |
+| value | [string](#string) |  | Carries value of the X-Header. |
 
  <!-- end messages -->
 
@@ -81,9 +81,9 @@ BearerTokenMsg carries information about request ACL rules with limited lifetime
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| TokenInfo | [BearerTokenMsg.Info](#service.BearerTokenMsg.Info) |  | TokenInfo is a grouped information about token |
-| OwnerKey | [bytes](#bytes) |  | OwnerKey is a public key of the token owner |
-| Signature | [bytes](#bytes) |  | Signature is a signature of token information |
+| token_info | [BearerTokenMsg.Info](#service.BearerTokenMsg.Info) |  | token_info is a grouped information about token |
+| owner_key | [bytes](#bytes) |  | owner_key is a public key of the token owner |
+| signature | [bytes](#bytes) |  | Signature is a signature of token information |
 
 
 <a name="service.BearerTokenMsg.Info"></a>
@@ -94,9 +94,9 @@ BearerTokenMsg carries information about request ACL rules with limited lifetime
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| EACLTable | [acl.EACLTable](#acl.EACLTable) |  | EACLTable carries table of extended ACL rules. |
-| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the token owner. |
-| ValidUntil | [uint64](#uint64) |  | ValidUntil carries a last epoch of token lifetime |
+| eacl_table | [acl.EACLTable](#acl.EACLTable) |  | EACLTable carries table of extended ACL rules. |
+| owner_id | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the token owner. |
+| valid_until | [uint64](#uint64) |  | ValidUntil carries a last epoch of token lifetime |
 
 
 <a name="service.RequestVerificationHeader"></a>
@@ -107,9 +107,9 @@ RequestVerificationHeader is a set of signatures of every NeoFS Node that proces
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Signatures | [RequestVerificationHeader.Signature](#service.RequestVerificationHeader.Signature) | repeated | Signatures is a set of signatures of every passed NeoFS Node |
-| Token | [Token](#service.Token) |  | Token is a token of the session within which the request is sent |
-| Bearer | [BearerTokenMsg](#service.BearerTokenMsg) |  | Bearer is a Bearer token of the request |
+| signatures | [RequestVerificationHeader.Signature](#service.RequestVerificationHeader.Signature) | repeated | Signatures is a set of signatures of every passed NeoFS Node |
+| token | [Token](#service.Token) |  | Token is a token of the session within which the request is sent |
+| bearer | [BearerTokenMsg](#service.BearerTokenMsg) |  | Bearer is a Bearer token of the request |
 
 
 <a name="service.RequestVerificationHeader.Signature"></a>
@@ -120,8 +120,8 @@ RequestVerificationHeader is a set of signatures of every NeoFS Node that proces
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Key | [bytes](#bytes) |  | Key is compressed public key used for signature. |
-| Sign | [bytes](#bytes) |  | Sign is signature of the request or session key. |
+| key | [bytes](#bytes) |  | Key is compressed public key used for signature. |
+| sign | [bytes](#bytes) |  | Sign is signature of the request or session key. |
 
 
 <a name="service.Token"></a>
@@ -132,8 +132,8 @@ User token granting rights for object manipulation
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| TokenInfo | [Token.Info](#service.Token.Info) |  | TokenInfo is a grouped information about token |
-| Signature | [bytes](#bytes) |  | Signature is a signature of session token information |
+| token_info | [Token.Info](#service.Token.Info) |  | token_info is a grouped information about token |
+| signature | [bytes](#bytes) |  | Signature is a signature of session token information |
 
 
 <a name="service.Token.Info"></a>
@@ -144,13 +144,13 @@ User token granting rights for object manipulation
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ID | [bytes](#bytes) |  | ID is a token identifier. valid UUIDv4 represented in bytes |
-| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the manipulation object owner. |
+| id | [bytes](#bytes) |  | ID is a token identifier. valid UUIDv4 represented in bytes |
+| owner_id | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the manipulation object owner. |
 | verb | [Token.Info.Verb](#service.Token.Info.Verb) |  | Verb is a type of request for which the token is issued |
-| Address | [refs.Address](#refs.Address) |  | Address is an object address for which token is issued |
-| Lifetime | [TokenLifetime](#service.TokenLifetime) |  | Lifetime is a lifetime of the session |
-| SessionKey | [bytes](#bytes) |  | SessionKey is a public key of session key |
-| OwnerKey | [bytes](#bytes) |  | OwnerKey is a public key of the token owner |
+| address | [refs.Address](#refs.Address) |  | Address is an object address for which token is issued |
+| lifetime | [TokenLifetime](#service.TokenLifetime) |  | Lifetime is a lifetime of the session |
+| session_key | [bytes](#bytes) |  | SessionKey is a public key of session key |
+| owner_key | [bytes](#bytes) |  | OwnerKey is a public key of the token owner |
 
 
 <a name="service.TokenLifetime"></a>
@@ -161,8 +161,8 @@ TokenLifetime carries a group of lifetime parameters of the token
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Created | [uint64](#uint64) |  | Created carries an initial epoch of token lifetime |
-| ValidUntil | [uint64](#uint64) |  | ValidUntil carries a last epoch of token lifetime |
+| created | [uint64](#uint64) |  | created carries an initial epoch of token lifetime |
+| valid_until | [uint64](#uint64) |  | valid_until carries a last epoch of token lifetime |
 
  <!-- end messages -->
 
@@ -174,13 +174,13 @@ Verb is an enumeration of session request types
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| Put | 0 | Put refers to object.Put RPC call |
-| Get | 1 | Get refers to object.Get RPC call |
-| Head | 2 | Head refers to object.Head RPC call |
-| Search | 3 | Search refers to object.Search RPC call |
-| Delete | 4 | Delete refers to object.Delete RPC call |
-| Range | 5 | Range refers to object.GetRange RPC call |
-| RangeHash | 6 | RangeHash refers to object.GetRangeHash RPC call |
+| PUT | 0 | Put refers to object.Put RPC call |
+| GET | 1 | Get refers to object.Get RPC call |
+| HEAD | 2 | Head refers to object.Head RPC call |
+| SEARCH | 3 | Search refers to object.Search RPC call |
+| DELETE | 4 | Delete refers to object.Delete RPC call |
+| RANGE | 5 | Range refers to object.GetRange RPC call |
+| RANGEHASH | 6 | RangeHash refers to object.GetRangeHash RPC call |
 
 
  <!-- end enums -->

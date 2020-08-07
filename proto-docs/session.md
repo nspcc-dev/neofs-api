@@ -52,10 +52,10 @@ CreateRequest carries an information necessary for opening a session.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | Carries an identifier of a session initiator. |
-| Lifetime | [service.TokenLifetime](#service.TokenLifetime) |  | Carries a lifetime of the session. |
-| MetaHeader | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| VerifyHeader | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| owner_id | [refs.OwnerID](#refs.OwnerID) |  | Carries an identifier of a session initiator. |
+| lifetime | [service.TokenLifetime](#service.TokenLifetime) |  | Carries a lifetime of the session. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="session.CreateResponse"></a>
@@ -66,8 +66,8 @@ CreateResponse carries an information about the opened session.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ID | [bytes](#bytes) |  | ID carries an identifier of session token. |
-| SessionKey | [bytes](#bytes) |  | SessionKey carries a session public key. |
+| id | [bytes](#bytes) |  | id carries an identifier of session token. |
+| session_key | [bytes](#bytes) |  | session_key carries a session public key. |
 
  <!-- end messages -->
 

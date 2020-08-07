@@ -35,8 +35,8 @@ EACLRecord groups information about extended ACL rule.
 | ----- | ---- | ----- | ----------- |
 | operation | [EACLRecord.Operation](#acl.EACLRecord.Operation) |  | Operation carries type of operation. |
 | action | [EACLRecord.Action](#acl.EACLRecord.Action) |  | Action carries ACL target action. |
-| Filters | [EACLRecord.FilterInfo](#acl.EACLRecord.FilterInfo) | repeated | Filters carries set of filters. |
-| Targets | [EACLRecord.TargetInfo](#acl.EACLRecord.TargetInfo) | repeated | Targets carries information about extended ACL target list. |
+| filters | [EACLRecord.FilterInfo](#acl.EACLRecord.FilterInfo) | repeated | filters carries set of filters. |
+| targets | [EACLRecord.TargetInfo](#acl.EACLRecord.TargetInfo) | repeated | targets carries information about extended ACL target list. |
 
 
 <a name="acl.EACLRecord.FilterInfo"></a>
@@ -48,9 +48,9 @@ FilterInfo groups information about filter.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | header | [EACLRecord.FilterInfo.Header](#acl.EACLRecord.FilterInfo.Header) |  | Header carries type of header. |
-| matchType | [EACLRecord.FilterInfo.MatchType](#acl.EACLRecord.FilterInfo.MatchType) |  | MatchType carries type of match. |
-| HeaderName | [string](#string) |  | HeaderName carries name of filtering header. |
-| HeaderVal | [string](#string) |  | HeaderVal carries value of filtering header. |
+| match_type | [EACLRecord.FilterInfo.MatchType](#acl.EACLRecord.FilterInfo.MatchType) |  | MatchType carries type of match. |
+| header_name | [string](#string) |  | header_name carries name of filtering header. |
+| header_val | [string](#string) |  | header_val carries value of filtering header. |
 
 
 <a name="acl.EACLRecord.TargetInfo"></a>
@@ -61,8 +61,8 @@ TargetInfo groups information about extended ACL target.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Target | [Target](#acl.Target) |  | Target carries target of ACL rule. |
-| KeyList | [bytes](#bytes) | repeated | KeyList carries public keys of ACL target. |
+| target | [Target](#acl.Target) |  | target carries target of ACL rule. |
+| key_list | [bytes](#bytes) | repeated | key_list carries public keys of ACL target. |
 
 
 <a name="acl.EACLTable"></a>
@@ -73,8 +73,8 @@ EACLRecord carries the information about extended ACL rules.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerID | [refs.ContainerID](#refs.ContainerID) |  | Carries identifier of the container that should use given access control rules. |
-| Records | [EACLRecord](#acl.EACLRecord) | repeated | Records carries list of extended ACL rule records. |
+| container_id | [refs.ContainerID](#refs.ContainerID) |  | Carries identifier of the container that should use given access control rules. |
+| records | [EACLRecord](#acl.EACLRecord) | repeated | Records carries list of extended ACL rule records. |
 
  <!-- end messages -->
 
@@ -86,9 +86,9 @@ Action is an enumeration of EACL actions.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| ActionUnknown | 0 |  |
-| Allow | 1 |  |
-| Deny | 2 |  |
+| ACTION_UNKNOWN | 0 |  |
+| ALLOW | 1 |  |
+| DENY | 2 |  |
 
 
 
@@ -99,10 +99,10 @@ Header is an enumeration of filtering header types.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| HeaderUnknown | 0 |  |
-| Request | 1 |  |
-| ObjectSystem | 2 |  |
-| ObjectUser | 3 |  |
+| HEADER_UNKNOWN | 0 |  |
+| REQUEST | 1 |  |
+| OBJECT_SYSTEM | 2 |  |
+| OBJECT_USER | 3 |  |
 
 
 
@@ -113,9 +113,9 @@ MatchType is an enumeration of match types.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| MatchUnknown | 0 |  |
-| StringEqual | 1 |  |
-| StringNotEqual | 2 |  |
+| MATCH_UNKNOWN | 0 |  |
+| STRING_EQUAL | 1 |  |
+| STRING_NOT_EQUAL | 2 |  |
 
 
 
@@ -144,10 +144,10 @@ Target of the access control rule in access control list.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| Unknown | 0 | Unknown target, default value. |
-| User | 1 | User target rule is applied if sender is the owner of the container. |
-| System | 2 | System target rule is applied if sender is the storage node within the container or inner ring node. |
-| Others | 3 | Others target rule is applied if sender is not user or system target. |
+| UNKNOWN | 0 | Unknown target, default value. |
+| USER | 1 | User target rule is applied if sender is the owner of the container. |
+| SYSTEM | 2 | System target rule is applied if sender is the storage node within the container or inner ring node. |
+| OTHERS | 3 | Others target rule is applied if sender is not user or system target. |
 
 
  <!-- end enums -->

@@ -120,8 +120,8 @@ smart-contract storage.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerID | [refs.ContainerID](#refs.ContainerID) |  | ContainerID carries identifier of the container to delete from NeoFS. |
-| Signature | [bytes](#bytes) |  | Signature of container id according to RFC-6979. |
+| container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the container to delete from NeoFS. |
+| signature | [bytes](#bytes) |  | Signature of container id according to RFC-6979. |
 
 
 <a name="container.DeleteResponse"></a>
@@ -140,7 +140,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerID | [refs.ContainerID](#refs.ContainerID) |  | ContainerID carries identifier of the container that has Extended ACL. |
+| container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the container that has Extended ACL. |
 
 
 <a name="container.GetExtendedACLResponse"></a>
@@ -151,8 +151,8 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| EACL | [acl.EACLTable](#acl.EACLTable) |  | EACL that has been requested if it was set up. |
-| Signature | [bytes](#bytes) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
+| eacl | [acl.EACLTable](#acl.EACLTable) |  | Extended ACL that has been requested if it was set up. |
+| signature | [bytes](#bytes) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
 
 
 <a name="container.GetRequest"></a>
@@ -163,7 +163,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerID | [refs.ContainerID](#refs.ContainerID) |  | ContainerID carries identifier of the container to get. |
+| container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the container to get. |
 
 
 <a name="container.GetResponse"></a>
@@ -174,7 +174,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Container | [Container](#container.Container) |  | Container that has been requested. |
+| container | [Container](#container.Container) |  | Container that has been requested. |
 
 
 <a name="container.ListRequest"></a>
@@ -185,7 +185,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the container owner. |
+| owner_id | [refs.OwnerID](#refs.OwnerID) |  | owner_id carries identifier of the container owner. |
 
 
 <a name="container.ListResponse"></a>
@@ -196,7 +196,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerIDs | [refs.ContainerID](#refs.ContainerID) | repeated | ContainerIDs carries list of identifiers of the containers that belong to the owner. |
+| container_ids | [refs.ContainerID](#refs.ContainerID) | repeated | ContainerIDs carries list of identifiers of the containers that belong to the owner. |
 
 
 <a name="container.PutRequest"></a>
@@ -207,9 +207,9 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Container | [Container](#container.Container) |  | Container to create in NeoFS. |
-| PublicKey | [bytes](#bytes) |  | PublicKey of container owner. It can be public key of the owner or it can be public key that bound in neofs.id smart-contract. |
-| Signature | [bytes](#bytes) |  | Signature of stable-marshalled container according to RFC-6979. |
+| container | [Container](#container.Container) |  | Container to create in NeoFS. |
+| public_key | [bytes](#bytes) |  | Public Key of container owner. It can be public key of the owner or it can be public key that bound in neofs.id smart-contract. |
+| signature | [bytes](#bytes) |  | Signature of stable-marshalled container according to RFC-6979. |
 
 
 <a name="container.PutResponse"></a>
@@ -220,7 +220,7 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ContainerID | [refs.ContainerID](#refs.ContainerID) |  | ContainerID carries identifier of the new container. |
+| container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the new container. |
 
 
 <a name="container.SetExtendedACLRequest"></a>
@@ -231,8 +231,8 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| EACL | [acl.EACLTable](#acl.EACLTable) |  | EACL to set for the container. |
-| Signature | [bytes](#bytes) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
+| eacl | [acl.EACLTable](#acl.EACLTable) |  | Extended ACL to set for the container. |
+| signature | [bytes](#bytes) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
 
 
 <a name="container.SetExtendedACLResponse"></a>
@@ -267,11 +267,11 @@ SHA256 hash of stable-marshalled container message.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the container owner. |
-| Nonce | [bytes](#bytes) |  | Nonce is a 16 byte UUID, used to avoid collisions of container id. |
-| BasicACL | [uint32](#uint32) |  | BasicACL contains access control rules for owner, system, others groups and permission bits for bearer token and Extended ACL. |
-| Attributes | [Container.Attribute](#container.Container.Attribute) | repeated | Attributes define any immutable characteristics of container. |
-| Rules | [netmap.PlacementRule](#netmap.PlacementRule) |  | Rules define storage policy for the object inside the container. |
+| owner_id | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the container owner. |
+| nonce | [bytes](#bytes) |  | Nonce is a 16 byte UUID, used to avoid collisions of container id. |
+| basic_acl | [uint32](#uint32) |  | BasicACL contains access control rules for owner, system, others groups and permission bits for bearer token and Extended ACL. |
+| attributes | [Container.Attribute](#container.Container.Attribute) | repeated | Attributes define any immutable characteristics of container. |
+| rules | [netmap.PlacementRule](#netmap.PlacementRule) |  | Rules define storage policy for the object inside the container. |
 
 
 <a name="container.Container.Attribute"></a>
@@ -282,8 +282,8 @@ Attribute is a key-value pair of strings.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Key | [string](#string) |  | Key of immutable container attribute. |
-| Value | [string](#string) |  | Value of immutable container attribute. |
+| key | [string](#string) |  | Key of immutable container attribute. |
+| value | [string](#string) |  | Value of immutable container attribute. |
 
  <!-- end messages -->
 
