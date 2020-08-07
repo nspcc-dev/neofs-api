@@ -8,6 +8,8 @@ option csharp_namespace = "NeoFS.API.Container";
 import "acl/types.proto";
 import "container/types.proto";
 import "refs/types.proto";
+import "service/meta.proto";
+import "service/verify.proto";
 
 // Service provides API to access container smart-contract in morph chain
 // via NeoFS node.
@@ -51,6 +53,14 @@ message PutRequest {
 
     // Signature of stable-marshalled container according to RFC-6979.
     bytes signature = 3;
+
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader meta_header = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader verify_header = 99;
 }
 
 message PutResponse {
@@ -64,6 +74,14 @@ message DeleteRequest {
 
     // Signature of container id according to RFC-6979.
     bytes signature = 2;
+
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader meta_header = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader verify_header = 99;
 }
 
 // DeleteResponse is empty because delete operation is asynchronous and done
@@ -73,6 +91,14 @@ message DeleteResponse {}
 message GetRequest {
     // container_id carries identifier of the container to get.
     refs.ContainerID container_id = 1;
+
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader meta_header = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader verify_header = 99;
 }
 
 message GetResponse {
@@ -83,6 +109,14 @@ message GetResponse {
 message ListRequest {
     // owner_id carries identifier of the container owner.
     refs.OwnerID owner_id = 1;
+
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader meta_header = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader verify_header = 99;
 }
 
 message ListResponse {
@@ -96,6 +130,14 @@ message SetExtendedACLRequest {
 
     // Signature of stable-marshalled Extended ACL according to RFC-6979.
     bytes signature = 2;
+
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader meta_header = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader verify_header = 99;
 }
 
 message SetExtendedACLResponse {}
@@ -103,6 +145,14 @@ message SetExtendedACLResponse {}
 message GetExtendedACLRequest {
     // container_id carries identifier of the container that has Extended ACL.
     refs.ContainerID container_id = 1;
+
+    // Carries request meta information. Header data is used only to regulate message
+    // transport and does not affect request execution.
+    service.RequestMetaHeader meta_header = 98;
+
+    // Carries request verification information. This header is used to authenticate
+    // the nodes of the message route and check the correctness of transmission.
+    service.RequestVerificationHeader verify_header = 99;
 }
 
 message GetExtendedACLResponse {

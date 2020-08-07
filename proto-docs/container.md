@@ -122,6 +122,8 @@ smart-contract storage.
 | ----- | ---- | ----- | ----------- |
 | container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the container to delete from NeoFS. |
 | signature | [bytes](#bytes) |  | Signature of container id according to RFC-6979. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="container.DeleteResponse"></a>
@@ -141,6 +143,8 @@ via consensus in inner ring nodes
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the container that has Extended ACL. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="container.GetExtendedACLResponse"></a>
@@ -164,6 +168,8 @@ via consensus in inner ring nodes
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the container to get. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="container.GetResponse"></a>
@@ -186,6 +192,8 @@ via consensus in inner ring nodes
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | owner_id | [refs.OwnerID](#refs.OwnerID) |  | owner_id carries identifier of the container owner. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="container.ListResponse"></a>
@@ -210,6 +218,8 @@ via consensus in inner ring nodes
 | container | [Container](#container.Container) |  | Container to create in NeoFS. |
 | public_key | [bytes](#bytes) |  | Public Key of container owner. It can be public key of the owner or it can be public key that bound in neofs.id smart-contract. |
 | signature | [bytes](#bytes) |  | Signature of stable-marshalled container according to RFC-6979. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="container.PutResponse"></a>
@@ -233,6 +243,8 @@ via consensus in inner ring nodes
 | ----- | ---- | ----- | ----------- |
 | eacl | [acl.EACLTable](#acl.EACLTable) |  | Extended ACL to set for the container. |
 | signature | [bytes](#bytes) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="container.SetExtendedACLResponse"></a>
