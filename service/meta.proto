@@ -13,6 +13,15 @@ message XHeader {
     string value = 2;
 }
 
+// Represents API version used by node.
+message Version {
+    // Carries major API version.
+    uint32 major = 1;
+
+    // Carries minor API version.
+    uint32 minor = 2;
+}
+
 // RequestMetaHeader contains information about request meta headers.
 message RequestMetaHeader {
     // Carries maximum number of nodes in the request route.

@@ -7,6 +7,7 @@
 
   - Messages
     - [RequestMetaHeader](#service.RequestMetaHeader)
+    - [Version](#service.Version)
     - [XHeader](#service.XHeader)
     
 
@@ -45,6 +46,18 @@ RequestMetaHeader contains information about request meta headers.
 | ----- | ---- | ----- | ----------- |
 | ttl | [uint32](#uint32) |  | Carries maximum number of nodes in the request route. |
 | x_headers | [XHeader](#service.XHeader) | repeated | Carries request X-Headers. |
+
+
+<a name="service.Version"></a>
+
+### Message Version
+Represents API version used by node.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| major | [uint32](#uint32) |  | Carries major API version. |
+| minor | [uint32](#uint32) |  | Carries minor API version. |
 
 
 <a name="service.XHeader"></a>
