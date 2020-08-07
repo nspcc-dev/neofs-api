@@ -133,6 +133,10 @@ DeleteResponse is empty because delete operation is asynchronous and done
 via consensus in inner ring nodes
 
 
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
+
 
 <a name="container.GetExtendedACLRequest"></a>
 
@@ -157,6 +161,7 @@ via consensus in inner ring nodes
 | ----- | ---- | ----- | ----------- |
 | eacl | [acl.EACLTable](#acl.EACLTable) |  | Extended ACL that has been requested if it was set up. |
 | signature | [bytes](#bytes) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
 
 
 <a name="container.GetRequest"></a>
@@ -181,6 +186,7 @@ via consensus in inner ring nodes
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container | [Container](#container.Container) |  | Container that has been requested. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
 
 
 <a name="container.ListRequest"></a>
@@ -205,6 +211,7 @@ via consensus in inner ring nodes
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container_ids | [refs.ContainerID](#refs.ContainerID) | repeated | ContainerIDs carries list of identifiers of the containers that belong to the owner. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
 
 
 <a name="container.PutRequest"></a>
@@ -231,6 +238,7 @@ via consensus in inner ring nodes
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the new container. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
 
 
 <a name="container.SetExtendedACLRequest"></a>
@@ -252,6 +260,10 @@ via consensus in inner ring nodes
 ### Message SetExtendedACLResponse
 
 
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
 
  <!-- end messages -->
 

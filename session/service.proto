@@ -38,4 +38,7 @@ message CreateResponse {
 
     // session_key carries a session public key.
     bytes session_key = 2;
+
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
 }

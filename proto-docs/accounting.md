@@ -75,6 +75,7 @@ The amount of funds is calculated in decimal numbers.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | balance | [Decimal](#accounting.Decimal) |  | Carries the amount of funds on the account. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
 
 
 <a name="accounting.Decimal"></a>

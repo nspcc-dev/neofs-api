@@ -50,4 +50,7 @@ message Decimal {
 message BalanceResponse {
     // Carries the amount of funds on the account.
     Decimal balance = 1;
+
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
 }

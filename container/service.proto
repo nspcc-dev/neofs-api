@@ -66,6 +66,9 @@ message PutRequest {
 message PutResponse {
     // container_id carries identifier of the new container.
     refs.ContainerID container_id = 1;
+
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
 }
 
 message DeleteRequest {
@@ -86,7 +89,10 @@ message DeleteRequest {
 
 // DeleteResponse is empty because delete operation is asynchronous and done
 // via consensus in inner ring nodes
-message DeleteResponse {}
+message DeleteResponse {
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
+}
 
 message GetRequest {
     // container_id carries identifier of the container to get.
@@ -104,6 +110,9 @@ message GetRequest {
 message GetResponse {
     // Container that has been requested.
     container.Container container = 1;
+
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
 }
 
 message ListRequest {
@@ -122,6 +131,9 @@ message ListRequest {
 message ListResponse {
     // ContainerIDs carries list of identifiers of the containers that belong to the owner.
     repeated refs.ContainerID container_ids = 1;
+
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
 }
 
 message SetExtendedACLRequest {
@@ -140,7 +152,10 @@ message SetExtendedACLRequest {
     service.RequestVerificationHeader verify_header = 99;
 }
 
-message SetExtendedACLResponse {}
+message SetExtendedACLResponse {
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
+}
 
 message GetExtendedACLRequest {
     // container_id carries identifier of the container that has Extended ACL.
@@ -161,4 +176,7 @@ message GetExtendedACLResponse {
 
     // Signature of stable-marshalled Extended ACL according to RFC-6979.
     bytes signature = 2;
+
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
 }

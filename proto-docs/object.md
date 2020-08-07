@@ -161,6 +161,10 @@ DeleteResponse is empty because we cannot guarantee permanent object removal
 in distributed system.
 
 
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
+
 
 <a name="object.GetRangeHashRequest"></a>
 
@@ -186,6 +190,7 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | hash_list | [bytes](#bytes) | repeated | Carries list of homomorphic hashes in a binary format. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
 
 
 <a name="object.GetRangeRequest"></a>
@@ -211,6 +216,7 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | chunk | [bytes](#bytes) |  | Carries part of the object payload. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
 
 
 <a name="object.GetRequest"></a>
@@ -237,6 +243,7 @@ in distributed system.
 | ----- | ---- | ----- | ----------- |
 | header | [Header](#object.Header) |  | Carries the object header. |
 | chunk | [bytes](#bytes) |  | Carries part of the object payload. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
 
 
 <a name="object.HeadRequest"></a>
@@ -263,6 +270,7 @@ in distributed system.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | header | [Header](#object.Header) |  | Carries the requested object header. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
 
 
 <a name="object.PutRequest"></a>
@@ -300,6 +308,7 @@ Groups initialization parameters of object placement in NeoFS.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | object_id | [refs.ObjectID](#refs.ObjectID) |  | Carries identifier of the saved object. It is used to access an object in the container. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
 
 
 <a name="object.Range"></a>
@@ -362,6 +371,7 @@ Range groups the parameters of object payload range.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | id_list | [refs.ObjectID](#refs.ObjectID) | repeated | Carries list of object identifiers that match the search query. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
 
  <!-- end messages -->
 

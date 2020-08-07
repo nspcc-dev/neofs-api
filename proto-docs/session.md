@@ -68,6 +68,7 @@ CreateResponse carries an information about the opened session.
 | ----- | ---- | ----- | ----------- |
 | id | [bytes](#bytes) |  | id carries an identifier of session token. |
 | session_key | [bytes](#bytes) |  | session_key carries a session public key. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information attached by server. |
 
  <!-- end messages -->
 

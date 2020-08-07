@@ -79,6 +79,9 @@ message GetResponse {
         // Carries part of the object payload.
         bytes chunk = 2;
     }
+
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
 }
 
 message PutRequest {
@@ -115,6 +118,9 @@ message PutResponse {
     // Carries identifier of the saved object.
     // It is used to access an object in the container.
     refs.ObjectID object_id = 1;
+
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
 }
 
 message DeleteRequest {
@@ -136,6 +142,8 @@ message DeleteRequest {
 // DeleteResponse is empty because we cannot guarantee permanent object removal
 // in distributed system.
 message DeleteResponse {
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
 }
 
 message HeadRequest {
@@ -162,6 +170,9 @@ message HeadRequest {
 message HeadResponse {
     // Carries the requested object header.
     Header header = 1;
+
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
 }
 
 message SearchRequest {
@@ -201,6 +212,9 @@ message SearchRequest {
 message SearchResponse {
     // Carries list of object identifiers that match the search query.
     repeated refs.ObjectID id_list = 1;
+
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
 }
 
 // Range groups the parameters of object payload range.
@@ -231,6 +245,9 @@ message GetRangeRequest {
 message GetRangeResponse {
     // Carries part of the object payload.
     bytes chunk = 1;
+
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
 }
 
 message GetRangeHashRequest {
@@ -255,5 +272,8 @@ message GetRangeHashRequest {
 message GetRangeHashResponse {
     // Carries list of homomorphic hashes in a binary format.
     repeated bytes hash_list = 1;
+
+    // Carries response meta information attached by server.
+    service.ResponseMetaHeader meta_header = 99;
 }
 
