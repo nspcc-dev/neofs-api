@@ -46,6 +46,8 @@ RequestMetaHeader contains information about request meta headers.
 | ----- | ---- | ----- | ----------- |
 | ttl | [uint32](#uint32) |  | Carries maximum number of nodes in the request route. |
 | x_headers | [XHeader](#service.XHeader) | repeated | Carries request X-Headers. |
+| version | [Version](#service.Version) |  | Carries client API version. |
+| epoch | [uint64](#uint64) |  | Carries client local epoch number. |
 
 
 <a name="service.Version"></a>

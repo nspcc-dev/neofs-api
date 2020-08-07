@@ -29,4 +29,10 @@ message RequestMetaHeader {
 
     // Carries request X-Headers.
     repeated XHeader x_headers = 2;
+
+    // Carries client API version.
+    Version version = 3;
+
+    // Carries client local epoch number.
+    uint64 epoch = 4;
 }
