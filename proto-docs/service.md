@@ -7,7 +7,7 @@
 
   - Messages
     - [RequestMetaHeader](#service.RequestMetaHeader)
-    - [RequestMetaHeader.XHeader](#service.RequestMetaHeader.XHeader)
+    - [XHeader](#service.XHeader)
     
 
 - [service/verify.proto](#service/verify.proto)
@@ -44,12 +44,12 @@ RequestMetaHeader contains information about request meta headers.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | ttl | [uint32](#uint32) |  | Carries maximum number of nodes in the request route. |
-| x_headers | [RequestMetaHeader.XHeader](#service.RequestMetaHeader.XHeader) | repeated | Carries request X-Headers. |
+| x_headers | [XHeader](#service.XHeader) | repeated | Carries request X-Headers. |
 
 
-<a name="service.RequestMetaHeader.XHeader"></a>
+<a name="service.XHeader"></a>
 
-### Message RequestMetaHeader.XHeader
+### Message XHeader
 
 
 

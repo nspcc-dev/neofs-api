@@ -5,18 +5,18 @@ package service;
 option go_package = "github.com/nspcc-dev/neofs-api-go/service";
 option csharp_namespace = "NeoFS.API.Service";
 
+message XHeader {
+    // Carries key to the X-Header.
+    string key = 1;
+
+    // Carries value of the X-Header.
+    string value = 2;
+}
+
 // RequestMetaHeader contains information about request meta headers.
 message RequestMetaHeader {
     // Carries maximum number of nodes in the request route.
     uint32 ttl = 1;
-
-    message XHeader {
-        // Carries key to the X-Header.
-        string key = 1;
-
-        // Carries value of the X-Header.
-        string value = 2;
-    }
 
     // Carries request X-Headers.
     repeated XHeader x_headers = 2;
