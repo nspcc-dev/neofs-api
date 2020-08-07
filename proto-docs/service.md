@@ -48,6 +48,7 @@ RequestMetaHeader contains information about request meta headers.
 | x_headers | [XHeader](#service.XHeader) | repeated | Carries request X-Headers. |
 | version | [Version](#service.Version) |  | Carries client API version. |
 | epoch | [uint64](#uint64) |  | Carries client local epoch number. |
+| origin | [RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta header of the origin request. |
 
 
 <a name="service.Version"></a>

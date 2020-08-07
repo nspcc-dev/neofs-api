@@ -35,4 +35,7 @@ message RequestMetaHeader {
 
     // Carries client local epoch number.
     uint64 epoch = 4;
+
+    // Carries request meta header of the origin request.
+    RequestMetaHeader origin = 99;
 }
