@@ -31,10 +31,10 @@ The storage group consists of objects from single container.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ValidationDataSize | [uint64](#uint64) |  | ValidationDataSize carries the total size of the payloads of the storage group members. |
-| ValidationHash | [bytes](#bytes) |  | ValidationHash carries homomorphic hash from the concatenation of the payloads of the storage group members. The order of concatenation is the same as the order of the members in the Members field. |
-| ExpirationEpoch | [uint64](#uint64) |  | ExpirationEpoch carries last NeoFS epoch number of the storage group lifetime. |
-| Members | [refs.ObjectID](#refs.ObjectID) | repeated | Members carries the list of identifiers of the object storage group members. The list is strictly ordered. |
+| validation_data_size | [uint64](#uint64) |  | validation_data_size carries the total size of the payloads of the storage group members. |
+| validation_hash | [bytes](#bytes) |  | validation_hash carries homomorphic hash from the concatenation of the payloads of the storage group members. The order of concatenation is the same as the order of the members in the Members field. |
+| expiration_epoch | [uint64](#uint64) |  | expiration_epoch carries last NeoFS epoch number of the storage group lifetime. |
+| members | [refs.ObjectID](#refs.ObjectID) | repeated | Members carries the list of identifiers of the object storage group members. The list is strictly ordered. |
 
  <!-- end messages -->
 

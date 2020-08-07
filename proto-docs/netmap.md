@@ -37,9 +37,9 @@ Groups the information about the NeoFS node.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Address | [string](#string) |  | Carries network address of the NeoFS node. |
-| PublicKey | [bytes](#bytes) |  | Carries public key of the NeoFS node in a binary format. |
-| Attributes | [NodeInfo.Attribute](#netmap.NodeInfo.Attribute) | repeated | Carries list of the NeoFS node attributes in a string key-value format. |
+| address | [string](#string) |  | Carries network address of the NeoFS node. |
+| public_key | [bytes](#bytes) |  | Carries public key of the NeoFS node in a binary format. |
+| attributes | [NodeInfo.Attribute](#netmap.NodeInfo.Attribute) | repeated | Carries list of the NeoFS node attributes in a string key-value format. |
 | state | [NodeInfo.State](#netmap.NodeInfo.State) |  | Carries state of the NeoFS node. |
 
 
@@ -51,8 +51,8 @@ Groups attributes of the NeoFS node.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Key | [string](#string) |  | Carries string key to the node attribute. |
-| Value | [string](#string) |  | Carries string value of the node attribute. |
+| key | [string](#string) |  | Carries string key to the node attribute. |
+| value | [string](#string) |  | Carries string value of the node attribute. |
 
 
 <a name="netmap.PlacementRule"></a>
@@ -63,8 +63,8 @@ Groups attributes of the NeoFS node.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ReplFactor | [uint32](#uint32) |  |  |
-| SFGroups | [PlacementRule.SFGroup](#netmap.PlacementRule.SFGroup) | repeated |  |
+| repl_factor | [uint32](#uint32) |  |  |
+| sf_groups | [PlacementRule.SFGroup](#netmap.PlacementRule.SFGroup) | repeated |  |
 
 
 <a name="netmap.PlacementRule.SFGroup"></a>
@@ -75,9 +75,9 @@ Groups attributes of the NeoFS node.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Filters | [PlacementRule.SFGroup.Filter](#netmap.PlacementRule.SFGroup.Filter) | repeated |  |
-| Selectors | [PlacementRule.SFGroup.Selector](#netmap.PlacementRule.SFGroup.Selector) | repeated |  |
-| Exclude | [uint32](#uint32) | repeated |  |
+| filters | [PlacementRule.SFGroup.Filter](#netmap.PlacementRule.SFGroup.Filter) | repeated |  |
+| selectors | [PlacementRule.SFGroup.Selector](#netmap.PlacementRule.SFGroup.Selector) | repeated |  |
+| exclude | [uint32](#uint32) | repeated |  |
 
 
 <a name="netmap.PlacementRule.SFGroup.Filter"></a>
@@ -88,8 +88,8 @@ Groups attributes of the NeoFS node.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Key | [string](#string) |  |  |
-| F | [PlacementRule.SFGroup.Filter.SimpleFilter](#netmap.PlacementRule.SFGroup.Filter.SimpleFilter) |  |  |
+| key | [string](#string) |  |  |
+| f | [PlacementRule.SFGroup.Filter.SimpleFilter](#netmap.PlacementRule.SFGroup.Filter.SimpleFilter) |  |  |
 
 
 <a name="netmap.PlacementRule.SFGroup.Filter.SimpleFilter"></a>
@@ -100,9 +100,9 @@ Groups attributes of the NeoFS node.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Op | [PlacementRule.SFGroup.Filter.SimpleFilter.Operation](#netmap.PlacementRule.SFGroup.Filter.SimpleFilter.Operation) |  |  |
-| Value | [string](#string) |  |  |
-| FArgs | [PlacementRule.SFGroup.Filter.SimpleFilters](#netmap.PlacementRule.SFGroup.Filter.SimpleFilters) |  |  |
+| op | [PlacementRule.SFGroup.Filter.SimpleFilter.Operation](#netmap.PlacementRule.SFGroup.Filter.SimpleFilter.Operation) |  |  |
+| value | [string](#string) |  |  |
+| f_args | [PlacementRule.SFGroup.Filter.SimpleFilters](#netmap.PlacementRule.SFGroup.Filter.SimpleFilters) |  |  |
 
 
 <a name="netmap.PlacementRule.SFGroup.Filter.SimpleFilters"></a>
@@ -113,7 +113,7 @@ Groups attributes of the NeoFS node.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Filters | [PlacementRule.SFGroup.Filter.SimpleFilter](#netmap.PlacementRule.SFGroup.Filter.SimpleFilter) | repeated |  |
+| filters | [PlacementRule.SFGroup.Filter.SimpleFilter](#netmap.PlacementRule.SFGroup.Filter.SimpleFilter) | repeated |  |
 
 
 <a name="netmap.PlacementRule.SFGroup.Selector"></a>
@@ -124,8 +124,8 @@ Groups attributes of the NeoFS node.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Count | [uint32](#uint32) |  |  |
-| Key | [string](#string) |  |  |
+| count | [uint32](#uint32) |  |  |
+| key | [string](#string) |  |  |
 
  <!-- end messages -->
 
@@ -137,9 +137,9 @@ Represents the enumeration of various states of the NeoFS node.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| Unknown | 0 | Undefined state. |
-| Online | 1 | Active state on the network. |
-| Offline | 2 | Network unavailable state. |
+| UNKNOWN | 0 | Undefined state. |
+| ONLINE | 1 | Active state in the network. |
+| OFFLINE | 2 | Network unavailable state. |
 
 
 

@@ -51,7 +51,7 @@ Returns the amount of funds for the requested NeoFS account.
 ### Message BalanceRequest
 Message defines the request body of Balance method.
 
-To indicate the account for which the balance is requested, its identifier is used.
+To indicate the account for which the balance is requested, it's identifier is used.
 
 To gain access to the requested information, the request body must be formed according
 to the requirements from the system specification.
@@ -59,7 +59,7 @@ to the requirements from the system specification.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| OwnerID | [refs.OwnerID](#refs.OwnerID) |  | Carries user identifier in NeoFS system for which the balance is requested. |
+| owner_id | [refs.OwnerID](#refs.OwnerID) |  | Carries user identifier in NeoFS system for which the balance is requested. |
 
 
 <a name="accounting.BalanceResponse"></a>
@@ -72,7 +72,7 @@ The amount of funds is calculated in decimal numbers.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Balance | [Decimal](#accounting.Decimal) |  | Carries the amount of funds on the account. |
+| balance | [Decimal](#accounting.Decimal) |  | Carries the amount of funds on the account. |
 
 
 <a name="accounting.Decimal"></a>
@@ -83,8 +83,8 @@ Decimal represents the decimal numbers.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Value | [int64](#int64) |  | Value carries number value. |
-| Precision | [uint32](#uint32) |  | Precision carries value precision. |
+| value | [int64](#int64) |  | value carries number value. |
+| precision | [uint32](#uint32) |  | precision carries value precision. |
 
  <!-- end messages -->
 
