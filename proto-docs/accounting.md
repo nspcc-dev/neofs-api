@@ -60,8 +60,6 @@ to the requirements from the system specification.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | OwnerID | [refs.OwnerID](#refs.OwnerID) |  | Carries user identifier in NeoFS system for which the balance is requested. |
-| MetaHeader | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| VerifyHeader | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="accounting.BalanceResponse"></a>
