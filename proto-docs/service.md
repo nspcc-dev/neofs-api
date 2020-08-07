@@ -7,6 +7,7 @@
 
   - Messages
     - [RequestMetaHeader](#service.RequestMetaHeader)
+    - [ResponseMetaHeader](#service.ResponseMetaHeader)
     - [Version](#service.Version)
     - [XHeader](#service.XHeader)
     
@@ -49,6 +50,22 @@ RequestMetaHeader contains information about request meta headers.
 | version | [Version](#service.Version) |  | Carries client API version. |
 | epoch | [uint64](#uint64) |  | Carries client local epoch number. |
 | origin | [RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta header of the origin request. |
+
+
+<a name="service.ResponseMetaHeader"></a>
+
+### Message ResponseMetaHeader
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ttl | [uint32](#uint32) |  | Carries maximum number of nodes in the response route. |
+| x_headers | [XHeader](#service.XHeader) | repeated | Carries response X-Headers. |
+| version | [Version](#service.Version) |  | Carries server API version. |
+| epoch | [uint64](#uint64) |  | Carries server local epoch number. |
+| origin | [RequestMetaHeader](#service.RequestMetaHeader) |  | Carries response meta header of the origin response. |
+| signature | [Signature](#service.Signature) |  | Carries server signature of the header structure. |
 
 
 <a name="service.Version"></a>
