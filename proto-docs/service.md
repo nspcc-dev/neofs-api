@@ -16,7 +16,7 @@
     - [BearerTokenMsg](#service.BearerTokenMsg)
     - [BearerTokenMsg.Info](#service.BearerTokenMsg.Info)
     - [RequestVerificationHeader](#service.RequestVerificationHeader)
-    - [RequestVerificationHeader.Signature](#service.RequestVerificationHeader.Signature)
+    - [Signature](#service.Signature)
     - [Token](#service.Token)
     - [Token.Info](#service.Token.Info)
     - [TokenLifetime](#service.TokenLifetime)
@@ -107,14 +107,14 @@ RequestVerificationHeader is a set of signatures of every NeoFS Node that proces
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| signatures | [RequestVerificationHeader.Signature](#service.RequestVerificationHeader.Signature) | repeated | Signatures is a set of signatures of every passed NeoFS Node |
+| signatures | [Signature](#service.Signature) | repeated | Signatures is a set of signatures of every passed NeoFS Node |
 | token | [Token](#service.Token) |  | Token is a token of the session within which the request is sent |
 | bearer | [BearerTokenMsg](#service.BearerTokenMsg) |  | Bearer is a Bearer token of the request |
 
 
-<a name="service.RequestVerificationHeader.Signature"></a>
+<a name="service.Signature"></a>
 
-### Message RequestVerificationHeader.Signature
+### Message Signature
 
 
 
