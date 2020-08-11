@@ -17,8 +17,8 @@
     - [BearerTokenMsg.Info](#service.BearerTokenMsg.Info)
     - [RequestVerificationHeader](#service.RequestVerificationHeader)
     - [RequestVerificationHeader.Signature](#service.RequestVerificationHeader.Signature)
-    - [Token](#service.Token)
-    - [Token.Info](#service.Token.Info)
+    - [SessionToken](#service.SessionToken)
+    - [SessionToken.Info](#service.SessionToken.Info)
     - [TokenLifetime](#service.TokenLifetime)
     
 
@@ -108,7 +108,7 @@ RequestVerificationHeader is a set of signatures of every NeoFS Node that proces
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | signatures | [RequestVerificationHeader.Signature](#service.RequestVerificationHeader.Signature) | repeated | Signatures is a set of signatures of every passed NeoFS Node |
-| token | [Token](#service.Token) |  | Token is a token of the session within which the request is sent |
+| token | [SessionToken](#service.SessionToken) |  | Token is a token of the session within which the request is sent |
 | bearer | [BearerTokenMsg](#service.BearerTokenMsg) |  | Bearer is a Bearer token of the request |
 
 
@@ -124,21 +124,21 @@ RequestVerificationHeader is a set of signatures of every NeoFS Node that proces
 | sign | [bytes](#bytes) |  | Sign is signature of the request or session key. |
 
 
-<a name="service.Token"></a>
+<a name="service.SessionToken"></a>
 
-### Message Token
-User token granting rights for object manipulation
+### Message SessionToken
+Represents the NeoFS session token.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| token_info | [Token.Info](#service.Token.Info) |  | token_info is a grouped information about token |
+| token_info | [SessionToken.Info](#service.SessionToken.Info) |  | token_info is a grouped information about token |
 | signature | [bytes](#bytes) |  | Signature is a signature of session token information |
 
 
-<a name="service.Token.Info"></a>
+<a name="service.SessionToken.Info"></a>
 
-### Message Token.Info
+### Message SessionToken.Info
 
 
 
@@ -146,7 +146,7 @@ User token granting rights for object manipulation
 | ----- | ---- | ----- | ----------- |
 | id | [bytes](#bytes) |  | ID is a token identifier. valid UUIDv4 represented in bytes |
 | owner_id | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the manipulation object owner. |
-| verb | [Token.Info.Verb](#service.Token.Info.Verb) |  | Verb is a type of request for which the token is issued |
+| verb | [SessionToken.Info.Verb](#service.SessionToken.Info.Verb) |  | Verb is a type of request for which the token is issued |
 | lifetime | [TokenLifetime](#service.TokenLifetime) |  | Lifetime is a lifetime of the session |
 | session_key | [bytes](#bytes) |  | SessionKey is a public key of session key |
 | owner_key | [bytes](#bytes) |  | OwnerKey is a public key of the token owner |
@@ -167,9 +167,9 @@ TokenLifetime carries a group of lifetime parameters of the token
  <!-- end messages -->
 
 
-<a name="service.Token.Info.Verb"></a>
+<a name="service.SessionToken.Info.Verb"></a>
 
-### Token.Info.Verb
+### SessionToken.Info.Verb
 Verb is an enumeration of session request types
 
 | Name | Number | Description |
