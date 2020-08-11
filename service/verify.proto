@@ -15,17 +15,17 @@ message Signature {
   bytes sign = 2;
 }
 
-// RequestVerificationHeader is a set of signatures of every NeoFS Node that
-// processed request.
+// Verification info for request signed by all intermediate nodes
 message RequestVerificationHeader {
-  // Signatures is a set of signatures of every passed NeoFS Node
-  repeated Signature signatures = 1;
+  Signature body_signature = 1;
+  Signature meta_signature = 2;
 
   // Token is a token of the session within which the request is sent
-  SessionToken token = 2;
-
+  SessionToken token = 3;
   // Bearer is a Bearer token of the request
-  BearerTokenMsg bearer = 3;
+  BearerTokenMsg bearer = 4;
+
+  RequestVerificationHeader origin = 5;
 }
 
 // Represents the NeoFS session token.
@@ -111,4 +111,12 @@ message BearerTokenMsg {
 
   // Signature is a signature of token information
   bytes signature = 3;
+}
+
+// Verification info for response signed by all intermediate nodes
+message ResponseVerificationHeader {
+  Signature body_signature = 1;
+  Signature meta_signature = 2;
+
+  ResponseVerificationHeader origin = 3;
 }
