@@ -9,17 +9,29 @@
     
   - Messages
     - [DeleteRequest](#container.DeleteRequest)
+    - [DeleteRequest.Body](#container.DeleteRequest.Body)
     - [DeleteResponse](#container.DeleteResponse)
+    - [DeleteResponse.Body](#container.DeleteResponse.Body)
     - [GetExtendedACLRequest](#container.GetExtendedACLRequest)
+    - [GetExtendedACLRequest.Body](#container.GetExtendedACLRequest.Body)
     - [GetExtendedACLResponse](#container.GetExtendedACLResponse)
+    - [GetExtendedACLResponse.Body](#container.GetExtendedACLResponse.Body)
     - [GetRequest](#container.GetRequest)
+    - [GetRequest.Body](#container.GetRequest.Body)
     - [GetResponse](#container.GetResponse)
+    - [GetResponse.Body](#container.GetResponse.Body)
     - [ListRequest](#container.ListRequest)
+    - [ListRequest.Body](#container.ListRequest.Body)
     - [ListResponse](#container.ListResponse)
+    - [ListResponse.Body](#container.ListResponse.Body)
     - [PutRequest](#container.PutRequest)
+    - [PutRequest.Body](#container.PutRequest.Body)
     - [PutResponse](#container.PutResponse)
+    - [PutResponse.Body](#container.PutResponse.Body)
     - [SetExtendedACLRequest](#container.SetExtendedACLRequest)
+    - [SetExtendedACLRequest.Body](#container.SetExtendedACLRequest.Body)
     - [SetExtendedACLResponse](#container.SetExtendedACLResponse)
+    - [SetExtendedACLResponse.Body](#container.SetExtendedACLResponse.Body)
     
 
 - [container/types.proto](#container/types.proto)
@@ -120,6 +132,19 @@ smart-contract storage.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| body | [DeleteRequest.Body](#container.DeleteRequest.Body) |  | Body of container delete request message. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="container.DeleteRequest.Body"></a>
+
+### Message DeleteRequest.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
 | container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the container to delete from NeoFS. |
 | signature | [bytes](#bytes) |  | Signature of container id according to RFC-6979. |
 
@@ -131,10 +156,36 @@ DeleteResponse is empty because delete operation is asynchronous and done
 via consensus in inner ring nodes
 
 
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [DeleteResponse.Body](#container.DeleteResponse.Body) |  | Body of container delete response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="container.DeleteResponse.Body"></a>
+
+### Message DeleteResponse.Body
+
+
+
 
 <a name="container.GetExtendedACLRequest"></a>
 
 ### Message GetExtendedACLRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [GetExtendedACLRequest.Body](#container.GetExtendedACLRequest.Body) |  | Body of get extended acl request message. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="container.GetExtendedACLRequest.Body"></a>
+
+### Message GetExtendedACLRequest.Body
 
 
 
@@ -146,6 +197,19 @@ via consensus in inner ring nodes
 <a name="container.GetExtendedACLResponse"></a>
 
 ### Message GetExtendedACLResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [GetExtendedACLResponse.Body](#container.GetExtendedACLResponse.Body) |  | Body of get extended acl response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="container.GetExtendedACLResponse.Body"></a>
+
+### Message GetExtendedACLResponse.Body
 
 
 
@@ -163,12 +227,38 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| body | [GetRequest.Body](#container.GetRequest.Body) |  | Body of container get request message. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="container.GetRequest.Body"></a>
+
+### Message GetRequest.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
 | container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the container to get. |
 
 
 <a name="container.GetResponse"></a>
 
 ### Message GetResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [GetResponse.Body](#container.GetResponse.Body) |  | Body of container get response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="container.GetResponse.Body"></a>
+
+### Message GetResponse.Body
 
 
 
@@ -185,6 +275,19 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| body | [ListRequest.Body](#container.ListRequest.Body) |  | Body of list containers request message. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="container.ListRequest.Body"></a>
+
+### Message ListRequest.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
 | owner_id | [refs.OwnerID](#refs.OwnerID) |  | owner_id carries identifier of the container owner. |
 
 
@@ -196,12 +299,38 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| body | [ListResponse.Body](#container.ListResponse.Body) |  | Body of list containers response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="container.ListResponse.Body"></a>
+
+### Message ListResponse.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
 | container_ids | [refs.ContainerID](#refs.ContainerID) | repeated | ContainerIDs carries list of identifiers of the containers that belong to the owner. |
 
 
 <a name="container.PutRequest"></a>
 
 ### Message PutRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [PutRequest.Body](#container.PutRequest.Body) |  | Body of container put request message. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="container.PutRequest.Body"></a>
+
+### Message PutRequest.Body
 
 
 
@@ -220,12 +349,38 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| body | [PutResponse.Body](#container.PutResponse.Body) |  | Body of container put response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="container.PutResponse.Body"></a>
+
+### Message PutResponse.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
 | container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the new container. |
 
 
 <a name="container.SetExtendedACLRequest"></a>
 
 ### Message SetExtendedACLRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [SetExtendedACLRequest.Body](#container.SetExtendedACLRequest.Body) |  | Body of set extended acl request message. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="container.SetExtendedACLRequest.Body"></a>
+
+### Message SetExtendedACLRequest.Body
 
 
 
@@ -238,6 +393,19 @@ via consensus in inner ring nodes
 <a name="container.SetExtendedACLResponse"></a>
 
 ### Message SetExtendedACLResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [SetExtendedACLResponse.Body](#container.SetExtendedACLResponse.Body) |  | Body of set extended acl response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="container.SetExtendedACLResponse.Body"></a>
+
+### Message SetExtendedACLResponse.Body
 
 
 
