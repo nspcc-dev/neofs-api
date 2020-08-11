@@ -58,17 +58,20 @@ message Token {
         // Verb is a type of request for which the token is issued
         Verb verb = 3;
 
-        // Address is an object address for which token is issued
-        refs.Address address = 4;
-
         // Lifetime is a lifetime of the session
-        TokenLifetime lifetime = 5;
+        TokenLifetime lifetime = 4;
 
         // SessionKey is a public key of session key
-        bytes session_key = 6;
+        bytes session_key = 5;
 
         // OwnerKey is a public key of the token owner
-        bytes owner_key = 7;
+        bytes owner_key = 6;
+
+        // Carries context of the session.
+        oneof context {
+            // object_address represents the object session context.
+            refs.Address object_address = 7;
+        }
     }
 
     // token_info is a grouped information about token

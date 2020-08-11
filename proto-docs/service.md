@@ -147,10 +147,10 @@ User token granting rights for object manipulation
 | id | [bytes](#bytes) |  | ID is a token identifier. valid UUIDv4 represented in bytes |
 | owner_id | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the manipulation object owner. |
 | verb | [Token.Info.Verb](#service.Token.Info.Verb) |  | Verb is a type of request for which the token is issued |
-| address | [refs.Address](#refs.Address) |  | Address is an object address for which token is issued |
 | lifetime | [TokenLifetime](#service.TokenLifetime) |  | Lifetime is a lifetime of the session |
 | session_key | [bytes](#bytes) |  | SessionKey is a public key of session key |
 | owner_key | [bytes](#bytes) |  | OwnerKey is a public key of the token owner |
+| object_address | [refs.Address](#refs.Address) |  | object_address represents the object session context. |
 
 
 <a name="service.TokenLifetime"></a>
