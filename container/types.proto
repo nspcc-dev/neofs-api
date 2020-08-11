@@ -13,28 +13,28 @@ import "netmap/types.proto";
 // and access control information. ID of the container is a 32 byte long
 // SHA256 hash of stable-marshalled container message.
 message Container {
-    // OwnerID carries identifier of the container owner.
+  // OwnerID carries identifier of the container owner.
   refs.OwnerID owner_id = 1;
 
-    // Nonce is a 16 byte UUID, used to avoid collisions of container id.
-    bytes nonce = 2;
+  // Nonce is a 16 byte UUID, used to avoid collisions of container id.
+  bytes nonce = 2;
 
-    // BasicACL contains access control rules for owner, system, others groups and
-    // permission bits for bearer token and Extended ACL.
-    uint32 basic_acl = 3;
+  // BasicACL contains access control rules for owner, system, others groups and
+  // permission bits for bearer token and Extended ACL.
+  uint32 basic_acl = 3;
 
-    // Attribute is a key-value pair of strings.
-    message Attribute {
-        // Key of immutable container attribute.
-        string key = 1;
+  // Attribute is a key-value pair of strings.
+  message Attribute {
+    // Key of immutable container attribute.
+    string key = 1;
 
-        // Value of immutable container attribute.
-        string value = 2;
-    }
+    // Value of immutable container attribute.
+    string value = 2;
+  }
 
-    // Attributes define any immutable characteristics of container.
+  // Attributes define any immutable characteristics of container.
   repeated Attribute attributes = 4;
 
-    // Rules define storage policy for the object inside the container.
-    netmap.PlacementRule rules = 5;
+  // Rules define storage policy for the object inside the container.
+  netmap.PlacementRule rules = 5;
 }

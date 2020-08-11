@@ -10,34 +10,35 @@ import "refs/types.proto";
 // The service provides methods for obtaining information
 // about the account balance in NeoFS system.
 service Accounting {
-    // Returns the amount of funds for the requested NeoFS account.
-    rpc Balance (BalanceRequest) returns (BalanceResponse);
+  // Returns the amount of funds for the requested NeoFS account.
+  rpc Balance (BalanceRequest) returns (BalanceResponse);
 }
 
 // Message defines the request body of Balance method.
 //
-// To indicate the account for which the balance is requested, it's identifier is used.
+// To indicate the account for which the balance is requested, it's identifier
+// is used.
 //
-// To gain access to the requested information, the request body must be formed according
-// to the requirements from the system specification.
+// To gain access to the requested information, the request body must be formed
+// according to the requirements from the system specification.
 message BalanceRequest {
-    // Carries user identifier in NeoFS system for which the balance is requested.
-    refs.OwnerID owner_id = 1;
+  // Carries user identifier in NeoFS system for which the balance is requested.
+  refs.OwnerID owner_id = 1;
 }
 
 // Decimal represents the decimal numbers.
 message Decimal {
-    // value carries number value.
-    int64 value = 1;
+  // value carries number value.
+  int64 value = 1;
 
-    // precision carries value precision.
-    uint32 precision = 2;
+  // precision carries value precision.
+  uint32 precision = 2;
 }
 
 // Message defines the response body of Balance method.
 //
 // The amount of funds is calculated in decimal numbers.
 message BalanceResponse {
-    // Carries the amount of funds on the account.
-    Decimal balance = 1;
+  // Carries the amount of funds on the account.
+  Decimal balance = 1;
 }

@@ -12,125 +12,125 @@ import "service/verify.proto";
 
 // Object service provides API for manipulating with the object.
 service Service {
-    // Get the object from container. Response uses gRPC stream. First response
-    // message carry object of requested address. Chunk messages are parts of
-    // the object's payload if it is needed. All messages except first carry
-    // chunks. Requested object can be restored by concatenation of object
-    // message payload and all chunks keeping receiving order.
-    rpc Get(GetRequest) returns (stream GetResponse);
+  // Get the object from container. Response uses gRPC stream. First response
+  // message carry object of requested address. Chunk messages are parts of
+  // the object's payload if it is needed. All messages except first carry
+  // chunks. Requested object can be restored by concatenation of object
+  // message payload and all chunks keeping receiving order.
+  rpc Get(GetRequest) returns (stream GetResponse);
 
-    // Put the object into container. Request uses gRPC stream. First message
-    // SHOULD BE type of PutHeader. Container id and Owner id of object SHOULD
-    // BE set. Session token SHOULD BE obtained before put operation (see
-    // session package). Chunk messages considered by server as part of object
-    // payload. All messages except first SHOULD BE chunks. Chunk messages
-    // SHOULD BE sent in direct order of fragmentation.
-    rpc Put(stream PutRequest) returns (PutResponse);
+  // Put the object into container. Request uses gRPC stream. First message
+  // SHOULD BE type of PutHeader. Container id and Owner id of object SHOULD
+  // BE set. Session token SHOULD BE obtained before put operation (see
+  // session package). Chunk messages considered by server as part of object
+  // payload. All messages except first SHOULD BE chunks. Chunk messages
+  // SHOULD BE sent in direct order of fragmentation.
+  rpc Put(stream PutRequest) returns (PutResponse);
 
-    // Delete the object from a container
-    rpc Delete(DeleteRequest) returns (DeleteResponse);
+  // Delete the object from a container
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
 
-    // Head returns the object without data payload. Object in the
-    // response has system header only. If full headers flag is set, extended
-    // headers are also present.
-    rpc Head(HeadRequest) returns (HeadResponse);
+  // Head returns the object without data payload. Object in the
+  // response has system header only. If full headers flag is set, extended
+  // headers are also present.
+  rpc Head(HeadRequest) returns (HeadResponse);
 
-    // Search objects in container. Version of query language format SHOULD BE
-    // set to 1. Search query represented in serialized format (see query
-    // package).
-    rpc Search(SearchRequest) returns (stream SearchResponse);
+  // Search objects in container. Version of query language format SHOULD BE
+  // set to 1. Search query represented in serialized format (see query
+  // package).
+  rpc Search(SearchRequest) returns (stream SearchResponse);
 
-    // GetRange of data payload. Range is a pair (offset, length).
-    // Requested range can be restored by concatenation of all chunks
-    // keeping receiving order.
-    rpc GetRange(GetRangeRequest) returns (stream GetRangeResponse);
+  // GetRange of data payload. Range is a pair (offset, length).
+  // Requested range can be restored by concatenation of all chunks
+  // keeping receiving order.
+  rpc GetRange(GetRangeRequest) returns (stream GetRangeResponse);
 
-    // GetRangeHash returns homomorphic hash of object payload range after XOR
-    // operation. Ranges are set of pairs (offset, length). Hashes order in
-    // response corresponds to ranges order in request. Homomorphic hash is
-    // calculated for XORed data.
-    rpc GetRangeHash(GetRangeHashRequest) returns (GetRangeHashResponse);
+  // GetRangeHash returns homomorphic hash of object payload range after XOR
+  // operation. Ranges are set of pairs (offset, length). Hashes order in
+  // response corresponds to ranges order in request. Homomorphic hash is
+  // calculated for XORed data.
+  rpc GetRangeHash(GetRangeHashRequest) returns (GetRangeHashResponse);
 }
 
 message GetRequest {
-    // Carries the address of the requested object.
-    refs.Address address = 1;
+  // Carries the address of the requested object.
+  refs.Address address = 1;
 
-    // Carries the raw option flag of the request.
-    // Raw request is sent to receive only the objects
-    // that are physically stored on the server.
-    bool raw = 2;
+  // Carries the raw option flag of the request.
+  // Raw request is sent to receive only the objects
+  // that are physically stored on the server.
+  bool raw = 2;
 
-    // Carries request meta information. Header data is used only to regulate message
-    // transport and does not affect request execution.
-    service.RequestMetaHeader meta_header = 98;
+  // Carries request meta information. Header data is used only to regulate message
+  // transport and does not affect request execution.
+  service.RequestMetaHeader meta_header = 98;
 
-    // Carries request verification information. This header is used to authenticate
-    // the nodes of the message route and check the correctness of transmission.
-    service.RequestVerificationHeader verify_header = 99;
+  // Carries request verification information. This header is used to authenticate
+  // the nodes of the message route and check the correctness of transmission.
+  service.RequestVerificationHeader verify_header = 99;
 }
 
 message GetResponse {
-    // Carries the single message of the response stream.
-    oneof ObjectPart {
-        // Carries the object header.
-        Header header = 1;
+  // Carries the single message of the response stream.
+  oneof ObjectPart {
+    // Carries the object header.
+    Header header = 1;
 
-        // Carries part of the object payload.
-        bytes chunk = 2;
-    }
+    // Carries part of the object payload.
+    bytes chunk = 2;
+  }
 }
 
 message PutRequest {
-    // Groups initialization parameters of object placement in NeoFS.
-    message Init {
-        // Carries the header of the object to save in the system.
-        Header header = 1;
+  // Groups initialization parameters of object placement in NeoFS.
+  message Init {
+    // Carries the header of the object to save in the system.
+    Header header = 1;
 
-        // Carries the number of the object copies to store
-        // within the RPC call. Default zero value is processed according
-        // to the container placement rules.
-        uint32 copies_number = 2;
-    }
+    // Carries the number of the object copies to store
+    // within the RPC call. Default zero value is processed according
+    // to the container placement rules.
+    uint32 copies_number = 2;
+  }
 
-    // Carries the single part of the query stream.
-    oneof Part {
-        // Carries the initialization parameters of the object stream.
-        Init init = 1;
+  // Carries the single part of the query stream.
+  oneof Part {
+    // Carries the initialization parameters of the object stream.
+    Init init = 1;
 
-        // Carries part of the object payload.
-        bytes chunk = 2;
-    }
+    // Carries part of the object payload.
+    bytes chunk = 2;
+  }
 
-    // Carries request meta information. Header data is used only to regulate message
-    // transport and does not affect request execution.
-    service.RequestMetaHeader meta_header = 98;
+  // Carries request meta information. Header data is used only to regulate message
+  // transport and does not affect request execution.
+  service.RequestMetaHeader meta_header = 98;
 
-    // Carries request verification information. This header is used to authenticate
-    // the nodes of the message route and check the correctness of transmission.
-    service.RequestVerificationHeader verify_header = 99;
+  // Carries request verification information. This header is used to authenticate
+  // the nodes of the message route and check the correctness of transmission.
+  service.RequestVerificationHeader verify_header = 99;
 }
 
 message PutResponse {
-    // Carries identifier of the saved object.
-    // It is used to access an object in the container.
-    refs.ObjectID object_id = 1;
+  // Carries identifier of the saved object.
+  // It is used to access an object in the container.
+  refs.ObjectID object_id = 1;
 }
 
 message DeleteRequest {
-    // Carries the address of the object to be deleted.
-    refs.Address address = 1;
+  // Carries the address of the object to be deleted.
+  refs.Address address = 1;
 
-    // Carries identifier the object owner.
-    refs.OwnerID owner_id = 2;
+  // Carries identifier the object owner.
+  refs.OwnerID owner_id = 2;
 
-    // Carries request meta information. Header data is used only to regulate message
-    // transport and does not affect request execution.
-    service.RequestMetaHeader meta_header = 98;
+  // Carries request meta information. Header data is used only to regulate message
+  // transport and does not affect request execution.
+  service.RequestMetaHeader meta_header = 98;
 
-    // Carries request verification information. This header is used to authenticate
-    // the nodes of the message route and check the correctness of transmission.
-    service.RequestVerificationHeader verify_header = 99;
+  // Carries request verification information. This header is used to authenticate
+  // the nodes of the message route and check the correctness of transmission.
+  service.RequestVerificationHeader verify_header = 99;
 }
 
 // DeleteResponse is empty because we cannot guarantee permanent object removal
@@ -139,121 +139,121 @@ message DeleteResponse {
 }
 
 message HeadRequest {
-    // Carries the address of the object with the requested header.
-    refs.Address address = 1;
+  // Carries the address of the object with the requested header.
+  refs.Address address = 1;
 
-    // Carries the option to crop header to main part.
-    bool main_only = 2;
+  // Carries the option to crop header to main part.
+  bool main_only = 2;
 
-    // Carries the raw option flag of the request.
-    // Raw request is sent to receive only the headers of the objects
-    // that are physically stored on the server.
-    bool raw = 3;
+  // Carries the raw option flag of the request.
+  // Raw request is sent to receive only the headers of the objects
+  // that are physically stored on the server.
+  bool raw = 3;
 
-    // Carries request meta information. Header data is used only to regulate message
-    // transport and does not affect request execution.
-    service.RequestMetaHeader meta_header = 98;
+  // Carries request meta information. Header data is used only to regulate message
+  // transport and does not affect request execution.
+  service.RequestMetaHeader meta_header = 98;
 
-    // Carries request verification information. This header is used to authenticate
-    // the nodes of the message route and check the correctness of transmission.
-    service.RequestVerificationHeader verify_header = 99;
+  // Carries request verification information. This header is used to authenticate
+  // the nodes of the message route and check the correctness of transmission.
+  service.RequestVerificationHeader verify_header = 99;
 }
 
 message HeadResponse {
-    // Carries the requested object header.
-    Header header = 1;
+  // Carries the requested object header.
+  Header header = 1;
 }
 
 message SearchRequest {
-    // Carries search container identifier.
-    refs.ContainerID container_id = 1;
+  // Carries search container identifier.
+  refs.ContainerID container_id = 1;
 
-    message Query {
-        uint32 version = 1;
+  message Query {
+    uint32 version = 1;
 
-        message Filter {
-            enum MatchType {
-                MATCH_UNKNOWN = 0;
-                STRING_EQUAL = 1;
-            }
+    message Filter {
+      enum MatchType {
+        MATCH_UNKNOWN = 0;
+        STRING_EQUAL = 1;
+      }
 
-            MatchType match_type = 1;
+      MatchType match_type = 1;
 
-            string name = 2;
+      string name = 2;
 
-            string value = 3;
-        }
-
-        repeated Filter filters = 2;
+      string value = 3;
     }
 
-    Query query = 2;
+    repeated Filter filters = 2;
+  }
 
-    // Carries request meta information. Header data is used only to regulate message
-    // transport and does not affect request execution.
-    service.RequestMetaHeader meta_header = 98;
+  Query query = 2;
 
-    // Carries request verification information. This header is used to authenticate
-    // the nodes of the message route and check the correctness of transmission.
-    service.RequestVerificationHeader verify_header = 99;
+  // Carries request meta information. Header data is used only to regulate message
+  // transport and does not affect request execution.
+  service.RequestMetaHeader meta_header = 98;
+
+  // Carries request verification information. This header is used to authenticate
+  // the nodes of the message route and check the correctness of transmission.
+  service.RequestVerificationHeader verify_header = 99;
 }
 
 message SearchResponse {
-    // Carries list of object identifiers that match the search query.
-    repeated refs.ObjectID id_list = 1;
+  // Carries list of object identifiers that match the search query.
+  repeated refs.ObjectID id_list = 1;
 }
 
 // Range groups the parameters of object payload range.
 message Range {
-    // Carries the offset of the range from the object payload start.
-    uint64 offset = 1;
+  // Carries the offset of the range from the object payload start.
+  uint64 offset = 1;
 
-    // Carries the length of the object payload range.
-    uint64 length = 2;
+  // Carries the length of the object payload range.
+  uint64 length = 2;
 }
 
 message GetRangeRequest {
-    // Address carries address of the object that contains the requested payload range.
-    refs.Address address = 1;
+  // Address carries address of the object that contains the requested payload range.
+  refs.Address address = 1;
 
-    // Range carries the parameters of the requested payload range.
-    Range range = 2;
+  // Range carries the parameters of the requested payload range.
+  Range range = 2;
 
-    // Carries request meta information. Header data is used only to regulate message
-    // transport and does not affect request execution.
-    service.RequestMetaHeader meta_header = 98;
+  // Carries request meta information. Header data is used only to regulate message
+  // transport and does not affect request execution.
+  service.RequestMetaHeader meta_header = 98;
 
-    // Carries request verification information. This header is used to authenticate
-    // the nodes of the message route and check the correctness of transmission.
-    service.RequestVerificationHeader verify_header = 99;
+  // Carries request verification information. This header is used to authenticate
+  // the nodes of the message route and check the correctness of transmission.
+  service.RequestVerificationHeader verify_header = 99;
 }
 
 message GetRangeResponse {
-    // Carries part of the object payload.
-    bytes chunk = 1;
+  // Carries part of the object payload.
+  bytes chunk = 1;
 }
 
 message GetRangeHashRequest {
-    // Carries address of the object that contains the requested payload range.
-    refs.Address address = 1;
+  // Carries address of the object that contains the requested payload range.
+  refs.Address address = 1;
 
-    // Carries the list of object payload range to calculate homomorphic hash.
-    repeated Range ranges = 2;
+  // Carries the list of object payload range to calculate homomorphic hash.
+  repeated Range ranges = 2;
 
-    // Carries binary salt to XOR object payload ranges before hash calculation.
-    bytes salt = 3;
+  // Carries binary salt to XOR object payload ranges before hash calculation.
+  bytes salt = 3;
 
-    // Carries request meta information. Header data is used only to regulate message
-    // transport and does not affect request execution.
-    service.RequestMetaHeader meta_header = 98;
+  // Carries request meta information. Header data is used only to regulate message
+  // transport and does not affect request execution.
+  service.RequestMetaHeader meta_header = 98;
 
-    // Carries request verification information. This header is used to authenticate
-    // the nodes of the message route and check the correctness of transmission.
-    service.RequestVerificationHeader verify_header = 99;
+  // Carries request verification information. This header is used to authenticate
+  // the nodes of the message route and check the correctness of transmission.
+  service.RequestVerificationHeader verify_header = 99;
 }
 
 message GetRangeHashResponse {
-    // Carries list of homomorphic hashes in a binary format.
-    repeated bytes hash_list = 1;
+  // Carries list of homomorphic hashes in a binary format.
+  repeated bytes hash_list = 1;
 }
 

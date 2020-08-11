@@ -10,32 +10,32 @@ import "service/verify.proto";
 import "refs/types.proto";
 
 service Session {
-    // Create opens new session between the client and the server.
-    rpc Create (CreateRequest) returns (CreateResponse);
+  // Create opens new session between the client and the server.
+  rpc Create (CreateRequest) returns (CreateResponse);
 }
 
 // CreateRequest carries an information necessary for opening a session.
 message CreateRequest {
-    // Carries an identifier of a session initiator.
-    refs.OwnerID owner_id = 1;
+  // Carries an identifier of a session initiator.
+  refs.OwnerID owner_id = 1;
 
-    // Carries a lifetime of the session.
-    service.TokenLifetime lifetime = 2;
+  // Carries a lifetime of the session.
+  service.TokenLifetime lifetime = 2;
 
-    // Carries request meta information. Header data is used only to regulate message
-    // transport and does not affect request execution.
-    service.RequestMetaHeader meta_header = 98;
+  // Carries request meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  service.RequestMetaHeader meta_header = 98;
 
-    // Carries request verification information. This header is used to authenticate
-    // the nodes of the message route and check the correctness of transmission.
-    service.RequestVerificationHeader verify_header = 99;
+  // Carries request verification information. This header is used to authenticate
+  // the nodes of the message route and check the correctness of transmission.
+  service.RequestVerificationHeader verify_header = 99;
 }
 
 // CreateResponse carries an information about the opened session.
 message CreateResponse {
-    // id carries an identifier of session token.
-    bytes id = 1;
+  // id carries an identifier of session token.
+  bytes id = 1;
 
-    // session_key carries a session public key.
-    bytes session_key = 2;
+  // session_key carries a session public key.
+  bytes session_key = 2;
 }

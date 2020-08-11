@@ -12,58 +12,58 @@ import "refs/types.proto";
 // Service provides API to access container smart-contract in morph chain
 // via NeoFS node.
 service Service {
-    // Put invokes 'Put' method in container smart-contract and returns
-    // response immediately. After new block in morph chain, request is verified
-    // by inner ring nodes. After one more block in morph chain, container
-    // added into smart-contract storage.
-    rpc Put(PutRequest) returns (PutResponse);
+  // Put invokes 'Put' method in container smart-contract and returns
+  // response immediately. After new block in morph chain, request is verified
+  // by inner ring nodes. After one more block in morph chain, container
+  // added into smart-contract storage.
+  rpc Put(PutRequest) returns (PutResponse);
 
-    // Delete invokes 'Delete' method in container smart-contract and returns
-    // response immediately. After new block in morph chain, request is verified
-    // by inner ring nodes. After one more block in morph chain, container
-    // removed from smart-contract storage.
-    rpc Delete(DeleteRequest) returns (DeleteResponse);
+  // Delete invokes 'Delete' method in container smart-contract and returns
+  // response immediately. After new block in morph chain, request is verified
+  // by inner ring nodes. After one more block in morph chain, container
+  // removed from smart-contract storage.
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
 
-    // Get returns container from container smart-contract storage.
-    rpc Get(GetRequest) returns (GetResponse);
+  // Get returns container from container smart-contract storage.
+  rpc Get(GetRequest) returns (GetResponse);
 
-    // List returns all owner's containers from container smart-contract
-    // storage.
-    rpc List(ListRequest) returns (ListResponse);
+  // List returns all owner's containers from container smart-contract
+  // storage.
+  rpc List(ListRequest) returns (ListResponse);
 
-    // SetExtendedACL invokes 'SetEACL' method in container smart-contract and
-    // returns response immediately. After new block in morph chain,
-    // Extended ACL added into smart-contract storage.
-    rpc SetExtendedACL(SetExtendedACLRequest) returns (SetExtendedACLResponse);
+  // SetExtendedACL invokes 'SetEACL' method in container smart-contract and
+  // returns response immediately. After new block in morph chain,
+  // Extended ACL added into smart-contract storage.
+  rpc SetExtendedACL(SetExtendedACLRequest) returns (SetExtendedACLResponse);
 
-    // GetExtendedACL returns Extended ACL table and signature from container
-    // smart-contract storage.
-    rpc GetExtendedACL(GetExtendedACLRequest) returns (GetExtendedACLResponse);
+  // GetExtendedACL returns Extended ACL table and signature from container
+  // smart-contract storage.
+  rpc GetExtendedACL(GetExtendedACLRequest) returns (GetExtendedACLResponse);
 }
 
 message PutRequest {
-    // Container to create in NeoFS.
-    container.Container container = 1;
+  // Container to create in NeoFS.
+  container.Container container = 1;
 
-    // Public Key of container owner. It can be public key of the owner
-    // or it can be public key that bound in neofs.id smart-contract.
-    bytes public_key = 2;
+  // Public Key of container owner. It can be public key of the owner
+  // or it can be public key that bound in neofs.id smart-contract.
+  bytes public_key = 2;
 
-    // Signature of stable-marshalled container according to RFC-6979.
-    bytes signature = 3;
+  // Signature of stable-marshalled container according to RFC-6979.
+  bytes signature = 3;
 }
 
 message PutResponse {
-    // container_id carries identifier of the new container.
-    refs.ContainerID container_id = 1;
+  // container_id carries identifier of the new container.
+  refs.ContainerID container_id = 1;
 }
 
 message DeleteRequest {
-    // container_id carries identifier of the container to delete from NeoFS.
-    refs.ContainerID container_id = 1;
+  // container_id carries identifier of the container to delete from NeoFS.
+  refs.ContainerID container_id = 1;
 
-    // Signature of container id according to RFC-6979.
-    bytes signature = 2;
+  // Signature of container id according to RFC-6979.
+  bytes signature = 2;
 }
 
 // DeleteResponse is empty because delete operation is asynchronous and done
@@ -71,44 +71,45 @@ message DeleteRequest {
 message DeleteResponse {}
 
 message GetRequest {
-    // container_id carries identifier of the container to get.
-    refs.ContainerID container_id = 1;
+  // container_id carries identifier of the container to get.
+  refs.ContainerID container_id = 1;
 }
 
 message GetResponse {
-    // Container that has been requested.
-    container.Container container = 1;
+  // Container that has been requested.
+  container.Container container = 1;
 }
 
 message ListRequest {
-    // owner_id carries identifier of the container owner.
-    refs.OwnerID owner_id = 1;
+  // owner_id carries identifier of the container owner.
+  refs.OwnerID owner_id = 1;
 }
 
 message ListResponse {
-    // ContainerIDs carries list of identifiers of the containers that belong to the owner.
-    repeated refs.ContainerID container_ids = 1;
+  // ContainerIDs carries list of identifiers of the containers that belong
+  // to the owner.
+  repeated refs.ContainerID container_ids = 1;
 }
 
 message SetExtendedACLRequest {
-    // Extended ACL to set for the container.
-    acl.EACLTable eacl = 1;
+  // Extended ACL to set for the container.
+  acl.EACLTable eacl = 1;
 
-    // Signature of stable-marshalled Extended ACL according to RFC-6979.
-    bytes signature = 2;
+  // Signature of stable-marshalled Extended ACL according to RFC-6979.
+  bytes signature = 2;
 }
 
 message SetExtendedACLResponse {}
 
 message GetExtendedACLRequest {
-    // container_id carries identifier of the container that has Extended ACL.
-    refs.ContainerID container_id = 1;
+  // container_id carries identifier of the container that has Extended ACL.
+  refs.ContainerID container_id = 1;
 }
 
 message GetExtendedACLResponse {
-    // Extended ACL that has been requested if it was set up.
-    acl.EACLTable eacl = 1;
+  // Extended ACL that has been requested if it was set up.
+  acl.EACLTable eacl = 1;
 
-    // Signature of stable-marshalled Extended ACL according to RFC-6979.
-    bytes signature = 2;
+  // Signature of stable-marshalled Extended ACL according to RFC-6979.
+  bytes signature = 2;
 }
