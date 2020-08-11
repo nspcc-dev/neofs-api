@@ -5,6 +5,14 @@ package service;
 option go_package = "github.com/nspcc-dev/neofs-api-go/service";
 option csharp_namespace = "NeoFS.API.Service";
 
+// Represents API version used by node.
+message Version {
+  // Major API version.
+  uint32 major = 1;
+  // Minor API version.
+  uint32 minor = 2;
+}
+
 // RequestMetaHeader contains information about request meta headers.
 message RequestMetaHeader {
   // Carries maximum number of nodes in the request route.
