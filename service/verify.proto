@@ -78,7 +78,7 @@ message Token {
     Info token_info = 1;
 
     // Signature is a signature of session token information
-    bytes signature = 8;
+    bytes signature = 2;
 }
 
 // TokenLifetime carries a group of lifetime parameters of the token
