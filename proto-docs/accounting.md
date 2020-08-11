@@ -9,7 +9,9 @@
     
   - Messages
     - [BalanceRequest](#accounting.BalanceRequest)
+    - [BalanceRequest.Body](#accounting.BalanceRequest.Body)
     - [BalanceResponse](#accounting.BalanceResponse)
+    - [BalanceResponse.Body](#accounting.BalanceResponse.Body)
     - [Decimal](#accounting.Decimal)
     
 
@@ -51,10 +53,24 @@ Returns the amount of funds for the requested NeoFS account.
 ### Message BalanceRequest
 Message defines the request body of Balance method.
 
-To indicate the account for which the balance is requested, it's identifier is used.
+To indicate the account for which the balance is requested, it's identifier
+is used.
 
-To gain access to the requested information, the request body must be formed according
-to the requirements from the system specification.
+To gain access to the requested information, the request body must be formed
+according to the requirements from the system specification.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [BalanceRequest.Body](#accounting.BalanceRequest.Body) |  | Body of the balance request message. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="accounting.BalanceRequest.Body"></a>
+
+### Message BalanceRequest.Body
+
 
 
 | Field | Type | Label | Description |
@@ -68,6 +84,19 @@ to the requirements from the system specification.
 Message defines the response body of Balance method.
 
 The amount of funds is calculated in decimal numbers.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [BalanceResponse.Body](#accounting.BalanceResponse.Body) |  | Body of the balance response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="accounting.BalanceResponse.Body"></a>
+
+### Message BalanceResponse.Body
+
 
 
 | Field | Type | Label | Description |

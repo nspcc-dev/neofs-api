@@ -9,36 +9,47 @@
     
   - Messages
     - [DeleteRequest](#object.DeleteRequest)
+    - [DeleteRequest.Body](#object.DeleteRequest.Body)
     - [DeleteResponse](#object.DeleteResponse)
+    - [DeleteResponse.Body](#object.DeleteResponse.Body)
     - [GetRangeHashRequest](#object.GetRangeHashRequest)
+    - [GetRangeHashRequest.Body](#object.GetRangeHashRequest.Body)
     - [GetRangeHashResponse](#object.GetRangeHashResponse)
+    - [GetRangeHashResponse.Body](#object.GetRangeHashResponse.Body)
     - [GetRangeRequest](#object.GetRangeRequest)
+    - [GetRangeRequest.Body](#object.GetRangeRequest.Body)
     - [GetRangeResponse](#object.GetRangeResponse)
+    - [GetRangeResponse.Body](#object.GetRangeResponse.Body)
     - [GetRequest](#object.GetRequest)
+    - [GetRequest.Body](#object.GetRequest.Body)
     - [GetResponse](#object.GetResponse)
+    - [GetResponse.Body](#object.GetResponse.Body)
+    - [GetResponse.Body.Init](#object.GetResponse.Body.Init)
     - [HeadRequest](#object.HeadRequest)
+    - [HeadRequest.Body](#object.HeadRequest.Body)
     - [HeadResponse](#object.HeadResponse)
+    - [HeadResponse.Body](#object.HeadResponse.Body)
+    - [HeadResponse.Body.ShortHeader](#object.HeadResponse.Body.ShortHeader)
     - [PutRequest](#object.PutRequest)
-    - [PutRequest.Init](#object.PutRequest.Init)
+    - [PutRequest.Body](#object.PutRequest.Body)
+    - [PutRequest.Body.Init](#object.PutRequest.Body.Init)
     - [PutResponse](#object.PutResponse)
+    - [PutResponse.Body](#object.PutResponse.Body)
     - [Range](#object.Range)
     - [SearchRequest](#object.SearchRequest)
-    - [SearchRequest.Query](#object.SearchRequest.Query)
-    - [SearchRequest.Query.Filter](#object.SearchRequest.Query.Filter)
+    - [SearchRequest.Body](#object.SearchRequest.Body)
+    - [SearchRequest.Body.Query](#object.SearchRequest.Body.Query)
+    - [SearchRequest.Body.Query.Filter](#object.SearchRequest.Body.Query.Filter)
     - [SearchResponse](#object.SearchResponse)
+    - [SearchResponse.Body](#object.SearchResponse.Body)
     
 
 - [object/types.proto](#object/types.proto)
 
   - Messages
     - [Header](#object.Header)
-    - [Header.Extended](#object.Header.Extended)
-    - [Header.Extended.Attribute](#object.Header.Extended.Attribute)
-    - [Header.Extended.Integrity](#object.Header.Extended.Integrity)
-    - [Header.Extended.Split](#object.Header.Extended.Split)
-    - [Header.Extended.StorageGroup](#object.Header.Extended.StorageGroup)
-    - [Header.Extended.Tombstone](#object.Header.Extended.Tombstone)
-    - [Header.Main](#object.Header.Main)
+    - [Header.Attribute](#object.Header.Attribute)
+    - [Header.Split](#object.Header.Split)
     - [Object](#object.Object)
     
 
@@ -148,10 +159,21 @@ calculated for XORed data.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [refs.Address](#refs.Address) |  | Carries the address of the object to be deleted. |
-| owner_id | [refs.OwnerID](#refs.OwnerID) |  | Carries identifier the object owner. |
+| body | [DeleteRequest.Body](#object.DeleteRequest.Body) |  | Body of delete object request message. |
 | meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
 | verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="object.DeleteRequest.Body"></a>
+
+### Message DeleteRequest.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| address | [refs.Address](#refs.Address) |  | Carries the address of the object to be deleted. |
+| owner_id | [refs.OwnerID](#refs.OwnerID) |  | Carries identifier the object owner. |
 
 
 <a name="object.DeleteResponse"></a>
@@ -159,6 +181,19 @@ calculated for XORed data.
 ### Message DeleteResponse
 DeleteResponse is empty because we cannot guarantee permanent object removal
 in distributed system.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [DeleteResponse.Body](#object.DeleteResponse.Body) |  | Body of delete object response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="object.DeleteResponse.Body"></a>
+
+### Message DeleteResponse.Body
+
 
 
 
@@ -170,16 +205,40 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| body | [GetRangeHashRequest.Body](#object.GetRangeHashRequest.Body) |  | Body of get range hash object request message. |
+| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="object.GetRangeHashRequest.Body"></a>
+
+### Message GetRangeHashRequest.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
 | address | [refs.Address](#refs.Address) |  | Carries address of the object that contains the requested payload range. |
 | ranges | [Range](#object.Range) | repeated | Carries the list of object payload range to calculate homomorphic hash. |
 | salt | [bytes](#bytes) |  | Carries binary salt to XOR object payload ranges before hash calculation. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="object.GetRangeHashResponse"></a>
 
 ### Message GetRangeHashResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [GetRangeHashResponse.Body](#object.GetRangeHashResponse.Body) |  | Body of get range hash object response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="object.GetRangeHashResponse.Body"></a>
+
+### Message GetRangeHashResponse.Body
 
 
 
@@ -196,15 +255,39 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [refs.Address](#refs.Address) |  | Address carries address of the object that contains the requested payload range. |
-| range | [Range](#object.Range) |  | Range carries the parameters of the requested payload range. |
+| body | [GetRangeRequest.Body](#object.GetRangeRequest.Body) |  | Body of get range object request message. |
 | meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
 | verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="object.GetRangeRequest.Body"></a>
+
+### Message GetRangeRequest.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| address | [refs.Address](#refs.Address) |  | Address carries address of the object that contains the requested payload range. |
+| range | [Range](#object.Range) |  | Range carries the parameters of the requested payload range. |
 
 
 <a name="object.GetRangeResponse"></a>
 
 ### Message GetRangeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [GetRangeResponse.Body](#object.GetRangeResponse.Body) |  | Body of get range object response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="object.GetRangeResponse.Body"></a>
+
+### Message GetRangeResponse.Body
 
 
 
@@ -221,10 +304,21 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [refs.Address](#refs.Address) |  | Carries the address of the requested object. |
-| raw | [bool](#bool) |  | Carries the raw option flag of the request. Raw request is sent to receive only the objects that are physically stored on the server. |
+| body | [GetRequest.Body](#object.GetRequest.Body) |  | Body of get object request message. |
 | meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
 | verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="object.GetRequest.Body"></a>
+
+### Message GetRequest.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| address | [refs.Address](#refs.Address) |  | Address of the requested object. |
+| raw | [bool](#bool) |  | Carries the raw option flag of the request. Raw request is sent to receive only the objects that are physically stored on the server. |
 
 
 <a name="object.GetResponse"></a>
@@ -235,8 +329,34 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| header | [Header](#object.Header) |  | Carries the object header. |
-| chunk | [bytes](#bytes) |  | Carries part of the object payload. |
+| body | [GetResponse.Body](#object.GetResponse.Body) |  | Body of get object response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="object.GetResponse.Body"></a>
+
+### Message GetResponse.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| init | [GetResponse.Body.Init](#object.GetResponse.Body.Init) |  | Initialization parameters of the object stream. |
+| chunk | [bytes](#bytes) |  | Part of the object payload. |
+
+
+<a name="object.GetResponse.Body.Init"></a>
+
+### Message GetResponse.Body.Init
+Initialization parameters of the object got from NeoFS.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| object_id | [refs.ObjectID](#refs.ObjectID) |  | Object ID |
+| signature | [service.Signature](#service.Signature) |  | Object signature |
+| header | [Header](#object.Header) |  | Object header. |
 
 
 <a name="object.HeadRequest"></a>
@@ -247,11 +367,22 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [refs.Address](#refs.Address) |  | Carries the address of the object with the requested header. |
-| main_only | [bool](#bool) |  | Carries the option to crop header to main part. |
-| raw | [bool](#bool) |  | Carries the raw option flag of the request. Raw request is sent to receive only the headers of the objects that are physically stored on the server. |
+| body | [HeadRequest.Body](#object.HeadRequest.Body) |  | Body of head object request message. |
 | meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
 | verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="object.HeadRequest.Body"></a>
+
+### Message HeadRequest.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| address | [refs.Address](#refs.Address) |  | Address of the object with the requested header. |
+| main_only | [bool](#bool) |  | Return only minimal header subset |
+| raw | [bool](#bool) |  | Carries the raw option flag of the request. Raw request is sent to receive only the headers of the objects that are physically stored on the server. |
 
 
 <a name="object.HeadResponse"></a>
@@ -262,7 +393,36 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| header | [Header](#object.Header) |  | Carries the requested object header. |
+| body | [HeadResponse.Body](#object.HeadResponse.Body) |  | Body of head object response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="object.HeadResponse.Body"></a>
+
+### Message HeadResponse.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| header | [Header](#object.Header) |  |  |
+| short_header | [HeadResponse.Body.ShortHeader](#object.HeadResponse.Body.ShortHeader) |  |  |
+
+
+<a name="object.HeadResponse.Body.ShortHeader"></a>
+
+### Message HeadResponse.Body.ShortHeader
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| version | [service.Version](#service.Version) |  | Object format version. |
+| creation_epoch | [uint64](#uint64) |  | Epoch when the object was created |
+| owner_id | [refs.OwnerID](#refs.OwnerID) |  | Object's owner |
+| object_type | [ObjectType](#object.ObjectType) |  | Type of the object payload content |
+| payload_length | [uint64](#uint64) |  | Size of payload in bytes. 0xFFFFFFFFFFFFFFFF means `payload_length` is unknown |
 
 
 <a name="object.PutRequest"></a>
@@ -273,27 +433,53 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| init | [PutRequest.Init](#object.PutRequest.Init) |  | Carries the initialization parameters of the object stream. |
-| chunk | [bytes](#bytes) |  | Carries part of the object payload. |
+| body | [PutRequest.Body](#object.PutRequest.Body) |  | Body of put object request message. |
 | meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
 | verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.PutRequest.Init"></a>
+<a name="object.PutRequest.Body"></a>
 
-### Message PutRequest.Init
+### Message PutRequest.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| init | [PutRequest.Body.Init](#object.PutRequest.Body.Init) |  | Carries the initialization parameters of the object stream. |
+| chunk | [bytes](#bytes) |  | Carries part of the object payload. |
+
+
+<a name="object.PutRequest.Body.Init"></a>
+
+### Message PutRequest.Body.Init
 Groups initialization parameters of object placement in NeoFS.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| header | [Header](#object.Header) |  | Carries the header of the object to save in the system. |
-| copies_number | [uint32](#uint32) |  | Carries the number of the object copies to store within the RPC call. Default zero value is processed according to the container placement rules. |
+| object_id | [refs.ObjectID](#refs.ObjectID) |  | Object ID, where available |
+| signature | [service.Signature](#service.Signature) |  | Object signature, were available |
+| header | [Header](#object.Header) |  | Header of the object to save in the system. |
+| copies_number | [uint32](#uint32) |  | Number of the object copies to store within the RPC call. Default zero value is processed according to the container placement rules. |
 
 
 <a name="object.PutResponse"></a>
 
 ### Message PutResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [PutResponse.Body](#object.PutResponse.Body) |  | Body of put object response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="object.PutResponse.Body"></a>
+
+### Message PutResponse.Body
 
 
 
@@ -322,33 +508,44 @@ Range groups the parameters of object payload range.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [refs.ContainerID](#refs.ContainerID) |  | Carries search container identifier. |
-| query | [SearchRequest.Query](#object.SearchRequest.Query) |  |  |
+| body | [SearchRequest.Body](#object.SearchRequest.Body) |  | Body of search object request message. |
 | meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
 | verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.SearchRequest.Query"></a>
+<a name="object.SearchRequest.Body"></a>
 
-### Message SearchRequest.Query
+### Message SearchRequest.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| container_id | [refs.ContainerID](#refs.ContainerID) |  | Carries search container identifier. |
+| query | [SearchRequest.Body.Query](#object.SearchRequest.Body.Query) |  |  |
+
+
+<a name="object.SearchRequest.Body.Query"></a>
+
+### Message SearchRequest.Body.Query
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | version | [uint32](#uint32) |  |  |
-| filters | [SearchRequest.Query.Filter](#object.SearchRequest.Query.Filter) | repeated |  |
+| filters | [SearchRequest.Body.Query.Filter](#object.SearchRequest.Body.Query.Filter) | repeated |  |
 
 
-<a name="object.SearchRequest.Query.Filter"></a>
+<a name="object.SearchRequest.Body.Query.Filter"></a>
 
-### Message SearchRequest.Query.Filter
+### Message SearchRequest.Body.Query.Filter
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| match_type | [SearchRequest.Query.Filter.MatchType](#object.SearchRequest.Query.Filter.MatchType) |  |  |
+| match_type | [SearchRequest.Body.Query.Filter.MatchType](#object.SearchRequest.Body.Query.Filter.MatchType) |  |  |
 | name | [string](#string) |  |  |
 | value | [string](#string) |  |  |
 
@@ -361,14 +558,27 @@ Range groups the parameters of object payload range.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| body | [SearchResponse.Body](#object.SearchResponse.Body) |  | Body of search object response message. |
+| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="object.SearchResponse.Body"></a>
+
+### Message SearchResponse.Body
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
 | id_list | [refs.ObjectID](#refs.ObjectID) | repeated | Carries list of object identifiers that match the search query. |
 
  <!-- end messages -->
 
 
-<a name="object.SearchRequest.Query.Filter.MatchType"></a>
+<a name="object.SearchRequest.Body.Query.Filter.MatchType"></a>
 
-### SearchRequest.Query.Filter.MatchType
+### SearchRequest.Body.Query.Filter.MatchType
 
 
 | Name | Number | Description |
@@ -393,117 +603,78 @@ Range groups the parameters of object payload range.
 <a name="object.Header"></a>
 
 ### Message Header
-Header groups the information about the NeoFS object.
 
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| main | [Header.Main](#object.Header.Main) |  | Main carries the main part of the header. Main MUST NOT be NULL. |
-| extended | [Header.Extended](#object.Header.Extended) |  | Extended carries the additional part of the header. |
-
-
-<a name="object.Header.Extended"></a>
-
-### Message Header.Extended
-Extended groups additional information about the object.
-It encapsulates both user and system attributes needed to regulate
-the NeoFS sub-systems.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| integrity | [Header.Extended.Integrity](#object.Header.Extended.Integrity) |  | integrity carries object integrity evidence. |
-| attributes | [Header.Extended.Attribute](#object.Header.Extended.Attribute) | repeated | attributes carries list of the object attributes in a string key-value format. |
-| creation_epoch | [uint64](#uint64) |  | creation_epoch carries number of NeoFS epoch on which the object was created. |
-| tombstone | [Header.Extended.Tombstone](#object.Header.Extended.Tombstone) |  | Tombstone marks the object to be deleted. |
-| homomorphic_hash | [bytes](#bytes) |  | homomorphic_hash carries homomorphic hash of the object payload. |
-| storage_group | [Header.Extended.StorageGroup](#object.Header.Extended.StorageGroup) |  | StorageGroup marks an object containing information about a storage group. |
-| split | [Header.Extended.Split](#object.Header.Extended.Split) |  | Split carries the position of the object in the split hierarchy. |
+| container_id | [refs.ContainerID](#refs.ContainerID) |  | Object's container |
+| owner_id | [refs.OwnerID](#refs.OwnerID) |  | Object's owner |
+| creation_epoch | [uint64](#uint64) |  | Epoch when the object was created |
+| version | [service.Version](#service.Version) |  | Object format version. Effectively the version of API library used to create particular object |
+| payload_length | [uint64](#uint64) |  | Size of payload in bytes. 0xFFFFFFFFFFFFFFFF means `payload_length` is unknown |
+| payload_hash | [bytes](#bytes) |  | Hash of payload bytes |
+| object_type | [ObjectType](#object.ObjectType) |  |  |
+| homomorphic_hash | [bytes](#bytes) |  | Homomorphic hash of the object payload. |
+| session_token | [service.SessionToken](#service.SessionToken) |  | Session token, if it was used during Object creation. Need it to verify integrity and authenticity out of Request scope. |
+| attributes | [Header.Attribute](#object.Header.Attribute) | repeated |  |
+| split | [Header.Split](#object.Header.Split) |  | Position of the object in the split hierarchy. |
 
 
-<a name="object.Header.Extended.Attribute"></a>
+<a name="object.Header.Attribute"></a>
 
-### Message Header.Extended.Attribute
-Attribute groups the parameters of the object attributes.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  | key carries the string key to the object attribute. |
-| value | [string](#string) |  | value carries the string value of the object attribute. |
-
-
-<a name="object.Header.Extended.Integrity"></a>
-
-### Message Header.Extended.Integrity
-Integrity groups evidence of the integrity of an object's structure.
+### Message Header.Attribute
+Attribute groups the user-defined Key-Value pairs attached to the object
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| payload_checksum | [bytes](#bytes) |  | payload_checksum carries the checksum of object payload bytes. Changing any byte of the payload changes the checksum. It is calculated as a SHA-256 hash over payload bytes. |
-| header_checksum | [bytes](#bytes) |  | header_checksum carries checksum of the object header structure. It covers all object attributes. Changing any field of the object except CreatorKey and ChecksumSignature changes the checksum. payload_checksum and header_checksum cannot be merged due to the need to verify the header in the absence of a payload (e.g. in object.Head rpc). It is calculated as a SHA-256 hash over marshaled object header with cut creator_key and checksum_signature. |
-| session_token | [service.SessionToken](#service.SessionToken) |  | session_token carries token of the session within which the object was created. If session token is presented in object, it acts as the user's proof of the correctness of the creator_key. |
-| creator_key | [bytes](#bytes) |  | creator_key carries public key of the object creator in a binary format. |
-| checksum_signature | [bytes](#bytes) |  | checksum_signature carries signature of the structure checksum by the object creator. |
+| key | [string](#string) |  | string key to the object attribute |
+| value | [string](#string) |  | string value of the object attribute |
 
 
-<a name="object.Header.Extended.Split"></a>
+<a name="object.Header.Split"></a>
 
-### Message Header.Extended.Split
-Split groups information about spawning the object through a payload splitting.
+### Message Header.Split
+Information about spawning the objects through a payload splitting.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [refs.ObjectID](#refs.ObjectID) |  | Parent carries identifier of the origin object. |
+| parent | [refs.ObjectID](#refs.ObjectID) |  | Identifier of the origin object. Parent and children objects must be within the same container. Parent object_id is known only to the minor child. |
 | previous | [refs.ObjectID](#refs.ObjectID) |  | Previous carries identifier of the left split neighbor. |
-| next | [refs.ObjectID](#refs.ObjectID) |  | Next carries identifier of the right split neighbor. |
+| parent_signature | [service.Signature](#service.Signature) |  | `signature` field of the parent object. Used to reconstruct parent. |
+| parent_header | [Header](#object.Header) |  | `header` field of the parent object. Used to reconstruct parent. |
 | children | [refs.ObjectID](#refs.ObjectID) | repeated | Children carries list of identifiers of the objects generated by splitting the current. |
-| origin | [Header](#object.Header) |  | Origin carries the header of the origin object. |
-
-
-<a name="object.Header.Extended.StorageGroup"></a>
-
-### Message Header.Extended.StorageGroup
-StorageGroup groups meta information about a storage group.
-
-
-
-<a name="object.Header.Extended.Tombstone"></a>
-
-### Message Header.Extended.Tombstone
-Tombstone groups the options for deleting an object.
-
-
-
-<a name="object.Header.Main"></a>
-
-### Message Header.Main
-Main groups mandatory information about the object.
-Message fields are presented in all NeoFS objects.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| payload_length | [uint64](#uint64) |  | payload_length carries length of the object payload. Each object has a fixed payload length since it's immutable. |
-| address | [refs.Address](#refs.Address) |  | address carries object address in the NeoFS system. It encapsulates the object and the container identifiers. |
-| owner_id | [refs.OwnerID](#refs.OwnerID) |  | owner_id carries identifier of the object owner. |
 
 
 <a name="object.Object"></a>
 
 ### Message Object
-Object groups the information about the NeoFS object.
-It consists of payload data with additional service information.
+Object structure.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| header | [Header](#object.Header) |  | Header carries the object header. |
-| payload | [bytes](#bytes) |  | Payload carries the object payload bytes. |
+| object_id | [refs.ObjectID](#refs.ObjectID) |  | Object's unique identifier. Object is content-addressed. It means id will change if header or payload changes. It's calculated as a hash of header field, which contains hash of object's payload |
+| signature | [service.Signature](#service.Signature) |  | Signed object_id |
+| header | [Header](#object.Header) |  | Object metadata headers |
+| payload | [bytes](#bytes) |  | Payload bytes. |
 
  <!-- end messages -->
+
+
+<a name="object.ObjectType"></a>
+
+### ObjectType
+Type of the object payload content
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| REGULAR | 0 | Just a normal object |
+| TOMBSTONE | 1 | Used internally to identify deleted objects |
+| STORAGE_GROUP | 2 | Identifies that the object holds StorageGroup information |
+
 
  <!-- end enums -->
 
