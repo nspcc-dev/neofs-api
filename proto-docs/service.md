@@ -174,13 +174,13 @@ Verb is an enumeration of session request types
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| PUT | 0 | Put refers to object.Put RPC call |
-| GET | 1 | Get refers to object.Get RPC call |
-| HEAD | 2 | Head refers to object.Head RPC call |
-| SEARCH | 3 | Search refers to object.Search RPC call |
-| DELETE | 4 | Delete refers to object.Delete RPC call |
-| RANGE | 5 | Range refers to object.GetRange RPC call |
-| RANGEHASH | 6 | RangeHash refers to object.GetRangeHash RPC call |
+| OBJECT_PUT | 0 | Refers to object.Put RPC call |
+| OBJECT_GET | 1 | Refers to object.Get RPC call |
+| OBJECT_HEAD | 2 | Refers to object.Head RPC call |
+| OBJECT_SEARCH | 3 | Refers to object.Search RPC call |
+| OBJECT_DELETE | 4 | Refers to object.Delete RPC call |
+| OBJECT_RANGE | 5 | Refers to object.GetRange RPC call |
+| OBJECT_RANGEHASH | 6 | Refers to object.GetRangeHash RPC call |
 
 
  <!-- end enums -->

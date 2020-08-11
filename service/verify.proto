@@ -39,20 +39,20 @@ message Token {
 
         // Verb is an enumeration of session request types
         enum Verb {
-            // Put refers to object.Put RPC call
-            PUT = 0;
-            // Get refers to object.Get RPC call
-            GET = 1;
-            // Head refers to object.Head RPC call
-            HEAD = 2;
-            // Search refers to object.Search RPC call
-            SEARCH = 3;
-            // Delete refers to object.Delete RPC call
-            DELETE = 4;
-            // Range refers to object.GetRange RPC call
-            RANGE = 5;
-            // RangeHash refers to object.GetRangeHash RPC call
-            RANGEHASH = 6;
+            // Refers to object.Put RPC call
+            OBJECT_PUT = 0;
+            // Refers to object.Get RPC call
+            OBJECT_GET = 1;
+            // Refers to object.Head RPC call
+            OBJECT_HEAD = 2;
+            // Refers to object.Search RPC call
+            OBJECT_SEARCH = 3;
+            // Refers to object.Delete RPC call
+            OBJECT_DELETE = 4;
+            // Refers to object.GetRange RPC call
+            OBJECT_RANGE = 5;
+            // Refers to object.GetRangeHash RPC call
+            OBJECT_RANGEHASH = 6;
         }
 
         // Verb is a type of request for which the token is issued
