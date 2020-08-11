@@ -443,7 +443,7 @@ Integrity groups evidence of the integrity of an object's structure.
 | ----- | ---- | ----- | ----------- |
 | payload_checksum | [bytes](#bytes) |  | payload_checksum carries the checksum of object payload bytes. Changing any byte of the payload changes the checksum. It is calculated as a SHA-256 hash over payload bytes. |
 | header_checksum | [bytes](#bytes) |  | header_checksum carries checksum of the object header structure. It covers all object attributes. Changing any field of the object except CreatorKey and ChecksumSignature changes the checksum. payload_checksum and header_checksum cannot be merged due to the need to verify the header in the absence of a payload (e.g. in object.Head rpc). It is calculated as a SHA-256 hash over marshaled object header with cut creator_key and checksum_signature. |
-| session_token | [service.Token](#service.Token) |  | session_token carries token of the session within which the object was created. If session token is presented in object, it acts as the user's proof of the correctness of the creator_key. |
+| session_token | [service.SessionToken](#service.SessionToken) |  | session_token carries token of the session within which the object was created. If session token is presented in object, it acts as the user's proof of the correctness of the creator_key. |
 | creator_key | [bytes](#bytes) |  | creator_key carries public key of the object creator in a binary format. |
 | checksum_signature | [bytes](#bytes) |  | checksum_signature carries signature of the structure checksum by the object creator. |
 
