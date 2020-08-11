@@ -145,7 +145,7 @@ Represents the NeoFS session token.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | id | [bytes](#bytes) |  | ID is a token identifier. valid UUIDv4 represented in bytes |
-| owner_id | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the manipulation object owner. |
+| owner_id | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the session author. |
 | verb | [SessionToken.Info.Verb](#service.SessionToken.Info.Verb) |  | Verb is a type of request for which the token is issued |
 | lifetime | [TokenLifetime](#service.TokenLifetime) |  | Lifetime is a lifetime of the session |
 | session_key | [bytes](#bytes) |  | SessionKey is a public key of session key |

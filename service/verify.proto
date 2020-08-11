@@ -34,7 +34,7 @@ message SessionToken {
         // ID is a token identifier. valid UUIDv4 represented in bytes
         bytes id = 1;
 
-        // OwnerID carries identifier of the manipulation object owner.
+        // OwnerID carries identifier of the session initiator.
         refs.OwnerID owner_id = 2;
 
         // Verb is an enumeration of session request types
