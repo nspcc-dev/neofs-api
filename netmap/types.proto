@@ -31,7 +31,7 @@ message PlacementRule {
 
         Operation op = 1;
 
-        oneof Args {
+        oneof args {
           string value = 2;
           SimpleFilters f_args = 3;
         }

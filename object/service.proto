@@ -86,7 +86,7 @@ message GetResponse {
       Header header = 3;
     }
     // Carries the single message of the response stream.
-    oneof ObjectPart {
+    oneof object_part {
       // Initialization parameters of the object stream.
       Init init =1;
       // Part of the object payload.
@@ -123,7 +123,7 @@ message PutRequest {
     }
 
     // Carries the single part of the query stream.
-    oneof ObjectPart {
+    oneof object_part {
       // Carries the initialization parameters of the object stream.
       Init init = 1;
       // Carries part of the object payload.
@@ -237,7 +237,7 @@ message HeadResponse {
       uint64 payload_length = 5;
     }
     // Carries the requested object header or it's part
-    oneof Head{
+    oneof head{
       Header header = 1;
       ShortHeader short_header = 2;
     }
