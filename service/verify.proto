@@ -8,107 +8,108 @@ option csharp_namespace = "NeoFS.API.Service";
 import "acl/types.proto";
 import "refs/types.proto";
 
-// RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request.
+// RequestVerificationHeader is a set of signatures of every NeoFS Node that
+// processed request.
 message RequestVerificationHeader {
-    message Signature {
-        // Key is compressed public key used for signature.
-        bytes key = 1;
+  message Signature {
+    // Key is compressed public key used for signature.
+    bytes key = 1;
 
-        // Sign is signature of the request or session key.
-        bytes sign = 2;
-    }
+    // Sign is signature of the request or session key.
+    bytes sign = 2;
+  }
 
-    // Signatures is a set of signatures of every passed NeoFS Node
-    repeated Signature signatures = 1;
+  // Signatures is a set of signatures of every passed NeoFS Node
+  repeated Signature signatures = 1;
 
-    // Token is a token of the session within which the request is sent
-    SessionToken token = 2;
+  // Token is a token of the session within which the request is sent
+  SessionToken token = 2;
 
-    // Bearer is a Bearer token of the request
-    BearerTokenMsg bearer = 3;
+  // Bearer is a Bearer token of the request
+  BearerTokenMsg bearer = 3;
 }
 
 // Represents the NeoFS session token.
 message SessionToken {
-    message Info {
-        // ID is a token identifier. valid UUIDv4 represented in bytes
-        bytes id = 1;
+  message Info {
+    // ID is a token identifier. valid UUIDv4 represented in bytes
+    bytes id = 1;
 
-        // OwnerID carries identifier of the session initiator.
-        refs.OwnerID owner_id = 2;
+    // OwnerID carries identifier of the session initiator.
+    refs.OwnerID owner_id = 2;
 
-        // Verb is an enumeration of session request types
-        enum Verb {
-            // Refers to object.Put RPC call
-            OBJECT_PUT = 0;
-            // Refers to object.Get RPC call
-            OBJECT_GET = 1;
-            // Refers to object.Head RPC call
-            OBJECT_HEAD = 2;
-            // Refers to object.Search RPC call
-            OBJECT_SEARCH = 3;
-            // Refers to object.Delete RPC call
-            OBJECT_DELETE = 4;
-            // Refers to object.GetRange RPC call
-            OBJECT_RANGE = 5;
-            // Refers to object.GetRangeHash RPC call
-            OBJECT_RANGEHASH = 6;
-        }
-
-        // Verb is a type of request for which the token is issued
-        Verb verb = 3;
-
-        // Lifetime is a lifetime of the session
-        TokenLifetime lifetime = 4;
-
-        // SessionKey is a public key of session key
-        bytes session_key = 5;
-
-        // OwnerKey is a public key of the token owner
-        bytes owner_key = 6;
-
-        // Carries context of the session.
-        oneof context {
-            // object_address represents the object session context.
-            refs.Address object_address = 7;
-        }
+    // Verb is an enumeration of session request types
+    enum Verb {
+      // Refers to object.Put RPC call
+      OBJECT_PUT = 0;
+      // Refers to object.Get RPC call
+      OBJECT_GET = 1;
+      // Refers to object.Head RPC call
+      OBJECT_HEAD = 2;
+      // Refers to object.Search RPC call
+      OBJECT_SEARCH = 3;
+      // Refers to object.Delete RPC call
+      OBJECT_DELETE = 4;
+      // Refers to object.GetRange RPC call
+      OBJECT_RANGE = 5;
+      // Refers to object.GetRangeHash RPC call
+      OBJECT_RANGEHASH = 6;
     }
 
-    // token_info is a grouped information about token
-    Info token_info = 1;
+    // Verb is a type of request for which the token is issued
+    Verb verb = 3;
 
-    // Signature is a signature of session token information
-    bytes signature = 2;
+    // Lifetime is a lifetime of the session
+    TokenLifetime lifetime = 4;
+
+    // SessionKey is a public key of session key
+    bytes session_key = 5;
+
+    // OwnerKey is a public key of the token owner
+    bytes owner_key = 6;
+
+    // Carries context of the session.
+    oneof context {
+      // object_address represents the object session context.
+      refs.Address object_address = 7;
+    }
+  }
+
+  // token_info is a grouped information about token
+  Info token_info = 1;
+
+  // Signature is a signature of session token information
+  bytes signature = 2;
 }
 
 // TokenLifetime carries a group of lifetime parameters of the token
 message TokenLifetime {
-    // created carries an initial epoch of token lifetime
-    uint64 created = 1;
+  // created carries an initial epoch of token lifetime
+  uint64 created = 1;
 
-    // valid_until carries a last epoch of token lifetime
-    uint64 valid_until = 2;
+  // valid_until carries a last epoch of token lifetime
+  uint64 valid_until = 2;
 }
 
 // BearerTokenMsg carries information about request ACL rules with limited lifetime
 message BearerTokenMsg {
-    message Info {
-        // EACLTable carries table of extended ACL rules.
-        acl.EACLTable eacl_table = 1;
+  message Info {
+    // EACLTable carries table of extended ACL rules.
+    acl.EACLTable eacl_table = 1;
 
-        // OwnerID carries identifier of the token owner.
-        refs.OwnerID owner_id = 2;
+    // OwnerID carries identifier of the token owner.
+    refs.OwnerID owner_id = 2;
 
-        // ValidUntil carries a last epoch of token lifetime
-        uint64 valid_until = 3;
-    }
+    // ValidUntil carries a last epoch of token lifetime
+    uint64 valid_until = 3;
+  }
 
-    // token_info is a grouped information about token
-    Info token_info = 1;
+  // token_info is a grouped information about token
+  Info token_info = 1;
 
-    // owner_key is a public key of the token owner
-    bytes owner_key = 2;
+  // owner_key is a public key of the token owner
+  bytes owner_key = 2;
 
-    // Signature is a signature of token information
-    bytes signature = 3;
+  // Signature is a signature of token information
+  bytes signature = 3;
 }
