@@ -5,6 +5,16 @@ package service;
 option go_package = "github.com/nspcc-dev/neofs-api-go/service";
 option csharp_namespace = "NeoFS.API.Service";
 
+import "acl/types.proto";
+import "service/verify.proto";
+
+message XHeader {
+  // Key of the X-Header.
+  string key = 1;
+  // Value of the X-Header.
+  string value = 2;
+}
+
 // Represents API version used by node.
 message Version {
   // Major API version.
@@ -13,19 +23,32 @@ message Version {
   uint32 minor = 2;
 }
 
-// RequestMetaHeader contains information about request meta headers.
+// Information about the request
 message RequestMetaHeader {
-  // Carries maximum number of nodes in the request route.
-  uint32 ttl = 1;
+  // Client API version.
+  Version version = 1;
+  // Client local epoch number. Set to 0 if unknown.
+  uint64 epoch = 2;
+  // Maximum number of nodes in the request route.
+  uint32 ttl = 3;
+  // Request X-Headers.
+  repeated XHeader x_headers = 4;
 
-  message XHeader {
-    // Carries key to the X-Header.
-    string key = 1;
+  // RequestMetaHeader of the origin request.
+  RequestMetaHeader origin = 98;
+}
 
-    // Carries value of the X-Header.
-    string value = 2;
-  }
+// Information about the response
+message ResponseMetaHeader {
+  // Server API version.
+  Version version = 1;
+  // Server local epoch number.
+  uint64 epoch = 2;
+  // Maximum number of nodes in the response route.
+  uint32 ttl = 3;
+  // Response X-Headers.
+  repeated XHeader x_headers = 4;
 
-  // Carries request X-Headers.
-  repeated XHeader x_headers = 2;
+  // Carries response meta header of the origin response.
+  ResponseMetaHeader origin = 98;
 }
