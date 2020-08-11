@@ -8,6 +8,7 @@ option csharp_namespace = "NeoFS.API.Service";
 import "acl/types.proto";
 import "refs/types.proto";
 
+// Signature of something in NeoFS
 message Signature {
   // Public key used for signing.
   bytes key = 1;
@@ -17,106 +18,26 @@ message Signature {
 
 // Verification info for request signed by all intermediate nodes
 message RequestVerificationHeader {
+  // Request Body signature. Should be generated once by request initiator.
   Signature body_signature = 1;
+  // Request Meta signature is added and signed by any intermediate node
   Signature meta_signature = 2;
+  // Sign previous hops
+  Signature origin_signature = 3;
 
-  // Token is a token of the session within which the request is sent
-  SessionToken token = 3;
-  // Bearer is a Bearer token of the request
-  BearerTokenMsg bearer = 4;
-
-  RequestVerificationHeader origin = 5;
-}
-
-// Represents the NeoFS session token.
-message SessionToken {
-  message Info {
-    // ID is a token identifier. valid UUIDv4 represented in bytes
-    bytes id = 1;
-
-    // OwnerID carries identifier of the session initiator.
-    refs.OwnerID owner_id = 2;
-
-    // Verb is an enumeration of session request types
-    enum Verb {
-      // Refers to object.Put RPC call
-      OBJECT_PUT = 0;
-      // Refers to object.Get RPC call
-      OBJECT_GET = 1;
-      // Refers to object.Head RPC call
-      OBJECT_HEAD = 2;
-      // Refers to object.Search RPC call
-      OBJECT_SEARCH = 3;
-      // Refers to object.Delete RPC call
-      OBJECT_DELETE = 4;
-      // Refers to object.GetRange RPC call
-      OBJECT_RANGE = 5;
-      // Refers to object.GetRangeHash RPC call
-      OBJECT_RANGEHASH = 6;
-    }
-
-    // Verb is a type of request for which the token is issued
-    Verb verb = 3;
-
-    // Lifetime is a lifetime of the session
-    TokenLifetime lifetime = 4;
-
-    // SessionKey is a public key of session key
-    bytes session_key = 5;
-
-    // OwnerKey is a public key of the token owner
-    bytes owner_key = 6;
-
-    // Carries context of the session.
-    oneof context {
-      // object_address represents the object session context.
-      refs.Address object_address = 7;
-    }
-  }
-
-  // token_info is a grouped information about token
-  Info token_info = 1;
-
-  // Signature is a signature of session token information
-  bytes signature = 2;
-}
-
-// TokenLifetime carries a group of lifetime parameters of the token
-message TokenLifetime {
-  // created carries an initial epoch of token lifetime
-  uint64 created = 1;
-
-  // valid_until carries a last epoch of token lifetime
-  uint64 valid_until = 2;
-}
-
-// BearerTokenMsg carries information about request ACL rules with limited lifetime
-message BearerTokenMsg {
-  message Info {
-    // EACLTable carries table of extended ACL rules.
-    acl.EACLTable eacl_table = 1;
-
-    // OwnerID carries identifier of the token owner.
-    refs.OwnerID owner_id = 2;
-
-    // ValidUntil carries a last epoch of token lifetime
-    uint64 valid_until = 3;
-  }
-
-  // token_info is a grouped information about token
-  Info token_info = 1;
-
-  // owner_key is a public key of the token owner
-  bytes owner_key = 2;
-
-  // Signature is a signature of token information
-  bytes signature = 3;
+  // Chain of previous hops signatures
+  RequestVerificationHeader origin = 4;
 }
 
 // Verification info for response signed by all intermediate nodes
 message ResponseVerificationHeader {
+  // Response Body signature. Should be generated once by answering node.
   Signature body_signature = 1;
+  // Response Meta signature is added and signed by any intermediate node
   Signature meta_signature = 2;
+  // Sign previous hops
+  Signature origin_signature = 3;
 
-  ResponseVerificationHeader origin = 3;
+  // Chain of previous hops signatures
+  ResponseVerificationHeader origin = 4;
 }
