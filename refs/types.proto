@@ -9,18 +9,17 @@ option csharp_namespace = "NeoFS.API.Refs";
 message Address {
   // container_id carries container identifier.
   ContainerID container_id = 1;
-
   // object_id carries object identifier.
   ObjectID object_id = 2;
 }
 
-// ObjectID groups information about the NeoFS object identifier.
+// NeoFS object identifier.
 message ObjectID {
   // value carries the object identifier in a binary format.
   bytes value = 1;
 }
 
-// ContainerID groups information about the NeoFS container identifier.
+// NeoFS container identifier.
 message ContainerID {
   // value carries the container identifier in a binary format.
   bytes value = 1;

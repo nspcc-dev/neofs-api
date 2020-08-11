@@ -8,17 +8,16 @@ option csharp_namespace = "NeoFS.API.Service";
 import "acl/types.proto";
 import "refs/types.proto";
 
+message Signature {
+  // Public key used for signing.
+  bytes key = 1;
+  // Signature
+  bytes sign = 2;
+}
+
 // RequestVerificationHeader is a set of signatures of every NeoFS Node that
 // processed request.
 message RequestVerificationHeader {
-  message Signature {
-    // Key is compressed public key used for signature.
-    bytes key = 1;
-
-    // Sign is signature of the request or session key.
-    bytes sign = 2;
-  }
-
   // Signatures is a set of signatures of every passed NeoFS Node
   repeated Signature signatures = 1;
 

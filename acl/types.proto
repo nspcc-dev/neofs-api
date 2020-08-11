@@ -56,8 +56,7 @@ message EACLRecord {
     enum Header {
       HEADER_UNKNOWN = 0;
       REQUEST = 1;
-      OBJECT_SYSTEM = 2;
-      OBJECT_USER = 3;
+      OBJECT = 2;
     }
 
     // Header carries type of header.

@@ -54,7 +54,7 @@ service Service {
 
 message GetRequest {
   message Body {
-    // Carries the address of the requested object.
+    // Address of the requested object.
     refs.Address address = 1;
 
     // Carries the raw option flag of the request.
@@ -62,7 +62,6 @@ message GetRequest {
     // that are physically stored on the server.
     bool raw = 2;
   }
-
   // Body of get object request message.
   Body body = 1;
 
@@ -77,16 +76,23 @@ message GetRequest {
 
 message GetResponse {
   message Body {
+    // Initialization parameters of the object got from NeoFS.
+    message Init {
+      // Object ID
+      refs.ObjectID object_id = 1;
+      // Object signature
+      service.Signature signature =2;
+      // Object header.
+      Header header = 3;
+    }
     // Carries the single message of the response stream.
     oneof ObjectPart {
-      // Carries the object header.
-      Header header = 1;
-
-      // Carries part of the object payload.
+      // Initialization parameters of the object stream.
+      Init init =1;
+      // Part of the object payload.
       bytes chunk = 2;
     }
   }
-
   // Body of get object response message.
   Body body = 1;
 
@@ -104,25 +110,26 @@ message PutRequest {
   message Body {
     // Groups initialization parameters of object placement in NeoFS.
     message Init {
-      // Carries the header of the object to save in the system.
-      Header header = 1;
-
-      // Carries the number of the object copies to store
-      // within the RPC call. Default zero value is processed according
-      // to the container placement rules.
-      uint32 copies_number = 2;
+      // Object ID, where available
+      refs.ObjectID object_id = 1;
+      // Object signature, were available
+      service.Signature signature =2;
+      // Header of the object to save in the system.
+      Header header = 3;
+      // Number of the object copies to store within the RPC call.
+      // Default zero value is processed according to the
+      // container placement rules.
+      uint32 copies_number = 4;
     }
 
     // Carries the single part of the query stream.
-    oneof Part {
+    oneof ObjectPart {
       // Carries the initialization parameters of the object stream.
       Init init = 1;
-
       // Carries part of the object payload.
       bytes chunk = 2;
     }
   }
-
   // Body of put object request message.
   Body body = 1;
 
@@ -141,7 +148,6 @@ message PutResponse {
     // It is used to access an object in the container.
     refs.ObjectID object_id = 1;
   }
-
   // Body of put object response message.
   Body body = 1;
 
@@ -159,11 +165,9 @@ message DeleteRequest {
   message Body {
     // Carries the address of the object to be deleted.
     refs.Address address = 1;
-
     // Carries identifier the object owner.
     refs.OwnerID owner_id = 2;
   }
-
   // Body of delete object request message.
   Body body = 1;
 
@@ -196,18 +200,15 @@ message DeleteResponse {
 
 message HeadRequest {
   message Body {
-    // Carries the address of the object with the requested header.
+    // Address of the object with the requested header.
     refs.Address address = 1;
-
-    // Carries the option to crop header to main part.
+    // Return only minimal header subset
     bool main_only = 2;
-
     // Carries the raw option flag of the request.
     // Raw request is sent to receive only the headers of the objects
     // that are physically stored on the server.
     bool raw = 3;
   }
-
   // Body of head object request message.
   Body body = 1;
 
@@ -222,10 +223,25 @@ message HeadRequest {
 
 message HeadResponse {
   message Body {
-    // Carries the requested object header.
-    Header header = 1;
+    message ShortHeader {
+      // Object format version.
+      service.Version version = 1;
+      // Epoch when the object was created
+      uint64 creation_epoch = 2;
+      // Object's owner
+      refs.OwnerID owner_id = 3;
+      // Type of the object payload content
+      ObjectType object_type = 4;
+      // Size of payload in bytes.
+      // 0xFFFFFFFFFFFFFFFF means `payload_length` is unknown
+      uint64 payload_length = 5;
+    }
+    // Carries the requested object header or it's part
+    oneof Head{
+      Header header = 1;
+      ShortHeader short_header = 2;
+    }
   }
-
   // Body of head object response message.
   Body body = 1;
 
