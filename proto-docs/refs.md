@@ -40,7 +40,7 @@ Address of object (container id + object id)
 <a name="refs.ContainerID"></a>
 
 ### Message ContainerID
-ContainerID groups information about the NeoFS container identifier.
+NeoFS container identifier.
 
 
 | Field | Type | Label | Description |
@@ -51,7 +51,7 @@ ContainerID groups information about the NeoFS container identifier.
 <a name="refs.ObjectID"></a>
 
 ### Message ObjectID
-ObjectID groups information about the NeoFS object identifier.
+NeoFS object identifier.
 
 
 | Field | Type | Label | Description |

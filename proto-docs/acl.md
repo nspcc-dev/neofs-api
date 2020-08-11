@@ -101,8 +101,7 @@ Header is an enumeration of filtering header types.
 | ---- | ------ | ----------- |
 | HEADER_UNKNOWN | 0 |  |
 | REQUEST | 1 |  |
-| OBJECT_SYSTEM | 2 |  |
-| OBJECT_USER | 3 |  |
+| OBJECT | 2 |  |
 
 
 

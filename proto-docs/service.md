@@ -8,6 +8,7 @@
   - Messages
     - [RequestMetaHeader](#service.RequestMetaHeader)
     - [RequestMetaHeader.XHeader](#service.RequestMetaHeader.XHeader)
+    - [Version](#service.Version)
     
 
 - [service/verify.proto](#service/verify.proto)
@@ -16,9 +17,9 @@
     - [BearerTokenMsg](#service.BearerTokenMsg)
     - [BearerTokenMsg.Info](#service.BearerTokenMsg.Info)
     - [RequestVerificationHeader](#service.RequestVerificationHeader)
-    - [RequestVerificationHeader.Signature](#service.RequestVerificationHeader.Signature)
     - [SessionToken](#service.SessionToken)
     - [SessionToken.Info](#service.SessionToken.Info)
+    - [Signature](#service.Signature)
     - [TokenLifetime](#service.TokenLifetime)
     
 
@@ -57,6 +58,18 @@ RequestMetaHeader contains information about request meta headers.
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  | Carries key to the X-Header. |
 | value | [string](#string) |  | Carries value of the X-Header. |
+
+
+<a name="service.Version"></a>
+
+### Message Version
+Represents API version used by node.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| major | [uint32](#uint32) |  | Major API version. |
+| minor | [uint32](#uint32) |  | Minor API version. |
 
  <!-- end messages -->
 
@@ -102,26 +115,15 @@ BearerTokenMsg carries information about request ACL rules with limited lifetime
 <a name="service.RequestVerificationHeader"></a>
 
 ### Message RequestVerificationHeader
-RequestVerificationHeader is a set of signatures of every NeoFS Node that processed request.
+RequestVerificationHeader is a set of signatures of every NeoFS Node that
+processed request.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| signatures | [RequestVerificationHeader.Signature](#service.RequestVerificationHeader.Signature) | repeated | Signatures is a set of signatures of every passed NeoFS Node |
+| signatures | [Signature](#service.Signature) | repeated | Signatures is a set of signatures of every passed NeoFS Node |
 | token | [SessionToken](#service.SessionToken) |  | Token is a token of the session within which the request is sent |
 | bearer | [BearerTokenMsg](#service.BearerTokenMsg) |  | Bearer is a Bearer token of the request |
-
-
-<a name="service.RequestVerificationHeader.Signature"></a>
-
-### Message RequestVerificationHeader.Signature
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [bytes](#bytes) |  | Key is compressed public key used for signature. |
-| sign | [bytes](#bytes) |  | Sign is signature of the request or session key. |
 
 
 <a name="service.SessionToken"></a>
@@ -145,12 +147,24 @@ Represents the NeoFS session token.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | id | [bytes](#bytes) |  | ID is a token identifier. valid UUIDv4 represented in bytes |
-| owner_id | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the session author. |
+| owner_id | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the session initiator. |
 | verb | [SessionToken.Info.Verb](#service.SessionToken.Info.Verb) |  | Verb is a type of request for which the token is issued |
 | lifetime | [TokenLifetime](#service.TokenLifetime) |  | Lifetime is a lifetime of the session |
 | session_key | [bytes](#bytes) |  | SessionKey is a public key of session key |
 | owner_key | [bytes](#bytes) |  | OwnerKey is a public key of the token owner |
 | object_address | [refs.Address](#refs.Address) |  | object_address represents the object session context. |
+
+
+<a name="service.Signature"></a>
+
+### Message Signature
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [bytes](#bytes) |  | Public key used for signing. |
+| sign | [bytes](#bytes) |  | Signature |
 
 
 <a name="service.TokenLifetime"></a>
