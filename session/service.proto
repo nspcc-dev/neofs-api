@@ -1,43 +1,45 @@
 syntax = "proto3";
 
-package session;
+package neo.fs.v2.session;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/session";
-option csharp_namespace = "NeoFS.API.Session";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/session;session";
+option csharp_namespace = "NeoFS.API.v2.Session";
 
 import "refs/types.proto";
 import "service/meta.proto";
 import "service/verify.proto";
 
-service Session {
+// Create Session record on Node side
+service SessionService {
   // Create opens new session between the client and the server.
   rpc Create (CreateRequest) returns (CreateResponse);
 }
 
 // CreateRequest carries an information necessary for opening a session.
 message CreateRequest {
+  // Request body
   message Body {
     // Carries an identifier of a session initiator.
-    refs.OwnerID owner_id = 1;
+    neo.fs.v2.refs.OwnerID owner_id = 1;
 
     // Carries a lifetime of the session.
-    service.TokenLifetime lifetime = 2;
+    neo.fs.v2.service.TokenLifetime lifetime = 2;
   }
-
   // Body of create session token request message.
   Body body = 1;
 
   // Carries request meta information. Header data is used only to regulate message
   // transport and does not affect request execution.
-  service.RequestMetaHeader meta_header = 2;
+  neo.fs.v2.service.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to authenticate
   // the nodes of the message route and check the correctness of transmission.
-  service.RequestVerificationHeader verify_header = 3;
+  neo.fs.v2.service.RequestVerificationHeader verify_header = 3;
 }
 
 // CreateResponse carries an information about the opened session.
 message CreateResponse {
+  // Response body
   message Body {
     // id carries an identifier of session token.
     bytes id = 1;
@@ -51,10 +53,10 @@ message CreateResponse {
 
   // Carries response meta information. Header data is used only to regulate
   // message transport and does not affect request execution.
-  service.ResponseMetaHeader meta_header = 2;
+  neo.fs.v2.service.ResponseMetaHeader meta_header = 2;
 
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness
   // of transmission.
-  service.ResponseVerificationHeader verify_header = 3;
+  neo.fs.v2.service.ResponseVerificationHeader verify_header = 3;
 }
