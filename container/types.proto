@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package container;
+package neo.fs.v2.container;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/container";
-option csharp_namespace = "NeoFS.API.Container";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/container;container";
+option csharp_namespace = "NeoFS.API.v2.Container";
 
 import "netmap/types.proto";
 import "refs/types.proto";
@@ -14,7 +14,7 @@ import "refs/types.proto";
 // SHA256 hash of stable-marshalled container message.
 message Container {
   // OwnerID carries identifier of the container owner.
-  refs.OwnerID owner_id = 1;
+  neo.fs.v2.refs.OwnerID owner_id = 1;
 
   // Nonce is a 16 byte UUID, used to avoid collisions of container id.
   bytes nonce = 2;
@@ -31,10 +31,9 @@ message Container {
     // Value of immutable container attribute.
     string value = 2;
   }
-
   // Attributes define any immutable characteristics of container.
   repeated Attribute attributes = 4;
 
-  // Rules define storage policy for the object inside the container.
-  netmap.PlacementRule rules = 5;
+  // Placement policy for the object inside the container.
+  neo.fs.v2.netmap.PlacementPolicy placement_policy = 5;
 }

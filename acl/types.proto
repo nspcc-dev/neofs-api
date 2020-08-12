@@ -1,16 +1,16 @@
 syntax = "proto3";
 
-package acl;
+package neo.fs.v2.acl;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/acl";
-option csharp_namespace = "NeoFS.API.Acl";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/acl;acl";
+option csharp_namespace = "NeoFS.API.v2.Acl";
 
 import "refs/types.proto";
 
 // Target of the access control rule in access control list.
 enum Target {
-  // Unknown target, default value.
-  UNKNOWN = 0;
+  // Unspecified target, default value.
+  TARGET_UNSPECIFIED= 0;
 
   // User target rule is applied if sender is the owner of the container.
   USER = 1;
@@ -27,13 +27,28 @@ enum Target {
 message EACLRecord {
   // Operation is an enumeration of operation types.
   enum Operation {
-    OPERATION_UNKNOWN = 0;
+    // Unspecified operation, default value.
+    OPERATION_UNSPECIFIED = 0;
+
+    // Get
     GET = 1;
+
+    // Head
     HEAD = 2;
+
+    // Put
     PUT = 3;
+
+    // Delete
     DELETE = 4;
+
+    // Search
     SEARCH = 5;
+
+    // GetRange
     GETRANGE = 6;
+
+    // GetRangeHash
     GETRANGEHASH = 7;
   }
 
@@ -42,8 +57,13 @@ message EACLRecord {
 
   // Action is an enumeration of EACL actions.
   enum Action {
-    ACTION_UNKNOWN = 0;
+    // Unspecified action, default value.
+    ACTION_UNSPECIFIED = 0;
+
+    // Allow action
     ALLOW = 1;
+
+    // Deny action
     DENY = 2;
   }
 
@@ -54,8 +74,13 @@ message EACLRecord {
   message FilterInfo {
     // Header is an enumeration of filtering header types.
     enum Header {
-      HEADER_UNKNOWN = 0;
+      // Unspecified header, default value.
+      HEADER_UNSPECIFIED = 0;
+
+      // Filter request headers
       REQUEST = 1;
+
+      // Filter object headers
       OBJECT = 2;
     }
 
@@ -64,11 +89,15 @@ message EACLRecord {
 
     // MatchType is an enumeration of match types.
     enum MatchType {
-      MATCH_UNKNOWN = 0;
+      // Unspecified match type, default value.
+      MATCH_TYPE_UNSPECIFIED = 0;
+
+      // Return true if strings are equal
       STRING_EQUAL = 1;
+
+      // Return true if strings are different
       STRING_NOT_EQUAL = 2;
     }
-
     // MatchType carries type of match.
     MatchType match_type = 2 [json_name = "MatchType"];
 
@@ -90,7 +119,6 @@ message EACLRecord {
     // key_list carries public keys of ACL target.
     repeated bytes key_list = 2 [json_name="Keys"];
   }
-
   // targets carries information about extended ACL target list.
   repeated TargetInfo targets = 4 [json_name="Targets"];
 }
@@ -99,7 +127,7 @@ message EACLRecord {
 message EACLTable {
   // Carries identifier of the container that should use given
   // access control rules.
-  refs.ContainerID container_id = 1 [json_name="ContainerID"];
+  neo.fs.v2.refs.ContainerID container_id = 1 [json_name="ContainerID"];
 
   // Records carries list of extended ACL rule records.
   repeated EACLRecord records = 2 [json_name="Records"];

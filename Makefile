@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 SHELL=bash
 
-# BRanch to match for BRaking changes
+# BRanch to match for BReaking changes
 BRBR?=master
 
 .PHONY: lint

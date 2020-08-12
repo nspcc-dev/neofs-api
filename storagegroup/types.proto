@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package storagegroup;
+package neo.fs.v2.storagegroup;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/storagegroup";
-option csharp_namespace = "NeoFS.API.StorageGroup";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/storagegroup;storagegroup";
+option csharp_namespace = "NeoFS.API.v2.StorageGroup";
 
 import "refs/types.proto";
 
@@ -26,5 +26,5 @@ message StorageGroup {
 
   // Members carries the list of identifiers of the object storage group members.
   // The list is strictly ordered.
-  repeated refs.ObjectID members = 4;
+  repeated neo.fs.v2.refs.ObjectID members = 4;
 }

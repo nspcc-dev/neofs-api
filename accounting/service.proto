@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package accounting;
+package neo.fs.v2.accounting;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/accounting";
-option csharp_namespace = "NeoFS.API.Accounting";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/accounting;accounting";
+option csharp_namespace = "NeoFS.API.v2.Accounting";
 
 import "refs/types.proto";
 import "service/meta.proto";
@@ -11,7 +11,7 @@ import "service/verify.proto";
 
 // The service provides methods for obtaining information
 // about the account balance in NeoFS system.
-service Accounting {
+service AccountingService {
   // Returns the amount of funds for the requested NeoFS account.
   rpc Balance (BalanceRequest) returns (BalanceResponse);
 }
@@ -24,23 +24,23 @@ service Accounting {
 // To gain access to the requested information, the request body must be formed
 // according to the requirements from the system specification.
 message BalanceRequest {
+  //Request body
   message Body {
     // Carries user identifier in NeoFS system for which the balance
     // is requested.
-    refs.OwnerID owner_id = 1;
+    neo.fs.v2.refs.OwnerID owner_id = 1;
   }
-
   // Body of the balance request message.
   Body body = 1;
 
   // Carries request meta information. Header data is used only to regulate
   // message transport and does not affect request execution.
-  service.RequestMetaHeader meta_header = 2;
+  neo.fs.v2.service.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness
   // of transmission.
-  service.RequestVerificationHeader verify_header = 3;
+  neo.fs.v2.service.RequestVerificationHeader verify_header = 3;
 }
 
 // Decimal represents the decimal numbers.
@@ -56,20 +56,20 @@ message Decimal {
 //
 // The amount of funds is calculated in decimal numbers.
 message BalanceResponse {
+  //Request body
   message Body {
     // Carries the amount of funds on the account.
     Decimal balance = 1;
   }
-
   // Body of the balance response message.
   Body body = 1;
 
   // Carries response meta information. Header data is used only to regulate
   // message transport and does not affect request execution.
-  service.ResponseMetaHeader meta_header = 2;
+  neo.fs.v2.service.ResponseMetaHeader meta_header = 2;
 
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness
   // of transmission.
-  service.ResponseVerificationHeader verify_header = 3;
+  neo.fs.v2.service.ResponseVerificationHeader verify_header = 3;
 }

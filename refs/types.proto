@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package refs;
+package neo.fs.v2.refs;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/refs";
-option csharp_namespace = "NeoFS.API.Refs";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/refs;refs";
+option csharp_namespace = "NeoFS.API.v2.Refs";
 
 // Address of object (container id + object id)
 message Address {

@@ -1,84 +1,118 @@
 syntax = "proto3";
 
-package netmap;
+package neo.fs.v2.netmap;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/netmap";
-option csharp_namespace = "NeoFS.API.Netmap";
+option go_package = "github.com/nspcc-dev/neofs-api-go/netmap;netmap";
+option csharp_namespace = "NeoFS.API.v2.Netmap";
 
-message PlacementRule {
+// Set of rules to select a subset of nodes able to store container's objects
+message PlacementPolicy {
+  // Replication factor
   uint32 repl_factor = 1;
 
-  message SFGroup {
+  // Filters to apply to Network Map
+  message FilterGroup {
+    // Filter definition
     message Filter {
+      // Filter identifier
       string key = 1;
 
-      message SimpleFilters {
-        repeated SimpleFilter filters = 1;
-      }
-
+      // Minimal simple filter
       message SimpleFilter {
+        // Filtering operation
         enum Operation {
-          NP = 0;
+          // No Operation defined
+          OPERATION_UNSPECIFIED= 0;
+
+          // Equal
           EQ = 1;
+
+          // Not Equal
           NE = 2;
+
+          // Greater then
           GT = 3;
+
+          // Greater or equal
           GE = 4;
+
+          // Less then
           LT = 5;
+
+          // Less or equal
           LE = 6;
+
+          // Logical OR
           OR = 7;
+
+          // Logical AND
           AND = 8;
         }
-
+        // Filtering operation
         Operation op = 1;
 
+        // List of filters
+        message SimpleFilters {
+          // List of filters
+          repeated SimpleFilter filters = 1;
+        }
+
+        // Filtering operation argument
         oneof args {
+          // Value
           string value = 2;
+          // Result of other filter application
           SimpleFilters f_args = 3;
         }
       }
-
+      // The rest of filter
       SimpleFilter f = 2;
     }
 
+    // Resulting filter list
     repeated Filter filters = 1;
 
+    // Selector
     message Selector {
+      // How many to select
       uint32 count = 1;
+      // Key to select
       string key = 2;
     }
 
+    // List of selectors
     repeated Selector selectors = 2;
 
+    // Parts of graph to exclude. Internal use.
     repeated uint32 exclude = 3;
   }
-
-  repeated SFGroup sf_groups = 2;
+  // List of filter groups
+  repeated FilterGroup filter_groups = 2;
 }
 
-// Groups the information about the NeoFS node.
+// NeoFS node description
 message NodeInfo {
-  // Carries network address of the NeoFS node.
+  // Ways to connect to a node
   string address = 1;
 
-  // Carries public key of the NeoFS node in a binary format.
+  // Public key of the NeoFS node in a binary format.
   bytes public_key = 2;
 
-  // Groups attributes of the NeoFS node.
+  // Attributes of the NeoFS node.
   message Attribute {
-    // Carries string key to the node attribute.
+    // Key of the node attribute.
     string key = 1;
 
-    // Carries string value of the node attribute.
+    // Value of the node attribute.
     string value = 2;
   }
-
   // Carries list of the NeoFS node attributes in a string key-value format.
   repeated Attribute attributes = 3;
 
   // Represents the enumeration of various states of the NeoFS node.
   enum State {
-    // Undefined state.
-    UNKNOWN = 0;
+    // Unknown state.
+     UNSPECIFIED = 0;
 
     // Active state in the network.
     ONLINE = 1;
