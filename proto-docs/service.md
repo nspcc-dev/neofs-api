@@ -8,6 +8,7 @@
   - Messages
     - [BearerToken](#neo.fs.v2.service.BearerToken)
     - [BearerToken.Body](#neo.fs.v2.service.BearerToken.Body)
+    - [ObjectServiceContext](#neo.fs.v2.service.ObjectServiceContext)
     - [RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader)
     - [ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader)
     - [SessionToken](#neo.fs.v2.service.SessionToken)
@@ -61,6 +62,18 @@ Bearer Token body
 | eacl_table | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | EACLTable carries table of extended ACL rules |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | OwnerID carries identifier of the token owner |
 | lifetime | [TokenLifetime](#neo.fs.v2.service.TokenLifetime) |  | Token expiration and valid time period parameters |
+
+
+<a name="neo.fs.v2.service.ObjectServiceContext"></a>
+
+### Message ObjectServiceContext
+Context information for Session Tokens related to ObjectService requests
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| verb | [ObjectServiceContext.Verb](#neo.fs.v2.service.ObjectServiceContext.Verb) |  | Verb is a type of request for which the token is issued |
+| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Related Object address |
 
 
 <a name="neo.fs.v2.service.RequestMetaHeader"></a>
@@ -117,10 +130,9 @@ Session token body
 | ----- | ---- | ----- | ----------- |
 | id | [bytes](#bytes) |  | ID is a token identifier. valid UUIDv4 represented in bytes |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | OwnerID carries identifier of the session initiator. |
-| verb | [SessionToken.Body.Verb](#neo.fs.v2.service.SessionToken.Body.Verb) |  | Verb is a type of request for which the token is issued |
 | lifetime | [TokenLifetime](#neo.fs.v2.service.TokenLifetime) |  | Lifetime is a lifetime of the session |
 | session_key | [bytes](#bytes) |  | SessionKey is a public key of session key |
-| object_address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | object_address represents the object session context. |
+| object_service | [ObjectServiceContext](#neo.fs.v2.service.ObjectServiceContext) |  | ObjectService session context. |
 
 
 <a name="neo.fs.v2.service.TokenLifetime"></a>
@@ -162,21 +174,21 @@ Extended headers for Request/Response
  <!-- end messages -->
 
 
-<a name="neo.fs.v2.service.SessionToken.Body.Verb"></a>
+<a name="neo.fs.v2.service.ObjectServiceContext.Verb"></a>
 
-### SessionToken.Body.Verb
-Verb is an enumeration of session request types
+### ObjectServiceContext.Verb
+Object request verbs
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | VERB_UNSPECIFIED | 0 | Unknown verb |
-| OBJECT_PUT | 1 | Refers to object.Put RPC call |
-| OBJECT_GET | 2 | Refers to object.Get RPC call |
-| OBJECT_HEAD | 3 | Refers to object.Head RPC call |
-| OBJECT_SEARCH | 4 | Refers to object.Search RPC call |
-| OBJECT_DELETE | 5 | Refers to object.Delete RPC call |
-| OBJECT_RANGE | 6 | Refers to object.GetRange RPC call |
-| OBJECT_RANGEHASH | 7 | Refers to object.GetRangeHash RPC call |
+| PUT | 1 | Refers to object.Put RPC call |
+| GET | 2 | Refers to object.Get RPC call |
+| HEAD | 3 | Refers to object.Head RPC call |
+| SEARCH | 4 | Refers to object.Search RPC call |
+| DELETE | 5 | Refers to object.Delete RPC call |
+| RANGE | 6 | Refers to object.GetRange RPC call |
+| RANGEHASH | 7 | Refers to object.GetRangeHash RPC call |
 
 
  <!-- end enums -->
