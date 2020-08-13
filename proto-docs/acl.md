@@ -6,10 +6,10 @@
 - [acl/types.proto](#acl/types.proto)
 
   - Messages
-    - [EACLRecord](#acl.EACLRecord)
-    - [EACLRecord.FilterInfo](#acl.EACLRecord.FilterInfo)
-    - [EACLRecord.TargetInfo](#acl.EACLRecord.TargetInfo)
-    - [EACLTable](#acl.EACLTable)
+    - [EACLRecord](#neo.fs.v2.acl.EACLRecord)
+    - [EACLRecord.FilterInfo](#neo.fs.v2.acl.EACLRecord.FilterInfo)
+    - [EACLRecord.TargetInfo](#neo.fs.v2.acl.EACLRecord.TargetInfo)
+    - [EACLTable](#neo.fs.v2.acl.EACLTable)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -25,7 +25,7 @@
  <!-- end services -->
 
 
-<a name="acl.EACLRecord"></a>
+<a name="neo.fs.v2.acl.EACLRecord"></a>
 
 ### Message EACLRecord
 EACLRecord groups information about extended ACL rule.
@@ -33,13 +33,13 @@ EACLRecord groups information about extended ACL rule.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| operation | [EACLRecord.Operation](#acl.EACLRecord.Operation) |  | Operation carries type of operation. |
-| action | [EACLRecord.Action](#acl.EACLRecord.Action) |  | Action carries ACL target action. |
-| filters | [EACLRecord.FilterInfo](#acl.EACLRecord.FilterInfo) | repeated | filters carries set of filters. |
-| targets | [EACLRecord.TargetInfo](#acl.EACLRecord.TargetInfo) | repeated | targets carries information about extended ACL target list. |
+| operation | [EACLRecord.Operation](#neo.fs.v2.acl.EACLRecord.Operation) |  | Operation carries type of operation. |
+| action | [EACLRecord.Action](#neo.fs.v2.acl.EACLRecord.Action) |  | Action carries ACL target action. |
+| filters | [EACLRecord.FilterInfo](#neo.fs.v2.acl.EACLRecord.FilterInfo) | repeated | filters carries set of filters. |
+| targets | [EACLRecord.TargetInfo](#neo.fs.v2.acl.EACLRecord.TargetInfo) | repeated | targets carries information about extended ACL target list. |
 
 
-<a name="acl.EACLRecord.FilterInfo"></a>
+<a name="neo.fs.v2.acl.EACLRecord.FilterInfo"></a>
 
 ### Message EACLRecord.FilterInfo
 FilterInfo groups information about filter.
@@ -47,13 +47,13 @@ FilterInfo groups information about filter.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| header | [EACLRecord.FilterInfo.Header](#acl.EACLRecord.FilterInfo.Header) |  | Header carries type of header. |
-| match_type | [EACLRecord.FilterInfo.MatchType](#acl.EACLRecord.FilterInfo.MatchType) |  | MatchType carries type of match. |
+| header | [EACLRecord.FilterInfo.Header](#neo.fs.v2.acl.EACLRecord.FilterInfo.Header) |  | Header carries type of header. |
+| match_type | [EACLRecord.FilterInfo.MatchType](#neo.fs.v2.acl.EACLRecord.FilterInfo.MatchType) |  | MatchType carries type of match. |
 | header_name | [string](#string) |  | header_name carries name of filtering header. |
 | header_val | [string](#string) |  | header_val carries value of filtering header. |
 
 
-<a name="acl.EACLRecord.TargetInfo"></a>
+<a name="neo.fs.v2.acl.EACLRecord.TargetInfo"></a>
 
 ### Message EACLRecord.TargetInfo
 TargetInfo groups information about extended ACL target.
@@ -61,11 +61,11 @@ TargetInfo groups information about extended ACL target.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| target | [Target](#acl.Target) |  | target carries target of ACL rule. |
+| target | [Target](#neo.fs.v2.acl.Target) |  | target carries target of ACL rule. |
 | key_list | [bytes](#bytes) | repeated | key_list carries public keys of ACL target. |
 
 
-<a name="acl.EACLTable"></a>
+<a name="neo.fs.v2.acl.EACLTable"></a>
 
 ### Message EACLTable
 EACLRecord carries the information about extended ACL rules.
@@ -73,77 +73,77 @@ EACLRecord carries the information about extended ACL rules.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [refs.ContainerID](#refs.ContainerID) |  | Carries identifier of the container that should use given access control rules. |
-| records | [EACLRecord](#acl.EACLRecord) | repeated | Records carries list of extended ACL rule records. |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Carries identifier of the container that should use given access control rules. |
+| records | [EACLRecord](#neo.fs.v2.acl.EACLRecord) | repeated | Records carries list of extended ACL rule records. |
 
  <!-- end messages -->
 
 
-<a name="acl.EACLRecord.Action"></a>
+<a name="neo.fs.v2.acl.EACLRecord.Action"></a>
 
 ### EACLRecord.Action
 Action is an enumeration of EACL actions.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| ACTION_UNKNOWN | 0 |  |
-| ALLOW | 1 |  |
-| DENY | 2 |  |
+| ACTION_UNSPECIFIED | 0 | Unspecified action, default value. |
+| ALLOW | 1 | Allow action |
+| DENY | 2 | Deny action |
 
 
 
-<a name="acl.EACLRecord.FilterInfo.Header"></a>
+<a name="neo.fs.v2.acl.EACLRecord.FilterInfo.Header"></a>
 
 ### EACLRecord.FilterInfo.Header
 Header is an enumeration of filtering header types.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| HEADER_UNKNOWN | 0 |  |
-| REQUEST | 1 |  |
-| OBJECT | 2 |  |
+| HEADER_UNSPECIFIED | 0 | Unspecified header, default value. |
+| REQUEST | 1 | Filter request headers |
+| OBJECT | 2 | Filter object headers |
 
 
 
-<a name="acl.EACLRecord.FilterInfo.MatchType"></a>
+<a name="neo.fs.v2.acl.EACLRecord.FilterInfo.MatchType"></a>
 
 ### EACLRecord.FilterInfo.MatchType
 MatchType is an enumeration of match types.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| MATCH_UNKNOWN | 0 |  |
-| STRING_EQUAL | 1 |  |
-| STRING_NOT_EQUAL | 2 |  |
+| MATCH_TYPE_UNSPECIFIED | 0 | Unspecified match type, default value. |
+| STRING_EQUAL | 1 | Return true if strings are equal |
+| STRING_NOT_EQUAL | 2 | Return true if strings are different |
 
 
 
-<a name="acl.EACLRecord.Operation"></a>
+<a name="neo.fs.v2.acl.EACLRecord.Operation"></a>
 
 ### EACLRecord.Operation
 Operation is an enumeration of operation types.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| OPERATION_UNKNOWN | 0 |  |
-| GET | 1 |  |
-| HEAD | 2 |  |
-| PUT | 3 |  |
-| DELETE | 4 |  |
-| SEARCH | 5 |  |
-| GETRANGE | 6 |  |
-| GETRANGEHASH | 7 |  |
+| OPERATION_UNSPECIFIED | 0 | Unspecified operation, default value. |
+| GET | 1 | Get |
+| HEAD | 2 | Head |
+| PUT | 3 | Put |
+| DELETE | 4 | Delete |
+| SEARCH | 5 | Search |
+| GETRANGE | 6 | GetRange |
+| GETRANGEHASH | 7 | GetRangeHash |
 
 
 
-<a name="acl.Target"></a>
+<a name="neo.fs.v2.acl.Target"></a>
 
 ### Target
 Target of the access control rule in access control list.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| UNKNOWN | 0 | Unknown target, default value. |
+| TARGET_UNSPECIFIED | 0 | Unspecified target, default value. |
 | USER | 1 | User target rule is applied if sender is the owner of the container. |
 | SYSTEM | 2 | System target rule is applied if sender is the storage node within the container or inner ring node. |
 | OTHERS | 3 | Others target rule is applied if sender is not user or system target. |

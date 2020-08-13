@@ -5,14 +5,14 @@
 
 - [accounting/service.proto](#accounting/service.proto)
  - Services
-    - [Accounting](#accounting.Accounting)
+    - [AccountingService](#neo.fs.v2.accounting.AccountingService)
     
   - Messages
-    - [BalanceRequest](#accounting.BalanceRequest)
-    - [BalanceRequest.Body](#accounting.BalanceRequest.Body)
-    - [BalanceResponse](#accounting.BalanceResponse)
-    - [BalanceResponse.Body](#accounting.BalanceResponse.Body)
-    - [Decimal](#accounting.Decimal)
+    - [BalanceRequest](#neo.fs.v2.accounting.BalanceRequest)
+    - [BalanceRequest.Body](#neo.fs.v2.accounting.BalanceRequest.Body)
+    - [BalanceResponse](#neo.fs.v2.accounting.BalanceResponse)
+    - [BalanceResponse.Body](#neo.fs.v2.accounting.BalanceResponse.Body)
+    - [Decimal](#neo.fs.v2.accounting.Decimal)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -27,9 +27,9 @@
 
 
 
-<a name="accounting.Accounting"></a>
+<a name="neo.fs.v2.accounting.AccountingService"></a>
 
-### Service "accounting.Accounting"
+### Service "neo.fs.v2.accounting.AccountingService"
 The service provides methods for obtaining information
 about the account balance in NeoFS system.
 
@@ -44,11 +44,11 @@ Returns the amount of funds for the requested NeoFS account.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| Balance | [BalanceRequest](#accounting.BalanceRequest) | [BalanceResponse](#accounting.BalanceResponse) |
+| Balance | [BalanceRequest](#neo.fs.v2.accounting.BalanceRequest) | [BalanceResponse](#neo.fs.v2.accounting.BalanceResponse) |
  <!-- end services -->
 
 
-<a name="accounting.BalanceRequest"></a>
+<a name="neo.fs.v2.accounting.BalanceRequest"></a>
 
 ### Message BalanceRequest
 Message defines the request body of Balance method.
@@ -62,23 +62,23 @@ according to the requirements from the system specification.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [BalanceRequest.Body](#accounting.BalanceRequest.Body) |  | Body of the balance request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [BalanceRequest.Body](#neo.fs.v2.accounting.BalanceRequest.Body) |  | Body of the balance request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="accounting.BalanceRequest.Body"></a>
+<a name="neo.fs.v2.accounting.BalanceRequest.Body"></a>
 
 ### Message BalanceRequest.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| owner_id | [refs.OwnerID](#refs.OwnerID) |  | Carries user identifier in NeoFS system for which the balance is requested. |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Carries user identifier in NeoFS system for which the balance is requested. |
 
 
-<a name="accounting.BalanceResponse"></a>
+<a name="neo.fs.v2.accounting.BalanceResponse"></a>
 
 ### Message BalanceResponse
 Message defines the response body of Balance method.
@@ -88,23 +88,23 @@ The amount of funds is calculated in decimal numbers.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [BalanceResponse.Body](#accounting.BalanceResponse.Body) |  | Body of the balance response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [BalanceResponse.Body](#neo.fs.v2.accounting.BalanceResponse.Body) |  | Body of the balance response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="accounting.BalanceResponse.Body"></a>
+<a name="neo.fs.v2.accounting.BalanceResponse.Body"></a>
 
 ### Message BalanceResponse.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| balance | [Decimal](#accounting.Decimal) |  | Carries the amount of funds on the account. |
+| balance | [Decimal](#neo.fs.v2.accounting.Decimal) |  | Carries the amount of funds on the account. |
 
 
-<a name="accounting.Decimal"></a>
+<a name="neo.fs.v2.accounting.Decimal"></a>
 
 ### Message Decimal
 Decimal represents the decimal numbers.

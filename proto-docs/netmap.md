@@ -6,14 +6,14 @@
 - [netmap/types.proto](#netmap/types.proto)
 
   - Messages
-    - [NodeInfo](#netmap.NodeInfo)
-    - [NodeInfo.Attribute](#netmap.NodeInfo.Attribute)
-    - [PlacementRule](#netmap.PlacementRule)
-    - [PlacementRule.SFGroup](#netmap.PlacementRule.SFGroup)
-    - [PlacementRule.SFGroup.Filter](#netmap.PlacementRule.SFGroup.Filter)
-    - [PlacementRule.SFGroup.Filter.SimpleFilter](#netmap.PlacementRule.SFGroup.Filter.SimpleFilter)
-    - [PlacementRule.SFGroup.Filter.SimpleFilters](#netmap.PlacementRule.SFGroup.Filter.SimpleFilters)
-    - [PlacementRule.SFGroup.Selector](#netmap.PlacementRule.SFGroup.Selector)
+    - [NodeInfo](#neo.fs.v2.netmap.NodeInfo)
+    - [NodeInfo.Attribute](#neo.fs.v2.netmap.NodeInfo.Attribute)
+    - [PlacementPolicy](#neo.fs.v2.netmap.PlacementPolicy)
+    - [PlacementPolicy.FilterGroup](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup)
+    - [PlacementPolicy.FilterGroup.Filter](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter)
+    - [PlacementPolicy.FilterGroup.Filter.SimpleFilter](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter)
+    - [PlacementPolicy.FilterGroup.Filter.SimpleFilter.SimpleFilters](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter.SimpleFilters)
+    - [PlacementPolicy.FilterGroup.Selector](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Selector)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -29,136 +29,136 @@
  <!-- end services -->
 
 
-<a name="netmap.NodeInfo"></a>
+<a name="neo.fs.v2.netmap.NodeInfo"></a>
 
 ### Message NodeInfo
-Groups the information about the NeoFS node.
+NeoFS node description
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [string](#string) |  | Carries network address of the NeoFS node. |
-| public_key | [bytes](#bytes) |  | Carries public key of the NeoFS node in a binary format. |
-| attributes | [NodeInfo.Attribute](#netmap.NodeInfo.Attribute) | repeated | Carries list of the NeoFS node attributes in a string key-value format. |
-| state | [NodeInfo.State](#netmap.NodeInfo.State) |  | Carries state of the NeoFS node. |
+| address | [string](#string) |  | Ways to connect to a node |
+| public_key | [bytes](#bytes) |  | Public key of the NeoFS node in a binary format. |
+| attributes | [NodeInfo.Attribute](#neo.fs.v2.netmap.NodeInfo.Attribute) | repeated | Carries list of the NeoFS node attributes in a string key-value format. |
+| state | [NodeInfo.State](#neo.fs.v2.netmap.NodeInfo.State) |  | Carries state of the NeoFS node. |
 
 
-<a name="netmap.NodeInfo.Attribute"></a>
+<a name="neo.fs.v2.netmap.NodeInfo.Attribute"></a>
 
 ### Message NodeInfo.Attribute
-Groups attributes of the NeoFS node.
+Attributes of the NeoFS node.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  | Carries string key to the node attribute. |
-| value | [string](#string) |  | Carries string value of the node attribute. |
+| key | [string](#string) |  | Key of the node attribute. |
+| value | [string](#string) |  | Value of the node attribute. |
 
 
-<a name="netmap.PlacementRule"></a>
+<a name="neo.fs.v2.netmap.PlacementPolicy"></a>
 
-### Message PlacementRule
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| repl_factor | [uint32](#uint32) |  |  |
-| sf_groups | [PlacementRule.SFGroup](#netmap.PlacementRule.SFGroup) | repeated |  |
-
-
-<a name="netmap.PlacementRule.SFGroup"></a>
-
-### Message PlacementRule.SFGroup
-
+### Message PlacementPolicy
+Set of rules to select a subset of nodes able to store container's objects
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| filters | [PlacementRule.SFGroup.Filter](#netmap.PlacementRule.SFGroup.Filter) | repeated |  |
-| selectors | [PlacementRule.SFGroup.Selector](#netmap.PlacementRule.SFGroup.Selector) | repeated |  |
-| exclude | [uint32](#uint32) | repeated |  |
+| repl_factor | [uint32](#uint32) |  | Replication factor |
+| filter_groups | [PlacementPolicy.FilterGroup](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup) | repeated | List of filter groups |
 
 
-<a name="netmap.PlacementRule.SFGroup.Filter"></a>
+<a name="neo.fs.v2.netmap.PlacementPolicy.FilterGroup"></a>
 
-### Message PlacementRule.SFGroup.Filter
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| f | [PlacementRule.SFGroup.Filter.SimpleFilter](#netmap.PlacementRule.SFGroup.Filter.SimpleFilter) |  |  |
-
-
-<a name="netmap.PlacementRule.SFGroup.Filter.SimpleFilter"></a>
-
-### Message PlacementRule.SFGroup.Filter.SimpleFilter
-
+### Message PlacementPolicy.FilterGroup
+Filters to apply to Network Map
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| op | [PlacementRule.SFGroup.Filter.SimpleFilter.Operation](#netmap.PlacementRule.SFGroup.Filter.SimpleFilter.Operation) |  |  |
-| value | [string](#string) |  |  |
-| f_args | [PlacementRule.SFGroup.Filter.SimpleFilters](#netmap.PlacementRule.SFGroup.Filter.SimpleFilters) |  |  |
+| filters | [PlacementPolicy.FilterGroup.Filter](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter) | repeated | Resulting filter list |
+| selectors | [PlacementPolicy.FilterGroup.Selector](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Selector) | repeated | List of selectors |
+| exclude | [uint32](#uint32) | repeated | Parts of graph to exclude. Internal use. |
 
 
-<a name="netmap.PlacementRule.SFGroup.Filter.SimpleFilters"></a>
+<a name="neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter"></a>
 
-### Message PlacementRule.SFGroup.Filter.SimpleFilters
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| filters | [PlacementRule.SFGroup.Filter.SimpleFilter](#netmap.PlacementRule.SFGroup.Filter.SimpleFilter) | repeated |  |
-
-
-<a name="netmap.PlacementRule.SFGroup.Selector"></a>
-
-### Message PlacementRule.SFGroup.Selector
-
+### Message PlacementPolicy.FilterGroup.Filter
+Filter definition
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| count | [uint32](#uint32) |  |  |
-| key | [string](#string) |  |  |
+| key | [string](#string) |  | Filter identifier |
+| f | [PlacementPolicy.FilterGroup.Filter.SimpleFilter](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter) |  | The rest of filter |
+
+
+<a name="neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter"></a>
+
+### Message PlacementPolicy.FilterGroup.Filter.SimpleFilter
+Minimal simple filter
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| op | [PlacementPolicy.FilterGroup.Filter.SimpleFilter.Operation](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter.Operation) |  | Filtering operation |
+| value | [string](#string) |  | Value |
+| f_args | [PlacementPolicy.FilterGroup.Filter.SimpleFilter.SimpleFilters](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter.SimpleFilters) |  | Result of other filter application |
+
+
+<a name="neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter.SimpleFilters"></a>
+
+### Message PlacementPolicy.FilterGroup.Filter.SimpleFilter.SimpleFilters
+List of filters
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filters | [PlacementPolicy.FilterGroup.Filter.SimpleFilter](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter) | repeated | List of filters |
+
+
+<a name="neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Selector"></a>
+
+### Message PlacementPolicy.FilterGroup.Selector
+Selector
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| count | [uint32](#uint32) |  | How many to select |
+| key | [string](#string) |  | Key to select |
 
  <!-- end messages -->
 
 
-<a name="netmap.NodeInfo.State"></a>
+<a name="neo.fs.v2.netmap.NodeInfo.State"></a>
 
 ### NodeInfo.State
 Represents the enumeration of various states of the NeoFS node.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| UNKNOWN | 0 | Undefined state. |
+| UNSPECIFIED | 0 | Unknown state. |
 | ONLINE | 1 | Active state in the network. |
 | OFFLINE | 2 | Network unavailable state. |
 
 
 
-<a name="netmap.PlacementRule.SFGroup.Filter.SimpleFilter.Operation"></a>
+<a name="neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter.Operation"></a>
 
-### PlacementRule.SFGroup.Filter.SimpleFilter.Operation
-
+### PlacementPolicy.FilterGroup.Filter.SimpleFilter.Operation
+Filtering operation
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| NP | 0 |  |
-| EQ | 1 |  |
-| NE | 2 |  |
-| GT | 3 |  |
-| GE | 4 |  |
-| LT | 5 |  |
-| LE | 6 |  |
-| OR | 7 |  |
-| AND | 8 |  |
+| OPERATION_UNSPECIFIED | 0 | No Operation defined |
+| EQ | 1 | Equal |
+| NE | 2 | Not Equal |
+| GT | 3 | Greater then |
+| GE | 4 | Greater or equal |
+| LT | 5 | Less then |
+| LE | 6 | Less or equal |
+| OR | 7 | Logical OR |
+| AND | 8 | Logical AND |
 
 
  <!-- end enums -->
