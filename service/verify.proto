@@ -5,9 +5,6 @@ package neo.fs.v2.service;
 option go_package = "github.com/nspcc-dev/neofs-api-go/v2/service;service";
 option csharp_namespace = "NeoFS.API.v2.Service";
 
-import "acl/types.proto";
-import "refs/types.proto";
-
 // Signature of something in NeoFS
 message Signature {
   // Public key used for signing.

@@ -39,6 +39,41 @@ message TokenLifetime {
   uint64 iat = 3;
 }
 
+// Context information for Session Tokens related to ObjectService requests
+message ObjectServiceContext {
+  // Object request verbs
+  enum Verb {
+    // Unknown verb
+    VERB_UNSPECIFIED = 0;
+
+    // Refers to object.Put RPC call
+    PUT = 1;
+
+    // Refers to object.Get RPC call
+    GET = 2;
+
+    // Refers to object.Head RPC call
+    HEAD = 3;
+
+    // Refers to object.Search RPC call
+    SEARCH = 4;
+
+    // Refers to object.Delete RPC call
+    DELETE = 5;
+
+    // Refers to object.GetRange RPC call
+    RANGE = 6;
+
+    // Refers to object.GetRangeHash RPC call
+    RANGEHASH = 7;
+  }
+  // Verb is a type of request for which the token is issued
+  Verb verb = 1;
+
+  // Related Object address
+  neo.fs.v2.refs.Address address = 2;
+}
+
 // NeoFS session token.
 message SessionToken {
   // Session token body
@@ -49,45 +84,16 @@ message SessionToken {
     // OwnerID carries identifier of the session initiator.
     neo.fs.v2.refs.OwnerID owner_id = 2;
 
-    // Verb is an enumeration of session request types
-    enum Verb {
-      // Unknown verb
-      VERB_UNSPECIFIED = 0;
-
-      // Refers to object.Put RPC call
-      OBJECT_PUT = 1;
-
-      // Refers to object.Get RPC call
-      OBJECT_GET = 2;
-
-      // Refers to object.Head RPC call
-      OBJECT_HEAD = 3;
-
-      // Refers to object.Search RPC call
-      OBJECT_SEARCH = 4;
-
-      // Refers to object.Delete RPC call
-      OBJECT_DELETE = 5;
-
-      // Refers to object.GetRange RPC call
-      OBJECT_RANGE = 6;
-
-      // Refers to object.GetRangeHash RPC call
-      OBJECT_RANGEHASH = 7;
-    }
-    // Verb is a type of request for which the token is issued
-    Verb verb = 3;
-
     // Lifetime is a lifetime of the session
-    TokenLifetime lifetime = 4;
+    TokenLifetime lifetime = 3;
 
     // SessionKey is a public key of session key
-    bytes session_key = 5;
+    bytes session_key = 4;
 
     // Carries context of the session.
     oneof context {
-      // object_address represents the object session context.
-      neo.fs.v2.refs.Address object_address = 6;
+      // ObjectService session context.
+      ObjectServiceContext object_service = 5;
     }
   }
   // Session Token body
