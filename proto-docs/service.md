@@ -6,23 +6,23 @@
 - [service/meta.proto](#service/meta.proto)
 
   - Messages
-    - [BearerToken](#service.BearerToken)
-    - [BearerToken.Body](#service.BearerToken.Body)
-    - [RequestMetaHeader](#service.RequestMetaHeader)
-    - [ResponseMetaHeader](#service.ResponseMetaHeader)
-    - [SessionToken](#service.SessionToken)
-    - [SessionToken.Body](#service.SessionToken.Body)
-    - [TokenLifetime](#service.TokenLifetime)
-    - [Version](#service.Version)
-    - [XHeader](#service.XHeader)
+    - [BearerToken](#neo.fs.v2.service.BearerToken)
+    - [BearerToken.Body](#neo.fs.v2.service.BearerToken.Body)
+    - [RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader)
+    - [ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader)
+    - [SessionToken](#neo.fs.v2.service.SessionToken)
+    - [SessionToken.Body](#neo.fs.v2.service.SessionToken.Body)
+    - [TokenLifetime](#neo.fs.v2.service.TokenLifetime)
+    - [Version](#neo.fs.v2.service.Version)
+    - [XHeader](#neo.fs.v2.service.XHeader)
     
 
 - [service/verify.proto](#service/verify.proto)
 
   - Messages
-    - [RequestVerificationHeader](#service.RequestVerificationHeader)
-    - [ResponseVerificationHeader](#service.ResponseVerificationHeader)
-    - [Signature](#service.Signature)
+    - [RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader)
+    - [ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader)
+    - [Signature](#neo.fs.v2.service.Signature)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -38,7 +38,7 @@
  <!-- end services -->
 
 
-<a name="service.BearerToken"></a>
+<a name="neo.fs.v2.service.BearerToken"></a>
 
 ### Message BearerToken
 BearerToken has information about request ACL rules with limited lifetime
@@ -46,24 +46,24 @@ BearerToken has information about request ACL rules with limited lifetime
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| token | [BearerToken.Body](#service.BearerToken.Body) |  | Bearer Token body |
-| signature | [Signature](#service.Signature) |  | Signature of BearerToken body |
+| body | [BearerToken.Body](#neo.fs.v2.service.BearerToken.Body) |  | Bearer Token body |
+| signature | [Signature](#neo.fs.v2.service.Signature) |  | Signature of BearerToken body |
 
 
-<a name="service.BearerToken.Body"></a>
+<a name="neo.fs.v2.service.BearerToken.Body"></a>
 
 ### Message BearerToken.Body
-
+Bearer Token body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| eacl_table | [acl.EACLTable](#acl.EACLTable) |  | EACLTable carries table of extended ACL rules |
-| owner_id | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the token owner |
-| lifetime | [TokenLifetime](#service.TokenLifetime) |  | Token expiration and valid time period parameters |
+| eacl_table | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | EACLTable carries table of extended ACL rules |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | OwnerID carries identifier of the token owner |
+| lifetime | [TokenLifetime](#neo.fs.v2.service.TokenLifetime) |  | Token expiration and valid time period parameters |
 
 
-<a name="service.RequestMetaHeader"></a>
+<a name="neo.fs.v2.service.RequestMetaHeader"></a>
 
 ### Message RequestMetaHeader
 Information about the request
@@ -71,16 +71,16 @@ Information about the request
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [Version](#service.Version) |  | Client API version. |
+| version | [Version](#neo.fs.v2.service.Version) |  | Client API version. |
 | epoch | [uint64](#uint64) |  | Client local epoch number. Set to 0 if unknown. |
 | ttl | [uint32](#uint32) |  | Maximum number of nodes in the request route. |
-| x_headers | [XHeader](#service.XHeader) | repeated | Request X-Headers. |
-| token | [SessionToken](#service.SessionToken) |  | Token is a token of the session within which the request is sent |
-| bearer | [BearerToken](#service.BearerToken) |  | Bearer is a Bearer token of the request |
-| origin | [RequestMetaHeader](#service.RequestMetaHeader) |  | RequestMetaHeader of the origin request. |
+| x_headers | [XHeader](#neo.fs.v2.service.XHeader) | repeated | Request X-Headers. |
+| session_token | [SessionToken](#neo.fs.v2.service.SessionToken) |  | Token is a token of the session within which the request is sent |
+| bearer_token | [BearerToken](#neo.fs.v2.service.BearerToken) |  | Bearer is a Bearer token of the request |
+| origin | [RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | RequestMetaHeader of the origin request. |
 
 
-<a name="service.ResponseMetaHeader"></a>
+<a name="neo.fs.v2.service.ResponseMetaHeader"></a>
 
 ### Message ResponseMetaHeader
 Information about the response
@@ -88,14 +88,14 @@ Information about the response
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [Version](#service.Version) |  | Server API version. |
+| version | [Version](#neo.fs.v2.service.Version) |  | Server API version. |
 | epoch | [uint64](#uint64) |  | Server local epoch number. |
 | ttl | [uint32](#uint32) |  | Maximum number of nodes in the response route. |
-| x_headers | [XHeader](#service.XHeader) | repeated | Response X-Headers. |
-| origin | [ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta header of the origin response. |
+| x_headers | [XHeader](#neo.fs.v2.service.XHeader) | repeated | Response X-Headers. |
+| origin | [ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta header of the origin response. |
 
 
-<a name="service.SessionToken"></a>
+<a name="neo.fs.v2.service.SessionToken"></a>
 
 ### Message SessionToken
 NeoFS session token.
@@ -103,27 +103,27 @@ NeoFS session token.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| token | [SessionToken.Body](#service.SessionToken.Body) |  | Session Token body |
-| signature | [Signature](#service.Signature) |  | Signature is a signature of session token information |
+| body | [SessionToken.Body](#neo.fs.v2.service.SessionToken.Body) |  | Session Token body |
+| signature | [Signature](#neo.fs.v2.service.Signature) |  | Signature is a signature of session token information |
 
 
-<a name="service.SessionToken.Body"></a>
+<a name="neo.fs.v2.service.SessionToken.Body"></a>
 
 ### Message SessionToken.Body
-
+Session token body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | id | [bytes](#bytes) |  | ID is a token identifier. valid UUIDv4 represented in bytes |
-| owner_id | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the session initiator. |
-| verb | [SessionToken.Body.Verb](#service.SessionToken.Body.Verb) |  | Verb is a type of request for which the token is issued |
-| lifetime | [TokenLifetime](#service.TokenLifetime) |  | Lifetime is a lifetime of the session |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | OwnerID carries identifier of the session initiator. |
+| verb | [SessionToken.Body.Verb](#neo.fs.v2.service.SessionToken.Body.Verb) |  | Verb is a type of request for which the token is issued |
+| lifetime | [TokenLifetime](#neo.fs.v2.service.TokenLifetime) |  | Lifetime is a lifetime of the session |
 | session_key | [bytes](#bytes) |  | SessionKey is a public key of session key |
-| object_address | [refs.Address](#refs.Address) |  | object_address represents the object session context. |
+| object_address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | object_address represents the object session context. |
 
 
-<a name="service.TokenLifetime"></a>
+<a name="neo.fs.v2.service.TokenLifetime"></a>
 
 ### Message TokenLifetime
 Lifetime parameters of the token. Filed names taken from rfc7519.
@@ -136,7 +136,7 @@ Lifetime parameters of the token. Filed names taken from rfc7519.
 | iat | [uint64](#uint64) |  | Issued at Epoch |
 
 
-<a name="service.Version"></a>
+<a name="neo.fs.v2.service.Version"></a>
 
 ### Message Version
 Represents API version used by node.
@@ -148,10 +148,10 @@ Represents API version used by node.
 | minor | [uint32](#uint32) |  | Minor API version. |
 
 
-<a name="service.XHeader"></a>
+<a name="neo.fs.v2.service.XHeader"></a>
 
 ### Message XHeader
-
+Extended headers for Request/Response
 
 
 | Field | Type | Label | Description |
@@ -162,20 +162,21 @@ Represents API version used by node.
  <!-- end messages -->
 
 
-<a name="service.SessionToken.Body.Verb"></a>
+<a name="neo.fs.v2.service.SessionToken.Body.Verb"></a>
 
 ### SessionToken.Body.Verb
 Verb is an enumeration of session request types
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| OBJECT_PUT | 0 | Refers to object.Put RPC call |
-| OBJECT_GET | 1 | Refers to object.Get RPC call |
-| OBJECT_HEAD | 2 | Refers to object.Head RPC call |
-| OBJECT_SEARCH | 3 | Refers to object.Search RPC call |
-| OBJECT_DELETE | 4 | Refers to object.Delete RPC call |
-| OBJECT_RANGE | 5 | Refers to object.GetRange RPC call |
-| OBJECT_RANGEHASH | 6 | Refers to object.GetRangeHash RPC call |
+| VERB_UNSPECIFIED | 0 | Unknown verb |
+| OBJECT_PUT | 1 | Refers to object.Put RPC call |
+| OBJECT_GET | 2 | Refers to object.Get RPC call |
+| OBJECT_HEAD | 3 | Refers to object.Head RPC call |
+| OBJECT_SEARCH | 4 | Refers to object.Search RPC call |
+| OBJECT_DELETE | 5 | Refers to object.Delete RPC call |
+| OBJECT_RANGE | 6 | Refers to object.GetRange RPC call |
+| OBJECT_RANGEHASH | 7 | Refers to object.GetRangeHash RPC call |
 
 
  <!-- end enums -->
@@ -191,7 +192,7 @@ Verb is an enumeration of session request types
  <!-- end services -->
 
 
-<a name="service.RequestVerificationHeader"></a>
+<a name="neo.fs.v2.service.RequestVerificationHeader"></a>
 
 ### Message RequestVerificationHeader
 Verification info for request signed by all intermediate nodes
@@ -199,13 +200,13 @@ Verification info for request signed by all intermediate nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body_signature | [Signature](#service.Signature) |  | Request Body signature. Should be generated once by request initiator. |
-| meta_signature | [Signature](#service.Signature) |  | Request Meta signature is added and signed by any intermediate node |
-| origin_signature | [Signature](#service.Signature) |  | Sign previous hops |
-| origin | [RequestVerificationHeader](#service.RequestVerificationHeader) |  | Chain of previous hops signatures |
+| body_signature | [Signature](#neo.fs.v2.service.Signature) |  | Request Body signature. Should be generated once by request initiator. |
+| meta_signature | [Signature](#neo.fs.v2.service.Signature) |  | Request Meta signature is added and signed by any intermediate node |
+| origin_signature | [Signature](#neo.fs.v2.service.Signature) |  | Sign previous hops |
+| origin | [RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Chain of previous hops signatures |
 
 
-<a name="service.ResponseVerificationHeader"></a>
+<a name="neo.fs.v2.service.ResponseVerificationHeader"></a>
 
 ### Message ResponseVerificationHeader
 Verification info for response signed by all intermediate nodes
@@ -213,13 +214,13 @@ Verification info for response signed by all intermediate nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body_signature | [Signature](#service.Signature) |  | Response Body signature. Should be generated once by answering node. |
-| meta_signature | [Signature](#service.Signature) |  | Response Meta signature is added and signed by any intermediate node |
-| origin_signature | [Signature](#service.Signature) |  | Sign previous hops |
-| origin | [ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Chain of previous hops signatures |
+| body_signature | [Signature](#neo.fs.v2.service.Signature) |  | Response Body signature. Should be generated once by answering node. |
+| meta_signature | [Signature](#neo.fs.v2.service.Signature) |  | Response Meta signature is added and signed by any intermediate node |
+| origin_signature | [Signature](#neo.fs.v2.service.Signature) |  | Sign previous hops |
+| origin | [ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Chain of previous hops signatures |
 
 
-<a name="service.Signature"></a>
+<a name="neo.fs.v2.service.Signature"></a>
 
 ### Message Signature
 Signature of something in NeoFS

@@ -5,40 +5,40 @@
 
 - [container/service.proto](#container/service.proto)
  - Services
-    - [Service](#container.Service)
+    - [ContainerService](#neo.fs.v2.container.ContainerService)
     
   - Messages
-    - [DeleteRequest](#container.DeleteRequest)
-    - [DeleteRequest.Body](#container.DeleteRequest.Body)
-    - [DeleteResponse](#container.DeleteResponse)
-    - [DeleteResponse.Body](#container.DeleteResponse.Body)
-    - [GetExtendedACLRequest](#container.GetExtendedACLRequest)
-    - [GetExtendedACLRequest.Body](#container.GetExtendedACLRequest.Body)
-    - [GetExtendedACLResponse](#container.GetExtendedACLResponse)
-    - [GetExtendedACLResponse.Body](#container.GetExtendedACLResponse.Body)
-    - [GetRequest](#container.GetRequest)
-    - [GetRequest.Body](#container.GetRequest.Body)
-    - [GetResponse](#container.GetResponse)
-    - [GetResponse.Body](#container.GetResponse.Body)
-    - [ListRequest](#container.ListRequest)
-    - [ListRequest.Body](#container.ListRequest.Body)
-    - [ListResponse](#container.ListResponse)
-    - [ListResponse.Body](#container.ListResponse.Body)
-    - [PutRequest](#container.PutRequest)
-    - [PutRequest.Body](#container.PutRequest.Body)
-    - [PutResponse](#container.PutResponse)
-    - [PutResponse.Body](#container.PutResponse.Body)
-    - [SetExtendedACLRequest](#container.SetExtendedACLRequest)
-    - [SetExtendedACLRequest.Body](#container.SetExtendedACLRequest.Body)
-    - [SetExtendedACLResponse](#container.SetExtendedACLResponse)
-    - [SetExtendedACLResponse.Body](#container.SetExtendedACLResponse.Body)
+    - [DeleteRequest](#neo.fs.v2.container.DeleteRequest)
+    - [DeleteRequest.Body](#neo.fs.v2.container.DeleteRequest.Body)
+    - [DeleteResponse](#neo.fs.v2.container.DeleteResponse)
+    - [DeleteResponse.Body](#neo.fs.v2.container.DeleteResponse.Body)
+    - [GetExtendedACLRequest](#neo.fs.v2.container.GetExtendedACLRequest)
+    - [GetExtendedACLRequest.Body](#neo.fs.v2.container.GetExtendedACLRequest.Body)
+    - [GetExtendedACLResponse](#neo.fs.v2.container.GetExtendedACLResponse)
+    - [GetExtendedACLResponse.Body](#neo.fs.v2.container.GetExtendedACLResponse.Body)
+    - [GetRequest](#neo.fs.v2.container.GetRequest)
+    - [GetRequest.Body](#neo.fs.v2.container.GetRequest.Body)
+    - [GetResponse](#neo.fs.v2.container.GetResponse)
+    - [GetResponse.Body](#neo.fs.v2.container.GetResponse.Body)
+    - [ListRequest](#neo.fs.v2.container.ListRequest)
+    - [ListRequest.Body](#neo.fs.v2.container.ListRequest.Body)
+    - [ListResponse](#neo.fs.v2.container.ListResponse)
+    - [ListResponse.Body](#neo.fs.v2.container.ListResponse.Body)
+    - [PutRequest](#neo.fs.v2.container.PutRequest)
+    - [PutRequest.Body](#neo.fs.v2.container.PutRequest.Body)
+    - [PutResponse](#neo.fs.v2.container.PutResponse)
+    - [PutResponse.Body](#neo.fs.v2.container.PutResponse.Body)
+    - [SetExtendedACLRequest](#neo.fs.v2.container.SetExtendedACLRequest)
+    - [SetExtendedACLRequest.Body](#neo.fs.v2.container.SetExtendedACLRequest.Body)
+    - [SetExtendedACLResponse](#neo.fs.v2.container.SetExtendedACLResponse)
+    - [SetExtendedACLResponse.Body](#neo.fs.v2.container.SetExtendedACLResponse.Body)
     
 
 - [container/types.proto](#container/types.proto)
 
   - Messages
-    - [Container](#container.Container)
-    - [Container.Attribute](#container.Container.Attribute)
+    - [Container](#neo.fs.v2.container.Container)
+    - [Container.Attribute](#neo.fs.v2.container.Container.Attribute)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -53,10 +53,10 @@
 
 
 
-<a name="container.Service"></a>
+<a name="neo.fs.v2.container.ContainerService"></a>
 
-### Service "container.Service"
-Service provides API to access container smart-contract in morph chain
+### Service "neo.fs.v2.container.ContainerService"
+ContainerService provides API to access container smart-contract in morph chain
 via NeoFS node.
 
 ```
@@ -78,7 +78,7 @@ added into smart-contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| Put | [PutRequest](#container.PutRequest) | [PutResponse](#container.PutResponse) |
+| Put | [PutRequest](#neo.fs.v2.container.PutRequest) | [PutResponse](#neo.fs.v2.container.PutResponse) |
 #### Method Delete
 
 Delete invokes 'Delete' method in container smart-contract and returns
@@ -88,14 +88,14 @@ removed from smart-contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| Delete | [DeleteRequest](#container.DeleteRequest) | [DeleteResponse](#container.DeleteResponse) |
+| Delete | [DeleteRequest](#neo.fs.v2.container.DeleteRequest) | [DeleteResponse](#neo.fs.v2.container.DeleteResponse) |
 #### Method Get
 
 Get returns container from container smart-contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| Get | [GetRequest](#container.GetRequest) | [GetResponse](#container.GetResponse) |
+| Get | [GetRequest](#neo.fs.v2.container.GetRequest) | [GetResponse](#neo.fs.v2.container.GetResponse) |
 #### Method List
 
 List returns all owner's containers from container smart-contract
@@ -103,7 +103,7 @@ storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| List | [ListRequest](#container.ListRequest) | [ListResponse](#container.ListResponse) |
+| List | [ListRequest](#neo.fs.v2.container.ListRequest) | [ListResponse](#neo.fs.v2.container.ListResponse) |
 #### Method SetExtendedACL
 
 SetExtendedACL invokes 'SetEACL' method in container smart-contract and
@@ -112,7 +112,7 @@ Extended ACL added into smart-contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| SetExtendedACL | [SetExtendedACLRequest](#container.SetExtendedACLRequest) | [SetExtendedACLResponse](#container.SetExtendedACLResponse) |
+| SetExtendedACL | [SetExtendedACLRequest](#neo.fs.v2.container.SetExtendedACLRequest) | [SetExtendedACLResponse](#neo.fs.v2.container.SetExtendedACLResponse) |
 #### Method GetExtendedACL
 
 GetExtendedACL returns Extended ACL table and signature from container
@@ -120,36 +120,36 @@ smart-contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| GetExtendedACL | [GetExtendedACLRequest](#container.GetExtendedACLRequest) | [GetExtendedACLResponse](#container.GetExtendedACLResponse) |
+| GetExtendedACL | [GetExtendedACLRequest](#neo.fs.v2.container.GetExtendedACLRequest) | [GetExtendedACLResponse](#neo.fs.v2.container.GetExtendedACLResponse) |
  <!-- end services -->
 
 
-<a name="container.DeleteRequest"></a>
+<a name="neo.fs.v2.container.DeleteRequest"></a>
 
 ### Message DeleteRequest
-
+Container removal request
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [DeleteRequest.Body](#container.DeleteRequest.Body) |  | Body of container delete request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [DeleteRequest.Body](#neo.fs.v2.container.DeleteRequest.Body) |  | Body of container delete request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="container.DeleteRequest.Body"></a>
+<a name="neo.fs.v2.container.DeleteRequest.Body"></a>
 
 ### Message DeleteRequest.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the container to delete from NeoFS. |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | container_id carries identifier of the container to delete from NeoFS. |
 | signature | [bytes](#bytes) |  | Signature of container id according to RFC-6979. |
 
 
-<a name="container.DeleteResponse"></a>
+<a name="neo.fs.v2.container.DeleteResponse"></a>
 
 ### Message DeleteResponse
 DeleteResponse is empty because delete operation is asynchronous and done
@@ -158,255 +158,255 @@ via consensus in inner ring nodes
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [DeleteResponse.Body](#container.DeleteResponse.Body) |  | Body of container delete response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [DeleteResponse.Body](#neo.fs.v2.container.DeleteResponse.Body) |  | Body of container delete response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="container.DeleteResponse.Body"></a>
+<a name="neo.fs.v2.container.DeleteResponse.Body"></a>
 
 ### Message DeleteResponse.Body
+Response body
 
 
 
-
-<a name="container.GetExtendedACLRequest"></a>
+<a name="neo.fs.v2.container.GetExtendedACLRequest"></a>
 
 ### Message GetExtendedACLRequest
-
+Get Extended ACL
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [GetExtendedACLRequest.Body](#container.GetExtendedACLRequest.Body) |  | Body of get extended acl request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [GetExtendedACLRequest.Body](#neo.fs.v2.container.GetExtendedACLRequest.Body) |  | Body of get extended acl request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="container.GetExtendedACLRequest.Body"></a>
+<a name="neo.fs.v2.container.GetExtendedACLRequest.Body"></a>
 
 ### Message GetExtendedACLRequest.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the container that has Extended ACL. |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | container_id carries identifier of the container that has Extended ACL. |
 
 
-<a name="container.GetExtendedACLResponse"></a>
+<a name="neo.fs.v2.container.GetExtendedACLResponse"></a>
 
 ### Message GetExtendedACLResponse
-
+Get Extended ACL
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [GetExtendedACLResponse.Body](#container.GetExtendedACLResponse.Body) |  | Body of get extended acl response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [GetExtendedACLResponse.Body](#neo.fs.v2.container.GetExtendedACLResponse.Body) |  | Body of get extended acl response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="container.GetExtendedACLResponse.Body"></a>
+<a name="neo.fs.v2.container.GetExtendedACLResponse.Body"></a>
 
 ### Message GetExtendedACLResponse.Body
-
+Response body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| eacl | [acl.EACLTable](#acl.EACLTable) |  | Extended ACL that has been requested if it was set up. |
+| eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL that has been requested if it was set up. |
 | signature | [bytes](#bytes) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
 
 
-<a name="container.GetRequest"></a>
+<a name="neo.fs.v2.container.GetRequest"></a>
 
 ### Message GetRequest
-
+Get container structure
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [GetRequest.Body](#container.GetRequest.Body) |  | Body of container get request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [GetRequest.Body](#neo.fs.v2.container.GetRequest.Body) |  | Body of container get request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="container.GetRequest.Body"></a>
+<a name="neo.fs.v2.container.GetRequest.Body"></a>
 
 ### Message GetRequest.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the container to get. |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | container_id carries identifier of the container to get. |
 
 
-<a name="container.GetResponse"></a>
+<a name="neo.fs.v2.container.GetResponse"></a>
 
 ### Message GetResponse
-
+Get container structure
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [GetResponse.Body](#container.GetResponse.Body) |  | Body of container get response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [GetResponse.Body](#neo.fs.v2.container.GetResponse.Body) |  | Body of container get response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="container.GetResponse.Body"></a>
+<a name="neo.fs.v2.container.GetResponse.Body"></a>
 
 ### Message GetResponse.Body
-
+Response body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container | [Container](#container.Container) |  | Container that has been requested. |
+| container | [Container](#neo.fs.v2.container.Container) |  | Container that has been requested. |
 
 
-<a name="container.ListRequest"></a>
+<a name="neo.fs.v2.container.ListRequest"></a>
 
 ### Message ListRequest
-
+List containers
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [ListRequest.Body](#container.ListRequest.Body) |  | Body of list containers request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [ListRequest.Body](#neo.fs.v2.container.ListRequest.Body) |  | Body of list containers request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="container.ListRequest.Body"></a>
+<a name="neo.fs.v2.container.ListRequest.Body"></a>
 
 ### Message ListRequest.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| owner_id | [refs.OwnerID](#refs.OwnerID) |  | owner_id carries identifier of the container owner. |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | owner_id carries identifier of the container owner. |
 
 
-<a name="container.ListResponse"></a>
+<a name="neo.fs.v2.container.ListResponse"></a>
 
 ### Message ListResponse
-
+List containers
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [ListResponse.Body](#container.ListResponse.Body) |  | Body of list containers response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [ListResponse.Body](#neo.fs.v2.container.ListResponse.Body) |  | Body of list containers response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="container.ListResponse.Body"></a>
+<a name="neo.fs.v2.container.ListResponse.Body"></a>
 
 ### Message ListResponse.Body
-
+Response body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_ids | [refs.ContainerID](#refs.ContainerID) | repeated | ContainerIDs carries list of identifiers of the containers that belong to the owner. |
+| container_ids | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) | repeated | ContainerIDs carries list of identifiers of the containers that belong to the owner. |
 
 
-<a name="container.PutRequest"></a>
+<a name="neo.fs.v2.container.PutRequest"></a>
 
 ### Message PutRequest
-
+New NeoFS Container creation request
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [PutRequest.Body](#container.PutRequest.Body) |  | Body of container put request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [PutRequest.Body](#neo.fs.v2.container.PutRequest.Body) |  | Body of container put request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="container.PutRequest.Body"></a>
+<a name="neo.fs.v2.container.PutRequest.Body"></a>
 
 ### Message PutRequest.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container | [Container](#container.Container) |  | Container to create in NeoFS. |
+| container | [Container](#neo.fs.v2.container.Container) |  | Container to create in NeoFS. |
 | public_key | [bytes](#bytes) |  | Public Key of container owner. It can be public key of the owner or it can be public key that bound in neofs.id smart-contract. |
 | signature | [bytes](#bytes) |  | Signature of stable-marshalled container according to RFC-6979. |
 
 
-<a name="container.PutResponse"></a>
+<a name="neo.fs.v2.container.PutResponse"></a>
 
 ### Message PutResponse
-
+New NeoFS Container creation response
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [PutResponse.Body](#container.PutResponse.Body) |  | Body of container put response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [PutResponse.Body](#neo.fs.v2.container.PutResponse.Body) |  | Body of container put response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="container.PutResponse.Body"></a>
+<a name="neo.fs.v2.container.PutResponse.Body"></a>
 
 ### Message PutResponse.Body
-
+Response body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [refs.ContainerID](#refs.ContainerID) |  | container_id carries identifier of the new container. |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | container_id carries identifier of the new container. |
 
 
-<a name="container.SetExtendedACLRequest"></a>
+<a name="neo.fs.v2.container.SetExtendedACLRequest"></a>
 
 ### Message SetExtendedACLRequest
-
+Set Extended ACL
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [SetExtendedACLRequest.Body](#container.SetExtendedACLRequest.Body) |  | Body of set extended acl request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [SetExtendedACLRequest.Body](#neo.fs.v2.container.SetExtendedACLRequest.Body) |  | Body of set extended acl request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="container.SetExtendedACLRequest.Body"></a>
+<a name="neo.fs.v2.container.SetExtendedACLRequest.Body"></a>
 
 ### Message SetExtendedACLRequest.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| eacl | [acl.EACLTable](#acl.EACLTable) |  | Extended ACL to set for the container. |
+| eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL to set for the container. |
 | signature | [bytes](#bytes) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
 
 
-<a name="container.SetExtendedACLResponse"></a>
+<a name="neo.fs.v2.container.SetExtendedACLResponse"></a>
 
 ### Message SetExtendedACLResponse
-
+Set Extended ACL
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [SetExtendedACLResponse.Body](#container.SetExtendedACLResponse.Body) |  | Body of set extended acl response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [SetExtendedACLResponse.Body](#neo.fs.v2.container.SetExtendedACLResponse.Body) |  | Body of set extended acl response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="container.SetExtendedACLResponse.Body"></a>
+<a name="neo.fs.v2.container.SetExtendedACLResponse.Body"></a>
 
 ### Message SetExtendedACLResponse.Body
-
+Response body
 
 
  <!-- end messages -->
@@ -424,7 +424,7 @@ via consensus in inner ring nodes
  <!-- end services -->
 
 
-<a name="container.Container"></a>
+<a name="neo.fs.v2.container.Container"></a>
 
 ### Message Container
 Container is a structure that defines object placement behaviour. Objects
@@ -435,14 +435,14 @@ SHA256 hash of stable-marshalled container message.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| owner_id | [refs.OwnerID](#refs.OwnerID) |  | OwnerID carries identifier of the container owner. |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | OwnerID carries identifier of the container owner. |
 | nonce | [bytes](#bytes) |  | Nonce is a 16 byte UUID, used to avoid collisions of container id. |
 | basic_acl | [uint32](#uint32) |  | BasicACL contains access control rules for owner, system, others groups and permission bits for bearer token and Extended ACL. |
-| attributes | [Container.Attribute](#container.Container.Attribute) | repeated | Attributes define any immutable characteristics of container. |
-| rules | [netmap.PlacementRule](#netmap.PlacementRule) |  | Rules define storage policy for the object inside the container. |
+| attributes | [Container.Attribute](#neo.fs.v2.container.Container.Attribute) | repeated | Attributes define any immutable characteristics of container. |
+| placement_policy | [neo.fs.v2.netmap.PlacementPolicy](#neo.fs.v2.netmap.PlacementPolicy) |  | Placement policy for the object inside the container. |
 
 
-<a name="container.Container.Attribute"></a>
+<a name="neo.fs.v2.container.Container.Attribute"></a>
 
 ### Message Container.Attribute
 Attribute is a key-value pair of strings.

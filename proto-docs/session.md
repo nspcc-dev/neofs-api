@@ -5,13 +5,13 @@
 
 - [session/service.proto](#session/service.proto)
  - Services
-    - [Session](#session.Session)
+    - [SessionService](#neo.fs.v2.session.SessionService)
     
   - Messages
-    - [CreateRequest](#session.CreateRequest)
-    - [CreateRequest.Body](#session.CreateRequest.Body)
-    - [CreateResponse](#session.CreateResponse)
-    - [CreateResponse.Body](#session.CreateResponse.Body)
+    - [CreateRequest](#neo.fs.v2.session.CreateRequest)
+    - [CreateRequest.Body](#neo.fs.v2.session.CreateRequest.Body)
+    - [CreateResponse](#neo.fs.v2.session.CreateResponse)
+    - [CreateResponse.Body](#neo.fs.v2.session.CreateResponse.Body)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -26,10 +26,10 @@
 
 
 
-<a name="session.Session"></a>
+<a name="neo.fs.v2.session.SessionService"></a>
 
-### Service "session.Session"
-
+### Service "neo.fs.v2.session.SessionService"
+Create Session record on Node side
 
 ```
 rpc Create(CreateRequest) returns (CreateResponse);
@@ -42,11 +42,11 @@ Create opens new session between the client and the server.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| Create | [CreateRequest](#session.CreateRequest) | [CreateResponse](#session.CreateResponse) |
+| Create | [CreateRequest](#neo.fs.v2.session.CreateRequest) | [CreateResponse](#neo.fs.v2.session.CreateResponse) |
  <!-- end services -->
 
 
-<a name="session.CreateRequest"></a>
+<a name="neo.fs.v2.session.CreateRequest"></a>
 
 ### Message CreateRequest
 CreateRequest carries an information necessary for opening a session.
@@ -54,24 +54,24 @@ CreateRequest carries an information necessary for opening a session.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [CreateRequest.Body](#session.CreateRequest.Body) |  | Body of create session token request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [CreateRequest.Body](#neo.fs.v2.session.CreateRequest.Body) |  | Body of create session token request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="session.CreateRequest.Body"></a>
+<a name="neo.fs.v2.session.CreateRequest.Body"></a>
 
 ### Message CreateRequest.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| owner_id | [refs.OwnerID](#refs.OwnerID) |  | Carries an identifier of a session initiator. |
-| lifetime | [service.TokenLifetime](#service.TokenLifetime) |  | Carries a lifetime of the session. |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Carries an identifier of a session initiator. |
+| lifetime | [neo.fs.v2.service.TokenLifetime](#neo.fs.v2.service.TokenLifetime) |  | Carries a lifetime of the session. |
 
 
-<a name="session.CreateResponse"></a>
+<a name="neo.fs.v2.session.CreateResponse"></a>
 
 ### Message CreateResponse
 CreateResponse carries an information about the opened session.
@@ -79,15 +79,15 @@ CreateResponse carries an information about the opened session.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [CreateResponse.Body](#session.CreateResponse.Body) |  | Body of create session token response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [CreateResponse.Body](#neo.fs.v2.session.CreateResponse.Body) |  | Body of create session token response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="session.CreateResponse.Body"></a>
+<a name="neo.fs.v2.session.CreateResponse.Body"></a>
 
 ### Message CreateResponse.Body
-
+Response body
 
 
 | Field | Type | Label | Description |

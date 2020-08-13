@@ -5,52 +5,51 @@
 
 - [object/service.proto](#object/service.proto)
  - Services
-    - [Service](#object.Service)
+    - [ObjectService](#neo.fs.v2.object.ObjectService)
     
   - Messages
-    - [DeleteRequest](#object.DeleteRequest)
-    - [DeleteRequest.Body](#object.DeleteRequest.Body)
-    - [DeleteResponse](#object.DeleteResponse)
-    - [DeleteResponse.Body](#object.DeleteResponse.Body)
-    - [GetRangeHashRequest](#object.GetRangeHashRequest)
-    - [GetRangeHashRequest.Body](#object.GetRangeHashRequest.Body)
-    - [GetRangeHashResponse](#object.GetRangeHashResponse)
-    - [GetRangeHashResponse.Body](#object.GetRangeHashResponse.Body)
-    - [GetRangeRequest](#object.GetRangeRequest)
-    - [GetRangeRequest.Body](#object.GetRangeRequest.Body)
-    - [GetRangeResponse](#object.GetRangeResponse)
-    - [GetRangeResponse.Body](#object.GetRangeResponse.Body)
-    - [GetRequest](#object.GetRequest)
-    - [GetRequest.Body](#object.GetRequest.Body)
-    - [GetResponse](#object.GetResponse)
-    - [GetResponse.Body](#object.GetResponse.Body)
-    - [GetResponse.Body.Init](#object.GetResponse.Body.Init)
-    - [HeadRequest](#object.HeadRequest)
-    - [HeadRequest.Body](#object.HeadRequest.Body)
-    - [HeadResponse](#object.HeadResponse)
-    - [HeadResponse.Body](#object.HeadResponse.Body)
-    - [HeadResponse.Body.ShortHeader](#object.HeadResponse.Body.ShortHeader)
-    - [PutRequest](#object.PutRequest)
-    - [PutRequest.Body](#object.PutRequest.Body)
-    - [PutRequest.Body.Init](#object.PutRequest.Body.Init)
-    - [PutResponse](#object.PutResponse)
-    - [PutResponse.Body](#object.PutResponse.Body)
-    - [Range](#object.Range)
-    - [SearchRequest](#object.SearchRequest)
-    - [SearchRequest.Body](#object.SearchRequest.Body)
-    - [SearchRequest.Body.Query](#object.SearchRequest.Body.Query)
-    - [SearchRequest.Body.Query.Filter](#object.SearchRequest.Body.Query.Filter)
-    - [SearchResponse](#object.SearchResponse)
-    - [SearchResponse.Body](#object.SearchResponse.Body)
+    - [DeleteRequest](#neo.fs.v2.object.DeleteRequest)
+    - [DeleteRequest.Body](#neo.fs.v2.object.DeleteRequest.Body)
+    - [DeleteResponse](#neo.fs.v2.object.DeleteResponse)
+    - [DeleteResponse.Body](#neo.fs.v2.object.DeleteResponse.Body)
+    - [GetRangeHashRequest](#neo.fs.v2.object.GetRangeHashRequest)
+    - [GetRangeHashRequest.Body](#neo.fs.v2.object.GetRangeHashRequest.Body)
+    - [GetRangeHashResponse](#neo.fs.v2.object.GetRangeHashResponse)
+    - [GetRangeHashResponse.Body](#neo.fs.v2.object.GetRangeHashResponse.Body)
+    - [GetRangeRequest](#neo.fs.v2.object.GetRangeRequest)
+    - [GetRangeRequest.Body](#neo.fs.v2.object.GetRangeRequest.Body)
+    - [GetRangeResponse](#neo.fs.v2.object.GetRangeResponse)
+    - [GetRangeResponse.Body](#neo.fs.v2.object.GetRangeResponse.Body)
+    - [GetRequest](#neo.fs.v2.object.GetRequest)
+    - [GetRequest.Body](#neo.fs.v2.object.GetRequest.Body)
+    - [GetResponse](#neo.fs.v2.object.GetResponse)
+    - [GetResponse.Body](#neo.fs.v2.object.GetResponse.Body)
+    - [GetResponse.Body.Init](#neo.fs.v2.object.GetResponse.Body.Init)
+    - [HeadRequest](#neo.fs.v2.object.HeadRequest)
+    - [HeadRequest.Body](#neo.fs.v2.object.HeadRequest.Body)
+    - [HeadResponse](#neo.fs.v2.object.HeadResponse)
+    - [HeadResponse.Body](#neo.fs.v2.object.HeadResponse.Body)
+    - [HeadResponse.Body.ShortHeader](#neo.fs.v2.object.HeadResponse.Body.ShortHeader)
+    - [PutRequest](#neo.fs.v2.object.PutRequest)
+    - [PutRequest.Body](#neo.fs.v2.object.PutRequest.Body)
+    - [PutRequest.Body.Init](#neo.fs.v2.object.PutRequest.Body.Init)
+    - [PutResponse](#neo.fs.v2.object.PutResponse)
+    - [PutResponse.Body](#neo.fs.v2.object.PutResponse.Body)
+    - [Range](#neo.fs.v2.object.Range)
+    - [SearchRequest](#neo.fs.v2.object.SearchRequest)
+    - [SearchRequest.Body](#neo.fs.v2.object.SearchRequest.Body)
+    - [SearchRequest.Body.Filter](#neo.fs.v2.object.SearchRequest.Body.Filter)
+    - [SearchResponse](#neo.fs.v2.object.SearchResponse)
+    - [SearchResponse.Body](#neo.fs.v2.object.SearchResponse.Body)
     
 
 - [object/types.proto](#object/types.proto)
 
   - Messages
-    - [Header](#object.Header)
-    - [Header.Attribute](#object.Header.Attribute)
-    - [Header.Split](#object.Header.Split)
-    - [Object](#object.Object)
+    - [Header](#neo.fs.v2.object.Header)
+    - [Header.Attribute](#neo.fs.v2.object.Header.Attribute)
+    - [Header.Split](#neo.fs.v2.object.Header.Split)
+    - [Object](#neo.fs.v2.object.Object)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -65,9 +64,9 @@
 
 
 
-<a name="object.Service"></a>
+<a name="neo.fs.v2.object.ObjectService"></a>
 
-### Service "object.Service"
+### Service "neo.fs.v2.object.ObjectService"
 Object service provides API for manipulating with the object.
 
 ```
@@ -91,7 +90,7 @@ message payload and all chunks keeping receiving order.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| Get | [GetRequest](#object.GetRequest) | [GetResponse](#object.GetResponse) |
+| Get | [GetRequest](#neo.fs.v2.object.GetRequest) | [GetResponse](#neo.fs.v2.object.GetResponse) |
 #### Method Put
 
 Put the object into container. Request uses gRPC stream. First message
@@ -103,14 +102,14 @@ SHOULD BE sent in direct order of fragmentation.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| Put | [PutRequest](#object.PutRequest) | [PutResponse](#object.PutResponse) |
+| Put | [PutRequest](#neo.fs.v2.object.PutRequest) | [PutResponse](#neo.fs.v2.object.PutResponse) |
 #### Method Delete
 
 Delete the object from a container
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| Delete | [DeleteRequest](#object.DeleteRequest) | [DeleteResponse](#object.DeleteResponse) |
+| Delete | [DeleteRequest](#neo.fs.v2.object.DeleteRequest) | [DeleteResponse](#neo.fs.v2.object.DeleteResponse) |
 #### Method Head
 
 Head returns the object without data payload. Object in the
@@ -119,7 +118,7 @@ headers are also present.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| Head | [HeadRequest](#object.HeadRequest) | [HeadResponse](#object.HeadResponse) |
+| Head | [HeadRequest](#neo.fs.v2.object.HeadRequest) | [HeadResponse](#neo.fs.v2.object.HeadResponse) |
 #### Method Search
 
 Search objects in container. Version of query language format SHOULD BE
@@ -128,7 +127,7 @@ package).
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| Search | [SearchRequest](#object.SearchRequest) | [SearchResponse](#object.SearchResponse) |
+| Search | [SearchRequest](#neo.fs.v2.object.SearchRequest) | [SearchResponse](#neo.fs.v2.object.SearchResponse) |
 #### Method GetRange
 
 GetRange of data payload. Range is a pair (offset, length).
@@ -137,7 +136,7 @@ keeping receiving order.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| GetRange | [GetRangeRequest](#object.GetRangeRequest) | [GetRangeResponse](#object.GetRangeResponse) |
+| GetRange | [GetRangeRequest](#neo.fs.v2.object.GetRangeRequest) | [GetRangeResponse](#neo.fs.v2.object.GetRangeResponse) |
 #### Method GetRangeHash
 
 GetRangeHash returns homomorphic hash of object payload range after XOR
@@ -147,36 +146,36 @@ calculated for XORed data.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
-| GetRangeHash | [GetRangeHashRequest](#object.GetRangeHashRequest) | [GetRangeHashResponse](#object.GetRangeHashResponse) |
+| GetRangeHash | [GetRangeHashRequest](#neo.fs.v2.object.GetRangeHashRequest) | [GetRangeHashResponse](#neo.fs.v2.object.GetRangeHashResponse) |
  <!-- end services -->
 
 
-<a name="object.DeleteRequest"></a>
+<a name="neo.fs.v2.object.DeleteRequest"></a>
 
 ### Message DeleteRequest
-
+Object Delete request
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [DeleteRequest.Body](#object.DeleteRequest.Body) |  | Body of delete object request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [DeleteRequest.Body](#neo.fs.v2.object.DeleteRequest.Body) |  | Body of delete object request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.DeleteRequest.Body"></a>
+<a name="neo.fs.v2.object.DeleteRequest.Body"></a>
 
 ### Message DeleteRequest.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [refs.Address](#refs.Address) |  | Carries the address of the object to be deleted. |
-| owner_id | [refs.OwnerID](#refs.OwnerID) |  | Carries identifier the object owner. |
+| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Carries the address of the object to be deleted. |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Carries identifier the object owner. |
 
 
-<a name="object.DeleteResponse"></a>
+<a name="neo.fs.v2.object.DeleteResponse"></a>
 
 ### Message DeleteResponse
 DeleteResponse is empty because we cannot guarantee permanent object removal
@@ -185,61 +184,61 @@ in distributed system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [DeleteResponse.Body](#object.DeleteResponse.Body) |  | Body of delete object response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [DeleteResponse.Body](#neo.fs.v2.object.DeleteResponse.Body) |  | Body of delete object response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.DeleteResponse.Body"></a>
+<a name="neo.fs.v2.object.DeleteResponse.Body"></a>
 
 ### Message DeleteResponse.Body
+Response body
 
 
 
-
-<a name="object.GetRangeHashRequest"></a>
+<a name="neo.fs.v2.object.GetRangeHashRequest"></a>
 
 ### Message GetRangeHashRequest
-
+Get hash of object's payload part
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [GetRangeHashRequest.Body](#object.GetRangeHashRequest.Body) |  | Body of get range hash object request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [GetRangeHashRequest.Body](#neo.fs.v2.object.GetRangeHashRequest.Body) |  | Body of get range hash object request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.GetRangeHashRequest.Body"></a>
+<a name="neo.fs.v2.object.GetRangeHashRequest.Body"></a>
 
 ### Message GetRangeHashRequest.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [refs.Address](#refs.Address) |  | Carries address of the object that contains the requested payload range. |
-| ranges | [Range](#object.Range) | repeated | Carries the list of object payload range to calculate homomorphic hash. |
+| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Carries address of the object that contains the requested payload range. |
+| ranges | [Range](#neo.fs.v2.object.Range) | repeated | Carries the list of object payload range to calculate homomorphic hash. |
 | salt | [bytes](#bytes) |  | Carries binary salt to XOR object payload ranges before hash calculation. |
 
 
-<a name="object.GetRangeHashResponse"></a>
+<a name="neo.fs.v2.object.GetRangeHashResponse"></a>
 
 ### Message GetRangeHashResponse
-
+Get hash of object's payload part
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [GetRangeHashResponse.Body](#object.GetRangeHashResponse.Body) |  | Body of get range hash object response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [GetRangeHashResponse.Body](#neo.fs.v2.object.GetRangeHashResponse.Body) |  | Body of get range hash object response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.GetRangeHashResponse.Body"></a>
+<a name="neo.fs.v2.object.GetRangeHashResponse.Body"></a>
 
 ### Message GetRangeHashResponse.Body
-
+Response body
 
 
 | Field | Type | Label | Description |
@@ -247,48 +246,48 @@ in distributed system.
 | hash_list | [bytes](#bytes) | repeated | Carries list of homomorphic hashes in a binary format. |
 
 
-<a name="object.GetRangeRequest"></a>
+<a name="neo.fs.v2.object.GetRangeRequest"></a>
 
 ### Message GetRangeRequest
-
+Request to get part of object's payload
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [GetRangeRequest.Body](#object.GetRangeRequest.Body) |  | Body of get range object request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [GetRangeRequest.Body](#neo.fs.v2.object.GetRangeRequest.Body) |  | Body of get range object request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.GetRangeRequest.Body"></a>
+<a name="neo.fs.v2.object.GetRangeRequest.Body"></a>
 
 ### Message GetRangeRequest.Body
-
+Request Body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [refs.Address](#refs.Address) |  | Address carries address of the object that contains the requested payload range. |
-| range | [Range](#object.Range) |  | Range carries the parameters of the requested payload range. |
+| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address carries address of the object that contains the requested payload range. |
+| range | [Range](#neo.fs.v2.object.Range) |  | Range carries the parameters of the requested payload range. |
 
 
-<a name="object.GetRangeResponse"></a>
+<a name="neo.fs.v2.object.GetRangeResponse"></a>
 
 ### Message GetRangeResponse
-
+Get part of object's payload
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [GetRangeResponse.Body](#object.GetRangeResponse.Body) |  | Body of get range object response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [GetRangeResponse.Body](#neo.fs.v2.object.GetRangeResponse.Body) |  | Body of get range object response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.GetRangeResponse.Body"></a>
+<a name="neo.fs.v2.object.GetRangeResponse.Body"></a>
 
 ### Message GetRangeResponse.Body
-
+Response body
 
 
 | Field | Type | Label | Description |
@@ -296,57 +295,57 @@ in distributed system.
 | chunk | [bytes](#bytes) |  | Carries part of the object payload. |
 
 
-<a name="object.GetRequest"></a>
+<a name="neo.fs.v2.object.GetRequest"></a>
 
 ### Message GetRequest
-
+Get object request
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [GetRequest.Body](#object.GetRequest.Body) |  | Body of get object request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [GetRequest.Body](#neo.fs.v2.object.GetRequest.Body) |  | Body of get object request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.GetRequest.Body"></a>
+<a name="neo.fs.v2.object.GetRequest.Body"></a>
 
 ### Message GetRequest.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [refs.Address](#refs.Address) |  | Address of the requested object. |
+| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the requested object. |
 | raw | [bool](#bool) |  | Carries the raw option flag of the request. Raw request is sent to receive only the objects that are physically stored on the server. |
 
 
-<a name="object.GetResponse"></a>
+<a name="neo.fs.v2.object.GetResponse"></a>
 
 ### Message GetResponse
-
+get object response
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [GetResponse.Body](#object.GetResponse.Body) |  | Body of get object response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [GetResponse.Body](#neo.fs.v2.object.GetResponse.Body) |  | Body of get object response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.GetResponse.Body"></a>
+<a name="neo.fs.v2.object.GetResponse.Body"></a>
 
 ### Message GetResponse.Body
-
+Response body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| init | [GetResponse.Body.Init](#object.GetResponse.Body.Init) |  | Initialization parameters of the object stream. |
+| init | [GetResponse.Body.Init](#neo.fs.v2.object.GetResponse.Body.Init) |  | Initialization parameters of the object stream. |
 | chunk | [bytes](#bytes) |  | Part of the object payload. |
 
 
-<a name="object.GetResponse.Body.Init"></a>
+<a name="neo.fs.v2.object.GetResponse.Body.Init"></a>
 
 ### Message GetResponse.Body.Init
 Initialization parameters of the object got from NeoFS.
@@ -354,103 +353,103 @@ Initialization parameters of the object got from NeoFS.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| object_id | [refs.ObjectID](#refs.ObjectID) |  | Object ID |
-| signature | [service.Signature](#service.Signature) |  | Object signature |
-| header | [Header](#object.Header) |  | Object header. |
+| object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Object ID |
+| signature | [neo.fs.v2.service.Signature](#neo.fs.v2.service.Signature) |  | Object signature |
+| header | [Header](#neo.fs.v2.object.Header) |  | Object header. |
 
 
-<a name="object.HeadRequest"></a>
+<a name="neo.fs.v2.object.HeadRequest"></a>
 
 ### Message HeadRequest
-
+Object head request
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [HeadRequest.Body](#object.HeadRequest.Body) |  | Body of head object request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [HeadRequest.Body](#neo.fs.v2.object.HeadRequest.Body) |  | Body of head object request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.HeadRequest.Body"></a>
+<a name="neo.fs.v2.object.HeadRequest.Body"></a>
 
 ### Message HeadRequest.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [refs.Address](#refs.Address) |  | Address of the object with the requested header. |
+| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the object with the requested header. |
 | main_only | [bool](#bool) |  | Return only minimal header subset |
 | raw | [bool](#bool) |  | Carries the raw option flag of the request. Raw request is sent to receive only the headers of the objects that are physically stored on the server. |
 
 
-<a name="object.HeadResponse"></a>
+<a name="neo.fs.v2.object.HeadResponse"></a>
 
 ### Message HeadResponse
-
+Head response
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [HeadResponse.Body](#object.HeadResponse.Body) |  | Body of head object response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [HeadResponse.Body](#neo.fs.v2.object.HeadResponse.Body) |  | Body of head object response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.HeadResponse.Body"></a>
+<a name="neo.fs.v2.object.HeadResponse.Body"></a>
 
 ### Message HeadResponse.Body
-
+Response body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| header | [Header](#object.Header) |  |  |
-| short_header | [HeadResponse.Body.ShortHeader](#object.HeadResponse.Body.ShortHeader) |  |  |
+| header | [Header](#neo.fs.v2.object.Header) |  | Full object header |
+| short_header | [HeadResponse.Body.ShortHeader](#neo.fs.v2.object.HeadResponse.Body.ShortHeader) |  | Short object header |
 
 
-<a name="object.HeadResponse.Body.ShortHeader"></a>
+<a name="neo.fs.v2.object.HeadResponse.Body.ShortHeader"></a>
 
 ### Message HeadResponse.Body.ShortHeader
-
+Short header fields
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [service.Version](#service.Version) |  | Object format version. |
+| version | [neo.fs.v2.service.Version](#neo.fs.v2.service.Version) |  | Object format version. |
 | creation_epoch | [uint64](#uint64) |  | Epoch when the object was created |
-| owner_id | [refs.OwnerID](#refs.OwnerID) |  | Object's owner |
-| object_type | [ObjectType](#object.ObjectType) |  | Type of the object payload content |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
+| object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Type of the object payload content |
 | payload_length | [uint64](#uint64) |  | Size of payload in bytes. 0xFFFFFFFFFFFFFFFF means `payload_length` is unknown |
 
 
-<a name="object.PutRequest"></a>
+<a name="neo.fs.v2.object.PutRequest"></a>
 
 ### Message PutRequest
-
+Put object request
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [PutRequest.Body](#object.PutRequest.Body) |  | Body of put object request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [PutRequest.Body](#neo.fs.v2.object.PutRequest.Body) |  | Body of put object request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.PutRequest.Body"></a>
+<a name="neo.fs.v2.object.PutRequest.Body"></a>
 
 ### Message PutRequest.Body
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| init | [PutRequest.Body.Init](#object.PutRequest.Body.Init) |  | Carries the initialization parameters of the object stream. |
+| init | [PutRequest.Body.Init](#neo.fs.v2.object.PutRequest.Body.Init) |  | Carries the initialization parameters of the object stream. |
 | chunk | [bytes](#bytes) |  | Carries part of the object payload. |
 
 
-<a name="object.PutRequest.Body.Init"></a>
+<a name="neo.fs.v2.object.PutRequest.Body.Init"></a>
 
 ### Message PutRequest.Body.Init
 Groups initialization parameters of object placement in NeoFS.
@@ -458,37 +457,37 @@ Groups initialization parameters of object placement in NeoFS.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| object_id | [refs.ObjectID](#refs.ObjectID) |  | Object ID, where available |
-| signature | [service.Signature](#service.Signature) |  | Object signature, were available |
-| header | [Header](#object.Header) |  | Header of the object to save in the system. |
+| object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Object ID, where available |
+| signature | [neo.fs.v2.service.Signature](#neo.fs.v2.service.Signature) |  | Object signature, were available |
+| header | [Header](#neo.fs.v2.object.Header) |  | Header of the object to save in the system. |
 | copies_number | [uint32](#uint32) |  | Number of the object copies to store within the RPC call. Default zero value is processed according to the container placement rules. |
 
 
-<a name="object.PutResponse"></a>
+<a name="neo.fs.v2.object.PutResponse"></a>
 
 ### Message PutResponse
-
+Put object response
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [PutResponse.Body](#object.PutResponse.Body) |  | Body of put object response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [PutResponse.Body](#neo.fs.v2.object.PutResponse.Body) |  | Body of put object response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.PutResponse.Body"></a>
+<a name="neo.fs.v2.object.PutResponse.Body"></a>
 
 ### Message PutResponse.Body
-
+Response body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| object_id | [refs.ObjectID](#refs.ObjectID) |  | Carries identifier of the saved object. It is used to access an object in the container. |
+| object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Carries identifier of the saved object. It is used to access an object in the container. |
 
 
-<a name="object.Range"></a>
+<a name="neo.fs.v2.object.Range"></a>
 
 ### Message Range
 Range groups the parameters of object payload range.
@@ -500,91 +499,80 @@ Range groups the parameters of object payload range.
 | length | [uint64](#uint64) |  | Carries the length of the object payload range. |
 
 
-<a name="object.SearchRequest"></a>
+<a name="neo.fs.v2.object.SearchRequest"></a>
 
 ### Message SearchRequest
-
+Search objects request
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [SearchRequest.Body](#object.SearchRequest.Body) |  | Body of search object request message. |
-| meta_header | [service.RequestMetaHeader](#service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.RequestVerificationHeader](#service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [SearchRequest.Body](#neo.fs.v2.object.SearchRequest.Body) |  | Body of search object request message. |
+| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.SearchRequest.Body"></a>
+<a name="neo.fs.v2.object.SearchRequest.Body"></a>
 
 ### Message SearchRequest.Body
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| container_id | [refs.ContainerID](#refs.ContainerID) |  | Carries search container identifier. |
-| query | [SearchRequest.Body.Query](#object.SearchRequest.Body.Query) |  |  |
-
-
-<a name="object.SearchRequest.Body.Query"></a>
-
-### Message SearchRequest.Body.Query
-
+Request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [uint32](#uint32) |  |  |
-| filters | [SearchRequest.Body.Query.Filter](#object.SearchRequest.Body.Query.Filter) | repeated |  |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Carries search container identifier. |
+| version | [uint32](#uint32) |  | Version of the Query Language used |
+| filters | [SearchRequest.Body.Filter](#neo.fs.v2.object.SearchRequest.Body.Filter) | repeated | List of search expressions |
 
 
-<a name="object.SearchRequest.Body.Query.Filter"></a>
+<a name="neo.fs.v2.object.SearchRequest.Body.Filter"></a>
 
-### Message SearchRequest.Body.Query.Filter
-
+### Message SearchRequest.Body.Filter
+Filter structure
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| match_type | [SearchRequest.Body.Query.Filter.MatchType](#object.SearchRequest.Body.Query.Filter.MatchType) |  |  |
-| name | [string](#string) |  |  |
-| value | [string](#string) |  |  |
+| match_type | [SearchRequest.Body.Filter.MatchType](#neo.fs.v2.object.SearchRequest.Body.Filter.MatchType) |  | Match type to use |
+| name | [string](#string) |  | Header name to match |
+| value | [string](#string) |  | Header value to match |
 
 
-<a name="object.SearchResponse"></a>
+<a name="neo.fs.v2.object.SearchResponse"></a>
 
 ### Message SearchResponse
-
+Search response
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [SearchResponse.Body](#object.SearchResponse.Body) |  | Body of search object response message. |
-| meta_header | [service.ResponseMetaHeader](#service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [service.ResponseVerificationHeader](#service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| body | [SearchResponse.Body](#neo.fs.v2.object.SearchResponse.Body) |  | Body of search object response message. |
+| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
-<a name="object.SearchResponse.Body"></a>
+<a name="neo.fs.v2.object.SearchResponse.Body"></a>
 
 ### Message SearchResponse.Body
-
+Response body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id_list | [refs.ObjectID](#refs.ObjectID) | repeated | Carries list of object identifiers that match the search query. |
+| id_list | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | Carries list of object identifiers that match the search query |
 
  <!-- end messages -->
 
 
-<a name="object.SearchRequest.Body.Query.Filter.MatchType"></a>
+<a name="neo.fs.v2.object.SearchRequest.Body.Filter.MatchType"></a>
 
-### SearchRequest.Body.Query.Filter.MatchType
-
+### SearchRequest.Body.Filter.MatchType
+Type of match expression
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| MATCH_UNKNOWN | 0 |  |
-| STRING_EQUAL | 1 |  |
+| MATCH_TYPE_UNSPECIFIED | 0 | Unknown. Not used |
+| STRING_EQUAL | 1 | Full string match |
 
 
  <!-- end enums -->
@@ -600,28 +588,28 @@ Range groups the parameters of object payload range.
  <!-- end services -->
 
 
-<a name="object.Header"></a>
+<a name="neo.fs.v2.object.Header"></a>
 
 ### Message Header
-
+Object Headers
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [refs.ContainerID](#refs.ContainerID) |  | Object's container |
-| owner_id | [refs.OwnerID](#refs.OwnerID) |  | Object's owner |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Object's container |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
 | creation_epoch | [uint64](#uint64) |  | Epoch when the object was created |
-| version | [service.Version](#service.Version) |  | Object format version. Effectively the version of API library used to create particular object |
+| version | [neo.fs.v2.service.Version](#neo.fs.v2.service.Version) |  | Object format version. Effectively the version of API library used to create particular object |
 | payload_length | [uint64](#uint64) |  | Size of payload in bytes. 0xFFFFFFFFFFFFFFFF means `payload_length` is unknown |
 | payload_hash | [bytes](#bytes) |  | Hash of payload bytes |
-| object_type | [ObjectType](#object.ObjectType) |  |  |
+| object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Special object type |
 | homomorphic_hash | [bytes](#bytes) |  | Homomorphic hash of the object payload. |
-| session_token | [service.SessionToken](#service.SessionToken) |  | Session token, if it was used during Object creation. Need it to verify integrity and authenticity out of Request scope. |
-| attributes | [Header.Attribute](#object.Header.Attribute) | repeated |  |
-| split | [Header.Split](#object.Header.Split) |  | Position of the object in the split hierarchy. |
+| session_token | [neo.fs.v2.service.SessionToken](#neo.fs.v2.service.SessionToken) |  | Session token, if it was used during Object creation. Need it to verify integrity and authenticity out of Request scope. |
+| attributes | [Header.Attribute](#neo.fs.v2.object.Header.Attribute) | repeated | User-defined object attributes |
+| split | [Header.Split](#neo.fs.v2.object.Header.Split) |  | Position of the object in the split hierarchy. |
 
 
-<a name="object.Header.Attribute"></a>
+<a name="neo.fs.v2.object.Header.Attribute"></a>
 
 ### Message Header.Attribute
 Attribute groups the user-defined Key-Value pairs attached to the object
@@ -633,7 +621,7 @@ Attribute groups the user-defined Key-Value pairs attached to the object
 | value | [string](#string) |  | string value of the object attribute |
 
 
-<a name="object.Header.Split"></a>
+<a name="neo.fs.v2.object.Header.Split"></a>
 
 ### Message Header.Split
 Information about spawning the objects through a payload splitting.
@@ -641,14 +629,14 @@ Information about spawning the objects through a payload splitting.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [refs.ObjectID](#refs.ObjectID) |  | Identifier of the origin object. Parent and children objects must be within the same container. Parent object_id is known only to the minor child. |
-| previous | [refs.ObjectID](#refs.ObjectID) |  | Previous carries identifier of the left split neighbor. |
-| parent_signature | [service.Signature](#service.Signature) |  | `signature` field of the parent object. Used to reconstruct parent. |
-| parent_header | [Header](#object.Header) |  | `header` field of the parent object. Used to reconstruct parent. |
-| children | [refs.ObjectID](#refs.ObjectID) | repeated | Children carries list of identifiers of the objects generated by splitting the current. |
+| parent | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Identifier of the origin object. Parent and children objects must be within the same container. Parent object_id is known only to the minor child. |
+| previous | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Previous carries identifier of the left split neighbor. |
+| parent_signature | [neo.fs.v2.service.Signature](#neo.fs.v2.service.Signature) |  | `signature` field of the parent object. Used to reconstruct parent. |
+| parent_header | [Header](#neo.fs.v2.object.Header) |  | `header` field of the parent object. Used to reconstruct parent. |
+| children | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | Children carries list of identifiers of the objects generated by splitting the current. |
 
 
-<a name="object.Object"></a>
+<a name="neo.fs.v2.object.Object"></a>
 
 ### Message Object
 Object structure.
@@ -656,15 +644,15 @@ Object structure.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| object_id | [refs.ObjectID](#refs.ObjectID) |  | Object's unique identifier. Object is content-addressed. It means id will change if header or payload changes. It's calculated as a hash of header field, which contains hash of object's payload |
-| signature | [service.Signature](#service.Signature) |  | Signed object_id |
-| header | [Header](#object.Header) |  | Object metadata headers |
+| object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Object's unique identifier. Object is content-addressed. It means id will change if header or payload changes. It's calculated as a hash of header field, which contains hash of object's payload |
+| signature | [neo.fs.v2.service.Signature](#neo.fs.v2.service.Signature) |  | Signed object_id |
+| header | [Header](#neo.fs.v2.object.Header) |  | Object metadata headers |
 | payload | [bytes](#bytes) |  | Payload bytes. |
 
  <!-- end messages -->
 
 
-<a name="object.ObjectType"></a>
+<a name="neo.fs.v2.object.ObjectType"></a>
 
 ### ObjectType
 Type of the object payload content

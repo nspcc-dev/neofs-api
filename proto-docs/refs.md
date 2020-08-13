@@ -6,10 +6,10 @@
 - [refs/types.proto](#refs/types.proto)
 
   - Messages
-    - [Address](#refs.Address)
-    - [ContainerID](#refs.ContainerID)
-    - [ObjectID](#refs.ObjectID)
-    - [OwnerID](#refs.OwnerID)
+    - [Address](#neo.fs.v2.refs.Address)
+    - [ContainerID](#neo.fs.v2.refs.ContainerID)
+    - [ObjectID](#neo.fs.v2.refs.ObjectID)
+    - [OwnerID](#neo.fs.v2.refs.OwnerID)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -25,7 +25,7 @@
  <!-- end services -->
 
 
-<a name="refs.Address"></a>
+<a name="neo.fs.v2.refs.Address"></a>
 
 ### Message Address
 Address of object (container id + object id)
@@ -33,11 +33,11 @@ Address of object (container id + object id)
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [ContainerID](#refs.ContainerID) |  | container_id carries container identifier. |
-| object_id | [ObjectID](#refs.ObjectID) |  | object_id carries object identifier. |
+| container_id | [ContainerID](#neo.fs.v2.refs.ContainerID) |  | container_id carries container identifier. |
+| object_id | [ObjectID](#neo.fs.v2.refs.ObjectID) |  | object_id carries object identifier. |
 
 
-<a name="refs.ContainerID"></a>
+<a name="neo.fs.v2.refs.ContainerID"></a>
 
 ### Message ContainerID
 NeoFS container identifier.
@@ -48,7 +48,7 @@ NeoFS container identifier.
 | value | [bytes](#bytes) |  | value carries the container identifier in a binary format. |
 
 
-<a name="refs.ObjectID"></a>
+<a name="neo.fs.v2.refs.ObjectID"></a>
 
 ### Message ObjectID
 NeoFS object identifier.
@@ -59,7 +59,7 @@ NeoFS object identifier.
 | value | [bytes](#bytes) |  | value carries the object identifier in a binary format. |
 
 
-<a name="refs.OwnerID"></a>
+<a name="neo.fs.v2.refs.OwnerID"></a>
 
 ### Message OwnerID
 OwnerID group information about the owner of the NeoFS container.
