@@ -23,18 +23,18 @@ enum ObjectType {
 
 // Object Headers
 message Header {
-  // Object's container
-  neo.fs.v2.refs.ContainerID container_id = 1;
-
-  // Object's owner
-  neo.fs.v2.refs.OwnerID owner_id = 2;
-
-  // Epoch when the object was created
-  uint64 creation_epoch = 3;
-
   // Object format version.
   // Effectively the version of API library used to create particular object
-  neo.fs.v2.service.Version version = 4;
+  neo.fs.v2.service.Version version = 1;
+
+  // Object's container
+  neo.fs.v2.refs.ContainerID container_id = 2;
+
+  // Object's owner
+  neo.fs.v2.refs.OwnerID owner_id = 3;
+
+  // Object creation Epoch
+  uint64 creation_epoch = 4;
 
   // Size of payload in bytes.
   // 0xFFFFFFFFFFFFFFFF means `payload_length` is unknown

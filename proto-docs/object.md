@@ -596,10 +596,10 @@ Object Headers
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| version | [neo.fs.v2.service.Version](#neo.fs.v2.service.Version) |  | Object format version. Effectively the version of API library used to create particular object |
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Object's container |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
-| creation_epoch | [uint64](#uint64) |  | Epoch when the object was created |
-| version | [neo.fs.v2.service.Version](#neo.fs.v2.service.Version) |  | Object format version. Effectively the version of API library used to create particular object |
+| creation_epoch | [uint64](#uint64) |  | Object creation Epoch |
 | payload_length | [uint64](#uint64) |  | Size of payload in bytes. 0xFFFFFFFFFFFFFFFF means `payload_length` is unknown |
 | payload_hash | [bytes](#bytes) |  | Hash of payload bytes |
 | object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Special object type |

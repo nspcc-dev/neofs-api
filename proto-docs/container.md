@@ -435,6 +435,7 @@ SHA256 hash of stable-marshalled container message.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| version | [neo.fs.v2.service.Version](#neo.fs.v2.service.Version) |  | Container format version. Effectively the version of API library used to create container |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | OwnerID carries identifier of the container owner. |
 | nonce | [bytes](#bytes) |  | Nonce is a 16 byte UUID, used to avoid collisions of container id. |
 | basic_acl | [uint32](#uint32) |  | BasicACL contains access control rules for owner, system, others groups and permission bits for bearer token and Extended ACL. |
