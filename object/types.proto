@@ -21,6 +21,33 @@ enum ObjectType {
   STORAGE_GROUP = 2;
 }
 
+// Type of match expression
+enum MatchType {
+  // Unknown. Not used
+  MATCH_TYPE_UNSPECIFIED = 0;
+  // Full string match
+  STRING_EQUAL = 1;
+}
+
+// Short header fields
+message ShortHeader {
+  // Object format version.
+  neo.fs.v2.service.Version version = 1;
+
+  // Epoch when the object was created
+  uint64 creation_epoch = 2;
+
+  // Object's owner
+  neo.fs.v2.refs.OwnerID owner_id = 3;
+
+  // Type of the object payload content
+  ObjectType object_type = 4;
+
+  // Size of payload in bytes.
+  // 0xFFFFFFFFFFFFFFFF means `payload_length` is unknown
+  uint64 payload_length = 5;
+}
+
 // Object Headers
 message Header {
   // Object's container

@@ -29,7 +29,6 @@
     - [HeadRequest.Body](#neo.fs.v2.object.HeadRequest.Body)
     - [HeadResponse](#neo.fs.v2.object.HeadResponse)
     - [HeadResponse.Body](#neo.fs.v2.object.HeadResponse.Body)
-    - [HeadResponse.Body.ShortHeader](#neo.fs.v2.object.HeadResponse.Body.ShortHeader)
     - [PutRequest](#neo.fs.v2.object.PutRequest)
     - [PutRequest.Body](#neo.fs.v2.object.PutRequest.Body)
     - [PutRequest.Body.Init](#neo.fs.v2.object.PutRequest.Body.Init)
@@ -50,6 +49,7 @@
     - [Header.Attribute](#neo.fs.v2.object.Header.Attribute)
     - [Header.Split](#neo.fs.v2.object.Header.Split)
     - [Object](#neo.fs.v2.object.Object)
+    - [ShortHeader](#neo.fs.v2.object.ShortHeader)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -406,22 +406,7 @@ Response body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | header | [Header](#neo.fs.v2.object.Header) |  | Full object header |
-| short_header | [HeadResponse.Body.ShortHeader](#neo.fs.v2.object.HeadResponse.Body.ShortHeader) |  | Short object header |
-
-
-<a name="neo.fs.v2.object.HeadResponse.Body.ShortHeader"></a>
-
-### Message HeadResponse.Body.ShortHeader
-Short header fields
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| version | [neo.fs.v2.service.Version](#neo.fs.v2.service.Version) |  | Object format version. |
-| creation_epoch | [uint64](#uint64) |  | Epoch when the object was created |
-| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
-| object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Type of the object payload content |
-| payload_length | [uint64](#uint64) |  | Size of payload in bytes. 0xFFFFFFFFFFFFFFFF means `payload_length` is unknown |
+| short_header | [ShortHeader](#neo.fs.v2.object.ShortHeader) |  | Short object header |
 
 
 <a name="neo.fs.v2.object.PutRequest"></a>
@@ -533,7 +518,7 @@ Filter structure
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| match_type | [SearchRequest.Body.Filter.MatchType](#neo.fs.v2.object.SearchRequest.Body.Filter.MatchType) |  | Match type to use |
+| match_type | [MatchType](#neo.fs.v2.object.MatchType) |  | Match type to use |
 | name | [string](#string) |  | Header name to match |
 | value | [string](#string) |  | Header value to match |
 
@@ -562,18 +547,6 @@ Response body
 | id_list | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | Carries list of object identifiers that match the search query |
 
  <!-- end messages -->
-
-
-<a name="neo.fs.v2.object.SearchRequest.Body.Filter.MatchType"></a>
-
-### SearchRequest.Body.Filter.MatchType
-Type of match expression
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| MATCH_TYPE_UNSPECIFIED | 0 | Unknown. Not used |
-| STRING_EQUAL | 1 | Full string match |
-
 
  <!-- end enums -->
 
@@ -649,7 +622,34 @@ Object structure.
 | header | [Header](#neo.fs.v2.object.Header) |  | Object metadata headers |
 | payload | [bytes](#bytes) |  | Payload bytes. |
 
+
+<a name="neo.fs.v2.object.ShortHeader"></a>
+
+### Message ShortHeader
+Short header fields
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| version | [neo.fs.v2.service.Version](#neo.fs.v2.service.Version) |  | Object format version. |
+| creation_epoch | [uint64](#uint64) |  | Epoch when the object was created |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
+| object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Type of the object payload content |
+| payload_length | [uint64](#uint64) |  | Size of payload in bytes. 0xFFFFFFFFFFFFFFFF means `payload_length` is unknown |
+
  <!-- end messages -->
+
+
+<a name="neo.fs.v2.object.MatchType"></a>
+
+### MatchType
+Type of match expression
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| MATCH_TYPE_UNSPECIFIED | 0 | Unknown. Not used |
+| STRING_EQUAL | 1 | Full string match |
+
 
 
 <a name="neo.fs.v2.object.ObjectType"></a>
