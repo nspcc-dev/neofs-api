@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package neo.fs.v2.object;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/object;object";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/object/grpc;object";
 option csharp_namespace = "NeoFS.API.v2.Object";
 
 import "object/types.proto";
