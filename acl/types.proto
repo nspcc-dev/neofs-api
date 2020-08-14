@@ -23,81 +23,82 @@ enum Target {
   OTHERS = 3;
 }
 
+// MatchType is an enumeration of match types.
+enum MatchType {
+  // Unspecified match type, default value.
+  MATCH_TYPE_UNSPECIFIED = 0;
+
+  // Return true if strings are equal
+  STRING_EQUAL = 1;
+
+  // Return true if strings are different
+  STRING_NOT_EQUAL = 2;
+}
+
+// Operation is an enumeration of operation types.
+enum Operation {
+  // Unspecified operation, default value.
+  OPERATION_UNSPECIFIED = 0;
+
+  // Get
+  GET = 1;
+
+  // Head
+  HEAD = 2;
+
+  // Put
+  PUT = 3;
+
+  // Delete
+  DELETE = 4;
+
+  // Search
+  SEARCH = 5;
+
+  // GetRange
+  GETRANGE = 6;
+
+  // GetRangeHash
+  GETRANGEHASH = 7;
+}
+
+// Action is an enumeration of EACL actions.
+enum Action {
+  // Unspecified action, default value.
+  ACTION_UNSPECIFIED = 0;
+
+  // Allow action
+  ALLOW = 1;
+
+  // Deny action
+  DENY = 2;
+}
+
+// Header is an enumeration of filtering header types.
+enum HeaderType {
+  // Unspecified header, default value.
+  HEADER_UNSPECIFIED = 0;
+
+  // Filter request headers
+  REQUEST = 1;
+
+  // Filter object headers
+  OBJECT = 2;
+}
+
 // EACLRecord groups information about extended ACL rule.
 message EACLRecord {
-  // Operation is an enumeration of operation types.
-  enum Operation {
-    // Unspecified operation, default value.
-    OPERATION_UNSPECIFIED = 0;
-
-    // Get
-    GET = 1;
-
-    // Head
-    HEAD = 2;
-
-    // Put
-    PUT = 3;
-
-    // Delete
-    DELETE = 4;
-
-    // Search
-    SEARCH = 5;
-
-    // GetRange
-    GETRANGE = 6;
-
-    // GetRangeHash
-    GETRANGEHASH = 7;
-  }
-
   // Operation carries type of operation.
   Operation operation = 1 [json_name = "Operation"];
-
-  // Action is an enumeration of EACL actions.
-  enum Action {
-    // Unspecified action, default value.
-    ACTION_UNSPECIFIED = 0;
-
-    // Allow action
-    ALLOW = 1;
-
-    // Deny action
-    DENY = 2;
-  }
 
   // Action carries ACL target action.
   Action action = 2 [json_name = "Action"];
 
   // FilterInfo groups information about filter.
   message FilterInfo {
-    // Header is an enumeration of filtering header types.
-    enum Header {
-      // Unspecified header, default value.
-      HEADER_UNSPECIFIED = 0;
-
-      // Filter request headers
-      REQUEST = 1;
-
-      // Filter object headers
-      OBJECT = 2;
-    }
-
     // Header carries type of header.
-    Header header = 1 [json_name = "HeaderType"];
+    HeaderType header = 1 [json_name = "HeaderType"];
 
-    // MatchType is an enumeration of match types.
-    enum MatchType {
-      // Unspecified match type, default value.
-      MATCH_TYPE_UNSPECIFIED = 0;
-
-      // Return true if strings are equal
-      STRING_EQUAL = 1;
-
-      // Return true if strings are different
-      STRING_NOT_EQUAL = 2;
-    }
     // MatchType carries type of match.
     MatchType match_type = 2 [json_name = "MatchType"];
 
@@ -114,7 +115,7 @@ message EACLRecord {
   // TargetInfo groups information about extended ACL target.
   message TargetInfo {
     // target carries target of ACL rule.
-    acl.Target target = 1 [json_name="Role"];
+    Target target = 1 [json_name="Role"];
 
     // key_list carries public keys of ACL target.
     repeated bytes key_list = 2 [json_name="Keys"];

@@ -33,8 +33,8 @@ EACLRecord groups information about extended ACL rule.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| operation | [EACLRecord.Operation](#neo.fs.v2.acl.EACLRecord.Operation) |  | Operation carries type of operation. |
-| action | [EACLRecord.Action](#neo.fs.v2.acl.EACLRecord.Action) |  | Action carries ACL target action. |
+| operation | [Operation](#neo.fs.v2.acl.Operation) |  | Operation carries type of operation. |
+| action | [Action](#neo.fs.v2.acl.Action) |  | Action carries ACL target action. |
 | filters | [EACLRecord.FilterInfo](#neo.fs.v2.acl.EACLRecord.FilterInfo) | repeated | filters carries set of filters. |
 | targets | [EACLRecord.TargetInfo](#neo.fs.v2.acl.EACLRecord.TargetInfo) | repeated | targets carries information about extended ACL target list. |
 
@@ -47,8 +47,8 @@ FilterInfo groups information about filter.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| header | [EACLRecord.FilterInfo.Header](#neo.fs.v2.acl.EACLRecord.FilterInfo.Header) |  | Header carries type of header. |
-| match_type | [EACLRecord.FilterInfo.MatchType](#neo.fs.v2.acl.EACLRecord.FilterInfo.MatchType) |  | MatchType carries type of match. |
+| header | [HeaderType](#neo.fs.v2.acl.HeaderType) |  | Header carries type of header. |
+| match_type | [MatchType](#neo.fs.v2.acl.MatchType) |  | MatchType carries type of match. |
 | header_name | [string](#string) |  | header_name carries name of filtering header. |
 | header_val | [string](#string) |  | header_val carries value of filtering header. |
 
@@ -79,9 +79,9 @@ EACLRecord carries the information about extended ACL rules.
  <!-- end messages -->
 
 
-<a name="neo.fs.v2.acl.EACLRecord.Action"></a>
+<a name="neo.fs.v2.acl.Action"></a>
 
-### EACLRecord.Action
+### Action
 Action is an enumeration of EACL actions.
 
 | Name | Number | Description |
@@ -92,9 +92,9 @@ Action is an enumeration of EACL actions.
 
 
 
-<a name="neo.fs.v2.acl.EACLRecord.FilterInfo.Header"></a>
+<a name="neo.fs.v2.acl.HeaderType"></a>
 
-### EACLRecord.FilterInfo.Header
+### HeaderType
 Header is an enumeration of filtering header types.
 
 | Name | Number | Description |
@@ -105,9 +105,9 @@ Header is an enumeration of filtering header types.
 
 
 
-<a name="neo.fs.v2.acl.EACLRecord.FilterInfo.MatchType"></a>
+<a name="neo.fs.v2.acl.MatchType"></a>
 
-### EACLRecord.FilterInfo.MatchType
+### MatchType
 MatchType is an enumeration of match types.
 
 | Name | Number | Description |
@@ -118,9 +118,9 @@ MatchType is an enumeration of match types.
 
 
 
-<a name="neo.fs.v2.acl.EACLRecord.Operation"></a>
+<a name="neo.fs.v2.acl.Operation"></a>
 
-### EACLRecord.Operation
+### Operation
 Operation is an enumeration of operation types.
 
 | Name | Number | Description |
