@@ -31,7 +31,7 @@ enum MatchType {
 // Short header fields
 message ShortHeader {
   // Object format version.
-  neo.fs.v2.service.Version version = 1;
+  neo.fs.v2.refs.Version version = 1;
 
   // Epoch when the object was created
   uint64 creation_epoch = 2;
@@ -51,7 +51,7 @@ message ShortHeader {
 message Header {
   // Object format version.
   // Effectively the version of API library used to create particular object
-  neo.fs.v2.service.Version version = 1;
+  neo.fs.v2.refs.Version version = 1;
 
   // Object's container
   neo.fs.v2.refs.ContainerID container_id = 2;
