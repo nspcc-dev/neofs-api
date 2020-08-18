@@ -17,18 +17,6 @@ message XHeader {
   string value = 2;
 }
 
-// Lifetime parameters of the token. Filed names taken from rfc7519.
-message TokenLifetime {
-  // Expiration Epoch
-  uint64 exp = 1;
-
-  // Not valid before Epoch
-  uint64 nbf = 2;
-
-  // Issued at Epoch
-  uint64 iat = 3;
-}
-
 // Context information for Session Tokens related to ObjectService requests
 message ObjectSessionContext {
   // Object request verbs
@@ -74,6 +62,17 @@ message SessionToken {
     // OwnerID carries identifier of the session initiator.
     neo.fs.v2.refs.OwnerID owner_id = 2;
 
+    // Lifetime parameters of the token. Filed names taken from rfc7519.
+    message TokenLifetime {
+      // Expiration Epoch
+      uint64 exp = 1;
+
+      // Not valid before Epoch
+      uint64 nbf = 2;
+
+      // Issued at Epoch
+      uint64 iat = 3;
+    }
     // Lifetime is a lifetime of the session
     TokenLifetime lifetime = 3;
 
@@ -90,27 +89,7 @@ message SessionToken {
   Body body = 1;
 
   // Signature is a signature of session token information
-  Signature signature = 2;
-}
-
-// BearerToken has information about request ACL rules with limited lifetime
-message BearerToken {
-  // Bearer Token body
-  message Body {
-    // EACLTable carries table of extended ACL rules
-    neo.fs.v2.acl.EACLTable eacl_table = 1;
-
-    // OwnerID carries identifier of the token owner
-    neo.fs.v2.refs.OwnerID owner_id = 2;
-
-    // Token expiration and valid time period parameters
-    TokenLifetime lifetime = 3;
-  }
-  // Bearer Token body
-  Body body = 1;
-
-  // Signature of BearerToken body
-  Signature signature = 2;
+  neo.fs.v2.refs.Signature signature = 2;
 }
 
 // Information about the request
@@ -131,7 +110,7 @@ message RequestMetaHeader {
   SessionToken session_token = 5;
 
   // Bearer is a Bearer token of the request
-  BearerToken bearer_token = 6;
+  neo.fs.v2.acl.BearerToken bearer_token = 6;
 
   // RequestMetaHeader of the origin request.
   RequestMetaHeader origin = 7;
@@ -155,22 +134,15 @@ message ResponseMetaHeader {
   ResponseMetaHeader origin = 5;
 }
 
-// Signature of something in NeoFS
-message Signature {
-  // Public key used for signing.
-  bytes key = 1;
-  // Signature
-  bytes sign = 2;
-}
 
 // Verification info for request signed by all intermediate nodes
 message RequestVerificationHeader {
   // Request Body signature. Should be generated once by request initiator.
-  Signature body_signature = 1;
+  neo.fs.v2.refs.Signature body_signature = 1;
   // Request Meta signature is added and signed by any intermediate node
-  Signature meta_signature = 2;
+  neo.fs.v2.refs.Signature meta_signature = 2;
   // Sign previous hops
-  Signature origin_signature = 3;
+  neo.fs.v2.refs.Signature origin_signature = 3;
 
   // Chain of previous hops signatures
   RequestVerificationHeader origin = 4;
@@ -179,11 +151,11 @@ message RequestVerificationHeader {
 // Verification info for response signed by all intermediate nodes
 message ResponseVerificationHeader {
   // Response Body signature. Should be generated once by answering node.
-  Signature body_signature = 1;
+  neo.fs.v2.refs.Signature body_signature = 1;
   // Response Meta signature is added and signed by any intermediate node
-  Signature meta_signature = 2;
+  neo.fs.v2.refs.Signature meta_signature = 2;
   // Sign previous hops
-  Signature origin_signature = 3;
+  neo.fs.v2.refs.Signature origin_signature = 3;
 
   // Chain of previous hops signatures
   ResponseVerificationHeader origin = 4;

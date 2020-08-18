@@ -85,7 +85,7 @@ message GetResponse {
       neo.fs.v2.refs.ObjectID object_id = 1;
 
       // Object signature
-      neo.fs.v2.service.Signature signature =2;
+      neo.fs.v2.refs.Signature signature =2;
 
       // Object header.
       Header header = 3;
@@ -122,7 +122,7 @@ message PutRequest {
       neo.fs.v2.refs.ObjectID object_id = 1;
 
       // Object signature, were available
-      neo.fs.v2.service.Signature signature =2;
+      neo.fs.v2.refs.Signature signature =2;
 
       // Header of the object to save in the system.
       Header header = 3;

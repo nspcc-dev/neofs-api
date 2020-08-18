@@ -39,3 +39,11 @@ message Version {
   // Minor API version.
   uint32 minor = 2;
 }
+
+// Signature of something in NeoFS
+message Signature {
+  // Public key used for signing.
+  bytes key = 1;
+  // Signature
+  bytes sign = 2;
+}

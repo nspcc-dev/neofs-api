@@ -100,7 +100,7 @@ message Header {
     neo.fs.v2.refs.ObjectID previous = 2;
 
     // `signature` field of the parent object. Used to reconstruct parent.
-    neo.fs.v2.service.Signature parent_signature = 3;
+    neo.fs.v2.refs.Signature parent_signature = 3;
 
     // `header` field of the parent object. Used to reconstruct parent.
     Header parent_header = 4;
@@ -121,7 +121,7 @@ message Object {
   neo.fs.v2.refs.ObjectID object_id = 1;
 
   // Signed object_id
-  neo.fs.v2.service.Signature signature = 2;
+  neo.fs.v2.refs.Signature signature = 2;
 
   // Object metadata headers
   Header header = 3;
