@@ -47,3 +47,21 @@ message Signature {
   // Signature
   bytes sign = 2;
 }
+
+// Checksum algorithm type
+enum ChecksumType {
+  // Unknown. Not used
+  CHECKSUM_TYPE_UNSPECIFIED = 0;
+
+  // Tillich-Zemor homomorphic hash funciton
+  TZ = 1;
+
+  // SHA-256
+  SHA256 = 2;
+}
+
+// Checksum message
+message Checksum {
+  ChecksumType type = 1;
+  bytes sum = 2;
+}
