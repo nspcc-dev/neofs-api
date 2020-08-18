@@ -385,6 +385,9 @@ message GetRangeHashRequest {
 
     // Carries binary salt to XOR object payload ranges before hash calculation.
     bytes salt = 3;
+
+    // Checksum algorithm type
+    neo.fs.v2.refs.ChecksumType type = 4;
   }
   // Body of get range hash object request message.
   Body body = 1;
@@ -402,8 +405,11 @@ message GetRangeHashRequest {
 message GetRangeHashResponse {
   // Response body
   message Body {
-    // Carries list of homomorphic hashes in a binary format.
-    repeated bytes hash_list = 1;
+    // Checksum algorithm type
+    neo.fs.v2.refs.ChecksumType type = 1;
+
+    // List of range hashes in a binary format.
+    repeated bytes hash_list = 2;
   }
   // Body of get range hash object response message.
   Body body = 1;
