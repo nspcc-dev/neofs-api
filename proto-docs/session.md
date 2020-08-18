@@ -14,6 +14,15 @@
     - [CreateResponse.Body](#neo.fs.v2.session.CreateResponse.Body)
     
 
+- [session/types.proto](#session/types.proto)
+
+  - Messages
+    - [ObjectSessionContext](#neo.fs.v2.session.ObjectSessionContext)
+    - [SessionToken](#neo.fs.v2.session.SessionToken)
+    - [SessionToken.Body](#neo.fs.v2.session.SessionToken.Body)
+    - [SessionToken.Body.TokenLifetime](#neo.fs.v2.session.SessionToken.Body.TokenLifetime)
+    
+
 - [Scalar Value Types](#scalar-value-types)
 
 
@@ -68,7 +77,7 @@ Request body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Carries an identifier of a session initiator. |
-| lifetime | [neo.fs.v2.service.TokenLifetime](#neo.fs.v2.service.TokenLifetime) |  | Carries a lifetime of the session. |
+| expiration | [uint64](#uint64) |  | Expiration Epoch |
 
 
 <a name="neo.fs.v2.session.CreateResponse"></a>
@@ -96,6 +105,90 @@ Response body
 | session_key | [bytes](#bytes) |  | session_key carries a session public key. |
 
  <!-- end messages -->
+
+ <!-- end enums -->
+
+
+
+<a name="session/types.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## session/types.proto
+
+
+ <!-- end services -->
+
+
+<a name="neo.fs.v2.session.ObjectSessionContext"></a>
+
+### Message ObjectSessionContext
+Context information for Session Tokens related to ObjectService requests
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| verb | [ObjectSessionContext.Verb](#neo.fs.v2.session.ObjectSessionContext.Verb) |  | Verb is a type of request for which the token is issued |
+| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Related Object address |
+
+
+<a name="neo.fs.v2.session.SessionToken"></a>
+
+### Message SessionToken
+NeoFS session token.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [SessionToken.Body](#neo.fs.v2.session.SessionToken.Body) |  | Session Token body |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature is a signature of session token information |
+
+
+<a name="neo.fs.v2.session.SessionToken.Body"></a>
+
+### Message SessionToken.Body
+Session token body
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [bytes](#bytes) |  | ID is a token identifier. valid UUIDv4 represented in bytes |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | OwnerID carries identifier of the session initiator. |
+| lifetime | [SessionToken.Body.TokenLifetime](#neo.fs.v2.session.SessionToken.Body.TokenLifetime) |  | Lifetime is a lifetime of the session |
+| session_key | [bytes](#bytes) |  | SessionKey is a public key of session key |
+| object | [ObjectSessionContext](#neo.fs.v2.session.ObjectSessionContext) |  | ObjectService session context. |
+
+
+<a name="neo.fs.v2.session.SessionToken.Body.TokenLifetime"></a>
+
+### Message SessionToken.Body.TokenLifetime
+Lifetime parameters of the token. Filed names taken from rfc7519.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| exp | [uint64](#uint64) |  | Expiration Epoch |
+| nbf | [uint64](#uint64) |  | Not valid before Epoch |
+| iat | [uint64](#uint64) |  | Issued at Epoch |
+
+ <!-- end messages -->
+
+
+<a name="neo.fs.v2.session.ObjectSessionContext.Verb"></a>
+
+### ObjectSessionContext.Verb
+Object request verbs
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| VERB_UNSPECIFIED | 0 | Unknown verb |
+| PUT | 1 | Refers to object.Put RPC call |
+| GET | 2 | Refers to object.Get RPC call |
+| HEAD | 3 | Refers to object.Head RPC call |
+| SEARCH | 4 | Refers to object.Search RPC call |
+| DELETE | 5 | Refers to object.Delete RPC call |
+| RANGE | 6 | Refers to object.GetRange RPC call |
+| RANGEHASH | 7 | Refers to object.GetRangeHash RPC call |
+
 
  <!-- end enums -->
 
