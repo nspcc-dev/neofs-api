@@ -172,7 +172,6 @@ Request body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Carries the address of the object to be deleted. |
-| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Carries identifier the object owner. |
 
 
 <a name="neo.fs.v2.object.DeleteResponse"></a>
