@@ -6,6 +6,9 @@
 - [acl/types.proto](#acl/types.proto)
 
   - Messages
+    - [BearerToken](#neo.fs.v2.acl.BearerToken)
+    - [BearerToken.Body](#neo.fs.v2.acl.BearerToken.Body)
+    - [BearerToken.Body.TokenLifetime](#neo.fs.v2.acl.BearerToken.Body.TokenLifetime)
     - [EACLRecord](#neo.fs.v2.acl.EACLRecord)
     - [EACLRecord.FilterInfo](#neo.fs.v2.acl.EACLRecord.FilterInfo)
     - [EACLRecord.TargetInfo](#neo.fs.v2.acl.EACLRecord.TargetInfo)
@@ -23,6 +26,44 @@
 
 
  <!-- end services -->
+
+
+<a name="neo.fs.v2.acl.BearerToken"></a>
+
+### Message BearerToken
+BearerToken has information about request ACL rules with limited lifetime
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [BearerToken.Body](#neo.fs.v2.acl.BearerToken.Body) |  | Bearer Token body |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of BearerToken body |
+
+
+<a name="neo.fs.v2.acl.BearerToken.Body"></a>
+
+### Message BearerToken.Body
+Bearer Token body
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| eacl_table | [EACLTable](#neo.fs.v2.acl.EACLTable) |  | EACLTable carries table of extended ACL rules |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | OwnerID carries identifier of the token owner |
+| lifetime | [BearerToken.Body.TokenLifetime](#neo.fs.v2.acl.BearerToken.Body.TokenLifetime) |  | Token expiration and valid time period parameters |
+
+
+<a name="neo.fs.v2.acl.BearerToken.Body.TokenLifetime"></a>
+
+### Message BearerToken.Body.TokenLifetime
+Lifetime parameters of the token. Filed names taken from rfc7519.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| exp | [uint64](#uint64) |  | Expiration Epoch |
+| nbf | [uint64](#uint64) |  | Not valid before Epoch |
+| iat | [uint64](#uint64) |  | Issued at Epoch |
 
 
 <a name="neo.fs.v2.acl.EACLRecord"></a>

@@ -146,7 +146,7 @@ Request body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | container_id carries identifier of the container to delete from NeoFS. |
-| signature | [neo.fs.v2.service.Signature](#neo.fs.v2.service.Signature) |  | Signature of container id according to RFC-6979. |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of container id according to RFC-6979. |
 
 
 <a name="neo.fs.v2.container.DeleteResponse"></a>
@@ -216,7 +216,7 @@ Response body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL that has been requested if it was set up. |
-| signature | [neo.fs.v2.service.Signature](#neo.fs.v2.service.Signature) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
 
 
 <a name="neo.fs.v2.container.GetRequest"></a>
@@ -337,7 +337,7 @@ Request body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container | [Container](#neo.fs.v2.container.Container) |  | Container to create in NeoFS. |
-| signature | [neo.fs.v2.service.Signature](#neo.fs.v2.service.Signature) |  | Signature of stable-marshalled container according to RFC-6979. |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled container according to RFC-6979. |
 
 
 <a name="neo.fs.v2.container.PutResponse"></a>
@@ -386,7 +386,7 @@ Request body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL to set for the container. |
-| signature | [neo.fs.v2.service.Signature](#neo.fs.v2.service.Signature) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
 
 
 <a name="neo.fs.v2.container.SetExtendedACLResponse"></a>
@@ -434,7 +434,7 @@ SHA256 hash of stable-marshalled container message.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [neo.fs.v2.service.Version](#neo.fs.v2.service.Version) |  | Container format version. Effectively the version of API library used to create container |
+| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Container format version. Effectively the version of API library used to create container |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | OwnerID carries identifier of the container owner. |
 | nonce | [bytes](#bytes) |  | Nonce is a 16 byte UUID, used to avoid collisions of container id. |
 | basic_acl | [uint32](#uint32) |  | BasicACL contains access control rules for owner, system, others groups and permission bits for bearer token and Extended ACL. |

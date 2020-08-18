@@ -10,6 +10,8 @@
     - [ContainerID](#neo.fs.v2.refs.ContainerID)
     - [ObjectID](#neo.fs.v2.refs.ObjectID)
     - [OwnerID](#neo.fs.v2.refs.OwnerID)
+    - [Signature](#neo.fs.v2.refs.Signature)
+    - [Version](#neo.fs.v2.refs.Version)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -68,6 +70,30 @@ OwnerID group information about the owner of the NeoFS container.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | value | [bytes](#bytes) |  | value carries the identifier of the container owner in a binary format. |
+
+
+<a name="neo.fs.v2.refs.Signature"></a>
+
+### Message Signature
+Signature of something in NeoFS
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [bytes](#bytes) |  | Public key used for signing. |
+| sign | [bytes](#bytes) |  | Signature |
+
+
+<a name="neo.fs.v2.refs.Version"></a>
+
+### Message Version
+Represents API version used by node.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| major | [uint32](#uint32) |  | Major API version. |
+| minor | [uint32](#uint32) |  | Minor API version. |
 
  <!-- end messages -->
 
