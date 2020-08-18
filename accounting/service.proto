@@ -5,6 +5,7 @@ package neo.fs.v2.accounting;
 option go_package = "github.com/nspcc-dev/neofs-api-go/v2/accounting/grpc;accounting";
 option csharp_namespace = "NeoFS.API.v2.Accounting";
 
+import "accounting/types.proto";
 import "refs/types.proto";
 import "service/types.proto";
 
@@ -40,15 +41,6 @@ message BalanceRequest {
   // authenticate the nodes of the message route and check the correctness
   // of transmission.
   neo.fs.v2.service.RequestVerificationHeader verify_header = 3;
-}
-
-// Decimal represents the decimal numbers.
-message Decimal {
-  // value carries number value.
-  int64 value = 1;
-
-  // precision carries value precision.
-  uint32 precision = 2;
 }
 
 // Message defines the response body of Balance method.
