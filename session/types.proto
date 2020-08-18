@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package neo.fs.v2.session;
+
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/session/grpc;session";
+option csharp_namespace = "NeoFS.API.v2.Session";
+
+import "refs/types.proto";
+
+// Context information for Session Tokens related to ObjectService requests
+message ObjectSessionContext {
+  // Object request verbs
+  enum Verb {
+    // Unknown verb
+    VERB_UNSPECIFIED = 0;
+
+    // Refers to object.Put RPC call
+    PUT = 1;
+
+    // Refers to object.Get RPC call
+    GET = 2;
+
+    // Refers to object.Head RPC call
+    HEAD = 3;
+
+    // Refers to object.Search RPC call
+    SEARCH = 4;
+
+    // Refers to object.Delete RPC call
+    DELETE = 5;
+
+    // Refers to object.GetRange RPC call
+    RANGE = 6;
+
+    // Refers to object.GetRangeHash RPC call
+    RANGEHASH = 7;
+  }
+  // Verb is a type of request for which the token is issued
+  Verb verb = 1;
+
+  // Related Object address
+  neo.fs.v2.refs.Address address = 2;
+}
+
+// NeoFS session token.
+message SessionToken {
+  // Session token body
+  message Body {
+    // ID is a token identifier. valid UUIDv4 represented in bytes
+    bytes id = 1;
+
+    // OwnerID carries identifier of the session initiator.
+    neo.fs.v2.refs.OwnerID owner_id = 2;
+
+    // Lifetime parameters of the token. Filed names taken from rfc7519.
+    message TokenLifetime {
+      // Expiration Epoch
+      uint64 exp = 1;
+
+      // Not valid before Epoch
+      uint64 nbf = 2;
+
+      // Issued at Epoch
+      uint64 iat = 3;
+    }
+    // Lifetime is a lifetime of the session
+    TokenLifetime lifetime = 3;
+
+    // SessionKey is a public key of session key
+    bytes session_key = 4;
+
+    // Carries context of the session.
+    oneof context {
+      // ObjectService session context.
+      ObjectSessionContext object = 5;
+    }
+  }
+  // Session Token body
+  Body body = 1;
+
+  // Signature is a signature of session token information
+  neo.fs.v2.refs.Signature signature = 2;
+}
