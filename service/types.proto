@@ -17,15 +17,6 @@ message XHeader {
   string value = 2;
 }
 
-// Represents API version used by node.
-message Version {
-  // Major API version.
-  uint32 major = 1;
-
-  // Minor API version.
-  uint32 minor = 2;
-}
-
 // Lifetime parameters of the token. Filed names taken from rfc7519.
 message TokenLifetime {
   // Expiration Epoch
@@ -125,7 +116,7 @@ message BearerToken {
 // Information about the request
 message RequestMetaHeader {
   // Client API version.
-  Version version = 1;
+  neo.fs.v2.refs.Version version = 1;
 
   // Client local epoch number. Set to 0 if unknown.
   uint64 epoch = 2;
@@ -149,7 +140,7 @@ message RequestMetaHeader {
 // Information about the response
 message ResponseMetaHeader {
   // Server API version.
-  Version version = 1;
+  neo.fs.v2.refs.Version version = 1;
 
   // Server local epoch number.
   uint64 epoch = 2;

@@ -7,7 +7,6 @@ option csharp_namespace = "NeoFS.API.v2.Container";
 
 import "netmap/types.proto";
 import "refs/types.proto";
-import "service/types.proto";
 
 // Container is a structure that defines object placement behaviour. Objects
 // can be stored only within containers. They define placement rule, attributes
@@ -16,7 +15,7 @@ import "service/types.proto";
 message Container {
   // Container format version.
   // Effectively the version of API library used to create container
-  neo.fs.v2.service.Version version = 1;
+  neo.fs.v2.refs.Version version = 1;
 
   // OwnerID carries identifier of the container owner.
   neo.fs.v2.refs.OwnerID owner_id = 2;

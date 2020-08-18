@@ -30,3 +30,12 @@ message OwnerID {
   // value carries the identifier of the container owner in a binary format.
   bytes value = 1;
 }
+
+// Represents API version used by node.
+message Version {
+  // Major API version.
+  uint32 major = 1;
+
+  // Minor API version.
+  uint32 minor = 2;
+}
