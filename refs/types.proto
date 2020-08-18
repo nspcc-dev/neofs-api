@@ -62,6 +62,9 @@ enum ChecksumType {
 
 // Checksum message
 message Checksum {
+  // Checksum algorithm type
   ChecksumType type = 1;
+
+  // Checksum itself
   bytes sum = 2;
 }

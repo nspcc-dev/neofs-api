@@ -7,6 +7,7 @@
 
   - Messages
     - [Address](#neo.fs.v2.refs.Address)
+    - [Checksum](#neo.fs.v2.refs.Checksum)
     - [ContainerID](#neo.fs.v2.refs.ContainerID)
     - [ObjectID](#neo.fs.v2.refs.ObjectID)
     - [OwnerID](#neo.fs.v2.refs.OwnerID)
@@ -37,6 +38,18 @@ Address of object (container id + object id)
 | ----- | ---- | ----- | ----------- |
 | container_id | [ContainerID](#neo.fs.v2.refs.ContainerID) |  | container_id carries container identifier. |
 | object_id | [ObjectID](#neo.fs.v2.refs.ObjectID) |  | object_id carries object identifier. |
+
+
+<a name="neo.fs.v2.refs.Checksum"></a>
+
+### Message Checksum
+Checksum message
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| type | [ChecksumType](#neo.fs.v2.refs.ChecksumType) |  | Checksum algorithm type |
+| sum | [bytes](#bytes) |  | Checksum itself |
 
 
 <a name="neo.fs.v2.refs.ContainerID"></a>
@@ -96,6 +109,19 @@ Represents API version used by node.
 | minor | [uint32](#uint32) |  | Minor API version. |
 
  <!-- end messages -->
+
+
+<a name="neo.fs.v2.refs.ChecksumType"></a>
+
+### ChecksumType
+Checksum algorithm type
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CHECKSUM_TYPE_UNSPECIFIED | 0 | Unknown. Not used |
+| TZ | 1 | Tillich-Zemor homomorphic hash funciton |
+| SHA256 | 2 | SHA-256 |
+
 
  <!-- end enums -->
 

@@ -219,6 +219,7 @@ Request body
 | address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Carries address of the object that contains the requested payload range. |
 | ranges | [Range](#neo.fs.v2.object.Range) | repeated | Carries the list of object payload range to calculate homomorphic hash. |
 | salt | [bytes](#bytes) |  | Carries binary salt to XOR object payload ranges before hash calculation. |
+| type | [neo.fs.v2.refs.ChecksumType](#neo.fs.v2.refs.ChecksumType) |  | Checksum algorithm type |
 
 
 <a name="neo.fs.v2.object.GetRangeHashResponse"></a>
@@ -242,7 +243,8 @@ Response body
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| hash_list | [bytes](#bytes) | repeated | Carries list of homomorphic hashes in a binary format. |
+| type | [neo.fs.v2.refs.ChecksumType](#neo.fs.v2.refs.ChecksumType) |  | Checksum algorithm type |
+| hash_list | [bytes](#bytes) | repeated | List of range hashes in a binary format. |
 
 
 <a name="neo.fs.v2.object.GetRangeRequest"></a>
@@ -573,9 +575,9 @@ Object Headers
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
 | creation_epoch | [uint64](#uint64) |  | Object creation Epoch |
 | payload_length | [uint64](#uint64) |  | Size of payload in bytes. 0xFFFFFFFFFFFFFFFF means `payload_length` is unknown |
-| payload_hash | [bytes](#bytes) |  | Hash of payload bytes |
+| payload_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Hash of payload bytes |
 | object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Special object type |
-| homomorphic_hash | [bytes](#bytes) |  | Homomorphic hash of the object payload. |
+| homomorphic_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash of the object payload. |
 | session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token, if it was used during Object creation. Need it to verify integrity and authenticity out of Request scope. |
 | attributes | [Header.Attribute](#neo.fs.v2.object.Header.Attribute) | repeated | User-defined object attributes |
 | split | [Header.Split](#neo.fs.v2.object.Header.Split) |  | Position of the object in the split hierarchy. |
