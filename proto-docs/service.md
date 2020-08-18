@@ -3,37 +3,32 @@
 
 ## Table of Contents
 
-- [service/meta.proto](#service/meta.proto)
+- [service/types.proto](#service/types.proto)
 
   - Messages
     - [BearerToken](#neo.fs.v2.service.BearerToken)
     - [BearerToken.Body](#neo.fs.v2.service.BearerToken.Body)
     - [ObjectSessionContext](#neo.fs.v2.service.ObjectSessionContext)
     - [RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader)
+    - [RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader)
     - [ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader)
+    - [ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader)
     - [SessionToken](#neo.fs.v2.service.SessionToken)
     - [SessionToken.Body](#neo.fs.v2.service.SessionToken.Body)
+    - [Signature](#neo.fs.v2.service.Signature)
     - [TokenLifetime](#neo.fs.v2.service.TokenLifetime)
     - [Version](#neo.fs.v2.service.Version)
     - [XHeader](#neo.fs.v2.service.XHeader)
-    
-
-- [service/verify.proto](#service/verify.proto)
-
-  - Messages
-    - [RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader)
-    - [ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader)
-    - [Signature](#neo.fs.v2.service.Signature)
     
 
 - [Scalar Value Types](#scalar-value-types)
 
 
 
-<a name="service/meta.proto"></a>
+<a name="service/types.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## service/meta.proto
+## service/types.proto
 
 
  <!-- end services -->
@@ -93,6 +88,20 @@ Information about the request
 | origin | [RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | RequestMetaHeader of the origin request. |
 
 
+<a name="neo.fs.v2.service.RequestVerificationHeader"></a>
+
+### Message RequestVerificationHeader
+Verification info for request signed by all intermediate nodes
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body_signature | [Signature](#neo.fs.v2.service.Signature) |  | Request Body signature. Should be generated once by request initiator. |
+| meta_signature | [Signature](#neo.fs.v2.service.Signature) |  | Request Meta signature is added and signed by any intermediate node |
+| origin_signature | [Signature](#neo.fs.v2.service.Signature) |  | Sign previous hops |
+| origin | [RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Chain of previous hops signatures |
+
+
 <a name="neo.fs.v2.service.ResponseMetaHeader"></a>
 
 ### Message ResponseMetaHeader
@@ -106,6 +115,20 @@ Information about the response
 | ttl | [uint32](#uint32) |  | Maximum number of nodes in the response route. |
 | x_headers | [XHeader](#neo.fs.v2.service.XHeader) | repeated | Response X-Headers. |
 | origin | [ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta header of the origin response. |
+
+
+<a name="neo.fs.v2.service.ResponseVerificationHeader"></a>
+
+### Message ResponseVerificationHeader
+Verification info for response signed by all intermediate nodes
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body_signature | [Signature](#neo.fs.v2.service.Signature) |  | Response Body signature. Should be generated once by answering node. |
+| meta_signature | [Signature](#neo.fs.v2.service.Signature) |  | Response Meta signature is added and signed by any intermediate node |
+| origin_signature | [Signature](#neo.fs.v2.service.Signature) |  | Sign previous hops |
+| origin | [ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Chain of previous hops signatures |
 
 
 <a name="neo.fs.v2.service.SessionToken"></a>
@@ -133,6 +156,18 @@ Session token body
 | lifetime | [TokenLifetime](#neo.fs.v2.service.TokenLifetime) |  | Lifetime is a lifetime of the session |
 | session_key | [bytes](#bytes) |  | SessionKey is a public key of session key |
 | object | [ObjectSessionContext](#neo.fs.v2.service.ObjectSessionContext) |  | ObjectService session context. |
+
+
+<a name="neo.fs.v2.service.Signature"></a>
+
+### Message Signature
+Signature of something in NeoFS
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [bytes](#bytes) |  | Public key used for signing. |
+| sign | [bytes](#bytes) |  | Signature |
 
 
 <a name="neo.fs.v2.service.TokenLifetime"></a>
@@ -190,60 +225,6 @@ Object request verbs
 | RANGE | 6 | Refers to object.GetRange RPC call |
 | RANGEHASH | 7 | Refers to object.GetRangeHash RPC call |
 
-
- <!-- end enums -->
-
-
-
-<a name="service/verify.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## service/verify.proto
-
-
- <!-- end services -->
-
-
-<a name="neo.fs.v2.service.RequestVerificationHeader"></a>
-
-### Message RequestVerificationHeader
-Verification info for request signed by all intermediate nodes
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| body_signature | [Signature](#neo.fs.v2.service.Signature) |  | Request Body signature. Should be generated once by request initiator. |
-| meta_signature | [Signature](#neo.fs.v2.service.Signature) |  | Request Meta signature is added and signed by any intermediate node |
-| origin_signature | [Signature](#neo.fs.v2.service.Signature) |  | Sign previous hops |
-| origin | [RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Chain of previous hops signatures |
-
-
-<a name="neo.fs.v2.service.ResponseVerificationHeader"></a>
-
-### Message ResponseVerificationHeader
-Verification info for response signed by all intermediate nodes
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| body_signature | [Signature](#neo.fs.v2.service.Signature) |  | Response Body signature. Should be generated once by answering node. |
-| meta_signature | [Signature](#neo.fs.v2.service.Signature) |  | Response Meta signature is added and signed by any intermediate node |
-| origin_signature | [Signature](#neo.fs.v2.service.Signature) |  | Sign previous hops |
-| origin | [ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Chain of previous hops signatures |
-
-
-<a name="neo.fs.v2.service.Signature"></a>
-
-### Message Signature
-Signature of something in NeoFS
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [bytes](#bytes) |  | Public key used for signing. |
-| sign | [bytes](#bytes) |  | Signature |
-
- <!-- end messages -->
 
  <!-- end enums -->
 

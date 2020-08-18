@@ -6,8 +6,7 @@ option go_package = "github.com/nspcc-dev/neofs-api-go/v2/accounting/grpc;accoun
 option csharp_namespace = "NeoFS.API.v2.Accounting";
 
 import "refs/types.proto";
-import "service/meta.proto";
-import "service/verify.proto";
+import "service/types.proto";
 
 // The service provides methods for obtaining information
 // about the account balance in NeoFS system.

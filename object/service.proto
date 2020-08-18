@@ -7,8 +7,7 @@ option csharp_namespace = "NeoFS.API.v2.Object";
 
 import "object/types.proto";
 import "refs/types.proto";
-import "service/meta.proto";
-import "service/verify.proto";
+import "service/types.proto";
 
 // Object service provides API for manipulating with the object.
 service ObjectService {

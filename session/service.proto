@@ -6,8 +6,7 @@ option go_package = "github.com/nspcc-dev/neofs-api-go/v2/session/grpc;session";
 option csharp_namespace = "NeoFS.API.v2.Session";
 
 import "refs/types.proto";
-import "service/meta.proto";
-import "service/verify.proto";
+import "service/types.proto";
 
 // Create Session record on Node side
 service SessionService {

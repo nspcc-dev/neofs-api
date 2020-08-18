@@ -7,7 +7,7 @@ option csharp_namespace = "NeoFS.API.v2.Container";
 
 import "netmap/types.proto";
 import "refs/types.proto";
-import "service/meta.proto";
+import "service/types.proto";
 
 // Container is a structure that defines object placement behaviour. Objects
 // can be stored only within containers. They define placement rule, attributes
