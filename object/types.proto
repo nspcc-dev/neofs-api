@@ -6,7 +6,7 @@ option go_package = "github.com/nspcc-dev/neofs-api-go/v2/object/grpc;object";
 option csharp_namespace = "NeoFS.API.v2.Object";
 
 import "refs/types.proto";
-import "service/types.proto";
+import "session/types.proto";
 
 // Type of the object payload content
 enum ObjectType {
@@ -77,7 +77,7 @@ message Header {
 
   // Session token, if it was used during Object creation.
   // Need it to verify integrity and authenticity out of Request scope.
-  neo.fs.v2.service.SessionToken session_token = 9;
+  neo.fs.v2.session.SessionToken session_token = 9;
 
   // Attribute groups the user-defined Key-Value pairs attached to the object
   message Attribute {
