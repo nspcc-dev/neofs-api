@@ -20,9 +20,8 @@ message CreateRequest {
   message Body {
     // Carries an identifier of a session initiator.
     neo.fs.v2.refs.OwnerID owner_id = 1;
-
-    // Carries a lifetime of the session.
-    neo.fs.v2.service.TokenLifetime lifetime = 2;
+    // Expiration Epoch
+    uint64 expiration = 2;
   }
   // Body of create session token request message.
   Body body = 1;

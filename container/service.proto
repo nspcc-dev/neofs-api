@@ -50,7 +50,7 @@ message PutRequest {
     container.Container container = 1;
 
     //Signature of stable-marshalled container according to RFC-6979.
-    neo.fs.v2.service.Signature signature =2;
+    neo.fs.v2.refs.Signature signature =2;
   }
   // Body of container put request message.
   Body body = 1;
@@ -94,7 +94,7 @@ message DeleteRequest {
     neo.fs.v2.refs.ContainerID container_id = 1;
 
     // Signature of container id according to RFC-6979.
-    neo.fs.v2.service.Signature signature = 2;
+    neo.fs.v2.refs.Signature signature = 2;
   }
   // Body of container delete request message.
   Body body = 1;
@@ -216,7 +216,7 @@ message SetExtendedACLRequest {
     neo.fs.v2.acl.EACLTable eacl = 1;
 
     // Signature of stable-marshalled Extended ACL according to RFC-6979.
-    neo.fs.v2.service.Signature signature = 2;
+    neo.fs.v2.refs.Signature signature = 2;
   }
   // Body of set extended acl request message.
   Body body = 1;
@@ -278,7 +278,7 @@ message GetExtendedACLResponse {
     neo.fs.v2.acl.EACLTable eacl = 1;
 
     // Signature of stable-marshalled Extended ACL according to RFC-6979.
-    neo.fs.v2.service.Signature signature = 2;
+    neo.fs.v2.refs.Signature signature = 2;
   }
   // Body of get extended acl response message.
   Body body = 1;

@@ -133,3 +133,34 @@ message EACLTable {
   // Records carries list of extended ACL rule records.
   repeated EACLRecord records = 2 [json_name="Records"];
 }
+
+// BearerToken has information about request ACL rules with limited lifetime
+message BearerToken {
+  // Bearer Token body
+  message Body {
+    // EACLTable carries table of extended ACL rules
+    EACLTable eacl_table = 1;
+
+    // OwnerID carries identifier of the token owner
+    neo.fs.v2.refs.OwnerID owner_id = 2;
+
+    // Lifetime parameters of the token. Filed names taken from rfc7519.
+    message TokenLifetime {
+      // Expiration Epoch
+      uint64 exp = 1;
+
+      // Not valid before Epoch
+      uint64 nbf = 2;
+
+      // Issued at Epoch
+      uint64 iat = 3;
+    }
+    // Token expiration and valid time period parameters
+    TokenLifetime lifetime = 3;
+  }
+  // Bearer Token body
+  Body body = 1;
+
+  // Signature of BearerToken body
+  neo.fs.v2.refs.Signature signature = 2;
+}
