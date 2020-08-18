@@ -146,7 +146,7 @@ Request body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | container_id carries identifier of the container to delete from NeoFS. |
-| signature | [bytes](#bytes) |  | Signature of container id according to RFC-6979. |
+| signature | [neo.fs.v2.service.Signature](#neo.fs.v2.service.Signature) |  | Signature of container id according to RFC-6979. |
 
 
 <a name="neo.fs.v2.container.DeleteResponse"></a>
@@ -216,7 +216,7 @@ Response body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL that has been requested if it was set up. |
-| signature | [bytes](#bytes) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
+| signature | [neo.fs.v2.service.Signature](#neo.fs.v2.service.Signature) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
 
 
 <a name="neo.fs.v2.container.GetRequest"></a>
@@ -337,8 +337,7 @@ Request body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container | [Container](#neo.fs.v2.container.Container) |  | Container to create in NeoFS. |
-| public_key | [bytes](#bytes) |  | Public Key of container owner. It can be public key of the owner or it can be public key that bound in neofs.id smart-contract. |
-| signature | [bytes](#bytes) |  | Signature of stable-marshalled container according to RFC-6979. |
+| signature | [neo.fs.v2.service.Signature](#neo.fs.v2.service.Signature) |  | Signature of stable-marshalled container according to RFC-6979. |
 
 
 <a name="neo.fs.v2.container.PutResponse"></a>
@@ -387,7 +386,7 @@ Request body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL to set for the container. |
-| signature | [bytes](#bytes) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
+| signature | [neo.fs.v2.service.Signature](#neo.fs.v2.service.Signature) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
 
 
 <a name="neo.fs.v2.container.SetExtendedACLResponse"></a>

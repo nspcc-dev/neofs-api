@@ -180,10 +180,7 @@ message DeleteRequest {
   message Body {
     // Carries the address of the object to be deleted.
     neo.fs.v2.refs.Address address = 1;
-
-    // Carries identifier the object owner.
-    neo.fs.v2.refs.OwnerID owner_id = 2;
-  }
+ }
   // Body of delete object request message.
   Body body = 1;
 
