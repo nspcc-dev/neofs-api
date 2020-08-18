@@ -40,7 +40,7 @@ message TokenLifetime {
 }
 
 // Context information for Session Tokens related to ObjectService requests
-message ObjectServiceContext {
+message ObjectSessionContext {
   // Object request verbs
   enum Verb {
     // Unknown verb
@@ -93,7 +93,7 @@ message SessionToken {
     // Carries context of the session.
     oneof context {
       // ObjectService session context.
-      ObjectServiceContext object_service = 5;
+      ObjectSessionContext object = 5;
     }
   }
   // Session Token body

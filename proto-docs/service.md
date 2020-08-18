@@ -8,7 +8,7 @@
   - Messages
     - [BearerToken](#neo.fs.v2.service.BearerToken)
     - [BearerToken.Body](#neo.fs.v2.service.BearerToken.Body)
-    - [ObjectServiceContext](#neo.fs.v2.service.ObjectServiceContext)
+    - [ObjectSessionContext](#neo.fs.v2.service.ObjectSessionContext)
     - [RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader)
     - [ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader)
     - [SessionToken](#neo.fs.v2.service.SessionToken)
@@ -64,15 +64,15 @@ Bearer Token body
 | lifetime | [TokenLifetime](#neo.fs.v2.service.TokenLifetime) |  | Token expiration and valid time period parameters |
 
 
-<a name="neo.fs.v2.service.ObjectServiceContext"></a>
+<a name="neo.fs.v2.service.ObjectSessionContext"></a>
 
-### Message ObjectServiceContext
+### Message ObjectSessionContext
 Context information for Session Tokens related to ObjectService requests
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| verb | [ObjectServiceContext.Verb](#neo.fs.v2.service.ObjectServiceContext.Verb) |  | Verb is a type of request for which the token is issued |
+| verb | [ObjectSessionContext.Verb](#neo.fs.v2.service.ObjectSessionContext.Verb) |  | Verb is a type of request for which the token is issued |
 | address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Related Object address |
 
 
@@ -132,7 +132,7 @@ Session token body
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | OwnerID carries identifier of the session initiator. |
 | lifetime | [TokenLifetime](#neo.fs.v2.service.TokenLifetime) |  | Lifetime is a lifetime of the session |
 | session_key | [bytes](#bytes) |  | SessionKey is a public key of session key |
-| object_service | [ObjectServiceContext](#neo.fs.v2.service.ObjectServiceContext) |  | ObjectService session context. |
+| object | [ObjectSessionContext](#neo.fs.v2.service.ObjectSessionContext) |  | ObjectService session context. |
 
 
 <a name="neo.fs.v2.service.TokenLifetime"></a>
@@ -174,9 +174,9 @@ Extended headers for Request/Response
  <!-- end messages -->
 
 
-<a name="neo.fs.v2.service.ObjectServiceContext.Verb"></a>
+<a name="neo.fs.v2.service.ObjectSessionContext.Verb"></a>
 
-### ObjectServiceContext.Verb
+### ObjectSessionContext.Verb
 Object request verbs
 
 | Name | Number | Description |
