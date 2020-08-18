@@ -12,6 +12,11 @@
     - [BalanceRequest.Body](#neo.fs.v2.accounting.BalanceRequest.Body)
     - [BalanceResponse](#neo.fs.v2.accounting.BalanceResponse)
     - [BalanceResponse.Body](#neo.fs.v2.accounting.BalanceResponse.Body)
+    
+
+- [accounting/types.proto](#accounting/types.proto)
+
+  - Messages
     - [Decimal](#neo.fs.v2.accounting.Decimal)
     
 
@@ -102,6 +107,20 @@ Request body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | balance | [Decimal](#neo.fs.v2.accounting.Decimal) |  | Carries the amount of funds on the account. |
+
+ <!-- end messages -->
+
+ <!-- end enums -->
+
+
+
+<a name="accounting/types.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## accounting/types.proto
+
+
+ <!-- end services -->
 
 
 <a name="neo.fs.v2.accounting.Decimal"></a>

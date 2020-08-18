@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package neo.fs.v2.accounting;
+
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/accounting/grpc;accounting";
+option csharp_namespace = "NeoFS.API.v2.Accounting";
+
+// Decimal represents the decimal numbers.
+message Decimal {
+  // value carries number value.
+  int64 value = 1;
+
+  // precision carries value precision.
+  uint32 precision = 2;
+}
