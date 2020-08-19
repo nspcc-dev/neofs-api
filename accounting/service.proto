@@ -7,7 +7,7 @@ option csharp_namespace = "NeoFS.API.v2.Accounting";
 
 import "accounting/types.proto";
 import "refs/types.proto";
-import "service/types.proto";
+import "session/types.proto";
 
 // The service provides methods for obtaining information
 // about the account balance in NeoFS system.
@@ -35,12 +35,12 @@ message BalanceRequest {
 
   // Carries request meta information. Header data is used only to regulate
   // message transport and does not affect request execution.
-  neo.fs.v2.service.RequestMetaHeader meta_header = 2;
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness
   // of transmission.
-  neo.fs.v2.service.RequestVerificationHeader verify_header = 3;
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
 // Message defines the response body of Balance method.
@@ -57,10 +57,10 @@ message BalanceResponse {
 
   // Carries response meta information. Header data is used only to regulate
   // message transport and does not affect request execution.
-  neo.fs.v2.service.ResponseMetaHeader meta_header = 2;
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness
   // of transmission.
-  neo.fs.v2.service.ResponseVerificationHeader verify_header = 3;
+  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }

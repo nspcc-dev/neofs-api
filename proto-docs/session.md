@@ -18,9 +18,14 @@
 
   - Messages
     - [ObjectSessionContext](#neo.fs.v2.session.ObjectSessionContext)
+    - [RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader)
+    - [RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader)
+    - [ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader)
+    - [ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader)
     - [SessionToken](#neo.fs.v2.session.SessionToken)
     - [SessionToken.Body](#neo.fs.v2.session.SessionToken.Body)
     - [SessionToken.Body.TokenLifetime](#neo.fs.v2.session.SessionToken.Body.TokenLifetime)
+    - [XHeader](#neo.fs.v2.session.XHeader)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -64,8 +69,8 @@ CreateRequest carries an information necessary for opening a session.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [CreateRequest.Body](#neo.fs.v2.session.CreateRequest.Body) |  | Body of create session token request message. |
-| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.session.CreateRequest.Body"></a>
@@ -89,8 +94,8 @@ CreateResponse carries an information about the opened session.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [CreateResponse.Body](#neo.fs.v2.session.CreateResponse.Body) |  | Body of create session token response message. |
-| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.session.CreateResponse.Body"></a>
@@ -131,6 +136,66 @@ Context information for Session Tokens related to ObjectService requests
 | address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Related Object address |
 
 
+<a name="neo.fs.v2.session.RequestMetaHeader"></a>
+
+### Message RequestMetaHeader
+Information about the request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Client API version. |
+| epoch | [uint64](#uint64) |  | Client local epoch number. Set to 0 if unknown. |
+| ttl | [uint32](#uint32) |  | Maximum number of nodes in the request route. |
+| x_headers | [XHeader](#neo.fs.v2.session.XHeader) | repeated | Request X-Headers. |
+| session_token | [SessionToken](#neo.fs.v2.session.SessionToken) |  | Token is a token of the session within which the request is sent |
+| bearer_token | [neo.fs.v2.acl.BearerToken](#neo.fs.v2.acl.BearerToken) |  | Bearer is a Bearer token of the request |
+| origin | [RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | RequestMetaHeader of the origin request. |
+
+
+<a name="neo.fs.v2.session.RequestVerificationHeader"></a>
+
+### Message RequestVerificationHeader
+Verification info for request signed by all intermediate nodes
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request Body signature. Should be generated once by request initiator. |
+| meta_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request Meta signature is added and signed by any intermediate node |
+| origin_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Sign previous hops |
+| origin | [RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Chain of previous hops signatures |
+
+
+<a name="neo.fs.v2.session.ResponseMetaHeader"></a>
+
+### Message ResponseMetaHeader
+Information about the response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Server API version. |
+| epoch | [uint64](#uint64) |  | Server local epoch number. |
+| ttl | [uint32](#uint32) |  | Maximum number of nodes in the response route. |
+| x_headers | [XHeader](#neo.fs.v2.session.XHeader) | repeated | Response X-Headers. |
+| origin | [ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta header of the origin response. |
+
+
+<a name="neo.fs.v2.session.ResponseVerificationHeader"></a>
+
+### Message ResponseVerificationHeader
+Verification info for response signed by all intermediate nodes
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Response Body signature. Should be generated once by answering node. |
+| meta_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Response Meta signature is added and signed by any intermediate node |
+| origin_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Sign previous hops |
+| origin | [ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Chain of previous hops signatures |
+
+
 <a name="neo.fs.v2.session.SessionToken"></a>
 
 ### Message SessionToken
@@ -169,6 +234,18 @@ Lifetime parameters of the token. Filed names taken from rfc7519.
 | exp | [uint64](#uint64) |  | Expiration Epoch |
 | nbf | [uint64](#uint64) |  | Not valid before Epoch |
 | iat | [uint64](#uint64) |  | Issued at Epoch |
+
+
+<a name="neo.fs.v2.session.XHeader"></a>
+
+### Message XHeader
+Extended headers for Request/Response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  | Key of the X-Header. |
+| value | [string](#string) |  | Value of the X-Header. |
 
  <!-- end messages -->
 
