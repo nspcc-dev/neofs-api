@@ -7,7 +7,7 @@ option csharp_namespace = "NeoFS.API.v2.Object";
 
 import "object/types.proto";
 import "refs/types.proto";
-import "service/types.proto";
+import "session/types.proto";
 
 // Object service provides API for manipulating with the object.
 service ObjectService {
@@ -68,11 +68,11 @@ message GetRequest {
 
   // Carries request meta information. Header data is used only to regulate message
   // transport and does not affect request execution.
-  neo.fs.v2.service.RequestMetaHeader meta_header = 2;
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to authenticate
   // the nodes of the message route and check the correctness of transmission.
-  neo.fs.v2.service.RequestVerificationHeader verify_header = 3;
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
 // get object response
@@ -104,12 +104,12 @@ message GetResponse {
 
   // Carries response meta information. Header data is used only to regulate
   // message transport and does not affect request execution.
-  neo.fs.v2.service.ResponseMetaHeader meta_header = 2;
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness
   // of transmission.
-  neo.fs.v2.service.ResponseVerificationHeader verify_header = 3;
+  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
 // Put object request
@@ -146,11 +146,11 @@ message PutRequest {
 
   // Carries request meta information. Header data is used only to regulate message
   // transport and does not affect request execution.
-  neo.fs.v2.service.RequestMetaHeader meta_header = 2;
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to authenticate
   // the nodes of the message route and check the correctness of transmission.
-  neo.fs.v2.service.RequestVerificationHeader verify_header = 3;
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
 // Put object response
@@ -166,12 +166,12 @@ message PutResponse {
 
   // Carries response meta information. Header data is used only to regulate
   // message transport and does not affect request execution.
-  neo.fs.v2.service.ResponseMetaHeader meta_header = 2;
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness
   // of transmission.
-  neo.fs.v2.service.ResponseVerificationHeader verify_header = 3;
+  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
 // Object Delete request
@@ -186,11 +186,11 @@ message DeleteRequest {
 
   // Carries request meta information. Header data is used only to regulate message
   // transport and does not affect request execution.
-  neo.fs.v2.service.RequestMetaHeader meta_header = 2;
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to authenticate
   // the nodes of the message route and check the correctness of transmission.
-  neo.fs.v2.service.RequestVerificationHeader verify_header = 3;
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
 // DeleteResponse is empty because we cannot guarantee permanent object removal
@@ -204,12 +204,12 @@ message DeleteResponse {
 
   // Carries response meta information. Header data is used only to regulate
   // message transport and does not affect request execution.
-  neo.fs.v2.service.ResponseMetaHeader meta_header = 2;
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness
   // of transmission.
-  neo.fs.v2.service.ResponseVerificationHeader verify_header = 3;
+  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
 // Object head request
@@ -232,11 +232,11 @@ message HeadRequest {
 
   // Carries request meta information. Header data is used only to regulate message
   // transport and does not affect request execution.
-  neo.fs.v2.service.RequestMetaHeader meta_header = 2;
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to authenticate
   // the nodes of the message route and check the correctness of transmission.
-  neo.fs.v2.service.RequestVerificationHeader verify_header = 3;
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
 // Head response
@@ -257,12 +257,12 @@ message HeadResponse {
 
   // Carries response meta information. Header data is used only to regulate
   // message transport and does not affect request execution.
-  neo.fs.v2.service.ResponseMetaHeader meta_header = 2;
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness
   // of transmission.
-  neo.fs.v2.service.ResponseVerificationHeader verify_header = 3;
+  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
 // Search objects request
@@ -293,11 +293,11 @@ message SearchRequest {
 
   // Carries request meta information. Header data is used only to regulate message
   // transport and does not affect request execution.
-  neo.fs.v2.service.RequestMetaHeader meta_header = 2;
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to authenticate
   // the nodes of the message route and check the correctness of transmission.
-  neo.fs.v2.service.RequestVerificationHeader verify_header = 3;
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
 // Search response
@@ -312,12 +312,12 @@ message SearchResponse {
 
   // Carries response meta information. Header data is used only to regulate
   // message transport and does not affect request execution.
-  neo.fs.v2.service.ResponseMetaHeader meta_header = 2;
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness
   // of transmission.
-  neo.fs.v2.service.ResponseVerificationHeader verify_header = 3;
+  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
 // Range groups the parameters of object payload range.
@@ -345,11 +345,11 @@ message GetRangeRequest {
 
   // Carries request meta information. Header data is used only to regulate message
   // transport and does not affect request execution.
-  neo.fs.v2.service.RequestMetaHeader meta_header = 2;
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to authenticate
   // the nodes of the message route and check the correctness of transmission.
-  neo.fs.v2.service.RequestVerificationHeader verify_header = 3;
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
 // Get part of object's payload
@@ -365,12 +365,12 @@ message GetRangeResponse {
 
   // Carries response meta information. Header data is used only to regulate
   // message transport and does not affect request execution.
-  neo.fs.v2.service.ResponseMetaHeader meta_header = 2;
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness
   // of transmission.
-  neo.fs.v2.service.ResponseVerificationHeader verify_header = 3;
+  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
 // Get hash of object's payload part
@@ -394,11 +394,11 @@ message GetRangeHashRequest {
 
   // Carries request meta information. Header data is used only to regulate message
   // transport and does not affect request execution.
-  neo.fs.v2.service.RequestMetaHeader meta_header = 2;
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to authenticate
   // the nodes of the message route and check the correctness of transmission.
-  neo.fs.v2.service.RequestVerificationHeader verify_header = 3;
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
 // Get hash of object's payload part
@@ -416,10 +416,10 @@ message GetRangeHashResponse {
 
   // Carries response meta information. Header data is used only to regulate
   // message transport and does not affect request execution.
-  neo.fs.v2.service.ResponseMetaHeader meta_header = 2;
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness
   // of transmission.
-  neo.fs.v2.service.ResponseVerificationHeader verify_header = 3;
+  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }

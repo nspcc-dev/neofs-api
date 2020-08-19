@@ -133,8 +133,8 @@ Container removal request
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [DeleteRequest.Body](#neo.fs.v2.container.DeleteRequest.Body) |  | Body of container delete request message. |
-| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.DeleteRequest.Body"></a>
@@ -159,8 +159,8 @@ via consensus in inner ring nodes
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [DeleteResponse.Body](#neo.fs.v2.container.DeleteResponse.Body) |  | Body of container delete response message. |
-| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.DeleteResponse.Body"></a>
@@ -179,8 +179,8 @@ Get Extended ACL
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [GetExtendedACLRequest.Body](#neo.fs.v2.container.GetExtendedACLRequest.Body) |  | Body of get extended acl request message. |
-| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.GetExtendedACLRequest.Body"></a>
@@ -203,8 +203,8 @@ Get Extended ACL
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [GetExtendedACLResponse.Body](#neo.fs.v2.container.GetExtendedACLResponse.Body) |  | Body of get extended acl response message. |
-| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.GetExtendedACLResponse.Body"></a>
@@ -228,8 +228,8 @@ Get container structure
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [GetRequest.Body](#neo.fs.v2.container.GetRequest.Body) |  | Body of container get request message. |
-| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.GetRequest.Body"></a>
@@ -252,8 +252,8 @@ Get container structure
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [GetResponse.Body](#neo.fs.v2.container.GetResponse.Body) |  | Body of container get response message. |
-| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.GetResponse.Body"></a>
@@ -276,8 +276,8 @@ List containers
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [ListRequest.Body](#neo.fs.v2.container.ListRequest.Body) |  | Body of list containers request message. |
-| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.ListRequest.Body"></a>
@@ -300,8 +300,8 @@ List containers
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [ListResponse.Body](#neo.fs.v2.container.ListResponse.Body) |  | Body of list containers response message. |
-| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.ListResponse.Body"></a>
@@ -324,8 +324,8 @@ New NeoFS Container creation request
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [PutRequest.Body](#neo.fs.v2.container.PutRequest.Body) |  | Body of container put request message. |
-| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.PutRequest.Body"></a>
@@ -349,8 +349,8 @@ New NeoFS Container creation response
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [PutResponse.Body](#neo.fs.v2.container.PutResponse.Body) |  | Body of container put response message. |
-| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.PutResponse.Body"></a>
@@ -373,8 +373,8 @@ Set Extended ACL
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [SetExtendedACLRequest.Body](#neo.fs.v2.container.SetExtendedACLRequest.Body) |  | Body of set extended acl request message. |
-| meta_header | [neo.fs.v2.service.RequestMetaHeader](#neo.fs.v2.service.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.RequestVerificationHeader](#neo.fs.v2.service.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.SetExtendedACLRequest.Body"></a>
@@ -398,8 +398,8 @@ Set Extended ACL
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [SetExtendedACLResponse.Body](#neo.fs.v2.container.SetExtendedACLResponse.Body) |  | Body of set extended acl response message. |
-| meta_header | [neo.fs.v2.service.ResponseMetaHeader](#neo.fs.v2.service.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.service.ResponseVerificationHeader](#neo.fs.v2.service.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.SetExtendedACLResponse.Body"></a>
