@@ -6,14 +6,12 @@
 - [netmap/types.proto](#netmap/types.proto)
 
   - Messages
+    - [Filter](#neo.fs.v2.netmap.Filter)
     - [NodeInfo](#neo.fs.v2.netmap.NodeInfo)
     - [NodeInfo.Attribute](#neo.fs.v2.netmap.NodeInfo.Attribute)
     - [PlacementPolicy](#neo.fs.v2.netmap.PlacementPolicy)
-    - [PlacementPolicy.FilterGroup](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup)
-    - [PlacementPolicy.FilterGroup.Filter](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter)
-    - [PlacementPolicy.FilterGroup.Filter.SimpleFilter](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter)
-    - [PlacementPolicy.FilterGroup.Filter.SimpleFilter.SimpleFilters](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter.SimpleFilters)
-    - [PlacementPolicy.FilterGroup.Selector](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Selector)
+    - [Replica](#neo.fs.v2.netmap.Replica)
+    - [Selector](#neo.fs.v2.netmap.Selector)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -27,6 +25,21 @@
 
 
  <!-- end services -->
+
+
+<a name="neo.fs.v2.netmap.Filter"></a>
+
+### Message Filter
+Filter
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Name of the filter or a reference to the named filter. '*' means application to the whole unfiltered NetworkMap At top level it's used as a filter name. At lower levels it's considered to be a reference to another named filter |
+| key | [string](#string) |  | Key to filter |
+| op | [Operation](#neo.fs.v2.netmap.Operation) |  | Filtering operation |
+| value | [string](#string) |  | Value to match |
+| filters | [Filter](#neo.fs.v2.netmap.Filter) | repeated | List of inner filters. Top level operation will be applied to the whole list. |
 
 
 <a name="neo.fs.v2.netmap.NodeInfo"></a>
@@ -53,6 +66,7 @@ Attributes of the NeoFS node.
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  | Key of the node attribute. |
 | value | [string](#string) |  | Value of the node attribute. |
+| parents | [string](#string) | repeated | Parent keys, if any Example: For City it can be Region or Country |
 
 
 <a name="neo.fs.v2.netmap.PlacementPolicy"></a>
@@ -63,69 +77,36 @@ Set of rules to select a subset of nodes able to store container's objects
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| repl_factor | [uint32](#uint32) |  | Replication factor |
-| filter_groups | [PlacementPolicy.FilterGroup](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup) | repeated | List of filter groups |
+| replicas | [Replica](#neo.fs.v2.netmap.Replica) | repeated | Rules to set number of object replicas and place each one into a particular bucket |
+| container_backup_factor | [uint32](#uint32) |  | Container backup factor controls how deep NeoFS will search for nodes alternatives to include into container. |
+| selectors | [Selector](#neo.fs.v2.netmap.Selector) | repeated | Set of Selectors to form the container's nodes subset |
+| filters | [Filter](#neo.fs.v2.netmap.Filter) | repeated | List of named filters to reference in selectors |
 
 
-<a name="neo.fs.v2.netmap.PlacementPolicy.FilterGroup"></a>
+<a name="neo.fs.v2.netmap.Replica"></a>
 
-### Message PlacementPolicy.FilterGroup
-Filters to apply to Network Map
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| filters | [PlacementPolicy.FilterGroup.Filter](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter) | repeated | Resulting filter list |
-| selectors | [PlacementPolicy.FilterGroup.Selector](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Selector) | repeated | List of selectors |
-| exclude | [uint32](#uint32) | repeated | Parts of graph to exclude. Internal use. |
-
-
-<a name="neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter"></a>
-
-### Message PlacementPolicy.FilterGroup.Filter
-Filter definition
+### Message Replica
+Exact bucket for each replica
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  | Filter identifier |
-| f | [PlacementPolicy.FilterGroup.Filter.SimpleFilter](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter) |  | The rest of filter |
+| count | [uint32](#uint32) |  | How many object replicas to put |
+| selector | [string](#string) |  | Named selector bucket to put in |
 
 
-<a name="neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter"></a>
+<a name="neo.fs.v2.netmap.Selector"></a>
 
-### Message PlacementPolicy.FilterGroup.Filter.SimpleFilter
-Minimal simple filter
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| op | [PlacementPolicy.FilterGroup.Filter.SimpleFilter.Operation](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter.Operation) |  | Filtering operation |
-| value | [string](#string) |  | Value |
-| f_args | [PlacementPolicy.FilterGroup.Filter.SimpleFilter.SimpleFilters](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter.SimpleFilters) |  | Result of other filter application |
-
-
-<a name="neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter.SimpleFilters"></a>
-
-### Message PlacementPolicy.FilterGroup.Filter.SimpleFilter.SimpleFilters
-List of filters
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| filters | [PlacementPolicy.FilterGroup.Filter.SimpleFilter](#neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter) | repeated | List of filters |
-
-
-<a name="neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Selector"></a>
-
-### Message PlacementPolicy.FilterGroup.Selector
+### Message Selector
 Selector
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| count | [uint32](#uint32) |  | How many to select |
-| key | [string](#string) |  | Key to select |
+| name | [string](#string) |  | Selector name to reference in object placement section |
+| count | [uint32](#uint32) |  | How many nodes to select from bucket |
+| attribute | [string](#string) |  | Attribute bucket to select from |
+| filter | [string](#string) |  | Filter reference to select from |
 
  <!-- end messages -->
 
@@ -143,10 +124,10 @@ Represents the enumeration of various states of the NeoFS node.
 
 
 
-<a name="neo.fs.v2.netmap.PlacementPolicy.FilterGroup.Filter.SimpleFilter.Operation"></a>
+<a name="neo.fs.v2.netmap.Operation"></a>
 
-### PlacementPolicy.FilterGroup.Filter.SimpleFilter.Operation
-Filtering operation
+### Operation
+Operations on filters
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
