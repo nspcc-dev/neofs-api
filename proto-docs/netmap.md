@@ -37,8 +37,8 @@ NeoFS node description
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [string](#string) |  | Ways to connect to a node |
 | public_key | [bytes](#bytes) |  | Public key of the NeoFS node in a binary format. |
+| address | [string](#string) |  | Ways to connect to a node |
 | attributes | [NodeInfo.Attribute](#neo.fs.v2.netmap.NodeInfo.Attribute) | repeated | Carries list of the NeoFS node attributes in a string key-value format. |
 | state | [NodeInfo.State](#neo.fs.v2.netmap.NodeInfo.State) |  | Carries state of the NeoFS node. |
 

@@ -92,11 +92,11 @@ message PlacementPolicy {
 
 // NeoFS node description
 message NodeInfo {
-  // Ways to connect to a node
-  string address = 1;
-
   // Public key of the NeoFS node in a binary format.
-  bytes public_key = 2;
+  bytes public_key = 1;
+
+  // Ways to connect to a node
+  string address = 2;
 
   // Attributes of the NeoFS node.
   message Attribute {
