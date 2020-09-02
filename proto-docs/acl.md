@@ -10,8 +10,8 @@
     - [BearerToken.Body](#neo.fs.v2.acl.BearerToken.Body)
     - [BearerToken.Body.TokenLifetime](#neo.fs.v2.acl.BearerToken.Body.TokenLifetime)
     - [EACLRecord](#neo.fs.v2.acl.EACLRecord)
-    - [EACLRecord.FilterInfo](#neo.fs.v2.acl.EACLRecord.FilterInfo)
-    - [EACLRecord.TargetInfo](#neo.fs.v2.acl.EACLRecord.TargetInfo)
+    - [EACLRecord.Filter](#neo.fs.v2.acl.EACLRecord.Filter)
+    - [EACLRecord.Target](#neo.fs.v2.acl.EACLRecord.Target)
     - [EACLTable](#neo.fs.v2.acl.EACLTable)
     
 
@@ -76,33 +76,33 @@ EACLRecord groups information about extended ACL rule.
 | ----- | ---- | ----- | ----------- |
 | operation | [Operation](#neo.fs.v2.acl.Operation) |  | Operation carries type of operation. |
 | action | [Action](#neo.fs.v2.acl.Action) |  | Action carries ACL target action. |
-| filters | [EACLRecord.FilterInfo](#neo.fs.v2.acl.EACLRecord.FilterInfo) | repeated | filters carries set of filters. |
-| targets | [EACLRecord.TargetInfo](#neo.fs.v2.acl.EACLRecord.TargetInfo) | repeated | targets carries information about extended ACL target list. |
+| filters | [EACLRecord.Filter](#neo.fs.v2.acl.EACLRecord.Filter) | repeated | filters carries set of filters. |
+| targets | [EACLRecord.Target](#neo.fs.v2.acl.EACLRecord.Target) | repeated | targets carries information about extended ACL target list. |
 
 
-<a name="neo.fs.v2.acl.EACLRecord.FilterInfo"></a>
+<a name="neo.fs.v2.acl.EACLRecord.Filter"></a>
 
-### Message EACLRecord.FilterInfo
-FilterInfo groups information about filter.
+### Message EACLRecord.Filter
+Filter definition
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| header | [HeaderType](#neo.fs.v2.acl.HeaderType) |  | Header carries type of header. |
+| header_type | [HeaderType](#neo.fs.v2.acl.HeaderType) |  | Header carries type of header. |
 | match_type | [MatchType](#neo.fs.v2.acl.MatchType) |  | MatchType carries type of match. |
 | header_name | [string](#string) |  | header_name carries name of filtering header. |
 | header_val | [string](#string) |  | header_val carries value of filtering header. |
 
 
-<a name="neo.fs.v2.acl.EACLRecord.TargetInfo"></a>
+<a name="neo.fs.v2.acl.EACLRecord.Target"></a>
 
-### Message EACLRecord.TargetInfo
-TargetInfo groups information about extended ACL target.
+### Message EACLRecord.Target
+Information about extended ACL target.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| target | [Target](#neo.fs.v2.acl.Target) |  | target carries target of ACL rule. |
+| role | [Role](#neo.fs.v2.acl.Role) |  | target carries target of ACL rule. |
 | key_list | [bytes](#bytes) | repeated | key_list carries public keys of ACL target. |
 
 
@@ -178,14 +178,14 @@ Operation is an enumeration of operation types.
 
 
 
-<a name="neo.fs.v2.acl.Target"></a>
+<a name="neo.fs.v2.acl.Role"></a>
 
-### Target
-Target of the access control rule in access control list.
+### Role
+Target role of the access control rule in access control list.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| TARGET_UNSPECIFIED | 0 | Unspecified target, default value. |
+| ROLE_UNSPECIFIED | 0 | Unspecified role, default value. |
 | USER | 1 | User target rule is applied if sender is the owner of the container. |
 | SYSTEM | 2 | System target rule is applied if sender is the storage node within the container or inner ring node. |
 | OTHERS | 3 | Others target rule is applied if sender is not user or system target. |

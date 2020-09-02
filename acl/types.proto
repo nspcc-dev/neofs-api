@@ -7,10 +7,10 @@ option csharp_namespace = "NeoFS.API.v2.Acl";
 
 import "refs/types.proto";
 
-// Target of the access control rule in access control list.
-enum Target {
-  // Unspecified target, default value.
-  TARGET_UNSPECIFIED= 0;
+// Target role of the access control rule in access control list.
+enum Role {
+  // Unspecified  role, default value.
+  ROLE_UNSPECIFIED= 0;
 
   // User target rule is applied if sender is the owner of the container.
   USER = 1;
@@ -94,10 +94,10 @@ message EACLRecord {
   // Action carries ACL target action.
   Action action = 2 [json_name = "Action"];
 
-  // FilterInfo groups information about filter.
-  message FilterInfo {
+  // Filter definition
+  message Filter {
     // Header carries type of header.
-    HeaderType header = 1 [json_name = "HeaderType"];
+    HeaderType header_type = 1 [json_name = "HeaderType"];
 
     // MatchType carries type of match.
     MatchType match_type = 2 [json_name = "MatchType"];
@@ -110,18 +110,18 @@ message EACLRecord {
   }
 
   // filters carries set of filters.
-  repeated FilterInfo filters = 3 [json_name="Filters"];
+  repeated Filter filters = 3 [json_name="Filters"];
 
-  // TargetInfo groups information about extended ACL target.
-  message TargetInfo {
+  // Information about extended ACL target.
+  message Target {
     // target carries target of ACL rule.
-    Target target = 1 [json_name="Role"];
+    Role role = 1 [json_name="Role"];
 
     // key_list carries public keys of ACL target.
     repeated bytes key_list = 2 [json_name="Keys"];
   }
   // targets carries information about extended ACL target list.
-  repeated TargetInfo targets = 4 [json_name="Targets"];
+  repeated Target targets = 4 [json_name="Targets"];
 }
 
 // EACLRecord carries the information about extended ACL rules.
