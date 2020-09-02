@@ -126,12 +126,16 @@ message EACLRecord {
 
 // EACLRecord carries the information about extended ACL rules.
 message EACLTable {
+  // eACL format version.
+  // Effectively the version of API library used to create eACL Table
+  neo.fs.v2.refs.Version version = 1;
+
   // Carries identifier of the container that should use given
   // access control rules.
-  neo.fs.v2.refs.ContainerID container_id = 1 [json_name="ContainerID"];
+  neo.fs.v2.refs.ContainerID container_id = 2 [json_name="ContainerID"];
 
   // Records carries list of extended ACL rule records.
-  repeated EACLRecord records = 2 [json_name="Records"];
+  repeated EACLRecord records = 3 [json_name="Records"];
 }
 
 // BearerToken has information about request ACL rules with limited lifetime

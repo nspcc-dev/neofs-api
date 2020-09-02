@@ -114,6 +114,7 @@ EACLRecord carries the information about extended ACL rules.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | eACL format version. Effectively the version of API library used to create eACL Table |
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Carries identifier of the container that should use given access control rules. |
 | records | [EACLRecord](#neo.fs.v2.acl.EACLRecord) | repeated | Records carries list of extended ACL rule records. |
 
