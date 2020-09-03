@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package neo.fs.v2.netmap;
+
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/netmap/grpc;netmap";
+option csharp_namespace = "NeoFS.API.v2.Netmap";
+
+import "netmap/types.proto";
+import "refs/types.proto";
+import "session/types.proto";
+
+// Methods to work with NetworkMap
+service NetmapService {
+  // Return information about Node
+  rpc LocalNodeInfo (LocalNodeInfoRequest) returns (LocalNodeInfoResponse);
+}
+
+// Get NodeInfo from the particular node directly
+message LocalNodeInfoRequest {
+  //Request body
+  message Body {
+  }
+  // Body of the balance request message.
+  Body body = 1;
+
+  // Carries request meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
+
+  // Carries request verification information. This header is used to
+  // authenticate the nodes of the message route and check the correctness
+  // of transmission.
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
+}
+
+// Local nod Info, including API Version in use
+message LocalNodeInfoResponse {
+  //Response body
+  message Body {
+    // API version in use
+    neo.fs.v2.refs.Version version = 1;
+
+    // NodeInfo from node itself
+    NodeInfo node_info = 2;
+  }
+  // Body of the balance response message.
+  Body body = 1;
+
+  // Carries response meta information. Header data is used only to regulate
+  // message transport and does not affect response execution.
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
+
+  // Carries response verification information. This header is used to
+  // authenticate the nodes of the message route and check the correctness
+  // of transmission.
+  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
+}
