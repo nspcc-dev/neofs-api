@@ -3,6 +3,17 @@
 
 ## Table of Contents
 
+- [netmap/service.proto](#netmap/service.proto)
+ - Services
+    - [NetmapService](#neo.fs.v2.netmap.NetmapService)
+    
+  - Messages
+    - [LocalNodeInfoRequest](#neo.fs.v2.netmap.LocalNodeInfoRequest)
+    - [LocalNodeInfoRequest.Body](#neo.fs.v2.netmap.LocalNodeInfoRequest.Body)
+    - [LocalNodeInfoResponse](#neo.fs.v2.netmap.LocalNodeInfoResponse)
+    - [LocalNodeInfoResponse.Body](#neo.fs.v2.netmap.LocalNodeInfoResponse.Body)
+    
+
 - [netmap/types.proto](#netmap/types.proto)
 
   - Messages
@@ -15,6 +26,84 @@
     
 
 - [Scalar Value Types](#scalar-value-types)
+
+
+
+<a name="netmap/service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## netmap/service.proto
+
+
+
+
+<a name="neo.fs.v2.netmap.NetmapService"></a>
+
+### Service "neo.fs.v2.netmap.NetmapService"
+Methods to work with NetworkMap
+
+```
+rpc LocalNodeInfo(LocalNodeInfoRequest) returns (LocalNodeInfoResponse);
+
+```
+
+#### Method LocalNodeInfo
+
+Return information about Node
+
+| Name | Input | Output |
+| ---- | ----- | ------ |
+| LocalNodeInfo | [LocalNodeInfoRequest](#neo.fs.v2.netmap.LocalNodeInfoRequest) | [LocalNodeInfoResponse](#neo.fs.v2.netmap.LocalNodeInfoResponse) |
+ <!-- end services -->
+
+
+<a name="neo.fs.v2.netmap.LocalNodeInfoRequest"></a>
+
+### Message LocalNodeInfoRequest
+Get NodeInfo from the particular node directly
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [LocalNodeInfoRequest.Body](#neo.fs.v2.netmap.LocalNodeInfoRequest.Body) |  | Body of the balance request message. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="neo.fs.v2.netmap.LocalNodeInfoRequest.Body"></a>
+
+### Message LocalNodeInfoRequest.Body
+Request body
+
+
+
+<a name="neo.fs.v2.netmap.LocalNodeInfoResponse"></a>
+
+### Message LocalNodeInfoResponse
+Local nod Info, including API Version in use
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [LocalNodeInfoResponse.Body](#neo.fs.v2.netmap.LocalNodeInfoResponse.Body) |  | Body of the balance response message. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect response execution. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="neo.fs.v2.netmap.LocalNodeInfoResponse.Body"></a>
+
+### Message LocalNodeInfoResponse.Body
+Response body
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | API version in use |
+| node_info | [NodeInfo](#neo.fs.v2.netmap.NodeInfo) |  | NodeInfo from node itself |
+
+ <!-- end messages -->
+
+ <!-- end enums -->
 
 
 
