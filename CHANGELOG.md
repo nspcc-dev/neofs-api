@@ -1,5 +1,57 @@
 # Changelog
 
+## [2.0.0] - 2020-09-04 - Jindo (진도, 珍島)
+
+Major API refactoring and simplification.
+
+### Added
+- `neo.fs.v2` prefix added to all package names
+- `container.Attributes` field added
+- `refs.ContainerID` added as a separate type
+- `refs.OwnerID` added as a separate type
+- Object Search query language defined in `object.SearchRequest.Body.filter`
+- `netmap` package added
+- `refs.Signature` defined as a separate type
+- `session.SessionToken` now has context information for each service
+- `refs.Version` defined as a separate type
+- `refs.Version` field added to all messages stored in SmartContracts
+- `refs.Checksum` defined as a separate type
+- `netmap.LocalNodeInfo` request added to get actual information from connected peer
+
+### Changed
+- Extended ACL Table format changed
+- Protobuf definitions style changed to follow Google Style Guide
+- `System` and `Extended` Object headers are merged into on `object.Header` type
+- `object.UserHeader` renamed to `object.Header.Attribute`
+- `refs.ObjectID` is now a hash of the `object.Header` field, which contains hash of payload
+- `StorageGroup` information moved to Object's payload
+- `netmap.NodeInfo.options` renamed to `netmap.NodeInfo.attributes` and it uses a
+  separate `netmap.NodeInfo.Attribute` type now.
+- `netmap.NodeInfo.Attribute` type now has a list of parents to construct a tree
+- Session Token renamed to `session.SessionToken` from `session.Token`
+- All Requests and Responses now have a common "body-meta-verify" structure
+- Meta and Verification headers now follow Matryoshka-style composition
+- SessionToken and BearerToken are now part of Meta header
+- Object placement policy format is simplified and defined in `netmap` package
+- `object.Head()` request now returns either short header or full header with a signature
+
+### Removed
+- gogoproto is not used anymore
+- `decimal` package merged into `accounting` package
+- `query` package merged into `object` package
+- `storagegroup` package merged into `object` package
+- `bootstrap` package merged into `netmap` package
+- `state` package removed
+- `service` package removed. Merged with `session` package
+- `state` package removed. It will be implementation specific part of neofs-node
+- `SpreadMap` functionality removed from `netmap` package
+- Unixtime support removed from creation timestamps, leaving only Epoch number
+- `Link` type removed from Object headers
+- `Redirect` type support removed from Object headers
+- Withdrawal and Account Lock functionality removed from `accounting` service
+- Deposit functionality removed from `accounting` service
+- Settlement functionality removed from `accounting` service
+
 ## [1.2.0] - 2020-07-08
 
 ### Added
@@ -111,3 +163,4 @@ Bump major release
 [1.0.0]: https://github.com/nspcc-dev/neofs-api/compare/v0.7.5...v1.0.0
 [1.1.0]: https://github.com/nspcc-dev/neofs-api/compare/v1.0.0...v1.1.0
 [1.2.0]: https://github.com/nspcc-dev/neofs-api/compare/v1.1.0...v1.2.0
+[2.0.0]: https://github.com/nspcc-dev/neofs-api/compare/v1.2.0...v2.0.0
