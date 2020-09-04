@@ -29,6 +29,7 @@
     - [HeadRequest.Body](#neo.fs.v2.object.HeadRequest.Body)
     - [HeadResponse](#neo.fs.v2.object.HeadResponse)
     - [HeadResponse.Body](#neo.fs.v2.object.HeadResponse.Body)
+    - [HeaderWithSignature](#neo.fs.v2.object.HeaderWithSignature)
     - [PutRequest](#neo.fs.v2.object.PutRequest)
     - [PutRequest.Body](#neo.fs.v2.object.PutRequest.Body)
     - [PutRequest.Body.Init](#neo.fs.v2.object.PutRequest.Body.Init)
@@ -406,8 +407,19 @@ Response body
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| header | [Header](#neo.fs.v2.object.Header) |  | Full object header |
+| header | [HeaderWithSignature](#neo.fs.v2.object.HeaderWithSignature) |  | Full object header with object ID signature |
 | short_header | [ShortHeader](#neo.fs.v2.object.ShortHeader) |  | Short object header |
+
+
+<a name="neo.fs.v2.object.HeaderWithSignature"></a>
+
+### Message HeaderWithSignature
+Tuple of full object header and signature of object ID.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| header | [Header](#neo.fs.v2.object.Header) |  | Full object header |
 | signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signed object_id to verify full header's authenticity through following steps: 1. Calculate SHA-256 of marshalled Headers structure. 2. Check if the resulting hash matched ObjectID 3. Check if ObjectID's signature in signature field is correct. |
 
 

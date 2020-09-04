@@ -258,7 +258,7 @@ message HeadResponse {
     // Carries the requested object header or it's part
     oneof head{
       // Full object header with object ID signature
-      Header HeaderWithSignature = 1;
+      HeaderWithSignature header = 1;
 
       // Short object header
       ShortHeader short_header = 2;
