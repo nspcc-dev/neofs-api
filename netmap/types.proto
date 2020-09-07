@@ -35,6 +35,20 @@ enum Operation {
   AND = 8;
 }
 
+// Selector modifier showing how the node set will be formed
+// By default selector just groups by attribute into a bucket selecting nodes
+// only by their hash distance.
+enum Clause{
+  // No modifier defined. Will select nodes from bucket randomly.
+  CLAUSE_UNSPECIFIED = 0;
+
+  // SAME will select only nodes having the same value of bucket attribute
+  SAME = 1;
+
+  // DISTINCT will select nodes having different values of bucket attribute
+  DISTINCT = 2;
+}
+
 // Filter
 message Filter {
   // Name of the filter or a reference to the named filter.
@@ -64,11 +78,14 @@ message Selector {
   // How many nodes to select from bucket
   uint32 count = 2;
 
+  // Selector modifier showing how to form a bucket
+  Clause clause = 3;
+
   // Attribute bucket to select from
-  string attribute = 3;
+  string attribute = 4;
 
   // Filter reference to select from
-  string filter = 4;
+  string filter = 5;
 }
 
 // Exact bucket for each replica

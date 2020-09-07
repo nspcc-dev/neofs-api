@@ -194,10 +194,26 @@ Selector
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Selector name to reference in object placement section |
 | count | [uint32](#uint32) |  | How many nodes to select from bucket |
+| clause | [Clause](#neo.fs.v2.netmap.Clause) |  | Selector modifier showing how to form a bucket |
 | attribute | [string](#string) |  | Attribute bucket to select from |
 | filter | [string](#string) |  | Filter reference to select from |
 
  <!-- end messages -->
+
+
+<a name="neo.fs.v2.netmap.Clause"></a>
+
+### Clause
+Selector modifier showing how the node set will be formed
+By default selector just groups by attribute into a bucket selecting nodes
+only by their hash distance.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CLAUSE_UNSPECIFIED | 0 | No modifier defined |
+| SAME | 1 | SAME will select only nodes having the same value of bucket attribute |
+| DISTINCT | 2 | DISTINCT will select nodes having different values of bucket attribute |
+
 
 
 <a name="neo.fs.v2.netmap.NodeInfo.State"></a>
