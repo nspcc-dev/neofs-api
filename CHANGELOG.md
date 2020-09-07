@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.0] - 2020-09-04 - Jindo (진도, 珍島)
+## [2.0.0] - 2020-09-07 - Jindo (진도, 珍島)
 
 Major API refactoring and simplification.
 
