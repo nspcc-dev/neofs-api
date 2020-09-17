@@ -10,10 +10,10 @@ lint:
 	buf check breaking --against-input '.git#branch=$(BRBR)'
 
 .PHONY: doc
-# Regenerate documentation for protot files:
+# Regenerate documentation for proto files:
 doc:
 	@for f in `find . -type f -name '*.proto' -exec dirname {} \; | sort -u `; do \
-		echo "${B}${G}⇒ Documentation for $$(basename $$f) ${R}"; \
+		echo "⇒ Documentation for $$(basename $$f)"; \
 		protoc \
 			--doc_opt=.github/markdown.tmpl,$${f}.md \
 			--proto_path=.:/usr/local/include \
