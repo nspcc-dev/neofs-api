@@ -25,7 +25,7 @@ This repository contains:
 - [auto-generated docs](proto-docs) for protocol buffers
 - [manually written docs](docs) for developers (to be done)
 
-# Contributing
+## Contributing
 
 Feel free to contribute to this project after reading the [contributing
 guidelines](CONTRIBUTING.md).
@@ -33,9 +33,7 @@ guidelines](CONTRIBUTING.md).
 Before starting to work on a certain topic, create an new issue first,
 describing the feature/topic you are going to implement.
 
-
 ## License
 
-This project is licensed under the Apache 2.0 License - 
+This project is licensed under the Apache 2.0 License -
 see the [LICENSE](LICENSE) file for details
-
