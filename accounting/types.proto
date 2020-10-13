@@ -5,11 +5,18 @@ package neo.fs.v2.accounting;
 option go_package = "github.com/nspcc-dev/neofs-api-go/v2/accounting/grpc;accounting";
 option csharp_namespace = "NeoFS.API.v2.Accounting";
 
-// Decimal represents the decimal numbers.
+// Standard floating point data type can't be used in NeoFS due to inexactness
+// of the result when doing lots of small number operations. To solve the lost
+// precision issue, special `Decimal` format is used for monetary computations.
+//
+// Please see [The General Decimal Arithmetic
+// Specification](http://speleotrove.com/decimal/) for detailed problem
+// description.
 message Decimal {
-  // value carries number value.
+  // Number in smallest Token fractions.
   int64 value = 1;
 
-  // precision carries value precision.
+  // Precision value indicating how many smallest fractions can be in one
+  // integer.
   uint32 precision = 2;
 }
