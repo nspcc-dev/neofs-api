@@ -79,7 +79,17 @@ message Header {
   // Need it to verify integrity and authenticity out of Request scope.
   neo.fs.v2.session.SessionToken session_token = 9;
 
-  // Attribute groups the user-defined Key-Value pairs attached to the object
+  // `Attribute` is a user-defined Key-Value metadata pair attached to the
+  // object.
+  //
+  // There are some "well-known" attributes starting with `__NEOFS__` prefix
+  // that affect system behaviour:
+  //
+  // * __NEOFS__UPLOAD_ID
+  // * __NEOFS__EXPIRATION_EPOCH
+  //
+  // For detailed description of each well-known attribute please see the
+  // corresponding section in NeoFS Technical specification.
   message Attribute {
     // string key to the object attribute
     string key = 1;
