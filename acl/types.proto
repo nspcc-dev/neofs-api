@@ -9,17 +9,17 @@ import "refs/types.proto";
 
 // Target role of the access control rule in access control list.
 enum Role {
-  // Unspecified  role, default value.
+  // Unspecified  role, default value
   ROLE_UNSPECIFIED= 0;
 
-  // User target rule is applied if sender is the owner of the container.
+  // User target rule is applied if sender is the owner of the container
   USER = 1;
 
   // System target rule is applied if sender is the storage node within the
-  // container or inner ring node.
+  // container or inner ring node
   SYSTEM = 2;
 
-  // Others target rule is applied if sender is not user or system target.
+  // Others target rule is applied if sender is not user nor system target
   OTHERS = 3;
 }
 
@@ -35,9 +35,10 @@ enum MatchType {
   STRING_NOT_EQUAL = 2;
 }
 
-// Operation is an enumeration of operation types.
+// Request's operation type to match if the rule is applicable to a particular
+// request.
 enum Operation {
-  // Unspecified operation, default value.
+  // Unspecified operation, default value
   OPERATION_UNSPECIFIED = 0;
 
   // Get
@@ -62,9 +63,10 @@ enum Operation {
   GETRANGEHASH = 7;
 }
 
-// Action is an enumeration of EACL actions.
+// Rule execution result action. Either allows or denies access if the rule's
+// filters match.
 enum Action {
-  // Unspecified action, default value.
+  // Unspecified action, default value
   ACTION_UNSPECIFIED = 0;
 
   // Allow action
@@ -74,7 +76,7 @@ enum Action {
   DENY = 2;
 }
 
-// Header is an enumeration of filtering header types.
+// Enumeration of possible sources of Headers to apply filters.
 enum HeaderType {
   // Unspecified header, default value.
   HEADER_UNSPECIFIED = 0;
@@ -86,69 +88,81 @@ enum HeaderType {
   OBJECT = 2;
 }
 
-// EACLRecord groups information about extended ACL rule.
+// Describes a single eACL rule.
 message EACLRecord {
-  // Operation carries type of operation.
+  // NeoFS request Verb to match
   Operation operation = 1 [json_name = "Operation"];
 
-  // Action carries ACL target action.
+  // Rule execution result. Either allows or denies access if filters match.
   Action action = 2 [json_name = "Action"];
 
-  // Filter definition
+  // Filter to check particular properties of the request or object.
   message Filter {
-    // Header carries type of header.
+    // Define if Object or Request header will be used
     HeaderType header_type = 1 [json_name = "HeaderType"];
 
-    // MatchType carries type of match.
+    // Match operation type
     MatchType match_type = 2 [json_name = "MatchType"];
 
-    // header_name carries name of filtering header.
+    // Name of the Header to use
     string header_name = 3 [json_name="Name"];
 
-    // header_val carries value of filtering header.
+    // Expected Header Value or pattern to match
     string header_val = 4 [json_name="Value"];
   }
 
-  // filters carries set of filters.
+  // List of filters to match and see if rule is applicable
   repeated Filter filters = 3 [json_name="Filters"];
 
-  // Information about extended ACL target.
+  // Target to apply ACL rule. Can be a subject's role class or a list of public
+  // keys to match.
   message Target {
-    // target carries target of ACL rule.
+    // Target subject's role class
     Role role = 1 [json_name="Role"];
 
-    // key_list carries public keys of ACL target.
+    // List of public keys to identify target subject
     repeated bytes key_list = 2 [json_name="Keys"];
   }
-  // targets carries information about extended ACL target list.
+  // List of target subjects to apply ACL rule to
   repeated Target targets = 4 [json_name="Targets"];
 }
 
-// EACLRecord carries the information about extended ACL rules.
+// Extended ACL rules table. Defined a list of ACL rules additionally to Basic
+// ACL. Extended ACL rules can be attached to the container and can be updated
+// or may be defined in `BearerToken` structure. Please see the corresponding
+// NeoFS Technical Specification's section for detailed description.
 message EACLTable {
-  // eACL format version.
-  // Effectively the version of API library used to create eACL Table
+  // eACL format version. Effectively the version of API library used to create
+  // eACL Table.
   neo.fs.v2.refs.Version version = 1;
 
-  // Carries identifier of the container that should use given
-  // access control rules.
+  // Identifier of the container that should use given access control rules
   neo.fs.v2.refs.ContainerID container_id = 2 [json_name="ContainerID"];
 
-  // Records carries list of extended ACL rule records.
+  // List of Extended ACL rules
   repeated EACLRecord records = 3 [json_name="Records"];
 }
 
-// BearerToken has information about request ACL rules with limited lifetime
+// BearerToken allows to attach signed Extended ACL rules to the request in
+// `RequestMetaHeader`. If container's Basic ACL rules allow, the attached rule
+// set will be checked instead of one attached to the container itself. Just
+// like [JWT](https://jwt.io), it has a limited lifetime and scope, hence can be
+// used in the similar use cases, like providing authorisation to externally
+// authenticated party.
 message BearerToken {
-  // Bearer Token body
+  // Bearer Token body structure contains Extended ACL table issued by container
+  // owner with additional information preventing token's abuse.
   message Body {
-    // EACLTable carries table of extended ACL rules
+    // Table of Extended ACL rules to use instead of the ones attached to the
+    // container
     EACLTable eacl_table = 1;
 
-    // OwnerID carries identifier of the token owner
+    // `OwnerID` to whom the token was issued. MUST match with the request
+    // originator's `OwnerID`
     neo.fs.v2.refs.OwnerID owner_id = 2;
 
-    // Lifetime parameters of the token. Filed names taken from rfc7519.
+    // Lifetime parameters of the token. Filed names taken from
+    // [rfc7519](https://tools.ietf.org/html/rfc7519).
     message TokenLifetime {
       // Expiration Epoch
       uint64 exp = 1;
