@@ -9,25 +9,25 @@ import "accounting/types.proto";
 import "refs/types.proto";
 import "session/types.proto";
 
-// The service provides methods for obtaining information
-// about the account balance in NeoFS system.
+// Accounting service provides methods for interaction with NeoFS sidechain via
+// other NeoFS nodes to get information about the account balance. Deposit and
+// Withdraw operations can't be implemented here, as they require Mainnet NeoFS
+// smart contract invocation. Transfer operations between internal NeoFS
+// accounts are possible, if both use the same token type.
 service AccountingService {
-  // Returns the amount of funds for the requested NeoFS account.
+  // Returns the amount of funds in GAS token for the requested NeoFS account.
   rpc Balance (BalanceRequest) returns (BalanceResponse);
 }
 
-// Message defines the request body of Balance method.
-//
-// To indicate the account for which the balance is requested, it's identifier
-// is used.
-//
-// To gain access to the requested information, the request body must be formed
-// according to the requirements from the system specification.
+// BalanceRequest message
 message BalanceRequest {
-  //Request body
+  // To indicate the account for which the balance is requested, it's identifier
+  // is used. It can be any existing account in NeoFS sidechain `Balance` smart
+  // contract. If omitted, client implementation MUST set it to the request's
+  // signer `OwnerID`.
   message Body {
-    // Carries user identifier in NeoFS system for which the balance
-    // is requested.
+    // Valid user identifier in `OwnerID` format for which the balance is
+    // requested. Required field.
     neo.fs.v2.refs.OwnerID owner_id = 1;
   }
   // Body of the balance request message.
@@ -38,18 +38,17 @@ message BalanceRequest {
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
-  // authenticate the nodes of the message route and check the correctness
-  // of transmission.
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
   neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
-// Message defines the response body of Balance method.
-//
-// The amount of funds is calculated in decimal numbers.
+// BalanceResponse message
 message BalanceResponse {
-  //Request body
+  // The amount of funds in GAS token for the `OwnerID`'s account requested.
+  // Balance is `Decimal` format to avoid precision issues with rounding.
   message Body {
-    // Carries the amount of funds on the account.
+    // Amount of funds in GAS token for the requested account.
     Decimal balance = 1;
   }
   // Body of the balance response message.
@@ -60,7 +59,7 @@ message BalanceResponse {
   neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 
   // Carries response verification information. This header is used to
-  // authenticate the nodes of the message route and check the correctness
-  // of transmission.
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
