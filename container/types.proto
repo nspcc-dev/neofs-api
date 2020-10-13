@@ -27,7 +27,15 @@ message Container {
   // permission bits for bearer token and Extended ACL.
   uint32 basic_acl = 4;
 
-  // Attribute is a key-value pair of strings.
+  // `Attribute` is a user-defined Key-Value metadata pair attached to the
+  // container. Container attribute are immutable. They are set at container
+  // creation and cna never be added or updated.
+  //
+  // There are some "well-known" attributes affecting system behaviour:
+  //
+  // * Subnet \
+  //   String ID of container's storage subnet. Container can be attached to
+  //   only one subnet.
   message Attribute {
     // Key of immutable container attribute.
     string key = 1;
