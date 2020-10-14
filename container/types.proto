@@ -8,23 +8,23 @@ option csharp_namespace = "NeoFS.API.v2.Container";
 import "netmap/types.proto";
 import "refs/types.proto";
 
-// Container is a structure that defines object placement behaviour. Objects
-// can be stored only within containers. They define placement rule, attributes
-// and access control information. ID of the container is a 32 byte long
-// SHA256 hash of stable-marshalled container message.
+// Container is a structure that defines object placement behaviour. Objects can
+// be stored only within containers. They define placement rule, attributes and
+// access control information. ID of the container is a 32 byte long SHA256 hash
+// of stable-marshalled container message.
 message Container {
-  // Container format version.
-  // Effectively the version of API library used to create container
+  // Container format version. Effectively the version of API library used to
+  // create container.
   neo.fs.v2.refs.Version version = 1;
 
-  // OwnerID carries identifier of the container owner.
+  // Identifier of the container owner
   neo.fs.v2.refs.OwnerID owner_id = 2;
 
-  // Nonce is a 16 byte UUID, used to avoid collisions of container id.
+  // Nonce is a 16 byte UUID, used to avoid collisions of container id
   bytes nonce = 3;
 
-  // BasicACL contains access control rules for owner, system, others groups and
-  // permission bits for bearer token and Extended ACL.
+  // `BasicACL` contains access control rules for owner, system, others groups
+  // and permission bits for `BearerToken` and `Extended ACL`
   uint32 basic_acl = 4;
 
   // `Attribute` is a user-defined Key-Value metadata pair attached to the
@@ -37,15 +37,15 @@ message Container {
   //   String ID of container's storage subnet. Container can be attached to
   //   only one subnet.
   message Attribute {
-    // Key of immutable container attribute.
+    // Attribute name key
     string key = 1;
 
-    // Value of immutable container attribute.
+    // Attribute value
     string value = 2;
   }
-  // Attributes define any immutable characteristics of container.
+  // Attributes represent immutable container's meta data
   repeated Attribute attributes = 5;
 
-  // Placement policy for the object inside the container.
+  // Placement policy for the object inside the container
   neo.fs.v2.netmap.PlacementPolicy placement_policy = 6;
 }
