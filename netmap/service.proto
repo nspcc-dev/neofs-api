@@ -9,18 +9,25 @@ import "netmap/types.proto";
 import "refs/types.proto";
 import "session/types.proto";
 
-// Methods to work with NetworkMap
+// `NetmapService` provides methods to work with `Network Map` and information
+// required to build it. The resulting `Network Map` is stored in sidechain
+// `Netmap` smart contract, while related information can be obtained from other
+// NeoFS nodes.
 service NetmapService {
-  // Return information about Node
+  // Get NodeInfo structure from the particular node directly. Node information
+  // can be taken from `Netmap` smart contract, but in some cases the one may
+  // want to get recent information directly, or to talk to the node not yet
+  // present in `Network Map` to find out what API version can be used for
+  // further communication. Can also be used to check if node is up and running.
   rpc LocalNodeInfo (LocalNodeInfoRequest) returns (LocalNodeInfoResponse);
 }
 
-// Get NodeInfo from the particular node directly
+// Get NodeInfo structure from the particular node directly
 message LocalNodeInfoRequest {
-  //Request body
+  // LocalNodeInfo request body is empty.
   message Body {
   }
-  // Body of the balance request message.
+  // Body of the LocalNodeInfo request message
   Body body = 1;
 
   // Carries request meta information. Header data is used only to regulate
@@ -28,19 +35,19 @@ message LocalNodeInfoRequest {
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
-  // authenticate the nodes of the message route and check the correctness
-  // of transmission.
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
   neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
-// Local nod Info, including API Version in use
+// Local Node Info, including API Version in use
 message LocalNodeInfoResponse {
-  //Response body
+  // Local Node Info, including API Version in use.
   message Body {
-    // API version in use
+    // Latest NeoFS API version in use
     neo.fs.v2.refs.Version version = 1;
 
-    // NodeInfo from node itself
+    // NodeInfo structure with recent information from node itself
     NodeInfo node_info = 2;
   }
   // Body of the balance response message.
@@ -51,7 +58,7 @@ message LocalNodeInfoResponse {
   neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 
   // Carries response verification information. This header is used to
-  // authenticate the nodes of the message route and check the correctness
-  // of transmission.
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
