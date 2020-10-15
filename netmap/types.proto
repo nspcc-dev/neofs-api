@@ -35,9 +35,9 @@ enum Operation {
   AND = 8;
 }
 
-// Selector modifier showing how the node set will be formed
-// By default selector just groups by attribute into a bucket selecting nodes
-// only by their hash distance.
+// Selector modifier shows how the node set will be formed. By default selector
+// just groups nodes into a bucket by attribute, selecting nodes only by their
+// hash distance.
 enum Clause{
   // No modifier defined. Will select nodes from bucket randomly.
   CLAUSE_UNSPECIFIED = 0;
@@ -49,12 +49,13 @@ enum Clause{
   DISTINCT = 2;
 }
 
-// Filter
+// Filter will return the subset of nodes from `NetworkMap` or another filter's
+// results, that will satisfy filter's conditions.
 message Filter {
-  // Name of the filter or a reference to the named filter.
-  // '*' means application to the whole unfiltered NetworkMap
-  // At top level it's used as a filter name. At lower levels it's considered to
-  // be a reference to another named filter
+  // Name of the filter or a reference to the named filter. '*' means
+  // application to the whole unfiltered NetworkMap. At top level it's used as a
+  // filter name. At lower levels it's considered to be a reference to another
+  // named filter
   string name = 1;
 
   // Key to filter
@@ -66,16 +67,18 @@ message Filter {
   // Value to match
   string value = 4;
 
-  // List of inner filters. Top level operation will be applied to the whole list.
+  // List of inner filters. Top level operation will be applied to the whole
+  // list.
   repeated Filter filters = 5;
 }
 
-// Selector
+// Selector chooses a number of nodes from the bucket taking the nearest nodes
+// to the provided `ContainerID` by hash distance.
 message Selector {
   // Selector name to reference in object placement section
   string name = 1;
 
-  // How many nodes to select from bucket
+  // How many nodes to select from the bucket
   uint32 count = 2;
 
   // Selector modifier showing how to form a bucket
@@ -88,22 +91,27 @@ message Selector {
   string filter = 5;
 }
 
-// Exact bucket for each replica
+// Number of object replicas in a set of nodes from the defined selector. If no
+// selector set the root bucket containing all possible nodes will be used by
+// default.
 message Replica {
   // How many object replicas to put
   uint32 count = 1;
 
-  // Named selector bucket to put in
+  // Named selector bucket to put replicas
   string selector = 2;
 }
 
-// Set of rules to select a subset of nodes able to store container's objects
+// Set of rules to select a subset of nodes from `NetworkMap` able to store
+// container's objects. The format is simple enough to transpile from different
+// storage policy definition languages.
 message PlacementPolicy {
-  // Rules to set number of object replicas and place each one into a particular bucket
+  // Rules to set number of object replicas and place each one into a named
+  // bucket
   repeated Replica replicas = 1;
 
   // Container backup factor controls how deep NeoFS will search for nodes
-  // alternatives to include into container.
+  // alternatives to include into container's nodes subset
   uint32 container_backup_factor = 2;
 
   // Set of Selectors to form the container's nodes subset
