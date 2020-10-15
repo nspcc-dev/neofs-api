@@ -5,62 +5,70 @@ package neo.fs.v2.refs;
 option go_package = "github.com/nspcc-dev/neofs-api-go/v2/refs/grpc;refs";
 option csharp_namespace = "NeoFS.API.v2.Refs";
 
-// Address of object (container id + object id)
+// Object in NeoFS can be addressed by it's ContainerID and ObjectID. In string
+// format there MUST be a '/' delimeter between them.
 message Address {
-  // container_id carries container identifier.
+  // Container identifier
   ContainerID container_id = 1;
-  // object_id carries object identifier.
+  // Object identifier
   ObjectID object_id = 2;
 }
 
-// NeoFS object identifier.
+// NeoFS Object unique identifier. Objects are immutable and content-addressed.
+// It means `ObjectID` will change if `header` or `payload` changes. `ObjectID`
+// is calculated as a hash of `header` field, which contains hash of object's
+// payload.
 message ObjectID {
-  // value carries the object identifier in a binary format.
+  // Object identifier in a binary format
   bytes value = 1;
 }
 
-// NeoFS container identifier.
+// NeoFS container identifier. Container structures are immutable and
+// content-addressed. `ContainerID` is a 32 byte long SHA256 hash of
+// stable-marshalled container message.
 message ContainerID {
-  // value carries the container identifier in a binary format.
+  // Container identifier in a binary format.
   bytes value = 1;
 }
 
-// OwnerID group information about the owner of the NeoFS container.
+// OwnerID is a derivative of a user's main public key. The transformation
+// algorithm is the same as for Neo3 wallet addresses. Neo3 wallet address can
+// be directly used as `OwnerID`.
 message OwnerID {
-  // value carries the identifier of the container owner in a binary format.
+  // Identifier of the container owner in a binary format
   bytes value = 1;
 }
 
-// Represents API version used by node.
+// API version used by a node.
 message Version {
-  // Major API version.
+  // Major API version
   uint32 major = 1;
 
-  // Minor API version.
+  // Minor API version
   uint32 minor = 2;
 }
 
-// Signature of something in NeoFS
+// Signature of something in NeoFS.
 message Signature {
-  // Public key used for signing.
+  // Public key used for signing
   bytes key = 1;
   // Signature
   bytes sign = 2;
 }
 
-// Checksum algorithm type
+// Checksum algorithm type.
 enum ChecksumType {
   // Unknown. Not used
   CHECKSUM_TYPE_UNSPECIFIED = 0;
 
-  // Tillich-Zemor homomorphic hash funciton
+  // Tillich-Zemor homomorphic hash function
   TZ = 1;
 
   // SHA-256
   SHA256 = 2;
 }
 
-// Checksum message
+// Checksum message.
 message Checksum {
   // Checksum algorithm type
   ChecksumType type = 1;
