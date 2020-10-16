@@ -8,41 +8,45 @@ option csharp_namespace = "NeoFS.API.v2.Session";
 import "refs/types.proto";
 import "session/types.proto";
 
-// Create Session record on Node side
+// `SessionService` allows to establish a temporary trust relationship between
+// two peer nodes and generate a `SessionToken` as the proof of trust to be
+// attached in requests for further verification. Please see corresponding
+// section of NeoFS Technical Specification for details.
 service SessionService {
-  // Create opens new session between the client and the server.
+  // Opens a new session between two peers.
   rpc Create (CreateRequest) returns (CreateResponse);
 }
 
-// CreateRequest carries an information necessary for opening a session.
+// Information necessary for opening a session.
 message CreateRequest {
-  // Request body
+  // Session creation request body
   message Body {
-    // Carries an identifier of a session initiator.
+    // Dession initiating user's or node's key derived `OwnerID`.
     neo.fs.v2.refs.OwnerID owner_id = 1;
-    // Expiration Epoch
+    // Session expiration `Epoch`
     uint64 expiration = 2;
   }
   // Body of create session token request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate message
-  // transport and does not affect request execution.
+  // Carries request meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
-  // Carries request verification information. This header is used to authenticate
-  // the nodes of the message route and check the correctness of transmission.
+  // Carries request verification information. This header is used to
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
   neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
-// CreateResponse carries an information about the opened session.
+// Information about the opened session.
 message CreateResponse {
-  // Response body
+  // Session creation response body
   message Body {
-    // id carries an identifier of session token.
+    // Identifier of a newly created session
     bytes id = 1;
 
-    // session_key carries a session public key.
+    // Public key used for session
     bytes session_key = 2;
   }
 
@@ -54,7 +58,7 @@ message CreateResponse {
   neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 
   // Carries response verification information. This header is used to
-  // authenticate the nodes of the message route and check the correctness
-  // of transmission.
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
