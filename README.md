@@ -23,7 +23,6 @@ This repository contains:
 
 - protocol buffers packages
 - [auto-generated docs](proto-docs) for protocol buffers
-- [manually written docs](docs) for developers (to be done)
 
 ## Contributing
 
