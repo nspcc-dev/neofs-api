@@ -36,21 +36,21 @@ message ObjectSessionContext {
     // Refers to object.GetRangeHash RPC call
     RANGEHASH = 7;
   }
-  // Verb is a type of request for which the token is issued
+  // Type of request for which the token is issued
   Verb verb = 1;
 
   // Related Object address
   neo.fs.v2.refs.Address address = 2;
 }
 
-// NeoFS session token.
+// NeoFS Session Token.
 message SessionToken {
-  // Session token body
+  // Session Token body
   message Body {
-    // ID is a token identifier. valid UUIDv4 represented in bytes
+    // Token identifier is a valid UUIDv4 in binary form
     bytes id = 1;
 
-    // OwnerID carries identifier of the session initiator.
+    // Identifier of the session initiator
     neo.fs.v2.refs.OwnerID owner_id = 2;
 
     // Lifetime parameters of the token. Filed names taken from rfc7519.
@@ -64,84 +64,86 @@ message SessionToken {
       // Issued at Epoch
       uint64 iat = 3;
     }
-    // Lifetime is a lifetime of the session
+    // Lifetime of the session
     TokenLifetime lifetime = 3;
 
-    // SessionKey is a public key of session key
+    // Public key used in session
     bytes session_key = 4;
 
-    // Carries context of the session.
+    // Session Context information
     oneof context {
-      // ObjectService session context.
+      // ObjectService session context
       ObjectSessionContext object = 5;
     }
   }
-  // Session Token body
+  // Session Token contains the proof of trust between peers to be attached in
+  // requests for further verification. Please see corresponding section of
+  // NeoFS Technical Specification for details.
   Body body = 1;
 
-  // Signature is a signature of session token information
+  // Signature of `SessionToken` information
   neo.fs.v2.refs.Signature signature = 2;
 }
 
-// Extended headers for Request/Response
+// Extended headers for Request/Response.
 message XHeader {
-  // Key of the X-Header.
+  // Key of the X-Header
   string key = 1;
 
-  // Value of the X-Header.
+  // Value of the X-Header
   string value = 2;
 }
 
-
-// Information about the request
+// Meta information attached to the request. When forwarded between peers,
+// request meta headers are folded in matryoshka style.
 message RequestMetaHeader {
-  // Client API version.
+  // Peer's API version used
   neo.fs.v2.refs.Version version = 1;
 
-  // Client local epoch number. Set to 0 if unknown.
+  // Peer's local epoch number. Set to 0 if unknown.
   uint64 epoch = 2;
 
-  // Maximum number of nodes in the request route.
+  // Maximum number of intermediate nodes in the request route
   uint32 ttl = 3;
 
-  // Request X-Headers.
+  // Request X-Headers
   repeated XHeader x_headers = 4;
 
-  // Token is a token of the session within which the request is sent
+  // Session token within which the request is sent
   SessionToken session_token = 5;
 
-  // Bearer is a Bearer token of the request
+  // `BearerToken` with eACL overrides for the request
   neo.fs.v2.acl.BearerToken bearer_token = 6;
 
-  // RequestMetaHeader of the origin request.
+  // `RequestMetaHeader` of the origin request
   RequestMetaHeader origin = 7;
 }
 
 // Information about the response
 message ResponseMetaHeader {
-  // Server API version.
+  // Peer's API version used
   neo.fs.v2.refs.Version version = 1;
 
-  // Server local epoch number.
+  // Peer's local epoch number
   uint64 epoch = 2;
 
-  // Maximum number of nodes in the response route.
+  // Maximum number of intermediate nodes in the request route
   uint32 ttl = 3;
 
-  // Response X-Headers.
+  // Response X-Headers
   repeated XHeader x_headers = 4;
 
-  // Carries response meta header of the origin response.
+  // `ResponseMetaHeader` of the origin request
   ResponseMetaHeader origin = 5;
 }
 
-// Verification info for request signed by all intermediate nodes
+// Verification info for request signed by all intermediate nodes.
 message RequestVerificationHeader {
   // Request Body signature. Should be generated once by request initiator.
   neo.fs.v2.refs.Signature body_signature = 1;
-  // Request Meta signature is added and signed by any intermediate node
+  // Request Meta signature is added and signed by each intermediate node
   neo.fs.v2.refs.Signature meta_signature = 2;
-  // Sign previous hops
+  // Signature of previous hops
   neo.fs.v2.refs.Signature origin_signature = 3;
 
   // Chain of previous hops signatures
@@ -152,9 +154,9 @@ message RequestVerificationHeader {
 message ResponseVerificationHeader {
   // Response Body signature. Should be generated once by answering node.
   neo.fs.v2.refs.Signature body_signature = 1;
-  // Response Meta signature is added and signed by any intermediate node
+  // Response Meta signature is added and signed by each intermediate node
   neo.fs.v2.refs.Signature meta_signature = 2;
-  // Sign previous hops
+  // Signature of previous hops
   neo.fs.v2.refs.Signature origin_signature = 3;
 
   // Chain of previous hops signatures
