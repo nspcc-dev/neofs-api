@@ -31,7 +31,12 @@
 <a name="neo.fs.v2.acl.BearerToken"></a>
 
 ### Message BearerToken
-BearerToken has information about request ACL rules with limited lifetime
+BearerToken allows to attach signed Extended ACL rules to the request in
+`RequestMetaHeader`. If container's Basic ACL rules allow, the attached rule
+set will be checked instead of one attached to the container itself. Just
+like [JWT](https://jwt.io), it has a limited lifetime and scope, hence can be
+used in the similar use cases, like providing authorisation to externally
+authenticated party.
 
 
 | Field | Type | Label | Description |
@@ -43,20 +48,22 @@ BearerToken has information about request ACL rules with limited lifetime
 <a name="neo.fs.v2.acl.BearerToken.Body"></a>
 
 ### Message BearerToken.Body
-Bearer Token body
+Bearer Token body structure contains Extended ACL table issued by container
+owner with additional information preventing token's abuse.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| eacl_table | [EACLTable](#neo.fs.v2.acl.EACLTable) |  | EACLTable carries table of extended ACL rules |
-| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | OwnerID carries identifier of the token owner |
+| eacl_table | [EACLTable](#neo.fs.v2.acl.EACLTable) |  | Table of Extended ACL rules to use instead of the ones attached to the container |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | `OwnerID` to whom the token was issued. MUST match with the request originator's `OwnerID` |
 | lifetime | [BearerToken.Body.TokenLifetime](#neo.fs.v2.acl.BearerToken.Body.TokenLifetime) |  | Token expiration and valid time period parameters |
 
 
 <a name="neo.fs.v2.acl.BearerToken.Body.TokenLifetime"></a>
 
 ### Message BearerToken.Body.TokenLifetime
-Lifetime parameters of the token. Filed names taken from rfc7519.
+Lifetime parameters of the token. Filed names taken from
+[rfc7519](https://tools.ietf.org/html/rfc7519).
 
 
 | Field | Type | Label | Description |
@@ -69,54 +76,58 @@ Lifetime parameters of the token. Filed names taken from rfc7519.
 <a name="neo.fs.v2.acl.EACLRecord"></a>
 
 ### Message EACLRecord
-EACLRecord groups information about extended ACL rule.
+Describes a single eACL rule.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| operation | [Operation](#neo.fs.v2.acl.Operation) |  | Operation carries type of operation. |
-| action | [Action](#neo.fs.v2.acl.Action) |  | Action carries ACL target action. |
-| filters | [EACLRecord.Filter](#neo.fs.v2.acl.EACLRecord.Filter) | repeated | filters carries set of filters. |
-| targets | [EACLRecord.Target](#neo.fs.v2.acl.EACLRecord.Target) | repeated | targets carries information about extended ACL target list. |
+| operation | [Operation](#neo.fs.v2.acl.Operation) |  | NeoFS request Verb to match |
+| action | [Action](#neo.fs.v2.acl.Action) |  | Rule execution result. Either allows or denies access if filters match. |
+| filters | [EACLRecord.Filter](#neo.fs.v2.acl.EACLRecord.Filter) | repeated | List of filters to match and see if rule is applicable |
+| targets | [EACLRecord.Target](#neo.fs.v2.acl.EACLRecord.Target) | repeated | List of target subjects to apply ACL rule to |
 
 
 <a name="neo.fs.v2.acl.EACLRecord.Filter"></a>
 
 ### Message EACLRecord.Filter
-Filter definition
+Filter to check particular properties of the request or object.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| header_type | [HeaderType](#neo.fs.v2.acl.HeaderType) |  | Header carries type of header. |
-| match_type | [MatchType](#neo.fs.v2.acl.MatchType) |  | MatchType carries type of match. |
-| header_name | [string](#string) |  | header_name carries name of filtering header. |
-| header_val | [string](#string) |  | header_val carries value of filtering header. |
+| header_type | [HeaderType](#neo.fs.v2.acl.HeaderType) |  | Define if Object or Request header will be used |
+| match_type | [MatchType](#neo.fs.v2.acl.MatchType) |  | Match operation type |
+| header_name | [string](#string) |  | Name of the Header to use |
+| header_val | [string](#string) |  | Expected Header Value or pattern to match |
 
 
 <a name="neo.fs.v2.acl.EACLRecord.Target"></a>
 
 ### Message EACLRecord.Target
-Information about extended ACL target.
+Target to apply ACL rule. Can be a subject's role class or a list of public
+keys to match.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| role | [Role](#neo.fs.v2.acl.Role) |  | target carries target of ACL rule. |
-| key_list | [bytes](#bytes) | repeated | key_list carries public keys of ACL target. |
+| role | [Role](#neo.fs.v2.acl.Role) |  | Target subject's role class |
+| key_list | [bytes](#bytes) | repeated | List of public keys to identify target subject |
 
 
 <a name="neo.fs.v2.acl.EACLTable"></a>
 
 ### Message EACLTable
-EACLRecord carries the information about extended ACL rules.
+Extended ACL rules table. Defined a list of ACL rules additionally to Basic
+ACL. Extended ACL rules can be attached to the container and can be updated
+or may be defined in `BearerToken` structure. Please see the corresponding
+NeoFS Technical Specification's section for detailed description.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | eACL format version. Effectively the version of API library used to create eACL Table |
-| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Carries identifier of the container that should use given access control rules. |
-| records | [EACLRecord](#neo.fs.v2.acl.EACLRecord) | repeated | Records carries list of extended ACL rule records. |
+| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | eACL format version. Effectively the version of API library used to create eACL Table. |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container that should use given access control rules |
+| records | [EACLRecord](#neo.fs.v2.acl.EACLRecord) | repeated | List of Extended ACL rules |
 
  <!-- end messages -->
 
@@ -124,11 +135,12 @@ EACLRecord carries the information about extended ACL rules.
 <a name="neo.fs.v2.acl.Action"></a>
 
 ### Action
-Action is an enumeration of EACL actions.
+Rule execution result action. Either allows or denies access if the rule's
+filters match.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| ACTION_UNSPECIFIED | 0 | Unspecified action, default value. |
+| ACTION_UNSPECIFIED | 0 | Unspecified action, default value |
 | ALLOW | 1 | Allow action |
 | DENY | 2 | Deny action |
 
@@ -137,7 +149,7 @@ Action is an enumeration of EACL actions.
 <a name="neo.fs.v2.acl.HeaderType"></a>
 
 ### HeaderType
-Header is an enumeration of filtering header types.
+Enumeration of possible sources of Headers to apply filters.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -163,11 +175,12 @@ MatchType is an enumeration of match types.
 <a name="neo.fs.v2.acl.Operation"></a>
 
 ### Operation
-Operation is an enumeration of operation types.
+Request's operation type to match if the rule is applicable to a particular
+request.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| OPERATION_UNSPECIFIED | 0 | Unspecified operation, default value. |
+| OPERATION_UNSPECIFIED | 0 | Unspecified operation, default value |
 | GET | 1 | Get |
 | HEAD | 2 | Head |
 | PUT | 3 | Put |
@@ -185,10 +198,10 @@ Target role of the access control rule in access control list.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| ROLE_UNSPECIFIED | 0 | Unspecified role, default value. |
-| USER | 1 | User target rule is applied if sender is the owner of the container. |
-| SYSTEM | 2 | System target rule is applied if sender is the storage node within the container or inner ring node. |
-| OTHERS | 3 | Others target rule is applied if sender is not user or system target. |
+| ROLE_UNSPECIFIED | 0 | Unspecified role, default value |
+| USER | 1 | User target rule is applied if sender is the owner of the container |
+| SYSTEM | 2 | System target rule is applied if sender is the storage node within the container or inner ring node |
+| OTHERS | 3 | Others target rule is applied if sender is not user nor system target |
 
 
  <!-- end enums -->

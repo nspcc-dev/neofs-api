@@ -31,19 +31,20 @@
 <a name="neo.fs.v2.refs.Address"></a>
 
 ### Message Address
-Address of object (container id + object id)
+Object in NeoFS can be addressed by it's ContainerID and ObjectID. In string
+format there MUST be a '/' delimeter between them.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [ContainerID](#neo.fs.v2.refs.ContainerID) |  | container_id carries container identifier. |
-| object_id | [ObjectID](#neo.fs.v2.refs.ObjectID) |  | object_id carries object identifier. |
+| container_id | [ContainerID](#neo.fs.v2.refs.ContainerID) |  | Container identifier |
+| object_id | [ObjectID](#neo.fs.v2.refs.ObjectID) |  | Object identifier |
 
 
 <a name="neo.fs.v2.refs.Checksum"></a>
 
 ### Message Checksum
-Checksum message
+Checksum message.
 
 
 | Field | Type | Label | Description |
@@ -55,58 +56,65 @@ Checksum message
 <a name="neo.fs.v2.refs.ContainerID"></a>
 
 ### Message ContainerID
-NeoFS container identifier.
+NeoFS container identifier. Container structures are immutable and
+content-addressed. `ContainerID` is a 32 byte long SHA256 hash of
+stable-marshalled container message.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| value | [bytes](#bytes) |  | value carries the container identifier in a binary format. |
+| value | [bytes](#bytes) |  | Container identifier in a binary format. |
 
 
 <a name="neo.fs.v2.refs.ObjectID"></a>
 
 ### Message ObjectID
-NeoFS object identifier.
+NeoFS Object unique identifier. Objects are immutable and content-addressed.
+It means `ObjectID` will change if `header` or `payload` changes. `ObjectID`
+is calculated as a hash of `header` field, which contains hash of object's
+payload.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| value | [bytes](#bytes) |  | value carries the object identifier in a binary format. |
+| value | [bytes](#bytes) |  | Object identifier in a binary format |
 
 
 <a name="neo.fs.v2.refs.OwnerID"></a>
 
 ### Message OwnerID
-OwnerID group information about the owner of the NeoFS container.
+OwnerID is a derivative of a user's main public key. The transformation
+algorithm is the same as for Neo3 wallet addresses. Neo3 wallet address can
+be directly used as `OwnerID`.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| value | [bytes](#bytes) |  | value carries the identifier of the container owner in a binary format. |
+| value | [bytes](#bytes) |  | Identifier of the container owner in a binary format |
 
 
 <a name="neo.fs.v2.refs.Signature"></a>
 
 ### Message Signature
-Signature of something in NeoFS
+Signature of something in NeoFS.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [bytes](#bytes) |  | Public key used for signing. |
+| key | [bytes](#bytes) |  | Public key used for signing |
 | sign | [bytes](#bytes) |  | Signature |
 
 
 <a name="neo.fs.v2.refs.Version"></a>
 
 ### Message Version
-Represents API version used by node.
+API version used by a node.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| major | [uint32](#uint32) |  | Major API version. |
-| minor | [uint32](#uint32) |  | Minor API version. |
+| major | [uint32](#uint32) |  | Major API version |
+| minor | [uint32](#uint32) |  | Minor API version |
 
  <!-- end messages -->
 
@@ -114,12 +122,12 @@ Represents API version used by node.
 <a name="neo.fs.v2.refs.ChecksumType"></a>
 
 ### ChecksumType
-Checksum algorithm type
+Checksum algorithm type.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | CHECKSUM_TYPE_UNSPECIFIED | 0 | Unknown. Not used |
-| TZ | 1 | Tillich-Zemor homomorphic hash funciton |
+| TZ | 1 | Tillich-Zemor homomorphic hash function |
 | SHA256 | 2 | SHA-256 |
 
 

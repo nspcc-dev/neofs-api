@@ -25,16 +25,18 @@
 <a name="neo.fs.v2.storagegroup.StorageGroup"></a>
 
 ### Message StorageGroup
-StorageGroup groups the information about the NeoFS storage group.
-The storage group consists of objects from single container.
+StorageGroup keeps verification information for Data Audit sessions. Objects
+that require payed storage guaranties are gathered in `StorageGroups` with
+additional information used for proof of storage. `StorageGroup` only
+contains objects from the same container.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| validation_data_size | [uint64](#uint64) |  | validation_data_size carries the total size of the payloads of the storage group members. |
-| validation_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | validation_hash carries homomorphic hash from the concatenation of the payloads of the storage group members The order of concatenation is the same as the order of the members in the Members field. |
-| expiration_epoch | [uint64](#uint64) |  | expiration_epoch carries last NeoFS epoch number of the storage group lifetime. |
-| members | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | Members carries the list of identifiers of the object storage group members. The list is strictly ordered. |
+| validation_data_size | [uint64](#uint64) |  | Total size of the payloads of objects in the storage group |
+| validation_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash from the concatenation of the payloads of the storage group members. The order of concatenation is the same as the order of the members in the `members` field. |
+| expiration_epoch | [uint64](#uint64) |  | Last NeoFS epoch number of the storage group lifetime |
+| members | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | Strictly ordered list of storage group member objects |
 
  <!-- end messages -->
 

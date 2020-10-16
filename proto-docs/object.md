@@ -68,7 +68,8 @@
 <a name="neo.fs.v2.object.ObjectService"></a>
 
 ### Service "neo.fs.v2.object.ObjectService"
-Object service provides API for manipulating with the object.
+`ObjectService` provides API for manipulating objects. Object operations do
+not interact with sidechain and are only served by nodes in p2p style.
 
 ```
 rpc Get(GetRequest) returns (stream GetResponse);
@@ -83,11 +84,12 @@ rpc GetRangeHash(GetRangeHashRequest) returns (GetRangeHashResponse);
 
 #### Method Get
 
-Get the object from container. Response uses gRPC stream. First response
-message carry object of requested address. Chunk messages are parts of
-the object's payload if it is needed. All messages except first carry
-chunks. Requested object can be restored by concatenation of object
-message payload and all chunks keeping receiving order.
+Receive full object structure, including Headers and payload. Response uses
+gRPC stream. First response message carries object with requested address.
+Chunk messages are parts of the object's payload if it is needed. All
+messages, except the first one, carry payload chunks. Requested object can
+be restored by concatenation of object message payload and all chunks
+keeping receiving order.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -95,55 +97,57 @@ message payload and all chunks keeping receiving order.
 #### Method Put
 
 Put the object into container. Request uses gRPC stream. First message
-SHOULD BE type of PutHeader. Container id and Owner id of object SHOULD
-BE set. Session token SHOULD BE obtained before put operation (see
-session package). Chunk messages considered by server as part of object
-payload. All messages except first SHOULD BE chunks. Chunk messages
-SHOULD BE sent in direct order of fragmentation.
+SHOULD be of PutHeader type. `ContainerID` and `OwnerID` of an object
+SHOULD be set. Session token SHOULD be obtained before `PUT` operation (see
+session package). Chunk messages are considered by server as a part of an
+object payload. All messages, except first one, SHOULD be payload chunks.
+Chunk messages SHOULD be sent in direct order of fragmentation.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Put | [PutRequest](#neo.fs.v2.object.PutRequest) | [PutResponse](#neo.fs.v2.object.PutResponse) |
 #### Method Delete
 
-Delete the object from a container
+Delete the object from a container. There is no immediate removal
+guarantee. Object will be marked for removal and deleted eventually.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Delete | [DeleteRequest](#neo.fs.v2.object.DeleteRequest) | [DeleteResponse](#neo.fs.v2.object.DeleteResponse) |
 #### Method Head
 
-Head returns the object without data payload. Object in the
-response has system header only. If full headers flag is set, extended
-headers are also present.
+Returns the object Headers without data payload. By default full header is
+returned. If `main_only` request field is set, the short header with only
+the very minimal information would be returned instead.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Head | [HeadRequest](#neo.fs.v2.object.HeadRequest) | [HeadResponse](#neo.fs.v2.object.HeadResponse) |
 #### Method Search
 
-Search objects in container. Version of query language format SHOULD BE
-set to 1. Search query represented in serialized format (see query
-package).
+Search objects in container. Search query allows to match by Object
+Header's filed values. Please see the corresponding NeoFS Technical
+Specification section for more details.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Search | [SearchRequest](#neo.fs.v2.object.SearchRequest) | [SearchResponse](#neo.fs.v2.object.SearchResponse) |
 #### Method GetRange
 
-GetRange of data payload. Range is a pair (offset, length).
-Requested range can be restored by concatenation of all chunks
-keeping receiving order.
+Get byte range of data payload. Range is set as an (offset, length) tuple.
+Like in `Get` method, the response uses gRPC stream. Requested range can be
+restored by concatenation of all received payload chunks keeping receiving
+order.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | GetRange | [GetRangeRequest](#neo.fs.v2.object.GetRangeRequest) | [GetRangeResponse](#neo.fs.v2.object.GetRangeResponse) |
 #### Method GetRangeHash
 
-GetRangeHash returns homomorphic hash of object payload range after XOR
-operation. Ranges are set of pairs (offset, length). Hashes order in
-response corresponds to ranges order in request. Homomorphic hash is
-calculated for XORed data.
+Returns homomorphic or regular hash of object's payload range after
+applying XOR operation with the provided `salt`. Ranges are set of (offset,
+length) tuples. Hashes order in response corresponds to ranges order in
+request. Note that hash is calculated for XORed data.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -154,7 +158,7 @@ calculated for XORed data.
 <a name="neo.fs.v2.object.DeleteRequest"></a>
 
 ### Message DeleteRequest
-Object Delete request
+Object DELETE request
 
 
 | Field | Type | Label | Description |
@@ -167,19 +171,19 @@ Object Delete request
 <a name="neo.fs.v2.object.DeleteRequest.Body"></a>
 
 ### Message DeleteRequest.Body
-Request body
+Object DELETE request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Carries the address of the object to be deleted. |
+| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the object to be deleted |
 
 
 <a name="neo.fs.v2.object.DeleteResponse"></a>
 
 ### Message DeleteResponse
-DeleteResponse is empty because we cannot guarantee permanent object removal
-in distributed system.
+DeleteResponse body is empty because we cannot guarantee permanent object
+removal in distributed system.
 
 
 | Field | Type | Label | Description |
@@ -192,7 +196,7 @@ in distributed system.
 <a name="neo.fs.v2.object.DeleteResponse.Body"></a>
 
 ### Message DeleteResponse.Body
-Response body
+Object DELETE Response has an empty body.
 
 
 
@@ -212,14 +216,14 @@ Get hash of object's payload part
 <a name="neo.fs.v2.object.GetRangeHashRequest.Body"></a>
 
 ### Message GetRangeHashRequest.Body
-Request body
+Get hash of object's payload part request body.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Carries address of the object that contains the requested payload range. |
-| ranges | [Range](#neo.fs.v2.object.Range) | repeated | Carries the list of object payload range to calculate homomorphic hash. |
-| salt | [bytes](#bytes) |  | Carries binary salt to XOR object payload ranges before hash calculation. |
+| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the object that containing the requested payload range |
+| ranges | [Range](#neo.fs.v2.object.Range) | repeated | List of object's payload ranges to calculate homomorphic hash |
+| salt | [bytes](#bytes) |  | Binary salt to XOR object's payload ranges before hash calculation |
 | type | [neo.fs.v2.refs.ChecksumType](#neo.fs.v2.refs.ChecksumType) |  | Checksum algorithm type |
 
 
@@ -239,19 +243,19 @@ Get hash of object's payload part
 <a name="neo.fs.v2.object.GetRangeHashResponse.Body"></a>
 
 ### Message GetRangeHashResponse.Body
-Response body
+Get hash of object's payload part response body.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | type | [neo.fs.v2.refs.ChecksumType](#neo.fs.v2.refs.ChecksumType) |  | Checksum algorithm type |
-| hash_list | [bytes](#bytes) | repeated | List of range hashes in a binary format. |
+| hash_list | [bytes](#bytes) | repeated | List of range hashes in a binary format |
 
 
 <a name="neo.fs.v2.object.GetRangeRequest"></a>
 
 ### Message GetRangeRequest
-Request to get part of object's payload
+Request part of object's payload
 
 
 | Field | Type | Label | Description |
@@ -264,13 +268,13 @@ Request to get part of object's payload
 <a name="neo.fs.v2.object.GetRangeRequest.Body"></a>
 
 ### Message GetRangeRequest.Body
-Request Body
+Byte range of object's payload request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address carries address of the object that contains the requested payload range. |
-| range | [Range](#neo.fs.v2.object.Range) |  | Range carries the parameters of the requested payload range. |
+| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the object containing the requested payload range |
+| range | [Range](#neo.fs.v2.object.Range) |  | Requested payload range |
 
 
 <a name="neo.fs.v2.object.GetRangeResponse"></a>
@@ -289,18 +293,21 @@ Get part of object's payload
 <a name="neo.fs.v2.object.GetRangeResponse.Body"></a>
 
 ### Message GetRangeResponse.Body
-Response body
+Get Range response body uses streams to transfer the response. Because
+object payload considered a byte sequence, there is no need to have some
+initial preamble message. The requested byte range is sent as a series
+chunks.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| chunk | [bytes](#bytes) |  | Carries part of the object payload. |
+| chunk | [bytes](#bytes) |  | Chunked object payload's range |
 
 
 <a name="neo.fs.v2.object.GetRequest"></a>
 
 ### Message GetRequest
-Get object request
+GET object request
 
 
 | Field | Type | Label | Description |
@@ -313,19 +320,19 @@ Get object request
 <a name="neo.fs.v2.object.GetRequest.Body"></a>
 
 ### Message GetRequest.Body
-Request body
+GET Object request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the requested object. |
-| raw | [bool](#bool) |  | Carries the raw option flag of the request. Raw request is sent to receive only the objects that are physically stored on the server. |
+| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the requested object |
+| raw | [bool](#bool) |  | If `raw` flag is set, request will work only with objects that are physically stored on the peer node |
 
 
 <a name="neo.fs.v2.object.GetResponse"></a>
 
 ### Message GetResponse
-get object response
+GET object response
 
 
 | Field | Type | Label | Description |
@@ -338,32 +345,33 @@ get object response
 <a name="neo.fs.v2.object.GetResponse.Body"></a>
 
 ### Message GetResponse.Body
-Response body
+GET Object Response body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| init | [GetResponse.Body.Init](#neo.fs.v2.object.GetResponse.Body.Init) |  | Initialization parameters of the object stream. |
-| chunk | [bytes](#bytes) |  | Part of the object payload. |
+| init | [GetResponse.Body.Init](#neo.fs.v2.object.GetResponse.Body.Init) |  | Initial part of the object stream |
+| chunk | [bytes](#bytes) |  | Chunked object payload |
 
 
 <a name="neo.fs.v2.object.GetResponse.Body.Init"></a>
 
 ### Message GetResponse.Body.Init
-Initialization parameters of the object got from NeoFS.
+Initial part of the `Object` structure stream. Technically it's a
+set of all `Object` structure's fields except `payload`.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Object ID |
-| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Object signature |
-| header | [Header](#neo.fs.v2.object.Header) |  | Object header. |
+| object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Object's unique identifier. |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signed `ObjectID` |
+| header | [Header](#neo.fs.v2.object.Header) |  | Object metadata headers |
 
 
 <a name="neo.fs.v2.object.HeadRequest"></a>
 
 ### Message HeadRequest
-Object head request
+Object HEAD request
 
 
 | Field | Type | Label | Description |
@@ -376,20 +384,20 @@ Object head request
 <a name="neo.fs.v2.object.HeadRequest.Body"></a>
 
 ### Message HeadRequest.Body
-Request body
+Object HEAD request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the object with the requested header. |
+| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the object with the requested Header |
 | main_only | [bool](#bool) |  | Return only minimal header subset |
-| raw | [bool](#bool) |  | Carries the raw option flag of the request. Raw request is sent to receive only the headers of the objects that are physically stored on the server. |
+| raw | [bool](#bool) |  | If `raw` flag is set, request will work only with objects that are physically stored on the peer node |
 
 
 <a name="neo.fs.v2.object.HeadResponse"></a>
 
 ### Message HeadResponse
-Head response
+Object HEAD response
 
 
 | Field | Type | Label | Description |
@@ -402,31 +410,37 @@ Head response
 <a name="neo.fs.v2.object.HeadResponse.Body"></a>
 
 ### Message HeadResponse.Body
-Response body
+Object HEAD response body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| header | [HeaderWithSignature](#neo.fs.v2.object.HeaderWithSignature) |  | Full object header with object ID signature |
+| header | [HeaderWithSignature](#neo.fs.v2.object.HeaderWithSignature) |  | Full object's `Header` with `ObjectID` signature |
 | short_header | [ShortHeader](#neo.fs.v2.object.ShortHeader) |  | Short object header |
 
 
 <a name="neo.fs.v2.object.HeaderWithSignature"></a>
 
 ### Message HeaderWithSignature
-Tuple of full object header and signature of object ID.
+Tuple of full object header and signature of `ObjectID`. \
+Signed `ObjectID` is present to verify full header's authenticity through the
+following steps:
+
+1. Calculate `SHA-256` of marshalled `Header` structure
+2. Check if the resulting hash matched `ObjectID`
+3. Check if `ObjectID` signature in `signature` field is correct
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | header | [Header](#neo.fs.v2.object.Header) |  | Full object header |
-| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signed object_id to verify full header's authenticity through following steps: 1. Calculate SHA-256 of marshalled Headers structure. 2. Check if the resulting hash matched ObjectID 3. Check if ObjectID's signature in signature field is correct. |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signed `ObjectID` to verify full header's authenticity |
 
 
 <a name="neo.fs.v2.object.PutRequest"></a>
 
 ### Message PutRequest
-Put object request
+PUT object request
 
 
 | Field | Type | Label | Description |
@@ -439,33 +453,34 @@ Put object request
 <a name="neo.fs.v2.object.PutRequest.Body"></a>
 
 ### Message PutRequest.Body
-Request body
+PUT request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| init | [PutRequest.Body.Init](#neo.fs.v2.object.PutRequest.Body.Init) |  | Carries the initialization parameters of the object stream. |
-| chunk | [bytes](#bytes) |  | Carries part of the object payload. |
+| init | [PutRequest.Body.Init](#neo.fs.v2.object.PutRequest.Body.Init) |  | Initial part of the object stream |
+| chunk | [bytes](#bytes) |  | Chunked object payload |
 
 
 <a name="neo.fs.v2.object.PutRequest.Body.Init"></a>
 
 ### Message PutRequest.Body.Init
-Groups initialization parameters of object placement in NeoFS.
+Newly created object structure parameters. If some optional parameters
+are not set, they will be calculated by a peer node.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Object ID, where available |
-| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Object signature, were available |
-| header | [Header](#neo.fs.v2.object.Header) |  | Header of the object to save in the system. |
-| copies_number | [uint32](#uint32) |  | Number of the object copies to store within the RPC call. Default zero value is processed according to the container placement rules. |
+| object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | ObjectID if available. |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Object signature if available |
+| header | [Header](#neo.fs.v2.object.Header) |  | Object's Header |
+| copies_number | [uint32](#uint32) |  | Number of the object copies to store within the RPC call. By default object is processed according to the container's placement policy. |
 
 
 <a name="neo.fs.v2.object.PutResponse"></a>
 
 ### Message PutResponse
-Put object response
+PUT Object response
 
 
 | Field | Type | Label | Description |
@@ -478,30 +493,30 @@ Put object response
 <a name="neo.fs.v2.object.PutResponse.Body"></a>
 
 ### Message PutResponse.Body
-Response body
+PUT Object response body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Carries identifier of the saved object. It is used to access an object in the container. |
+| object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Identifier of the saved object |
 
 
 <a name="neo.fs.v2.object.Range"></a>
 
 ### Message Range
-Range groups the parameters of object payload range.
+Object payload range.Ranges of zero length SHOULD be considered as invalid.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| offset | [uint64](#uint64) |  | Carries the offset of the range from the object payload start. |
-| length | [uint64](#uint64) |  | Carries the length of the object payload range. |
+| offset | [uint64](#uint64) |  | Offset of the range from the object payload start |
+| length | [uint64](#uint64) |  | Length in bytes of the object payload range |
 
 
 <a name="neo.fs.v2.object.SearchRequest"></a>
 
 ### Message SearchRequest
-Search objects request
+Object Search request
 
 
 | Field | Type | Label | Description |
@@ -514,12 +529,12 @@ Search objects request
 <a name="neo.fs.v2.object.SearchRequest.Body"></a>
 
 ### Message SearchRequest.Body
-Request body
+Object Search request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Carries search container identifier. |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Container identifier were to search |
 | version | [uint32](#uint32) |  | Version of the Query Language used |
 | filters | [SearchRequest.Body.Filter](#neo.fs.v2.object.SearchRequest.Body.Filter) | repeated | List of search expressions |
 
@@ -553,12 +568,12 @@ Search response
 <a name="neo.fs.v2.object.SearchResponse.Body"></a>
 
 ### Message SearchResponse.Body
-Response body
+Object Search response body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id_list | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | Carries list of object identifiers that match the search query |
+| id_list | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | List of `ObjectID`s that match the search query |
 
  <!-- end messages -->
 
@@ -578,7 +593,7 @@ Response body
 <a name="neo.fs.v2.object.Header"></a>
 
 ### Message Header
-Object Headers
+Object Header
 
 
 | Field | Type | Label | Description |
@@ -587,19 +602,29 @@ Object Headers
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Object's container |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
 | creation_epoch | [uint64](#uint64) |  | Object creation Epoch |
-| payload_length | [uint64](#uint64) |  | Size of payload in bytes. 0xFFFFFFFFFFFFFFFF means `payload_length` is unknown |
+| payload_length | [uint64](#uint64) |  | Size of payload in bytes. `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown |
 | payload_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Hash of payload bytes |
-| object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Special object type |
+| object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Type of the object payload content |
 | homomorphic_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash of the object payload. |
 | session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token, if it was used during Object creation. Need it to verify integrity and authenticity out of Request scope. |
 | attributes | [Header.Attribute](#neo.fs.v2.object.Header.Attribute) | repeated | User-defined object attributes |
-| split | [Header.Split](#neo.fs.v2.object.Header.Split) |  | Position of the object in the split hierarchy. |
+| split | [Header.Split](#neo.fs.v2.object.Header.Split) |  | Position of the object in the split hierarchy |
 
 
 <a name="neo.fs.v2.object.Header.Attribute"></a>
 
 ### Message Header.Attribute
-Attribute groups the user-defined Key-Value pairs attached to the object
+`Attribute` is a user-defined Key-Value metadata pair attached to the
+object.
+
+There are some "well-known" attributes starting with `__NEOFS__` prefix
+that affect system behaviour:
+
+* __NEOFS__UPLOAD_ID
+* __NEOFS__EXPIRATION_EPOCH
+
+For detailed description of each well-known attribute please see the
+corresponding section in NeoFS Technical specification.
 
 
 | Field | Type | Label | Description |
@@ -611,27 +636,32 @@ Attribute groups the user-defined Key-Value pairs attached to the object
 <a name="neo.fs.v2.object.Header.Split"></a>
 
 ### Message Header.Split
-Information about spawning the objects through a payload splitting.
+Bigger objects can be split into a chain of smaller objects. Information
+about inter-dependencies between spawned objects and how to re-construct
+the original one is in the `Split` headers. Parent and children objects
+must be within the same container.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Identifier of the origin object. Parent and children objects must be within the same container. Parent object_id is known only to the minor child. |
-| previous | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Previous carries identifier of the left split neighbor. |
+| parent | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Identifier of the origin object. Known only to the minor child. |
+| previous | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Identifier of the left split neighbor |
 | parent_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | `signature` field of the parent object. Used to reconstruct parent. |
 | parent_header | [Header](#neo.fs.v2.object.Header) |  | `header` field of the parent object. Used to reconstruct parent. |
-| children | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | Children carries list of identifiers of the objects generated by splitting the current. |
+| children | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | List of identifiers of the objects generated by splitting current one. |
 
 
 <a name="neo.fs.v2.object.Object"></a>
 
 ### Message Object
-Object structure.
+Object structure. Object is immutable and content-addressed. It means
+`ObjectID` will change if header or payload changes. It's calculated as a
+hash of header field, which contains hash of object's payload.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Object's unique identifier. Object is content-addressed. It means id will change if header or payload changes. It's calculated as a hash of header field, which contains hash of object's payload |
+| object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Object's unique identifier. |
 | signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signed object_id |
 | header | [Header](#neo.fs.v2.object.Header) |  | Object metadata headers |
 | payload | [bytes](#bytes) |  | Payload bytes. |
@@ -645,11 +675,11 @@ Short header fields
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Object format version. |
+| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Object format version. Effectively the version of API library used to create particular object |
 | creation_epoch | [uint64](#uint64) |  | Epoch when the object was created |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
 | object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Type of the object payload content |
-| payload_length | [uint64](#uint64) |  | Size of payload in bytes. 0xFFFFFFFFFFFFFFFF means `payload_length` is unknown |
+| payload_length | [uint64](#uint64) |  | Size of payload in bytes. `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown |
 
  <!-- end messages -->
 
@@ -669,13 +699,13 @@ Type of match expression
 <a name="neo.fs.v2.object.ObjectType"></a>
 
 ### ObjectType
-Type of the object payload content
+Type of the object payload content.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | REGULAR | 0 | Just a normal object |
 | TOMBSTONE | 1 | Used internally to identify deleted objects |
-| STORAGE_GROUP | 2 | Identifies that the object holds StorageGroup information |
+| STORAGE_GROUP | 2 | StorageGroup information |
 
 
  <!-- end enums -->

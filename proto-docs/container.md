@@ -56,8 +56,10 @@
 <a name="neo.fs.v2.container.ContainerService"></a>
 
 ### Service "neo.fs.v2.container.ContainerService"
-ContainerService provides API to access container smart-contract in morph chain
-via NeoFS node.
+`ContainerService` provides API to interact with `Container` smart contract
+in NeoFS sidechain via other NeoFS nodes. All of those actions can be done
+equivalently by directly issuing transactions and RPC calls to sidechain
+nodes.
 
 ```
 rpc Put(PutRequest) returns (PutResponse);
@@ -71,52 +73,51 @@ rpc GetExtendedACL(GetExtendedACLRequest) returns (GetExtendedACLResponse);
 
 #### Method Put
 
-Put invokes 'Put' method in container smart-contract and returns
-response immediately. After new block in morph chain, request is verified
-by inner ring nodes. After one more block in morph chain, container
-added into smart-contract storage.
+`Put` invokes `Container` smart contract's `Put` method and returns
+response immediately. After a new block is issued in sidechain, request is
+verified by Inner Ring nodes. After one more block in sidechain, container
+is added into smart contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Put | [PutRequest](#neo.fs.v2.container.PutRequest) | [PutResponse](#neo.fs.v2.container.PutResponse) |
 #### Method Delete
 
-Delete invokes 'Delete' method in container smart-contract and returns
-response immediately. After new block in morph chain, request is verified
-by inner ring nodes. After one more block in morph chain, container
-removed from smart-contract storage.
+`Delete` invokes `Container` smart contract's `Delete` method and returns
+response immediately. After a new block is issued in sidechain, request is
+verified by Inner Ring nodes. After one more block in sidechain, container
+is added into smart contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Delete | [DeleteRequest](#neo.fs.v2.container.DeleteRequest) | [DeleteResponse](#neo.fs.v2.container.DeleteResponse) |
 #### Method Get
 
-Get returns container from container smart-contract storage.
+Returns container structure from `Container` smart contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Get | [GetRequest](#neo.fs.v2.container.GetRequest) | [GetResponse](#neo.fs.v2.container.GetResponse) |
 #### Method List
 
-List returns all owner's containers from container smart-contract
-storage.
+Returns all owner's containers from 'Container` smart contract' storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | List | [ListRequest](#neo.fs.v2.container.ListRequest) | [ListResponse](#neo.fs.v2.container.ListResponse) |
 #### Method SetExtendedACL
 
-SetExtendedACL invokes 'SetEACL' method in container smart-contract and
-returns response immediately. After new block in morph chain,
-Extended ACL added into smart-contract storage.
+Invokes 'SetEACL' method of 'Container` smart contract and returns response
+immediately. After one more block in sidechain, Extended ACL changes are
+added into smart contract storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | SetExtendedACL | [SetExtendedACLRequest](#neo.fs.v2.container.SetExtendedACLRequest) | [SetExtendedACLResponse](#neo.fs.v2.container.SetExtendedACLResponse) |
 #### Method GetExtendedACL
 
-GetExtendedACL returns Extended ACL table and signature from container
-smart-contract storage.
+Returns Extended ACL table and signature from `Container` smart contract
+storage.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -140,20 +141,22 @@ Container removal request
 <a name="neo.fs.v2.container.DeleteRequest.Body"></a>
 
 ### Message DeleteRequest.Body
-Request body
+Container removal request body has a signed `ContainerID` as a proof of
+container owner's intent. The signature will be verified by `Container`
+smart contract, so signing algorithm must be supported by NeoVM.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | container_id carries identifier of the container to delete from NeoFS. |
-| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of container id according to RFC-6979. |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container to delete from NeoFS |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | `ContainerID` signed with the container owner's key according to RFC-6979 |
 
 
 <a name="neo.fs.v2.container.DeleteResponse"></a>
 
 ### Message DeleteResponse
-DeleteResponse is empty because delete operation is asynchronous and done
-via consensus in inner ring nodes
+`DeleteResponse` has an empty body because delete operation is asynchronous
+and done via consensus in Inner Ring nodes.
 
 
 | Field | Type | Label | Description |
@@ -166,7 +169,8 @@ via consensus in inner ring nodes
 <a name="neo.fs.v2.container.DeleteResponse.Body"></a>
 
 ### Message DeleteResponse.Body
-Response body
+`DeleteResponse` has an empty body because delete operation is asynchronous
+and done via consensus in Inner Ring nodes.
 
 
 
@@ -186,12 +190,12 @@ Get Extended ACL
 <a name="neo.fs.v2.container.GetExtendedACLRequest.Body"></a>
 
 ### Message GetExtendedACLRequest.Body
-Request body
+Get Extended ACL request body
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | container_id carries identifier of the container that has Extended ACL. |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container having Extended ACL |
 
 
 <a name="neo.fs.v2.container.GetExtendedACLResponse"></a>
@@ -210,13 +214,15 @@ Get Extended ACL
 <a name="neo.fs.v2.container.GetExtendedACLResponse.Body"></a>
 
 ### Message GetExtendedACLResponse.Body
-Response body
+Get Extended ACL Response body can be empty if the requested container did
+not have Extended ACL Table attached or Extended ACL was not allowed at
+container creation.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL that has been requested if it was set up. |
-| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
+| eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL requested, if available |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled Extended ACL according to RFC-6979 |
 
 
 <a name="neo.fs.v2.container.GetRequest"></a>
@@ -235,12 +241,12 @@ Get container structure
 <a name="neo.fs.v2.container.GetRequest.Body"></a>
 
 ### Message GetRequest.Body
-Request body
+Get container structure request body.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | container_id carries identifier of the container to get. |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container to get |
 
 
 <a name="neo.fs.v2.container.GetResponse"></a>
@@ -259,12 +265,13 @@ Get container structure
 <a name="neo.fs.v2.container.GetResponse.Body"></a>
 
 ### Message GetResponse.Body
-Response body
+Get container response body does not have container structure signature. It
+was already verified on container creation.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container | [Container](#neo.fs.v2.container.Container) |  | Container that has been requested. |
+| container | [Container](#neo.fs.v2.container.Container) |  | Requested container structure |
 
 
 <a name="neo.fs.v2.container.ListRequest"></a>
@@ -275,7 +282,7 @@ List containers
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [ListRequest.Body](#neo.fs.v2.container.ListRequest.Body) |  | Body of list containers request message. |
+| body | [ListRequest.Body](#neo.fs.v2.container.ListRequest.Body) |  | Body of list containers request message |
 | meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
@@ -283,12 +290,12 @@ List containers
 <a name="neo.fs.v2.container.ListRequest.Body"></a>
 
 ### Message ListRequest.Body
-Request body
+List containers request body.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | owner_id carries identifier of the container owner. |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Identifier of the container owner |
 
 
 <a name="neo.fs.v2.container.ListResponse"></a>
@@ -307,12 +314,12 @@ List containers
 <a name="neo.fs.v2.container.ListResponse.Body"></a>
 
 ### Message ListResponse.Body
-Response body
+List containers response body.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_ids | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) | repeated | ContainerIDs carries list of identifiers of the containers that belong to the owner. |
+| container_ids | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) | repeated | List of `ContainerID`s belonging to the requested `OwnerID` |
 
 
 <a name="neo.fs.v2.container.PutRequest"></a>
@@ -331,13 +338,17 @@ New NeoFS Container creation request
 <a name="neo.fs.v2.container.PutRequest.Body"></a>
 
 ### Message PutRequest.Body
-Request body
+Container creation request has container structure's signature as a
+separate field. It's not stored in sidechain, just verified on container
+creation by `Container` smart contract. `ContainerID` is a SHA256 hash of
+the stable-marshalled container strucutre, hence there is no need for
+additional signature checks.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container | [Container](#neo.fs.v2.container.Container) |  | Container to create in NeoFS. |
-| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled container according to RFC-6979. |
+| container | [Container](#neo.fs.v2.container.Container) |  | Container structure to register in NeoFS |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of a stable-marshalled container according to RFC-6979 |
 
 
 <a name="neo.fs.v2.container.PutResponse"></a>
@@ -356,12 +367,15 @@ New NeoFS Container creation response
 <a name="neo.fs.v2.container.PutResponse.Body"></a>
 
 ### Message PutResponse.Body
-Response body
+Container put response body contains information about the newly registered
+container as seen by `Container` smart contract. `ContainerID` can be
+calculated beforehand from the container structure and compared to the one
+returned here to make sure everything was done as expected.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | container_id carries identifier of the new container. |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Unique identifier of the newly created container |
 
 
 <a name="neo.fs.v2.container.SetExtendedACLRequest"></a>
@@ -380,13 +394,14 @@ Set Extended ACL
 <a name="neo.fs.v2.container.SetExtendedACLRequest.Body"></a>
 
 ### Message SetExtendedACLRequest.Body
-Request body
+Set Extended ACL request body does not have separate `ContainerID`
+reference. It will be taken from `EACLTable.container_id` field.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL to set for the container. |
-| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
+| eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL table to set for container |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled Extended ACL table according to RFC-6979 |
 
 
 <a name="neo.fs.v2.container.SetExtendedACLResponse"></a>
@@ -405,7 +420,9 @@ Set Extended ACL
 <a name="neo.fs.v2.container.SetExtendedACLResponse.Body"></a>
 
 ### Message SetExtendedACLResponse.Body
-Response body
+`SetExtendedACLResponse` has an empty body because the operation is
+asynchronous and update should be reflected in `Container` smart contract's
+storage after next block is issued in sidechain.
 
 
  <!-- end messages -->
@@ -426,32 +443,40 @@ Response body
 <a name="neo.fs.v2.container.Container"></a>
 
 ### Message Container
-Container is a structure that defines object placement behaviour. Objects
-can be stored only within containers. They define placement rule, attributes
-and access control information. ID of the container is a 32 byte long
-SHA256 hash of stable-marshalled container message.
+Container is a structure that defines object placement behaviour. Objects can
+be stored only within containers. They define placement rule, attributes and
+access control information. ID of the container is a 32 byte long SHA256 hash
+of stable-marshalled container message.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Container format version. Effectively the version of API library used to create container |
-| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | OwnerID carries identifier of the container owner. |
-| nonce | [bytes](#bytes) |  | Nonce is a 16 byte UUID, used to avoid collisions of container id. |
-| basic_acl | [uint32](#uint32) |  | BasicACL contains access control rules for owner, system, others groups and permission bits for bearer token and Extended ACL. |
-| attributes | [Container.Attribute](#neo.fs.v2.container.Container.Attribute) | repeated | Attributes define any immutable characteristics of container. |
-| placement_policy | [neo.fs.v2.netmap.PlacementPolicy](#neo.fs.v2.netmap.PlacementPolicy) |  | Placement policy for the object inside the container. |
+| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Container format version. Effectively the version of API library used to create container. |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Identifier of the container owner |
+| nonce | [bytes](#bytes) |  | Nonce is a 16 byte UUID, used to avoid collisions of container id |
+| basic_acl | [uint32](#uint32) |  | `BasicACL` contains access control rules for owner, system, others groups and permission bits for `BearerToken` and `Extended ACL` |
+| attributes | [Container.Attribute](#neo.fs.v2.container.Container.Attribute) | repeated | Attributes represent immutable container's meta data |
+| placement_policy | [neo.fs.v2.netmap.PlacementPolicy](#neo.fs.v2.netmap.PlacementPolicy) |  | Placement policy for the object inside the container |
 
 
 <a name="neo.fs.v2.container.Container.Attribute"></a>
 
 ### Message Container.Attribute
-Attribute is a key-value pair of strings.
+`Attribute` is a user-defined Key-Value metadata pair attached to the
+container. Container attribute are immutable. They are set at container
+creation and cna never be added or updated.
+
+There are some "well-known" attributes affecting system behaviour:
+
+* Subnet \
+  String ID of container's storage subnet. Container can be attached to
+  only one subnet.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  | Key of immutable container attribute. |
-| value | [string](#string) |  | Value of immutable container attribute. |
+| key | [string](#string) |  | Attribute name key |
+| value | [string](#string) |  | Attribute value |
 
  <!-- end messages -->
 

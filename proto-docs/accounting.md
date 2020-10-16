@@ -35,8 +35,11 @@
 <a name="neo.fs.v2.accounting.AccountingService"></a>
 
 ### Service "neo.fs.v2.accounting.AccountingService"
-The service provides methods for obtaining information
-about the account balance in NeoFS system.
+Accounting service provides methods for interaction with NeoFS sidechain via
+other NeoFS nodes to get information about the account balance. Deposit and
+Withdraw operations can't be implemented here, as they require Mainnet NeoFS
+smart contract invocation. Transfer operations between internal NeoFS
+accounts are possible, if both use the same token type.
 
 ```
 rpc Balance(BalanceRequest) returns (BalanceResponse);
@@ -45,7 +48,7 @@ rpc Balance(BalanceRequest) returns (BalanceResponse);
 
 #### Method Balance
 
-Returns the amount of funds for the requested NeoFS account.
+Returns the amount of funds in GAS token for the requested NeoFS account.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -56,13 +59,7 @@ Returns the amount of funds for the requested NeoFS account.
 <a name="neo.fs.v2.accounting.BalanceRequest"></a>
 
 ### Message BalanceRequest
-Message defines the request body of Balance method.
-
-To indicate the account for which the balance is requested, it's identifier
-is used.
-
-To gain access to the requested information, the request body must be formed
-according to the requirements from the system specification.
+BalanceRequest message
 
 
 | Field | Type | Label | Description |
@@ -75,20 +72,21 @@ according to the requirements from the system specification.
 <a name="neo.fs.v2.accounting.BalanceRequest.Body"></a>
 
 ### Message BalanceRequest.Body
-Request body
+To indicate the account for which the balance is requested, it's identifier
+is used. It can be any existing account in NeoFS sidechain `Balance` smart
+contract. If omitted, client implementation MUST set it to the request's
+signer `OwnerID`.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Carries user identifier in NeoFS system for which the balance is requested. |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Valid user identifier in `OwnerID` format for which the balance is requested. Required field. |
 
 
 <a name="neo.fs.v2.accounting.BalanceResponse"></a>
 
 ### Message BalanceResponse
-Message defines the response body of Balance method.
-
-The amount of funds is calculated in decimal numbers.
+BalanceResponse message
 
 
 | Field | Type | Label | Description |
@@ -101,12 +99,13 @@ The amount of funds is calculated in decimal numbers.
 <a name="neo.fs.v2.accounting.BalanceResponse.Body"></a>
 
 ### Message BalanceResponse.Body
-Request body
+The amount of funds in GAS token for the `OwnerID`'s account requested.
+Balance is `Decimal` format to avoid precision issues with rounding.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| balance | [Decimal](#neo.fs.v2.accounting.Decimal) |  | Carries the amount of funds on the account. |
+| balance | [Decimal](#neo.fs.v2.accounting.Decimal) |  | Amount of funds in GAS token for the requested account. |
 
  <!-- end messages -->
 
@@ -126,13 +125,19 @@ Request body
 <a name="neo.fs.v2.accounting.Decimal"></a>
 
 ### Message Decimal
-Decimal represents the decimal numbers.
+Standard floating point data type can't be used in NeoFS due to inexactness
+of the result when doing lots of small number operations. To solve the lost
+precision issue, special `Decimal` format is used for monetary computations.
+
+Please see [The General Decimal Arithmetic
+Specification](http://speleotrove.com/decimal/) for detailed problem
+description.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| value | [int64](#int64) |  | value carries number value. |
-| precision | [uint32](#uint32) |  | precision carries value precision. |
+| value | [int64](#int64) |  | Number in smallest Token fractions. |
+| precision | [uint32](#uint32) |  | Precision value indicating how many smallest fractions can be in one integer. |
 
  <!-- end messages -->
 
