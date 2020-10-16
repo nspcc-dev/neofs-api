@@ -9,9 +9,9 @@ option csharp_namespace = "NeoFS.API.v2.Refs";
 // format there MUST be a '/' delimeter between them.
 message Address {
   // Container identifier
-  ContainerID container_id = 1;
+  ContainerID container_id = 1 [json_name = "container"];
   // Object identifier
-  ObjectID object_id = 2;
+  ObjectID object_id = 2 [json_name = "object"];
 }
 
 // NeoFS Object unique identifier. Objects are immutable and content-addressed.
@@ -20,7 +20,7 @@ message Address {
 // payload.
 message ObjectID {
   // Object identifier in a binary format
-  bytes value = 1;
+  bytes value = 1 [json_name = "value"];
 }
 
 // NeoFS container identifier. Container structures are immutable and
@@ -28,7 +28,7 @@ message ObjectID {
 // stable-marshalled container message.
 message ContainerID {
   // Container identifier in a binary format.
-  bytes value = 1;
+  bytes value = 1 [json_name = "value"];
 }
 
 // OwnerID is a derivative of a user's main public key. The transformation
@@ -36,24 +36,24 @@ message ContainerID {
 // be directly used as `OwnerID`.
 message OwnerID {
   // Identifier of the container owner in a binary format
-  bytes value = 1;
+  bytes value = 1 [json_name = "value"];
 }
 
 // API version used by a node.
 message Version {
   // Major API version
-  uint32 major = 1;
+  uint32 major = 1 [json_name = "major"];
 
   // Minor API version
-  uint32 minor = 2;
+  uint32 minor = 2 [json_name = "minor"];
 }
 
 // Signature of something in NeoFS.
 message Signature {
   // Public key used for signing
-  bytes key = 1;
+  bytes key = 1 [json_name = "key"];
   // Signature
-  bytes sign = 2;
+  bytes sign = 2 [json_name = "signature"];
 }
 
 // Checksum algorithm type.
@@ -71,8 +71,8 @@ enum ChecksumType {
 // Checksum message.
 message Checksum {
   // Checksum algorithm type
-  ChecksumType type = 1;
+  ChecksumType type = 1 [json_name = "type"];
 
   // Checksum itself
-  bytes sum = 2;
+  bytes sum = 2 [json_name = "sum"];
 }
