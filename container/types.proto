@@ -15,17 +15,17 @@ import "refs/types.proto";
 message Container {
   // Container format version. Effectively the version of API library used to
   // create container.
-  neo.fs.v2.refs.Version version = 1;
+  neo.fs.v2.refs.Version version = 1 [json_name = "version"];
 
   // Identifier of the container owner
-  neo.fs.v2.refs.OwnerID owner_id = 2;
+  neo.fs.v2.refs.OwnerID owner_id = 2 [json_name = "ownerID"];
 
   // Nonce is a 16 byte UUID, used to avoid collisions of container id
-  bytes nonce = 3;
+  bytes nonce = 3 [json_name = "nonce"];
 
   // `BasicACL` contains access control rules for owner, system, others groups
   // and permission bits for `BearerToken` and `Extended ACL`
-  uint32 basic_acl = 4;
+  uint32 basic_acl = 4 [json_name = "basicACL"];
 
   // `Attribute` is a user-defined Key-Value metadata pair attached to the
   // container. Container attribute are immutable. They are set at container
@@ -38,14 +38,14 @@ message Container {
   //   only one subnet.
   message Attribute {
     // Attribute name key
-    string key = 1;
+    string key = 1 [json_name = "key"];
 
     // Attribute value
-    string value = 2;
+    string value = 2 [json_name = "value"];
   }
   // Attributes represent immutable container's meta data
-  repeated Attribute attributes = 5;
+  repeated Attribute attributes = 5 [json_name = "attributes"];
 
   // Placement policy for the object inside the container
-  neo.fs.v2.netmap.PlacementPolicy placement_policy = 6;
+  neo.fs.v2.netmap.PlacementPolicy placement_policy = 6 [json_name = "placementPolicy"];
 }
