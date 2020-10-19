@@ -14,9 +14,9 @@ option csharp_namespace = "NeoFS.API.v2.Accounting";
 // description.
 message Decimal {
   // Number in smallest Token fractions.
-  int64 value = 1;
+  int64 value = 1 [json_name = "value"];
 
   // Precision value indicating how many smallest fractions can be in one
   // integer.
-  uint32 precision = 2;
+  uint32 precision = 2 [json_name = "precision"];
 }
