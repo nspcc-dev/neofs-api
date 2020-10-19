@@ -9,9 +9,9 @@ option csharp_namespace = "NeoFS.API.v2.Refs";
 // format there MUST be a '/' delimeter between them.
 message Address {
   // Container identifier
-  ContainerID container_id = 1 [json_name = "container"];
+  ContainerID container_id = 1 [json_name = "containerID"];
   // Object identifier
-  ObjectID object_id = 2 [json_name = "object"];
+  ObjectID object_id = 2 [json_name = "objectID"];
 }
 
 // NeoFS Object unique identifier. Objects are immutable and content-addressed.
