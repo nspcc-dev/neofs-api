@@ -10,7 +10,7 @@ import "refs/types.proto";
 // Target role of the access control rule in access control list.
 enum Role {
   // Unspecified  role, default value
-  ROLE_UNSPECIFIED= 0;
+  ROLE_UNSPECIFIED = 0;
 
   // User target rule is applied if sender is the owner of the container
   USER = 1;
@@ -91,40 +91,40 @@ enum HeaderType {
 // Describes a single eACL rule.
 message EACLRecord {
   // NeoFS request Verb to match
-  Operation operation = 1 [json_name = "Operation"];
+  Operation operation = 1 [json_name = "operation"];
 
   // Rule execution result. Either allows or denies access if filters match.
-  Action action = 2 [json_name = "Action"];
+  Action action = 2 [json_name = "action"];
 
   // Filter to check particular properties of the request or object.
   message Filter {
     // Define if Object or Request header will be used
-    HeaderType header_type = 1 [json_name = "HeaderType"];
+    HeaderType header_type = 1 [json_name = "headerType"];
 
     // Match operation type
-    MatchType match_type = 2 [json_name = "MatchType"];
+    MatchType match_type = 2 [json_name = "matchType"];
 
     // Name of the Header to use
-    string header_name = 3 [json_name="Name"];
+    string header_name = 3 [json_name="headerName"];
 
     // Expected Header Value or pattern to match
-    string header_val = 4 [json_name="Value"];
+    string header_val = 4 [json_name="value"];
   }
 
   // List of filters to match and see if rule is applicable
-  repeated Filter filters = 3 [json_name="Filters"];
+  repeated Filter filters = 3 [json_name="filters"];
 
   // Target to apply ACL rule. Can be a subject's role class or a list of public
   // keys to match.
   message Target {
     // Target subject's role class
-    Role role = 1 [json_name="Role"];
+    Role role = 1 [json_name="role"];
 
     // List of public keys to identify target subject
-    repeated bytes key_list = 2 [json_name="Keys"];
+    repeated bytes keys = 2 [json_name="keys"];
   }
   // List of target subjects to apply ACL rule to
-  repeated Target targets = 4 [json_name="Targets"];
+  repeated Target targets = 4 [json_name="targets"];
 }
 
 // Extended ACL rules table. Defined a list of ACL rules additionally to Basic
@@ -137,10 +137,10 @@ message EACLTable {
   neo.fs.v2.refs.Version version = 1;
 
   // Identifier of the container that should use given access control rules
-  neo.fs.v2.refs.ContainerID container_id = 2 [json_name="ContainerID"];
+  neo.fs.v2.refs.ContainerID container_id = 2 [json_name="containerID"];
 
   // List of Extended ACL rules
-  repeated EACLRecord records = 3 [json_name="Records"];
+  repeated EACLRecord records = 3 [json_name="records"];
 }
 
 // BearerToken allows to attach signed Extended ACL rules to the request in
@@ -155,30 +155,30 @@ message BearerToken {
   message Body {
     // Table of Extended ACL rules to use instead of the ones attached to the
     // container
-    EACLTable eacl_table = 1;
+    EACLTable eacl_table = 1 [json_name="eaclTable"];
 
     // `OwnerID` to whom the token was issued. MUST match with the request
     // originator's `OwnerID`
-    neo.fs.v2.refs.OwnerID owner_id = 2;
+    neo.fs.v2.refs.OwnerID owner_id = 2 [json_name="ownerID"];
 
     // Lifetime parameters of the token. Filed names taken from
     // [rfc7519](https://tools.ietf.org/html/rfc7519).
     message TokenLifetime {
       // Expiration Epoch
-      uint64 exp = 1;
+      uint64 exp = 1 [json_name="exp"];
 
       // Not valid before Epoch
-      uint64 nbf = 2;
+      uint64 nbf = 2 [json_name="nbf"];
 
       // Issued at Epoch
-      uint64 iat = 3;
+      uint64 iat = 3 [json_name="iat"];
     }
     // Token expiration and valid time period parameters
-    TokenLifetime lifetime = 3;
+    TokenLifetime lifetime = 3 [json_name="lifetime"];
   }
   // Bearer Token body
-  Body body = 1;
+  Body body = 1 [json_name="body"];
 
   // Signature of BearerToken body
-  neo.fs.v2.refs.Signature signature = 2;
+  neo.fs.v2.refs.Signature signature = 2 [json_name="signature"];
 }
