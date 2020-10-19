@@ -254,10 +254,10 @@ message HeadRequest {
 // 3. Check if `ObjectID` signature in `signature` field is correct
 message HeaderWithSignature {
   // Full object header
-  Header header = 1;
+  Header header = 1 [json_name = "header"];
 
   // Signed `ObjectID` to verify full header's authenticity
-  neo.fs.v2.refs.Signature signature = 2;
+  neo.fs.v2.refs.Signature signature = 2 [json_name = "signature"];
 }
 
 // Object HEAD response
