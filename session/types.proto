@@ -37,10 +37,10 @@ message ObjectSessionContext {
     RANGEHASH = 7;
   }
   // Type of request for which the token is issued
-  Verb verb = 1;
+  Verb verb = 1 [json_name = "verb"];
 
   // Related Object address
-  neo.fs.v2.refs.Address address = 2;
+  neo.fs.v2.refs.Address address = 2 [json_name = "address"];
 }
 
 // NeoFS Session Token.
@@ -48,117 +48,117 @@ message SessionToken {
   // Session Token body
   message Body {
     // Token identifier is a valid UUIDv4 in binary form
-    bytes id = 1;
+    bytes id = 1 [json_name = "id"];
 
     // Identifier of the session initiator
-    neo.fs.v2.refs.OwnerID owner_id = 2;
+    neo.fs.v2.refs.OwnerID owner_id = 2 [json_name = "ownerID"];
 
     // Lifetime parameters of the token. Filed names taken from rfc7519.
     message TokenLifetime {
       // Expiration Epoch
-      uint64 exp = 1;
+      uint64 exp = 1 [json_name = "exp"];
 
       // Not valid before Epoch
-      uint64 nbf = 2;
+      uint64 nbf = 2 [json_name = "nbf"];
 
       // Issued at Epoch
-      uint64 iat = 3;
+      uint64 iat = 3 [json_name = "iat"];
     }
     // Lifetime of the session
-    TokenLifetime lifetime = 3;
+    TokenLifetime lifetime = 3 [json_name = "lifetime"];
 
     // Public key used in session
-    bytes session_key = 4;
+    bytes session_key = 4 [json_name = "sessionKey"];
 
     // Session Context information
     oneof context {
       // ObjectService session context
-      ObjectSessionContext object = 5;
+      ObjectSessionContext object = 5 [json_name = "object"];
     }
   }
   // Session Token contains the proof of trust between peers to be attached in
   // requests for further verification. Please see corresponding section of
   // NeoFS Technical Specification for details.
-  Body body = 1;
+  Body body = 1 [json_name = "body"];
 
   // Signature of `SessionToken` information
-  neo.fs.v2.refs.Signature signature = 2;
+  neo.fs.v2.refs.Signature signature = 2 [json_name = "signature"];
 }
 
 // Extended headers for Request/Response.
 message XHeader {
   // Key of the X-Header
-  string key = 1;
+  string key = 1 [json_name = "key"];
 
   // Value of the X-Header
-  string value = 2;
+  string value = 2 [json_name = "value"];
 }
 
 // Meta information attached to the request. When forwarded between peers,
 // request meta headers are folded in matryoshka style.
 message RequestMetaHeader {
   // Peer's API version used
-  neo.fs.v2.refs.Version version = 1;
+  neo.fs.v2.refs.Version version = 1 [json_name = "version"];
 
   // Peer's local epoch number. Set to 0 if unknown.
-  uint64 epoch = 2;
+  uint64 epoch = 2 [json_name = "epoch"];
 
   // Maximum number of intermediate nodes in the request route
-  uint32 ttl = 3;
+  uint32 ttl = 3 [json_name = "ttl"];
 
   // Request X-Headers
-  repeated XHeader x_headers = 4;
+  repeated XHeader x_headers = 4 [json_name = "xHeaders"];
 
   // Session token within which the request is sent
-  SessionToken session_token = 5;
+  SessionToken session_token = 5 [json_name = "sessionToken"];
 
   // `BearerToken` with eACL overrides for the request
-  neo.fs.v2.acl.BearerToken bearer_token = 6;
+  neo.fs.v2.acl.BearerToken bearer_token = 6 [json_name = "bearerToken"];
 
   // `RequestMetaHeader` of the origin request
-  RequestMetaHeader origin = 7;
+  RequestMetaHeader origin = 7 [json_name = "origin"];
 }
 
 // Information about the response
 message ResponseMetaHeader {
   // Peer's API version used
-  neo.fs.v2.refs.Version version = 1;
+  neo.fs.v2.refs.Version version = 1 [json_name = "version"];
 
   // Peer's local epoch number
-  uint64 epoch = 2;
+  uint64 epoch = 2 [json_name = "epoch"];
 
   // Maximum number of intermediate nodes in the request route
-  uint32 ttl = 3;
+  uint32 ttl = 3 [json_name = "ttl"];
 
   // Response X-Headers
-  repeated XHeader x_headers = 4;
+  repeated XHeader x_headers = 4 [json_name = "xHeaders"];
 
   // `ResponseMetaHeader` of the origin request
-  ResponseMetaHeader origin = 5;
+  ResponseMetaHeader origin = 5 [json_name = "origin"];
 }
 
 // Verification info for request signed by all intermediate nodes.
 message RequestVerificationHeader {
   // Request Body signature. Should be generated once by request initiator.
-  neo.fs.v2.refs.Signature body_signature = 1;
+  neo.fs.v2.refs.Signature body_signature = 1 [json_name = "bodySignature"];
   // Request Meta signature is added and signed by each intermediate node
-  neo.fs.v2.refs.Signature meta_signature = 2;
+  neo.fs.v2.refs.Signature meta_signature = 2 [json_name = "metaSignature"];
   // Signature of previous hops
-  neo.fs.v2.refs.Signature origin_signature = 3;
+  neo.fs.v2.refs.Signature origin_signature = 3 [json_name = "originSignature"];
 
   // Chain of previous hops signatures
-  RequestVerificationHeader origin = 4;
+  RequestVerificationHeader origin = 4 [json_name = "origin"];
 }
 
 // Verification info for response signed by all intermediate nodes
 message ResponseVerificationHeader {
   // Response Body signature. Should be generated once by answering node.
-  neo.fs.v2.refs.Signature body_signature = 1;
+  neo.fs.v2.refs.Signature body_signature = 1 [json_name = "bodySignature"];
   // Response Meta signature is added and signed by each intermediate node
-  neo.fs.v2.refs.Signature meta_signature = 2;
+  neo.fs.v2.refs.Signature meta_signature = 2 [json_name = "metaSignature"];
   // Signature of previous hops
-  neo.fs.v2.refs.Signature origin_signature = 3;
+  neo.fs.v2.refs.Signature origin_signature = 3 [json_name = "originSignature"];
 
   // Chain of previous hops signatures
-  ResponseVerificationHeader origin = 4;
+  ResponseVerificationHeader origin = 4 [json_name = "origin"];
 }
