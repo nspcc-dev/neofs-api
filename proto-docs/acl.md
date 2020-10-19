@@ -111,7 +111,7 @@ keys to match.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | role | [Role](#neo.fs.v2.acl.Role) |  | Target subject's role class |
-| key_list | [bytes](#bytes) | repeated | List of public keys to identify target subject |
+| keys | [bytes](#bytes) | repeated | List of public keys to identify target subject |
 
 
 <a name="neo.fs.v2.acl.EACLTable"></a>
