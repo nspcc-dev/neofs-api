@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.0.1] - 2020-10-19
+
+Documentation updates and JSON field names definition
+
+### Added
+- Added "well-known" attributes list for `netmap.NodeInfo`
+- Added "well-known" attributes list for objects
+- Added "well-known" attributes list for containers
+- JSON field names defined for most of data structures
+
+### Changed
+- Documentation updated for all packages fixing typos and minor inaccuracies
+- `acl.EACLRecord.Target.key_list` field renamed to `keys` for consistency
+
+### Removed
+- Human-written documentation will now be only in [NeoFS
+  Specification](https://github.com/nspcc-dev/neofs-spec)
+
 ## [2.0.0] - 2020-09-07 - Jindo (진도, 珍島)
 
 Major API refactoring and simplification.
@@ -164,3 +182,4 @@ Bump major release
 [1.1.0]: https://github.com/nspcc-dev/neofs-api/compare/v1.0.0...v1.1.0
 [1.2.0]: https://github.com/nspcc-dev/neofs-api/compare/v1.1.0...v1.2.0
 [2.0.0]: https://github.com/nspcc-dev/neofs-api/compare/v1.2.0...v2.0.0
+[2.0.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.0.0...v2.0.1
