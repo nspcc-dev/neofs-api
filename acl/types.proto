@@ -149,6 +149,9 @@ message EACLTable {
 // like [JWT](https://jwt.io), it has a limited lifetime and scope, hence can be
 // used in the similar use cases, like providing authorisation to externally
 // authenticated party.
+//
+// BearerToken can be issued only by container's owner and must be signed using
+// the key associated with container's `OwnerID`.
 message BearerToken {
   // Bearer Token body structure contains Extended ACL table issued by container
   // owner with additional information preventing token's abuse.
@@ -157,8 +160,8 @@ message BearerToken {
     // container
     EACLTable eacl_table = 1 [json_name="eaclTable"];
 
-    // `OwnerID` to whom the token was issued. MUST match with the request
-    // originator's `OwnerID`
+    // `OwnerID` to whom the token was issued. Must match the request
+    // originator's `OwnerID`. If empty, any token bearer will be accepted.
     neo.fs.v2.refs.OwnerID owner_id = 2 [json_name="ownerID"];
 
     // Lifetime parameters of the token. Filed names taken from
