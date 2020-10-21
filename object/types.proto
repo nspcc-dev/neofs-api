@@ -124,7 +124,7 @@ message Header {
     neo.fs.v2.refs.ObjectID previous = 2 [json_name = "previous"];
 
     // `signature` field of the parent object. Used to reconstruct parent.
-    neo.fs.v2.refs.Signature parent_signature = 3[json_name = "parentSignature"];
+    neo.fs.v2.refs.Signature parent_signature = 3 [json_name = "parentSignature"];
 
     // `header` field of the parent object. Used to reconstruct parent.
     Header parent_header = 4 [json_name = "parentHeader"];
