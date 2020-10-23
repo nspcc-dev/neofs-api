@@ -542,14 +542,51 @@ Object Search request body
 <a name="neo.fs.v2.object.SearchRequest.Body.Filter"></a>
 
 ### Message SearchRequest.Body.Filter
-Filter structure
+Filter structure checks if object header field or attribute content
+matches a value.
+
+By default `key` field refers to the corresponding object's `Attribute`.
+Some Object's header fields can also be accessed by adding `$Object:`
+prefix to the name. Here is the list of fields available via this prefix:
+
+* $Object:version \
+  version
+* $Object:containerID \
+  container_id
+* $Object:ownerID \
+  owner_id
+* $Object:creationEpoch \
+  creation_epoch
+* $Object:payloadLength \
+  payload_length
+* $Object:payloadHash \
+  payload_hash
+* $Object:objectType \
+  object_type
+* $Object:homomorphicHash \
+  homomorphic_hash
+
+There are some well-known filter aliases to match objects by certain
+properties:
+
+* $Object:ROOT \
+  With the `value` set to `true` checks if an object is a top object in a
+  split hierarchy. With other values returns non-root objects.
+* $Object:LEAF \
+  With the `value` set to `true` checks if an object is a leaf in a split
+  hierarchy. With other values returns non-leaf objects.
+* $Object:PARENT \
+  With the `value` set to `true` checks if an object has any child
+  objects is `Split` header or there are objects known to reference this
+  object as a parent. If set to `false` returns object without child
+  objects in `Split` header or any objects known to reference them.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | match_type | [MatchType](#neo.fs.v2.object.MatchType) |  | Match type to use |
-| name | [string](#string) |  | Header name to match |
-| value | [string](#string) |  | Header value to match |
+| key | [string](#string) |  | Attribute or Header fields to match |
+| value | [string](#string) |  | Value to match |
 
 
 <a name="neo.fs.v2.object.SearchResponse"></a>
@@ -620,8 +657,19 @@ object.
 There are some "well-known" attributes starting with `__NEOFS__` prefix
 that affect system behaviour:
 
-* __NEOFS__UPLOAD_ID
-* __NEOFS__EXPIRATION_EPOCH
+* __NEOFS__UPLOAD_ID \
+  Marks smaller parts of a split bigger object
+* __NEOFS__EXPIRATION_EPOCH \
+  Tells GC to delete object after that epoch
+
+And some well-known attributes used by applications only:
+
+* Name \
+  Human-friendly name
+* FileName \
+  File name to be associated with the object on saving
+* Timestamp \
+  User-defined local time of object creation in Unix Timestamp format
 
 For detailed description of each well-known attribute please see the
 corresponding section in NeoFS Technical specification.

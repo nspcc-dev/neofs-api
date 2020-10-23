@@ -468,9 +468,16 @@ creation and cna never be added or updated.
 
 There are some "well-known" attributes affecting system behaviour:
 
-* Subnet \
+* __NEOFS__SUBNET \
   String ID of container's storage subnet. Container can be attached to
   only one subnet.
+
+And some well-known attributes used by applications only:
+
+* Name \
+  Human-friendly name
+* Timestamp \
+  User-defined local time of container creation in Unix Timestamp format
 
 
 | Field | Type | Label | Description |
