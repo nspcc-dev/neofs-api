@@ -565,6 +565,8 @@ prefix to the name. Here is the list of fields available via this prefix:
   object_type
 * $Object:homomorphicHash \
   homomorphic_hash
+* $Object:split.parent \
+  object_id of parent
 
 There are some well-known filter aliases to match objects by certain
 properties:
@@ -575,11 +577,10 @@ properties:
 * $Object:LEAF \
   With the `value` set to `true` checks if an object is a leaf in a split
   hierarchy. With other values returns non-leaf objects.
-* $Object:PARENT \
-  With the `value` set to `true` checks if an object has any child
-  objects is `Split` header or there are objects known to reference this
-  object as a parent. If set to `false` returns object without child
-  objects in `Split` header or any objects known to reference them.
+* $Object:CHILDFREE \
+  With the `value` set to `true` checks if an object has empty
+  children list in `Split` header. With other values returns
+  non-childfree objects.
 
 
 | Field | Type | Label | Description |
