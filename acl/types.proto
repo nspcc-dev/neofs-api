@@ -98,10 +98,9 @@ message EACLRecord {
 
   // Filter to check particular properties of the request or object.
   //
-  // By default `header_name` field refers to the corresponding object's
-  // `Attribute`. Some Object's header fields can also be accessed by adding
-  // `$Object:` prefix to the name. Here is the list of fields available via
-  // this prefix:
+  // By default `key` field refers to the corresponding object's `Attribute`.
+  // Some Object's header fields can also be accessed by adding `$Object:`
+  // prefix to the name. Here is the list of fields available via this prefix:
   //
   // * $Object:version \
   //   version
@@ -128,10 +127,10 @@ message EACLRecord {
     MatchType match_type = 2 [json_name = "matchType"];
 
     // Name of the Header to use
-    string header_name = 3 [json_name="headerName"];
+    string key = 3 [json_name="key"];
 
     // Expected Header Value or pattern to match
-    string header_val = 4 [json_name="value"];
+    string value = 4 [json_name="value"];
   }
 
   // List of filters to match and see if rule is applicable
