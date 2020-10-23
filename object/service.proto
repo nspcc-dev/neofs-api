@@ -298,7 +298,7 @@ message SearchRequest {
     // Filter structure checks if object header field or attribute content
     // matches a value.
     //
-    // By default `name` field refers to the corresponding object's `Attribute`.
+    // By default `key` field refers to the corresponding object's `Attribute`.
     // Some Object's header fields can also be accessed by adding `$Object:`
     // prefix to the name. Here is the list of fields available via this prefix:
     //
@@ -338,7 +338,7 @@ message SearchRequest {
       MatchType match_type = 1;
 
       // Attribute or Header fields to match
-      string name = 2;
+      string key = 2;
 
       // Value to match
       string value = 3;
