@@ -38,6 +38,9 @@ like [JWT](https://jwt.io), it has a limited lifetime and scope, hence can be
 used in the similar use cases, like providing authorisation to externally
 authenticated party.
 
+BearerToken can be issued only by container's owner and must be signed using
+the key associated with container's `OwnerID`.
+
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
@@ -55,7 +58,7 @@ owner with additional information preventing token's abuse.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | eacl_table | [EACLTable](#neo.fs.v2.acl.EACLTable) |  | Table of Extended ACL rules to use instead of the ones attached to the container |
-| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | `OwnerID` to whom the token was issued. MUST match with the request originator's `OwnerID` |
+| owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | `OwnerID` to whom the token was issued. Must match the request originator's `OwnerID`. If empty, any token bearer will be accepted. |
 | lifetime | [BearerToken.Body.TokenLifetime](#neo.fs.v2.acl.BearerToken.Body.TokenLifetime) |  | Token expiration and valid time period parameters |
 
 
@@ -92,13 +95,34 @@ Describes a single eACL rule.
 ### Message EACLRecord.Filter
 Filter to check particular properties of the request or object.
 
+By default `key` field refers to the corresponding object's `Attribute`.
+Some Object's header fields can also be accessed by adding `$Object:`
+prefix to the name. Here is the list of fields available via this prefix:
+
+* $Object:version \
+  version
+* $Object:containerID \
+  container_id
+* $Object:ownerID \
+  owner_id
+* $Object:creationEpoch \
+  creation_epoch
+* $Object:payloadLength \
+  payload_length
+* $Object:payloadHash \
+  payload_hash
+* $Object:objectType \
+  object_type
+* $Object:homomorphicHash \
+  homomorphic_hash
+
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | header_type | [HeaderType](#neo.fs.v2.acl.HeaderType) |  | Define if Object or Request header will be used |
 | match_type | [MatchType](#neo.fs.v2.acl.MatchType) |  | Match operation type |
-| header_name | [string](#string) |  | Name of the Header to use |
-| header_val | [string](#string) |  | Expected Header Value or pattern to match |
+| key | [string](#string) |  | Name of the Header to use |
+| value | [string](#string) |  | Expected Header Value or pattern to match |
 
 
 <a name="neo.fs.v2.acl.EACLRecord.Target"></a>
