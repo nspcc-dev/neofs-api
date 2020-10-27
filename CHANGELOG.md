@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.0.2] - 2020-10-27
+
+More "well-known" application attributes and documentation updates.
+
+### Added
+- Added "well-known" attributes list for extended ACL and object search filters
+- Added `Name`, `Timestamp` "well-known" application attributes for container
+- Added `Name`, `FileName`, `Timestamp` "well-known" application attributes for object
+
+### Changed
+- `BearerToken.owner_id` field description changed
+- `Subnet` container attribute now has `__NEOFS__` prefix
+- Search and ACL filters now have `key` and `value` fields
+
 ## [2.0.1] - 2020-10-19
 
 Documentation updates and JSON field names definition
@@ -183,3 +197,4 @@ Bump major release
 [1.2.0]: https://github.com/nspcc-dev/neofs-api/compare/v1.1.0...v1.2.0
 [2.0.0]: https://github.com/nspcc-dev/neofs-api/compare/v1.2.0...v2.0.0
 [2.0.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.0.0...v2.0.1
+[2.0.2]: https://github.com/nspcc-dev/neofs-api/compare/v2.0.1...v2.0.2
