@@ -8,7 +8,9 @@ option csharp_namespace = "NeoFS.API.v2.Object";
 import "refs/types.proto";
 import "session/types.proto";
 
-// Type of the object payload content.
+// Type of the object payload content. Only `REGULAR` type objects can be split,
+// hence `TOMBSTONE` and `STORAGEGROUP` payload is limited by maximal object
+// size.
 enum ObjectType {
   // Just a normal object
   REGULAR = 0;
