@@ -104,6 +104,8 @@ message EACLRecord {
   //
   // * $Object:version \
   //   version
+  // * $Object:objectID \
+  //   object_id
   // * $Object:containerID \
   //   container_id
   // * $Object:ownerID \
