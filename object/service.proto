@@ -327,11 +327,17 @@ message SearchRequest {
     // properties:
     //
     // * $Object:ROOT \
-    //   With the `value` set to `true` checks if an object is a top object in a
-    //   split hierarchy. With other values returns non-root objects.
-    // * $Object:LEAF \
-    //   With the `value` set to `true` checks if an object is a leaf in a split
-    //   hierarchy. With other values returns non-leaf objects.
+    //   Returns only `REGULAR` type objects that are not split or are the top
+    //   level root objects in a split hierarchy. This includes objects not
+    //   present physically, like large objects split into smaller objects
+    //   without separate top-level root object. Other type objects like
+    //   StorageGroups and Tombstones will not be shown. This filter may be
+    //   useful for listing objects like `ls` command of some virtual file
+    //   system. This filter is activated if the `key` exists, disregarding the
+    //   value and matcher type.
+    // * $Object:PHY \
+    //   Returns only objects physically stored in the system. This filter is
+    //   activated if the `key` exists, disregarding the value and matcher type.
     // * $Object:CHILDFREE \
     //   With the `value` set to `true` checks if an object has empty
     //   children list in `Split` header. With other values returns
