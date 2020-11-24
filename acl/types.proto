@@ -158,7 +158,7 @@ message EACLRecord {
 message EACLTable {
   // eACL format version. Effectively the version of API library used to create
   // eACL Table.
-  neo.fs.v2.refs.Version version = 1;
+  neo.fs.v2.refs.Version version = 1 [json_name = "version"];
 
   // Identifier of the container that should use given access control rules
   neo.fs.v2.refs.ContainerID container_id = 2 [json_name="containerID"];
