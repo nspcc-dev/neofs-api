@@ -53,7 +53,7 @@ message SessionToken {
     // Identifier of the session initiator
     neo.fs.v2.refs.OwnerID owner_id = 2 [json_name = "ownerID"];
 
-    // Lifetime parameters of the token. Filed names taken from rfc7519.
+    // Lifetime parameters of the token. Field names taken from rfc7519.
     message TokenLifetime {
       // Expiration Epoch
       uint64 exp = 1 [json_name = "exp"];
