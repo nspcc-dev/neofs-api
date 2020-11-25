@@ -322,7 +322,7 @@ message SearchRequest {
     //   homomorphic_hash
     // * $Object:split.parent \
     //   object_id of parent
-    // * $Object:split.split_id \
+    // * $Object:split.splitID \
     //   16 byte UUID used to identify the split object hierarchy parts
     //
     // There are some well-known filter aliases to match objects by certain
