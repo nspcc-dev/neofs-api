@@ -304,7 +304,7 @@ message SearchRequest {
     //
     // * $Object:version \
     //   version
-    // * $Object:objectID                       \
+    // * $Object:objectID \
     //   object_id
     // * $Object:containerID \
     //   container_id
@@ -322,6 +322,8 @@ message SearchRequest {
     //   homomorphic_hash
     // * $Object:split.parent \
     //   object_id of parent
+    // * $Object:split.split_id \
+    //   16 byte UUID used to identify the split object hierarchy parts
     //
     // There are some well-known filter aliases to match objects by certain
     // properties:
@@ -338,10 +340,6 @@ message SearchRequest {
     // * $Object:PHY \
     //   Returns only objects physically stored in the system. This filter is
     //   activated if the `key` exists, disregarding the value and matcher type.
-    // * $Object:CHILDFREE \
-    //   With the `value` set to `true` checks if an object has empty
-    //   children list in `Split` header. With other values returns
-    //   non-childfree objects.
     message Filter {
       // Match type to use
       MatchType match_type = 1;
