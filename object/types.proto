@@ -135,7 +135,7 @@ message Header {
     repeated neo.fs.v2.refs.ObjectID children = 5 [json_name = "children"];
 
     // 16 byte UUID used to identify the split object hierarchy parts. Must be
-    // unique inside container. All objects participaiting in the split must
+    // unique inside container. All objects participating in the split must
     // have the same `split_id` value.
     bytes split_id = 6 [json_name = "splitID"];
 
