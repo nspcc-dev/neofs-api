@@ -102,6 +102,9 @@ message GetResponse {
 
       // Chunked object payload
       bytes chunk = 2;
+
+      // Meta information of split hierarchy for object assembly.
+      SplitInfo split_info = 3;
     }
   }
   // Body of get object response message.
