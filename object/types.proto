@@ -168,3 +168,21 @@ message Object {
   // Payload bytes
   bytes payload = 4 [json_name = "payload"];
 }
+
+// Meta information of split hierarchy for object assembly. With last part
+// one can traverse linked list of split hierarchy back to first part and
+// assemble original object. With linking object one can assembly object
+// straight away from the object parts.
+message SplitInfo {
+  // 16 byte UUID used to identify the split object hierarchy parts.
+  bytes split_id = 1;
+
+  // Identifier of the last object in split hierarchy parts. It contains
+  // split header with original object header.
+  neo.fs.v2.refs.ObjectID last_part = 2;
+
+  // Identifier of linking object for split hierarchy parts. It contains
+  // split header with original object header and sorted list of
+  // object parts.
+  neo.fs.v2.refs.ObjectID link = 3;
+}
