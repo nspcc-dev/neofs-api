@@ -267,13 +267,17 @@ message HeaderWithSignature {
 message HeadResponse {
   // Object HEAD response body
   message Body {
-    // Requested object header or it's part.
+    // Requested object header, it's part or meta information about split
+    // object.
     oneof head{
       // Full object's `Header` with `ObjectID` signature
       HeaderWithSignature header = 1;
 
       // Short object header
       ShortHeader short_header = 2;
+
+      // Meta information of split hierarchy.
+      SplitInfo split_info = 3;
     }
   }
   // Body of head object response message.
