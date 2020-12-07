@@ -436,8 +436,14 @@ message GetRangeResponse {
   // initial preamble message. The requested byte range is sent as a series
   // chunks.
   message Body {
-    // Chunked object payload's range
-    bytes chunk = 1;
+    // Requested object range or meta information about split object.
+    oneof range_part{
+      // Chunked object payload's range.
+      bytes chunk = 1;
+
+      // Meta information of split hierarchy.
+      SplitInfo split_info = 2;
+    }
   }
 
   // Body of get range object response message.
