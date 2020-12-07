@@ -411,6 +411,10 @@ message GetRangeRequest {
 
     // Requested payload range
     Range range = 2;
+
+    // If `raw` flag is set, request will work only with objects that are
+    // physically stored on the peer node.
+    bool raw = 3;
   }
 
   // Body of get range object request message.
