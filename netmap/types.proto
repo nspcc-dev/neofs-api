@@ -131,6 +131,9 @@ message NodeInfo {
 
   // Administrator-defined Attributes of the NeoFS Storage Node.
   //
+  // `Attribute` is a Key-Value metadata pair. Key name must be a valid UTF-8
+  // string. Value can't be empty.
+  //
   // Node's attributes are mostly used during Storage Policy evaluation to
   // calculate object's placement and find a set of nodes satisfying policy
   // requirements. There are some "well-known" node attributes common to all the

@@ -28,8 +28,10 @@ message Container {
   uint32 basic_acl = 4 [json_name = "basicACL"];
 
   // `Attribute` is a user-defined Key-Value metadata pair attached to the
-  // container. Container attribute are immutable. They are set at container
-  // creation and cna never be added or updated.
+  // container. Container attributes are immutable. They are set at container
+  // creation and can never be added or updated.
+  //
+  // Key name must be a valid UTF-8 string. Value can't be empty.
   //
   // There are some "well-known" attributes affecting system behaviour:
   //
