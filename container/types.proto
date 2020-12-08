@@ -20,7 +20,7 @@ message Container {
   // Identifier of the container owner
   neo.fs.v2.refs.OwnerID owner_id = 2 [json_name = "ownerID"];
 
-  // Nonce is a 16 byte UUID, used to avoid collisions of container id
+  // Nonce is a 16 byte UUIDv4, used to avoid collisions of `ContainerID`s
   bytes nonce = 3 [json_name = "nonce"];
 
   // `BasicACL` contains access control rules for owner, system, others groups

@@ -5,8 +5,10 @@ package neo.fs.v2.refs;
 option go_package = "github.com/nspcc-dev/neofs-api-go/v2/refs/grpc;refs";
 option csharp_namespace = "NeoFS.API.v2.Refs";
 
-// Object in NeoFS can be addressed by it's ContainerID and ObjectID. In string
-// format there MUST be a '/' delimeter between them.
+// Objects in NeoFS are addressed by their ContainerID and ObjectID.
+//
+// String presentation of `Address` is the concatenation of string encoded
+// `ContainerID` and `ObjectID` delimited by '/' character.
 message Address {
   // Container identifier
   ContainerID container_id = 1 [json_name = "containerID"];
@@ -15,31 +17,46 @@ message Address {
 }
 
 // NeoFS Object unique identifier. Objects are immutable and content-addressed.
-// It means `ObjectID` will change if `header` or `payload` changes. `ObjectID`
-// is calculated as a hash of `header` field, which contains hash of object's
-// payload.
+// It means `ObjectID` will change if `header` or `payload` changes.
+//
+// `ObjectID` is a 32 byte long SHA256 hash of object's `header` field, which,
+// in it's turn, contains hash of object's payload.
+//
+// String presentation is base58 encoded string.
 message ObjectID {
   // Object identifier in a binary format
   bytes value = 1 [json_name = "value"];
 }
 
 // NeoFS container identifier. Container structures are immutable and
-// content-addressed. `ContainerID` is a 32 byte long SHA256 hash of
-// stable-marshalled container message.
+// content-addressed.
+//
+// `ContainerID` is a 32 byte long SHA256 hash of stable-marshalled container
+// message.
+//
+// String presentation is base58 encoded string.
 message ContainerID {
   // Container identifier in a binary format.
   bytes value = 1 [json_name = "value"];
 }
 
-// OwnerID is a derivative of a user's main public key. The transformation
+// `OwnerID` is a derivative of a user's main public key. The transformation
 // algorithm is the same as for Neo3 wallet addresses. Neo3 wallet address can
 // be directly used as `OwnerID`.
+//
+// `OwnerID` is a 25 bytes sequence starting with Neo version prefix byte
+// followed by 20 bytes of ScrptHash and 4 bytes of checksum.
+//
+// String presentation is Base58 Check Encoded string.
 message OwnerID {
   // Identifier of the container owner in a binary format
   bytes value = 1 [json_name = "value"];
 }
 
 // API version used by a node.
+//
+// String presentation is a Semantic Versioning 2.0.0 compatible version string
+// with 'v' prefix. I.e. `vX.Y`, where `X` - major number, `Y` - minor number.
 message Version {
   // Major API version
   uint32 major = 1 [json_name = "major"];
@@ -69,6 +86,12 @@ enum ChecksumType {
 }
 
 // Checksum message.
+// Depending on checksum algorithm type the string presentation may vary:
+//
+// * TZ \
+//   Hex encoded string without `0x` prefix
+// * SHA256 \
+//   Hex encoded string without `0x` prefix
 message Checksum {
   // Checksum algorithm type
   ChecksumType type = 1 [json_name = "type"];
