@@ -203,7 +203,10 @@ message DeleteRequest {
 // removal in distributed system.
 message DeleteResponse {
   // Object DELETE Response has an empty body.
-  message Body { }
+  message Body {
+    // Address of the tombstone created for the deleted object
+    neo.fs.v2.refs.Address tombstone = 1;
+  }
 
   // Body of delete object response message.
   Body body = 1;
