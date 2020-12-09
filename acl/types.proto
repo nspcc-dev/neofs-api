@@ -106,8 +106,6 @@ message EACLRecord {
   //   version
   // * $Object:objectID \
   //   object_id
-  // * $Object:containerID \
-  //   container_id
   // * $Object:ownerID \
   //   owner_id
   // * $Object:creationEpoch \
