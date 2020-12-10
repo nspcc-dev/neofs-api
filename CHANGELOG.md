@@ -1,5 +1,32 @@
 # Changelog
 
+## [2.1.0] - 2020-12-XX - Modo (모도, 茅島)
+
+Object split and deletion improvements, documentation clarifications.
+
+### Added
+- `$Object:objectID` added to the list of available ACL and Search filters
+- `split_id` field added in `object.Object.header`
+- `$Object:split.splitID` search filter added
+- json_name notation added to `acl.EACLTable.Version` field
+- Adding `tombstone` field with newly created tombstone address field to
+  `object.DeleteResponse.Body`
+- `tombstone` package added
+- Tombstone payload definition added as `tombstone.Tombstone` message
+- `SplitInfo` message added to `object` package
+- `split_info` field added to `object.GetResponse.Body`
+- `split_info` field added to `object.HeadResponse.Body`
+- `split_info` field added to `object.GetRangeResponse.Body`
+- `raw` flag added in `object.GetRangeRequest.Body`
+
+### Changed
+- Clarified special search index descriptions
+- Clarified various types encoding formats descriptions
+
+### Removed
+- `$Object:CHILDFREE` filter description removed from well-known list
+- `$Object:LEAF` filter description removed from well-known list
+
 ## [2.0.2] - 2020-10-27
 
 More "well-known" application attributes and documentation updates.
@@ -198,3 +225,4 @@ Bump major release
 [2.0.0]: https://github.com/nspcc-dev/neofs-api/compare/v1.2.0...v2.0.0
 [2.0.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.0.0...v2.0.1
 [2.0.2]: https://github.com/nspcc-dev/neofs-api/compare/v2.0.1...v2.0.2
+[2.1.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.0.2...v2.1.0
