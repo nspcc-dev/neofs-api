@@ -230,7 +230,7 @@ Session Token body
 <a name="neo.fs.v2.session.SessionToken.Body.TokenLifetime"></a>
 
 ### Message SessionToken.Body.TokenLifetime
-Lifetime parameters of the token. Filed names taken from rfc7519.
+Lifetime parameters of the token. Field names taken from rfc7519.
 
 
 | Field | Type | Label | Description |

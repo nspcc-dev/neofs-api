@@ -51,6 +51,7 @@
     - [Header.Split](#neo.fs.v2.object.Header.Split)
     - [Object](#neo.fs.v2.object.Object)
     - [ShortHeader](#neo.fs.v2.object.ShortHeader)
+    - [SplitInfo](#neo.fs.v2.object.SplitInfo)
     
 
 - [Scalar Value Types](#scalar-value-types)
@@ -199,6 +200,10 @@ removal in distributed system.
 Object DELETE Response has an empty body.
 
 
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tombstone | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the tombstone created for the deleted object |
+
 
 <a name="neo.fs.v2.object.GetRangeHashRequest"></a>
 
@@ -275,6 +280,7 @@ Byte range of object's payload request body
 | ----- | ---- | ----- | ----------- |
 | address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the object containing the requested payload range |
 | range | [Range](#neo.fs.v2.object.Range) |  | Requested payload range |
+| raw | [bool](#bool) |  | If `raw` flag is set, request will work only with objects that are physically stored on the peer node. |
 
 
 <a name="neo.fs.v2.object.GetRangeResponse"></a>
@@ -301,7 +307,8 @@ chunks.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| chunk | [bytes](#bytes) |  | Chunked object payload's range |
+| chunk | [bytes](#bytes) |  | Chunked object payload's range. |
+| split_info | [SplitInfo](#neo.fs.v2.object.SplitInfo) |  | Meta information of split hierarchy. |
 
 
 <a name="neo.fs.v2.object.GetRequest"></a>
@@ -352,6 +359,7 @@ GET Object Response body
 | ----- | ---- | ----- | ----------- |
 | init | [GetResponse.Body.Init](#neo.fs.v2.object.GetResponse.Body.Init) |  | Initial part of the object stream |
 | chunk | [bytes](#bytes) |  | Chunked object payload |
+| split_info | [SplitInfo](#neo.fs.v2.object.SplitInfo) |  | Meta information of split hierarchy for object assembly. |
 
 
 <a name="neo.fs.v2.object.GetResponse.Body.Init"></a>
@@ -417,6 +425,7 @@ Object HEAD response body
 | ----- | ---- | ----- | ----------- |
 | header | [HeaderWithSignature](#neo.fs.v2.object.HeaderWithSignature) |  | Full object's `Header` with `ObjectID` signature |
 | short_header | [ShortHeader](#neo.fs.v2.object.ShortHeader) |  | Short object header |
+| split_info | [SplitInfo](#neo.fs.v2.object.SplitInfo) |  | Meta information of split hierarchy. |
 
 
 <a name="neo.fs.v2.object.HeaderWithSignature"></a>
@@ -551,6 +560,8 @@ prefix to the name. Here is the list of fields available via this prefix:
 
 * $Object:version \
   version
+* $Object:objectID \
+  object_id
 * $Object:containerID \
   container_id
 * $Object:ownerID \
@@ -567,20 +578,24 @@ prefix to the name. Here is the list of fields available via this prefix:
   homomorphic_hash
 * $Object:split.parent \
   object_id of parent
+* $Object:split.splitID \
+  16 byte UUIDv4 used to identify the split object hierarchy parts
 
 There are some well-known filter aliases to match objects by certain
 properties:
 
 * $Object:ROOT \
-  With the `value` set to `true` checks if an object is a top object in a
-  split hierarchy. With other values returns non-root objects.
-* $Object:LEAF \
-  With the `value` set to `true` checks if an object is a leaf in a split
-  hierarchy. With other values returns non-leaf objects.
-* $Object:CHILDFREE \
-  With the `value` set to `true` checks if an object has empty
-  children list in `Split` header. With other values returns
-  non-childfree objects.
+  Returns only `REGULAR` type objects that are not split or are the top
+  level root objects in a split hierarchy. This includes objects not
+  present physically, like large objects split into smaller objects
+  without separate top-level root object. Other type objects like
+  StorageGroups and Tombstones will not be shown. This filter may be
+  useful for listing objects like `ls` command of some virtual file
+  system. This filter is activated if the `key` exists, disregarding the
+  value and matcher type.
+* $Object:PHY \
+  Returns only objects physically stored in the system. This filter is
+  activated if the `key` exists, disregarding the value and matcher type.
 
 
 | Field | Type | Label | Description |
@@ -640,10 +655,10 @@ Object Header
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Object's container |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
 | creation_epoch | [uint64](#uint64) |  | Object creation Epoch |
-| payload_length | [uint64](#uint64) |  | Size of payload in bytes. `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown |
+| payload_length | [uint64](#uint64) |  | Size of payload in bytes. `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown. |
 | payload_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Hash of payload bytes |
 | object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Type of the object payload content |
-| homomorphic_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash of the object payload. |
+| homomorphic_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash of the object payload |
 | session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token, if it was used during Object creation. Need it to verify integrity and authenticity out of Request scope. |
 | attributes | [Header.Attribute](#neo.fs.v2.object.Header.Attribute) | repeated | User-defined object attributes |
 | split | [Header.Split](#neo.fs.v2.object.Header.Split) |  | Position of the object in the split hierarchy |
@@ -654,6 +669,10 @@ Object Header
 ### Message Header.Attribute
 `Attribute` is a user-defined Key-Value metadata pair attached to the
 object.
+
+Key name must be a object-unique valid UTF-8 string. Value can't be empty.
+Objects with duplicated attribute names or attributes with empty values
+will be considered invalid.
 
 There are some "well-known" attributes starting with `__NEOFS__` prefix
 that affect system behaviour:
@@ -698,6 +717,7 @@ must be within the same container.
 | parent_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | `signature` field of the parent object. Used to reconstruct parent. |
 | parent_header | [Header](#neo.fs.v2.object.Header) |  | `header` field of the parent object. Used to reconstruct parent. |
 | children | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | List of identifiers of the objects generated by splitting current one. |
+| split_id | [bytes](#bytes) |  | 16 byte UUIDv4 used to identify the split object hierarchy parts. Must be unique inside container. All objects participating in the split must have the same `split_id` value. |
 
 
 <a name="neo.fs.v2.object.Object"></a>
@@ -713,7 +733,7 @@ hash of header field, which contains hash of object's payload.
 | object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Object's unique identifier. |
 | signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signed object_id |
 | header | [Header](#neo.fs.v2.object.Header) |  | Object metadata headers |
-| payload | [bytes](#bytes) |  | Payload bytes. |
+| payload | [bytes](#bytes) |  | Payload bytes |
 
 
 <a name="neo.fs.v2.object.ShortHeader"></a>
@@ -724,11 +744,27 @@ Short header fields
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Object format version. Effectively the version of API library used to create particular object |
+| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Object format version. Effectively the version of API library used to create particular object. |
 | creation_epoch | [uint64](#uint64) |  | Epoch when the object was created |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
 | object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Type of the object payload content |
 | payload_length | [uint64](#uint64) |  | Size of payload in bytes. `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown |
+
+
+<a name="neo.fs.v2.object.SplitInfo"></a>
+
+### Message SplitInfo
+Meta information of split hierarchy for object assembly. With last part
+one can traverse linked list of split hierarchy back to first part and
+assemble original object. With linking object one can assembly object
+straight away from the object parts.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| split_id | [bytes](#bytes) |  | 16 byte UUID used to identify the split object hierarchy parts. |
+| last_part | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Identifier of the last object in split hierarchy parts. It contains split header with original object header. |
+| link | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Identifier of linking object for split hierarchy parts. It contains split header with original object header and sorted list of object parts. |
 
  <!-- end messages -->
 
@@ -748,7 +784,15 @@ Type of match expression
 <a name="neo.fs.v2.object.ObjectType"></a>
 
 ### ObjectType
-Type of the object payload content.
+Type of the object payload content. Only `REGULAR` type objects can be split,
+hence `TOMBSTONE` and `STORAGEGROUP` payload is limited by maximal object
+size.
+
+String presentation of object type is PascalCased `ObjectType` enumeration
+item name:
+* Regular
+* Tombstone
+* StorageGroup
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |

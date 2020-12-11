@@ -31,8 +31,10 @@
 <a name="neo.fs.v2.refs.Address"></a>
 
 ### Message Address
-Object in NeoFS can be addressed by it's ContainerID and ObjectID. In string
-format there MUST be a '/' delimeter between them.
+Objects in NeoFS are addressed by their ContainerID and ObjectID.
+
+String presentation of `Address` is the concatenation of string encoded
+`ContainerID` and `ObjectID` delimited by '/' character.
 
 
 | Field | Type | Label | Description |
@@ -45,6 +47,12 @@ format there MUST be a '/' delimeter between them.
 
 ### Message Checksum
 Checksum message.
+Depending on checksum algorithm type the string presentation may vary:
+
+* TZ \
+  Hex encoded string without `0x` prefix
+* SHA256 \
+  Hex encoded string without `0x` prefix
 
 
 | Field | Type | Label | Description |
@@ -57,8 +65,12 @@ Checksum message.
 
 ### Message ContainerID
 NeoFS container identifier. Container structures are immutable and
-content-addressed. `ContainerID` is a 32 byte long SHA256 hash of
-stable-marshalled container message.
+content-addressed.
+
+`ContainerID` is a 32 byte long SHA256 hash of stable-marshalled container
+message.
+
+String presentation is base58 encoded string.
 
 
 | Field | Type | Label | Description |
@@ -70,9 +82,12 @@ stable-marshalled container message.
 
 ### Message ObjectID
 NeoFS Object unique identifier. Objects are immutable and content-addressed.
-It means `ObjectID` will change if `header` or `payload` changes. `ObjectID`
-is calculated as a hash of `header` field, which contains hash of object's
-payload.
+It means `ObjectID` will change if `header` or `payload` changes.
+
+`ObjectID` is a 32 byte long SHA256 hash of object's `header` field, which,
+in it's turn, contains hash of object's payload.
+
+String presentation is base58 encoded string.
 
 
 | Field | Type | Label | Description |
@@ -83,9 +98,14 @@ payload.
 <a name="neo.fs.v2.refs.OwnerID"></a>
 
 ### Message OwnerID
-OwnerID is a derivative of a user's main public key. The transformation
+`OwnerID` is a derivative of a user's main public key. The transformation
 algorithm is the same as for Neo3 wallet addresses. Neo3 wallet address can
 be directly used as `OwnerID`.
+
+`OwnerID` is a 25 bytes sequence starting with Neo version prefix byte
+followed by 20 bytes of ScrptHash and 4 bytes of checksum.
+
+String presentation is Base58 Check Encoded string.
 
 
 | Field | Type | Label | Description |
@@ -109,6 +129,9 @@ Signature of something in NeoFS.
 
 ### Message Version
 API version used by a node.
+
+String presentation is a Semantic Versioning 2.0.0 compatible version string
+with 'v' prefix. I.e. `vX.Y`, where `X` - major number, `Y` - minor number.
 
 
 | Field | Type | Label | Description |

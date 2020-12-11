@@ -65,7 +65,7 @@ owner with additional information preventing token's abuse.
 <a name="neo.fs.v2.acl.BearerToken.Body.TokenLifetime"></a>
 
 ### Message BearerToken.Body.TokenLifetime
-Lifetime parameters of the token. Filed names taken from
+Lifetime parameters of the token. Field names taken from
 [rfc7519](https://tools.ietf.org/html/rfc7519).
 
 
@@ -101,6 +101,8 @@ prefix to the name. Here is the list of fields available via this prefix:
 
 * $Object:version \
   version
+* $Object:objectID \
+  object_id
 * $Object:containerID \
   container_id
 * $Object:ownerID \

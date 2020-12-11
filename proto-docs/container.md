@@ -453,7 +453,7 @@ of stable-marshalled container message.
 | ----- | ---- | ----- | ----------- |
 | version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Container format version. Effectively the version of API library used to create container. |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Identifier of the container owner |
-| nonce | [bytes](#bytes) |  | Nonce is a 16 byte UUID, used to avoid collisions of container id |
+| nonce | [bytes](#bytes) |  | Nonce is a 16 byte UUIDv4, used to avoid collisions of `ContainerID`s |
 | basic_acl | [uint32](#uint32) |  | `BasicACL` contains access control rules for owner, system, others groups and permission bits for `BearerToken` and `Extended ACL` |
 | attributes | [Container.Attribute](#neo.fs.v2.container.Container.Attribute) | repeated | Attributes represent immutable container's meta data |
 | placement_policy | [neo.fs.v2.netmap.PlacementPolicy](#neo.fs.v2.netmap.PlacementPolicy) |  | Placement policy for the object inside the container |
@@ -463,8 +463,12 @@ of stable-marshalled container message.
 
 ### Message Container.Attribute
 `Attribute` is a user-defined Key-Value metadata pair attached to the
-container. Container attribute are immutable. They are set at container
-creation and cna never be added or updated.
+container. Container attributes are immutable. They are set at container
+creation and can never be added or updated.
+
+Key name must be a container-unique valid UTF-8 string. Value can't be
+empty. Containers with duplicated attribute names or attributes with empty
+values will be considered invalid.
 
 There are some "well-known" attributes affecting system behaviour:
 
