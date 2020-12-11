@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.1.0] - 2020-12-XX - Modo (모도, 茅島)
+## [2.1.0] - 2020-12-11 - Modo (모도, 茅島)
 
 Object split and deletion improvements, documentation clarifications.
 
