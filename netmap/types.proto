@@ -179,7 +179,10 @@ message NodeInfo {
     // `Country`.
     repeated string parents = 3 [json_name = "parents"];
   }
-  // Carries list of the NeoFS node attributes in a string key-value format.
+  // Carries list of the NeoFS node attributes in a key-value form. Key name
+  // must be a node-unique valid UTF-8 string. Value can't be empty. NodeInfo
+  // structures with duplicated attribute names or attributes with empty values
+  // will be considered invalid.
   repeated Attribute attributes = 3 [json_name = "attributes"];
 
   // Represents the enumeration of various states of the NeoFS node.
