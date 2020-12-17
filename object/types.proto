@@ -55,6 +55,12 @@ message ShortHeader {
   // Size of payload in bytes.
   // `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown
   uint64 payload_length = 5 [json_name = "payloadLength"];
+
+  // Hash of payload bytes
+  neo.fs.v2.refs.Checksum payload_hash = 6 [json_name = "payloadHash"];
+
+  // Homomorphic hash of the object payload
+  neo.fs.v2.refs.Checksum homomorphic_hash = 7 [json_name = "homomorphicHash"];
 }
 
 // Object Header
