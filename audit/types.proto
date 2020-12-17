@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package neo.fs.v2.audit;
+
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/audit/grpc;audit";
+option csharp_namespace = "NeoFS.API.v2.Audit";
+
+import "refs/types.proto";
+
+// DataAuditResult keeps record of conducted Data Audits. The detailed report is
+// generated separately.
+message DataAuditResult {
+  // Data Audit Result format version. Effectively the version of API library
+  // used to report DataAuditResult structure.
+  neo.fs.v2.refs.Version version = 1 [json_name = "version"];
+
+  // Epoch number when the Data Audit was conducted
+  fixed64 audit_epoch = 2 [json_name = "auditEpoch"];
+
+  // Container under audit
+  neo.fs.v2.refs.ContainerID container_id = 3 [json_name = "containerID"];
+
+  // Public key of the auditing InnerRing node in a binary format
+  bytes public_key = 4 [json_name = "publicKey"];
+
+  // Shows if Data Audit process was complete in time or if it was cancelled
+  bool complete = 5 [json_name = "complete"];
+
+  // Number of request done at PoR stage
+  uint32 requests = 6 [json_name = "requests"];
+
+  // Number of retries done at PoR stage
+  uint32 retries = 7 [json_name = "retries"];
+
+  // List of Storage Groups that passed audit PoR stage
+  repeated neo.fs.v2.refs.ObjectID pass_sg = 8 [json_name = "passSG"];
+
+  // List of Storage Groups that failed audit PoR stage
+  repeated neo.fs.v2.refs.ObjectID fail_sg = 9 [json_name = "failSG"];
+
+  // Number of sampled objects under audit placed in an optimal way according to
+  // the containers placement policy when checking PoP
+  uint32 hit = 10 [json_name = "hit"];
+
+  // Number of sampled objects under audit placed in suboptimal way according to
+  // the containers placement policy, but still at a satisfactory level when
+  // checking PoP
+  uint32 miss = 11 [json_name = "miss"];
+
+  // Number of sampled objects under audit stored in a way not confirming
+  // placement policy or not found at all when checking PoP
+  uint32 fail = 12 [json_name = "fail"];
+
+  // List of storage node public keys that passed at least one PDP
+  repeated bytes pass_nodes = 13 [json_name = "passNodes"];
+
+  // List of storage node public keys that failed at least one PDP
+  repeated bytes fail_nodes = 14 [json_name = "failNodes"];
+}
