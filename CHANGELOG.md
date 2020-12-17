@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.1] - 2020-12-17
+
+Minor documentation fixes
+
+### Changed
+- Clarify JSON encoding for `ObjectID`, `ContainerID` and `OwnerID`
+- Clarify object field usage in some requests' eACL filters
+
 ## [2.1.0] - 2020-12-11 - Modo (모도, 茅島)
 
 Object split and deletion improvements, documentation clarifications.
