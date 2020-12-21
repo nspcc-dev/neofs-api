@@ -31,9 +31,11 @@ generated separately.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Data Audit Result format version. Effectively the version of API library used to report DataAuditResult structure. |
 | audit_epoch | [fixed64](#fixed64) |  | Epoch number when the Data Audit was conducted |
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Container under audit |
 | public_key | [bytes](#bytes) |  | Public key of the auditing InnerRing node in a binary format |
+| complete | [bool](#bool) |  | Shows if Data Audit process was complete in time or if it was cancelled |
 | pass_sg | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | List of Storage Groups that passed audit PoR stage |
 | fail_sg | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | List of Storage Groups that failed audit PoR stage |
 | hit | [uint32](#uint32) |  | Number of sampled objects under audit placed in an optimal way according to the containers placement policy when checking PoP |
