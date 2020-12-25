@@ -749,6 +749,8 @@ Short header fields
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
 | object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Type of the object payload content |
 | payload_length | [uint64](#uint64) |  | Size of payload in bytes. `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown |
+| payload_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Hash of payload bytes |
+| homomorphic_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash of the object payload |
 
 
 <a name="neo.fs.v2.object.SplitInfo"></a>

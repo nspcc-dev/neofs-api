@@ -67,10 +67,18 @@ Depending on checksum algorithm type the string presentation may vary:
 NeoFS container identifier. Container structures are immutable and
 content-addressed.
 
-`ContainerID` is a 32 byte long SHA256 hash of stable-marshalled container
-message.
+`ContainerID` is a 32 byte long
+[SHA256](https://csrc.nist.gov/publications/detail/fips/180/4/final) hash of
+stable-marshalled container message.
 
-String presentation is base58 encoded string.
+String presentation is
+[base58](https://tools.ietf.org/html/draft-msporny-base58-02) encoded string.
+
+JSON value will be the data encoded as a string using standard base64
+encoding with paddings. Either
+[standard](https://tools.ietf.org/html/rfc4648#section-4) or
+[URL-safe](https://tools.ietf.org/html/rfc4648#section-5) base64 encoding
+with/without paddings are accepted.
 
 
 | Field | Type | Label | Description |
@@ -84,10 +92,19 @@ String presentation is base58 encoded string.
 NeoFS Object unique identifier. Objects are immutable and content-addressed.
 It means `ObjectID` will change if `header` or `payload` changes.
 
-`ObjectID` is a 32 byte long SHA256 hash of object's `header` field, which,
-in it's turn, contains hash of object's payload.
+`ObjectID` is a 32 byte long
+[SHA256](https://csrc.nist.gov/publications/detail/fips/180/4/final) hash of
+object's `header` field, which, in it's turn, contains hash of object's
+payload.
 
-String presentation is base58 encoded string.
+String presentation is
+[base58](https://tools.ietf.org/html/draft-msporny-base58-02) encoded string.
+
+JSON value will be the data encoded as a string using standard base64
+encoding with paddings. Either
+[standard](https://tools.ietf.org/html/rfc4648#section-4) or
+[URL-safe](https://tools.ietf.org/html/rfc4648#section-5) base64 encoding
+with/without paddings are accepted.
 
 
 | Field | Type | Label | Description |
@@ -105,7 +122,14 @@ be directly used as `OwnerID`.
 `OwnerID` is a 25 bytes sequence starting with Neo version prefix byte
 followed by 20 bytes of ScrptHash and 4 bytes of checksum.
 
-String presentation is Base58 Check Encoded string.
+String presentation is [Base58
+Check](https://en.bitcoin.it/wiki/Base58Check_encoding) Encoded string.
+
+JSON value will be the data encoded as a string using standard base64
+encoding with paddings. Either
+[standard](https://tools.ietf.org/html/rfc4648#section-4) or
+[URL-safe](https://tools.ietf.org/html/rfc4648#section-5) base64 encoding
+with/without paddings are accepted.
 
 
 | Field | Type | Label | Description |
