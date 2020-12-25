@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.2.0] - 2020-12-XX - Yeouido (여의도, 汝矣島)
+
+Storage Groups based Data Audit updates
+
+### Added
+- `audit.DataAuditResult` message for recording audit result is added
+
+### Changed
+- `object.ShortHeader` now has `payload_hash` and `homomorphic_hash` fields
+
 ## [2.1.1] - 2020-12-17
 
 Minor documentation fixes
@@ -234,3 +244,5 @@ Bump major release
 [2.0.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.0.0...v2.0.1
 [2.0.2]: https://github.com/nspcc-dev/neofs-api/compare/v2.0.1...v2.0.2
 [2.1.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.0.2...v2.1.0
+[2.1.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.1.0...v2.1.1
+[2.2.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.1.1...v2.2.0
