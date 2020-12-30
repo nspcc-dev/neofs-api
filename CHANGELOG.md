@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.2.0] - 2020-12-XX - Yeouido (여의도, 汝矣島)
+## [2.2.0] - 2020-12-30 - Yeouido (여의도, 汝矣島)
 
 Storage Groups based Data Audit updates
 
