@@ -21,7 +21,7 @@ service SessionService {
 message CreateRequest {
   // Session creation request body
   message Body {
-    // Dession initiating user's or node's key derived `OwnerID`.
+    // Session initiating user's or node's key derived `OwnerID`
     neo.fs.v2.refs.OwnerID owner_id = 1;
     // Session expiration `Epoch`
     uint64 expiration = 2;
