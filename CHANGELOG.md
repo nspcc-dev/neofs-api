@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.2.1] - 2021-01-15
+
+Define "well-known" X-headers
+
+### Added
+- Description of the format of "well-known" X-headers that affect system behavior
+- X-header key to netmap epoch value
+- X-header key to netmap lookup depth value
+
 ## [2.2.0] - 2020-12-30 - Yeouido (여의도, 汝矣島)
 
 Storage Groups based Data Audit updates
@@ -246,3 +255,4 @@ Bump major release
 [2.1.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.0.2...v2.1.0
 [2.1.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.1.0...v2.1.1
 [2.2.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.1.1...v2.2.0
+[2.2.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.2.0...v2.2.1
