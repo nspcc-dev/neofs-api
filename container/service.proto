@@ -41,6 +41,9 @@ service ContainerService {
   // Returns Extended ACL table and signature from `Container` smart contract
   // storage.
   rpc GetExtendedACL(GetExtendedACLRequest) returns (GetExtendedACLResponse);
+
+  // Announce container used space values for P2P synchronization.
+  rpc AnnounceUsedSpace(AnnounceUsedSpaceRequest) returns (AnnounceUsedSpaceResponse);
 }
 
 // New NeoFS Container creation request
@@ -297,6 +300,57 @@ message GetExtendedACLResponse {
     neo.fs.v2.refs.Signature signature = 2;
   }
   // Body of get extended acl response message.
+  Body body = 1;
+
+  // Carries response meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
+
+  // Carries response verification information. This header is used to
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
+  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
+}
+
+// Announce container used space
+message AnnounceUsedSpaceRequest {
+  // Container used space announcement body.
+  message Body {
+    // Announcement contains used space information about single container.
+    message Announcement {
+      // Identifier of the container
+      neo.fs.v2.refs.ContainerID container_id = 1;
+
+      // used_space is a sum of object payused space sizes of specified
+      // container, stored in the node. It must not include inhumed objects.
+      uint64 used_space = 2;
+    }
+
+    // List of announcements. If nodes share several containers, then
+    // announcements transferred in a batch.
+    repeated Announcement announcements = 1;
+  }
+
+  // Body of announce used space request message.
+  Body body = 1;
+
+  // Carries request meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
+
+  // Carries request verification information. This header is used to
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
+}
+
+// Announce container used space
+message AnnounceUsedSpaceResponse {
+  // `AnnounceUsedSpaceResponse` has an empty body because announcements are
+  // one way communication.
+  message Body { }
+
+  // Body of announce used space response message.
   Body body = 1;
 
   // Carries response meta information. Header data is used only to regulate
