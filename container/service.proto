@@ -318,12 +318,15 @@ message AnnounceUsedSpaceRequest {
   message Body {
     // Announcement contains used space information about single container.
     message Announcement {
-      // Identifier of the container
-      neo.fs.v2.refs.ContainerID container_id = 1;
+      // Epoch number for which container size estimation was produced.
+      uint64 epoch = 1;
 
-      // used_space is a sum of object payused space sizes of specified
+      // Identifier of the container.
+      neo.fs.v2.refs.ContainerID container_id = 2;
+
+      // Used space is a sum of object payload sizes of specified
       // container, stored in the node. It must not include inhumed objects.
-      uint64 used_space = 2;
+      uint64 used_space = 3;
     }
 
     // List of announcements. If nodes share several containers, then
