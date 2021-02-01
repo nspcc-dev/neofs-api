@@ -35,6 +35,9 @@ enum MatchType {
 
   // Full string match
   STRING_EQUAL = 1;
+
+  // Full string mismatch
+  STRING_NOT_EQUAL = 2;
 }
 
 // Short header fields
