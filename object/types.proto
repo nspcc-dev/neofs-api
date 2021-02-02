@@ -38,6 +38,9 @@ enum MatchType {
 
   // Full string mismatch
   STRING_NOT_EQUAL = 2;
+
+  // Lack of key
+  NOT_PRESENT = 3;
 }
 
 // Short header fields
