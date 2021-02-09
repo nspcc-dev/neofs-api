@@ -356,13 +356,13 @@ message SearchRequest {
     // Behavior when processing this kind of filters is undefined.
     message Filter {
       // Match type to use
-      MatchType match_type = 1;
+      MatchType match_type = 1 [json_name = "matchType"];
 
       // Attribute or Header fields to match
-      string key = 2;
+      string key = 2 [json_name = "key"];
 
       // Value to match
-      string value = 3;
+      string value = 3 [json_name = "value"];
     }
     // List of search expressions
     repeated Filter filters = 3;
