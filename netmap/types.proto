@@ -154,6 +154,8 @@ message NodeInfo {
   //   Node's geographic location in
   //   [UN/LOCODE](https://www.unece.org/cefact/codesfortrade/codes_index.html)
   //   format approximated to the nearest point defined in standard.
+  // * CountryCode \
+  //   TODO: write description.
   // * Country \
   //   Country code in
   //   [ISO 3166-1_alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
