@@ -164,6 +164,8 @@ message NodeInfo {
   //   TODO: write description.
   // * Location \
   //   TODO: write description.
+  // * SubDivCode \
+  //   TODO: write description.
   // * Region \
   //   Country's administative subdivision where node is located. Calculated
   //   automatically from `Locode` attribute based on `SubDiv` field. Presented
