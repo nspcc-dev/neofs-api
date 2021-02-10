@@ -150,7 +150,7 @@ message NodeInfo {
   // * Subnet \
   //   String ID of Node's storage subnet. There can be only one subnet served
   //   by the Storage Node.
-  // * Locode \
+  // * UN-LOCODE \
   //   Node's geographic location in
   //   [UN/LOCODE](https://www.unece.org/cefact/codesfortrade/codes_index.html)
   //   format approximated to the nearest point defined in standard.
