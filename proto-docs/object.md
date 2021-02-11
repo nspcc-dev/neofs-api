@@ -597,6 +597,10 @@ properties:
   Returns only objects physically stored in the system. This filter is
   activated if the `key` exists, disregarding the value and matcher type.
 
+Note: using filters with a key with prefix `$Object:` and match type
+`NOT_PRESENT `is not recommended since this is not a cross-version approach.
+Behavior when processing this kind of filters is undefined.
+
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
@@ -780,6 +784,8 @@ Type of match expression
 | ---- | ------ | ----------- |
 | MATCH_TYPE_UNSPECIFIED | 0 | Unknown. Not used |
 | STRING_EQUAL | 1 | Full string match |
+| STRING_NOT_EQUAL | 2 | Full string mismatch |
+| NOT_PRESENT | 3 | Lack of key |
 
 
 

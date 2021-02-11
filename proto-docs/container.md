@@ -8,6 +8,11 @@
     - [ContainerService](#neo.fs.v2.container.ContainerService)
     
   - Messages
+    - [AnnounceUsedSpaceRequest](#neo.fs.v2.container.AnnounceUsedSpaceRequest)
+    - [AnnounceUsedSpaceRequest.Body](#neo.fs.v2.container.AnnounceUsedSpaceRequest.Body)
+    - [AnnounceUsedSpaceRequest.Body.Announcement](#neo.fs.v2.container.AnnounceUsedSpaceRequest.Body.Announcement)
+    - [AnnounceUsedSpaceResponse](#neo.fs.v2.container.AnnounceUsedSpaceResponse)
+    - [AnnounceUsedSpaceResponse.Body](#neo.fs.v2.container.AnnounceUsedSpaceResponse.Body)
     - [DeleteRequest](#neo.fs.v2.container.DeleteRequest)
     - [DeleteRequest.Body](#neo.fs.v2.container.DeleteRequest.Body)
     - [DeleteResponse](#neo.fs.v2.container.DeleteResponse)
@@ -68,6 +73,7 @@ rpc Get(GetRequest) returns (GetResponse);
 rpc List(ListRequest) returns (ListResponse);
 rpc SetExtendedACL(SetExtendedACLRequest) returns (SetExtendedACLResponse);
 rpc GetExtendedACL(GetExtendedACLRequest) returns (GetExtendedACLResponse);
+rpc AnnounceUsedSpace(AnnounceUsedSpaceRequest) returns (AnnounceUsedSpaceResponse);
 
 ```
 
@@ -122,7 +128,72 @@ storage.
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | GetExtendedACL | [GetExtendedACLRequest](#neo.fs.v2.container.GetExtendedACLRequest) | [GetExtendedACLResponse](#neo.fs.v2.container.GetExtendedACLResponse) |
+#### Method AnnounceUsedSpace
+
+Announce container used space values for P2P synchronization.
+
+| Name | Input | Output |
+| ---- | ----- | ------ |
+| AnnounceUsedSpace | [AnnounceUsedSpaceRequest](#neo.fs.v2.container.AnnounceUsedSpaceRequest) | [AnnounceUsedSpaceResponse](#neo.fs.v2.container.AnnounceUsedSpaceResponse) |
  <!-- end services -->
+
+
+<a name="neo.fs.v2.container.AnnounceUsedSpaceRequest"></a>
+
+### Message AnnounceUsedSpaceRequest
+Announce container used space
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [AnnounceUsedSpaceRequest.Body](#neo.fs.v2.container.AnnounceUsedSpaceRequest.Body) |  | Body of announce used space request message. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="neo.fs.v2.container.AnnounceUsedSpaceRequest.Body"></a>
+
+### Message AnnounceUsedSpaceRequest.Body
+Container used space announcement body.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| announcements | [AnnounceUsedSpaceRequest.Body.Announcement](#neo.fs.v2.container.AnnounceUsedSpaceRequest.Body.Announcement) | repeated | List of announcements. If nodes share several containers, then announcements transferred in a batch. |
+
+
+<a name="neo.fs.v2.container.AnnounceUsedSpaceRequest.Body.Announcement"></a>
+
+### Message AnnounceUsedSpaceRequest.Body.Announcement
+Announcement contains used space information about single container.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| epoch | [uint64](#uint64) |  | Epoch number for which container size estimation was produced. |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container. |
+| used_space | [uint64](#uint64) |  | Used space is a sum of object payload sizes of specified container, stored in the node. It must not include inhumed objects. |
+
+
+<a name="neo.fs.v2.container.AnnounceUsedSpaceResponse"></a>
+
+### Message AnnounceUsedSpaceResponse
+Announce container used space
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [AnnounceUsedSpaceResponse.Body](#neo.fs.v2.container.AnnounceUsedSpaceResponse.Body) |  | Body of announce used space response message. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="neo.fs.v2.container.AnnounceUsedSpaceResponse.Body"></a>
+
+### Message AnnounceUsedSpaceResponse.Body
+`AnnounceUsedSpaceResponse` has an empty body because announcements are
+one way communication.
+
 
 
 <a name="neo.fs.v2.container.DeleteRequest"></a>
