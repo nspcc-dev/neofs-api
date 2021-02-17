@@ -216,3 +216,12 @@ message NodeInfo {
   // Carries state of the NeoFS node.
   State state = 4 [json_name = "state"];
 }
+
+// Information about NeoFS network
+message NetworkInfo {
+    // Number of the current epoch in the NeoFS network.
+    uint64 current_epoch = 1 [json_name = "currentEpoch"];
+
+    // Magic number of the sidechain of the NeoFS network.
+    uint64 magic_number = 2 [json_name = "magicNumber"];
+}
