@@ -20,6 +20,9 @@ service NetmapService {
   // present in `Network Map` to find out what API version can be used for
   // further communication. Can also be used to check if node is up and running.
   rpc LocalNodeInfo (LocalNodeInfoRequest) returns (LocalNodeInfoResponse);
+
+  // Read recent information about the NeoFS network.
+  rpc NetworkInfo (NetworkInfoRequest) returns (NetworkInfoResponse);
 }
 
 // Get NodeInfo structure from the particular node directly
@@ -61,4 +64,40 @@ message LocalNodeInfoResponse {
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
+}
+
+message NetworkInfoRequest {
+    // NetworkInfo request body is empty.
+    message Body {
+    }
+    // Body of the NetworkInfo request message
+    Body body = 1;
+
+    // Carries request meta information. Header data is used only to regulate
+    // message transport and does not affect request execution.
+    neo.fs.v2.session.RequestMetaHeader meta_header = 2;
+
+    // Carries request verification information. This header is used to
+    // authenticate the nodes of the message route and check the correctness of
+    // transmission.
+    neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
+}
+
+message NetworkInfoResponse {
+    // Information about the network.
+    message Body {
+        // NetworkInfo structure with recent information.
+        NetworkInfo network_info = 1;
+    }
+    // Body of the NetworkInfo response message.
+    Body body = 1;
+
+    // Carries response meta information. Header data is used only to regulate
+    // message transport and does not affect response execution.
+    neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
+
+    // Carries response verification information. This header is used to
+    // authenticate the nodes of the message route and check the correctness of
+    // transmission.
+    neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
