@@ -66,6 +66,7 @@ message LocalNodeInfoResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
+// Get NetworkInfo structure with the network view from particular node.
 message NetworkInfoRequest {
     // NetworkInfo request body is empty.
     message Body {
@@ -83,6 +84,8 @@ message NetworkInfoRequest {
     neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
+// Response with NetworkInfo structure including current epoch and
+// sidechain magic number.
 message NetworkInfoResponse {
     // Information about the network.
     message Body {
