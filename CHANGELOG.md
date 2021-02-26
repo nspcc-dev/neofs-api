@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.4.0] - 2021-02-26 - Ganghwado (강화도, 江華島)
+
+This release provides new RPC method to fetch network info from storage node.
+By getting current epoch value, application might set up correct expiration
+values in the objects.
+
+### Added
+
+- `netmap.NetworkInfo` request for getting node's network view.
+- Release instructions.
+
+### Changed
+
+- Clarified processing of empty search query in `object.Search` RPC. 
+- Specified connection of tombstone expiration value with well-known 
+  `__NEOFS__EXPIRATION_EPOCH` object attribute.
+
 ## [2.3.0] - 2021-02-11 - Seonyudo (선유도, 仙遊島)
 
 This release brings support for nodes to exchange information about disk space
@@ -313,3 +330,4 @@ Bump major release
 [2.2.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.1.1...v2.2.0
 [2.2.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.2.0...v2.2.1
 [2.3.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.2.1...v2.3.0
+[2.4.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.3.0...v2.4.0

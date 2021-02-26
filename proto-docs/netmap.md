@@ -12,12 +12,17 @@
     - [LocalNodeInfoRequest.Body](#neo.fs.v2.netmap.LocalNodeInfoRequest.Body)
     - [LocalNodeInfoResponse](#neo.fs.v2.netmap.LocalNodeInfoResponse)
     - [LocalNodeInfoResponse.Body](#neo.fs.v2.netmap.LocalNodeInfoResponse.Body)
+    - [NetworkInfoRequest](#neo.fs.v2.netmap.NetworkInfoRequest)
+    - [NetworkInfoRequest.Body](#neo.fs.v2.netmap.NetworkInfoRequest.Body)
+    - [NetworkInfoResponse](#neo.fs.v2.netmap.NetworkInfoResponse)
+    - [NetworkInfoResponse.Body](#neo.fs.v2.netmap.NetworkInfoResponse.Body)
     
 
 - [netmap/types.proto](#netmap/types.proto)
 
   - Messages
     - [Filter](#neo.fs.v2.netmap.Filter)
+    - [NetworkInfo](#neo.fs.v2.netmap.NetworkInfo)
     - [NodeInfo](#neo.fs.v2.netmap.NodeInfo)
     - [NodeInfo.Attribute](#neo.fs.v2.netmap.NodeInfo.Attribute)
     - [PlacementPolicy](#neo.fs.v2.netmap.PlacementPolicy)
@@ -47,6 +52,7 @@ NeoFS nodes.
 
 ```
 rpc LocalNodeInfo(LocalNodeInfoRequest) returns (LocalNodeInfoResponse);
+rpc NetworkInfo(NetworkInfoRequest) returns (NetworkInfoResponse);
 
 ```
 
@@ -61,6 +67,13 @@ further communication. Can also be used to check if node is up and running.
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | LocalNodeInfo | [LocalNodeInfoRequest](#neo.fs.v2.netmap.LocalNodeInfoRequest) | [LocalNodeInfoResponse](#neo.fs.v2.netmap.LocalNodeInfoResponse) |
+#### Method NetworkInfo
+
+Read recent information about the NeoFS network.
+
+| Name | Input | Output |
+| ---- | ----- | ------ |
+| NetworkInfo | [NetworkInfoRequest](#neo.fs.v2.netmap.NetworkInfoRequest) | [NetworkInfoResponse](#neo.fs.v2.netmap.NetworkInfoResponse) |
  <!-- end services -->
 
 
@@ -108,6 +121,51 @@ Local Node Info, including API Version in use.
 | version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Latest NeoFS API version in use |
 | node_info | [NodeInfo](#neo.fs.v2.netmap.NodeInfo) |  | NodeInfo structure with recent information from node itself |
 
+
+<a name="neo.fs.v2.netmap.NetworkInfoRequest"></a>
+
+### Message NetworkInfoRequest
+Get NetworkInfo structure with the network view from particular node.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [NetworkInfoRequest.Body](#neo.fs.v2.netmap.NetworkInfoRequest.Body) |  | Body of the NetworkInfo request message |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="neo.fs.v2.netmap.NetworkInfoRequest.Body"></a>
+
+### Message NetworkInfoRequest.Body
+NetworkInfo request body is empty.
+
+
+
+<a name="neo.fs.v2.netmap.NetworkInfoResponse"></a>
+
+### Message NetworkInfoResponse
+Response with NetworkInfo structure including current epoch and
+sidechain magic number.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [NetworkInfoResponse.Body](#neo.fs.v2.netmap.NetworkInfoResponse.Body) |  | Body of the NetworkInfo response message. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect response execution. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="neo.fs.v2.netmap.NetworkInfoResponse.Body"></a>
+
+### Message NetworkInfoResponse.Body
+Information about the network.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| network_info | [NetworkInfo](#neo.fs.v2.netmap.NetworkInfo) |  | NetworkInfo structure with recent information. |
+
  <!-- end messages -->
 
  <!-- end enums -->
@@ -137,6 +195,18 @@ results, that will satisfy filter's conditions.
 | op | [Operation](#neo.fs.v2.netmap.Operation) |  | Filtering operation |
 | value | [string](#string) |  | Value to match |
 | filters | [Filter](#neo.fs.v2.netmap.Filter) | repeated | List of inner filters. Top level operation will be applied to the whole list. |
+
+
+<a name="neo.fs.v2.netmap.NetworkInfo"></a>
+
+### Message NetworkInfo
+Information about NeoFS network
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| current_epoch | [uint64](#uint64) |  | Number of the current epoch in the NeoFS network. |
+| magic_number | [uint64](#uint64) |  | Magic number of the sidechain of the NeoFS network. |
 
 
 <a name="neo.fs.v2.netmap.NodeInfo"></a>
