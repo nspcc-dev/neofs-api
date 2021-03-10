@@ -3,7 +3,7 @@ syntax = "proto3";
 package neo.fs.v2.accounting;
 
 option go_package = "github.com/nspcc-dev/neofs-api-go/v2/accounting/grpc;accounting";
-option csharp_namespace = "NeoFS.API.v2.Accounting";
+option csharp_namespace = "Neo.FileStorage.API.Accounting";
 
 // Standard floating point data type can't be used in NeoFS due to inexactness
 // of the result when doing lots of small number operations. To solve the lost
