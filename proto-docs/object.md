@@ -699,6 +699,8 @@ And some well-known attributes used by applications only:
   File name to be associated with the object on saving
 * Timestamp \
   User-defined local time of object creation in Unix Timestamp format
+* Content-Type \
+  MIME Content Type of object's payload
 
 For detailed description of each well-known attribute please see the
 corresponding section in NeoFS Technical specification.
