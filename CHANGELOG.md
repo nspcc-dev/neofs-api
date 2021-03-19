@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.5.0] - 2021-03-19 - Jebudo (제부도, 濟扶島)
+
+This release contains changes and fixes for NEO3 testnet launch.
+
+### Added
+
+- Well-known object attribute `Content-Type`.
+
+### Changed
+
+- Namespace for C# has been changed to `Neo.FileStorage.API`.
+
 ## [2.4.0] - 2021-02-26 - Ganghwado (강화도, 江華島)
 
 This release provides new RPC method to fetch network info from storage node.
@@ -331,3 +343,4 @@ Bump major release
 [2.2.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.2.0...v2.2.1
 [2.3.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.2.1...v2.3.0
 [2.4.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.3.0...v2.4.0
+[2.5.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.4.0...v2.5.0
