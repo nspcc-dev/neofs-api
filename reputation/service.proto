@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package neo.fs.v2.reputation;
+
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/reputation/grpc;reputation";
+option csharp_namespace = "Neo.FileStorage.API.Reputation";
+
+import "reputation/types.proto";
+import "session/types.proto";
+
+// `ReputationService` provides mechanisms for exchanging
+// trust values within NeoFS Reputation system .
+service ReputationService {
+    // Sends local client trust to any peer from NeoFS network.
+    rpc SendLocalTrust (SendLocalTrustRequest) returns (SendLocalTrustResponse);
+}
+
+// Request to send local trust.
+message SendLocalTrustRequest {
+    // Request body structure.
+    message Body {
+        // The number of the epoch in which the trust was assessed.
+        uint64 epoch = 1;
+
+        // List of normalized local trust values of the client to the NeoFS peers.
+        // The value is calculated according to EigenTrust++ algorithm
+        // and must be in the range [0;1].
+        repeated Trust trusts = 2;
+    }
+
+    // Body of the request message.
+    Body body = 1;
+
+    // Carries request meta information. Header data is used only to regulate
+    // message transport and does not affect request execution.
+    neo.fs.v2.session.RequestMetaHeader meta_header = 2;
+
+    // Carries request verification information. This header is used to
+    // authenticate the nodes of the message route and check the correctness of
+    // transmission.
+    neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
+}
+
+// Response to request to send local trust.
+message SendLocalTrustResponse {
+    // Response body structure.
+    message Body {
+    }
+
+    // Body of the response message.
+    Body body = 1;
+
+    // Carries response meta information. Header data is used only to regulate
+    // message transport and does not affect request execution.
+    neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
+
+    // Carries response verification information. This header is used to
+    // authenticate the nodes of the message route and check the correctness of
+    // transmission.
+    neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
+}
