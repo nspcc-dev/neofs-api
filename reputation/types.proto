@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package neo.fs.v2.reputation;
+
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/reputation/grpc;reputation";
+option csharp_namespace = "Neo.FileStorage.API.Reputation";
+
+// Trust value to NeoFS network peer.
+message Trust {
+    // Identifier of the trusted peer.
+    //
+    // For storage nodes, it is the node's public key
+    // fixed in the network map.
+    bytes peer = 1 [json_name = "peer"];
+
+    // Trust value.
+    double value = 2 [json_name = "value"];
+}
