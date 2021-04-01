@@ -13,6 +13,10 @@ import "session/types.proto";
 service ReputationService {
     // Sends local client trust to any peer from NeoFS network.
     rpc SendLocalTrust (SendLocalTrustRequest) returns (SendLocalTrustResponse);
+
+    // Sends the intermediate result of the iterative algorithm
+    // for calculating the global reputation of the node.
+    rpc SendIntermediateResult (SendIntermediateResultRequest) returns (SendIntermediateResultResponse);
 }
 
 // Request to send local trust.
@@ -43,6 +47,49 @@ message SendLocalTrustRequest {
 
 // Response to request to send local trust.
 message SendLocalTrustResponse {
+    // Response body structure.
+    message Body {
+    }
+
+    // Body of the response message.
+    Body body = 1;
+
+    // Carries response meta information. Header data is used only to regulate
+    // message transport and does not affect request execution.
+    neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
+
+    // Carries response verification information. This header is used to
+    // authenticate the nodes of the message route and check the correctness of
+    // transmission.
+    neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
+}
+
+// Request to send intermediate global trust.
+message SendIntermediateResultRequest {
+    // Request body structure.
+    message Body {
+        // Sequence number of the iteration.
+        uint32 iteration = 1;
+
+        // Current global trust value computed at the specified iteration.
+        Trust trust = 2;
+    }
+
+    // Body of the request message.
+    Body body = 1;
+
+    // Carries request meta information. Header data is used only to regulate
+    // message transport and does not affect request execution.
+    neo.fs.v2.session.RequestMetaHeader meta_header = 2;
+
+    // Carries request verification information. This header is used to
+    // authenticate the nodes of the message route and check the correctness of
+    // transmission.
+    neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
+}
+
+// Response to request to send intermediate global trust.
+message SendIntermediateResultResponse {
     // Response body structure.
     message Body {
     }
