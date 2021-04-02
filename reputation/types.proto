@@ -5,6 +5,8 @@ package neo.fs.v2.reputation;
 option go_package = "github.com/nspcc-dev/neofs-api-go/v2/reputation/grpc;reputation";
 option csharp_namespace = "Neo.FileStorage.API.Reputation";
 
+import "refs/types.proto";
+
 // NeoFS unique peer identifier.
 //
 // `PeerID` is a 33 byte long compressed public key of the node
@@ -30,4 +32,22 @@ message Trust {
 
     // Trust value.
     double value = 2 [json_name = "value"];
+}
+
+// Global trust value to NeoFS network peer.
+message GlobalTrust {
+    // Message body structure.
+    message Body {
+      // Node manager ID.
+      PeerID manager = 1 [json_name = "manager"];
+
+      // Global trust value.
+      Trust trust = 2 [json_name = "trust"];
+    }
+
+    // Message body.
+    Body body = 1 [json_name = "body"];
+
+    // Signature of the binary `body` field by the manager.
+    refs.Signature signature = 2 [json_name = "signature"];
 }
