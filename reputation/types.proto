@@ -36,6 +36,10 @@ message Trust {
 
 // Global trust value to NeoFS network peer.
 message GlobalTrust {
+    // Message format version. Effectively the version of API library used to create
+    // the message.
+    neo.fs.v2.refs.Version version = 1 [json_name = "version"];
+
     // Message body structure.
     message Body {
       // Node manager ID.
@@ -46,8 +50,8 @@ message GlobalTrust {
     }
 
     // Message body.
-    Body body = 1 [json_name = "body"];
+    Body body = 2 [json_name = "body"];
 
     // Signature of the binary `body` field by the manager.
-    refs.Signature signature = 2 [json_name = "signature"];
+    neo.fs.v2.refs.Signature signature = 3 [json_name = "signature"];
 }
