@@ -72,7 +72,7 @@ message SendIntermediateResultRequest {
         uint32 iteration = 1;
 
         // Current global trust value computed at the specified iteration.
-        Trust trust = 2;
+        PeerToPeerTrust trust = 2;
     }
 
     // Body of the request message.
