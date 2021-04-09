@@ -34,6 +34,15 @@ message Trust {
     double value = 2 [json_name = "value"];
 }
 
+// Trust value of a peer to a peer.
+message PeerToPeerTrust {
+    // Identifier of the trusting peer.
+    PeerID trusting_peer = 1 [json_name = "trustingPeer"];
+
+    // Trust value.
+    Trust trust = 2 [json_name = "trust"];
+}
+
 // Global trust value to NeoFS network peer.
 message GlobalTrust {
     // Message format version. Effectively the version of API library used to create
