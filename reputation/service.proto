@@ -68,11 +68,14 @@ message SendLocalTrustResponse {
 message SendIntermediateResultRequest {
     // Request body structure.
     message Body {
+        // The number of the epoch in which the iteration was executed.
+        uint64 epoch = 1;
+
         // Sequence number of the iteration.
-        uint32 iteration = 1;
+        uint32 iteration = 2;
 
         // Current global trust value computed at the specified iteration.
-        PeerToPeerTrust trust = 2;
+        PeerToPeerTrust trust = 3;
     }
 
     // Body of the request message.
