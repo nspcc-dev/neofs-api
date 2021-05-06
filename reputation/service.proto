@@ -8,27 +8,30 @@ option csharp_namespace = "Neo.FileStorage.API.Reputation";
 import "reputation/types.proto";
 import "session/types.proto";
 
-// `ReputationService` provides mechanisms for exchanging
-// trust values within NeoFS Reputation system .
+// `ReputationService` provides mechanisms for exchanging trust values with
+// other NeoFS nodes. Nodes rate each other's reputation based on how good they
+// process requests and set a trust level based on that rating. The trust
+// information is passed to the next nodes to check and aggregate unless the
+// final result is recorded.
 service ReputationService {
-    // Sends local client trust to any peer from NeoFS network.
-    rpc SendLocalTrust (SendLocalTrustRequest) returns (SendLocalTrustResponse);
+    // Announce local client trust information to any node in NeoFS network.
+    rpc AnnounceLocalTrust (AnnounceLocalTrustRequest) returns (AnnounceLocalTrustResponse);
 
-    // Sends the intermediate result of the iterative algorithm
-    // for calculating the global reputation of the node.
-    rpc SendIntermediateResult (SendIntermediateResultRequest) returns (SendIntermediateResultResponse);
+    // Announces the intermediate result of the iterative algorithm for
+    // calculating the global reputation of the node in NeoFS network.
+    rpc AnnounceIntermediateResult (AnnounceIntermediateResultRequest) returns (AnnounceIntermediateResultResponse);
 }
 
-// Request to send local trust.
-message SendLocalTrustRequest {
-    // Request body structure.
+// Announce node's local trust information.
+message AnnounceLocalTrustRequest {
+    // Announce node's local trust information.
     message Body {
-        // The number of the epoch in which the trust was assessed.
+        // Trust assessment Epoch number
         uint64 epoch = 1;
 
-        // List of normalized local trust values of the client to the NeoFS peers.
-        // The value is calculated according to EigenTrust++ algorithm
-        // and must be in the range [0;1].
+        // List of normalized local trust values to other NeoFS nodes. The value
+        // is calculated according to EigenTrust++ algorithm and must be a
+        // floating point number in the [0;1] range.
         repeated Trust trusts = 2;
     }
 
@@ -45,9 +48,11 @@ message SendLocalTrustRequest {
     neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
-// Response to request to send local trust.
-message SendLocalTrustResponse {
-    // Response body structure.
+// Node's local trust information announce response.
+message AnnounceLocalTrustResponse {
+    // Response to the node's local trust information announce has an empty body
+    // because the trust exchange operation is asynchronous. If Trust information
+    // will not pass sanity checks it is silently ignored.
     message Body {
     }
 
@@ -64,17 +69,17 @@ message SendLocalTrustResponse {
     neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// Request to send intermediate global trust.
-message SendIntermediateResultRequest {
-    // Request body structure.
+// Announce intermediate global trust information.
+message AnnounceIntermediateResultRequest {
+    // Announce intermediate global trust information.
     message Body {
-        // The number of the epoch in which the iteration was executed.
+        // Iteration execution Epoch number
         uint64 epoch = 1;
 
-        // Sequence number of the iteration.
+        // Iteration sequence number
         uint32 iteration = 2;
 
-        // Current global trust value computed at the specified iteration.
+        // Current global trust value calculated at the specified iteration
         PeerToPeerTrust trust = 3;
     }
 
@@ -91,9 +96,11 @@ message SendIntermediateResultRequest {
     neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
-// Response to request to send intermediate global trust.
-message SendIntermediateResultResponse {
-    // Response body structure.
+// Intermediate global trust information announce response.
+message AnnounceIntermediateResultResponse {
+    // Response to the node's intermediate global trust information announce has
+    // an empty body because the trust exchange operation is asynchronous. If
+    // Trust information will not pass sanity checks it is silently ignored.
     message Body {
     }
 
