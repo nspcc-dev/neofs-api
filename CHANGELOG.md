@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.6.0] - 2021-05-07 - Daecheongdo (대청도, 大靑島)
+
+### Added
+
+- Reputation package with reputation service and corresponding type definitions.
+
 ## [2.5.0] - 2021-03-19 - Jebudo (제부도, 濟扶島)
 
 This release contains changes and fixes for NEO3 testnet launch.
@@ -344,3 +350,4 @@ Bump major release
 [2.3.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.2.1...v2.3.0
 [2.4.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.3.0...v2.4.0
 [2.5.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.4.0...v2.5.0
+[2.6.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.5.0...v2.6.0
