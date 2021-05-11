@@ -24,7 +24,9 @@ service ContainerService {
   // `Delete` invokes `Container` smart contract's `Delete` method and returns
   // response immediately. After a new block is issued in sidechain, request is
   // verified by Inner Ring nodes. After one more block in sidechain, container
-  // is removed from smart contract storage.
+  // is removed from smart contract storage. Only container owner has permission
+  // to perform this operation. If container has NFT-related attributes, then
+  // NFT owner is considered as container owner.
   rpc Delete(DeleteRequest) returns (DeleteResponse);
 
   // Returns container structure from `Container` smart contract storage.
@@ -34,8 +36,11 @@ service ContainerService {
   rpc List(ListRequest) returns (ListResponse);
 
   // Invokes 'SetEACL' method of 'Container` smart contract and returns response
-  // immediately. After one more block in sidechain, Extended ACL changes are
-  // added into smart contract storage.
+  // immediately. After a new block is issued in sidechain, request is verified
+  // by Inner Ring nodes. After one more block in sidechain, Extended ACL
+  // changes are added into smart contract storage. Only container owner has
+  // permission to perform this operation. If container has NFT-related
+  // attributes then NFT owner is considered as container owner.
   rpc SetExtendedACL(SetExtendedACLRequest) returns (SetExtendedACLResponse);
 
   // Returns Extended ACL table and signature from `Container` smart contract
