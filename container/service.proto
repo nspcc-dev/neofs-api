@@ -24,7 +24,7 @@ service ContainerService {
   // `Delete` invokes `Container` smart contract's `Delete` method and returns
   // response immediately. After a new block is issued in sidechain, request is
   // verified by Inner Ring nodes. After one more block in sidechain, container
-  // is added into smart contract storage.
+  // is removed from smart contract storage.
   rpc Delete(DeleteRequest) returns (DeleteResponse);
 
   // Returns container structure from `Container` smart contract storage.
