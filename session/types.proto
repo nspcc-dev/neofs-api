@@ -43,6 +43,34 @@ message ObjectSessionContext {
   neo.fs.v2.refs.Address address = 2 [json_name = "address"];
 }
 
+// Context information for Session Tokens related to ContainerService requests.
+message ContainerSessionContext {
+    // Container request verbs
+    enum Verb {
+        // Unknown verb
+        VERB_UNSPECIFIED = 0;
+
+        // Refers to container.Put RPC call
+        PUT = 1;
+
+        // Refers to container.Delete RPC call
+        DELETE = 2;
+
+        // Refers to container.SetExtendedACL RPC call
+        SETEACL = 3;
+    }
+    // Type of request for which the token is issued
+    Verb verb = 1 [json_name = "verb"];
+
+    // Spreads the action to all owner containers.
+    // If set, container_id field is ignored.
+    bool wildcard = 2 [json_name = "wildcard"];
+
+    // Particular container to which the action applies.
+    // Ignored if wildcard flag is set.
+    refs.ContainerID container_id = 3 [json_name = "containerID"];
+}
+
 // NeoFS Session Token.
 message SessionToken {
   // Session Token body
