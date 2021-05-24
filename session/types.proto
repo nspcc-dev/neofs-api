@@ -102,6 +102,9 @@ message SessionToken {
     oneof context {
       // ObjectService session context
       ObjectSessionContext object = 5 [json_name = "object"];
+
+      // ContainerService session context
+      ContainerSessionContext container = 6 [json_name = "container"];
     }
   }
   // Session Token contains the proof of trust between peers to be attached in
