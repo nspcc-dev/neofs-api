@@ -167,6 +167,12 @@ message GetResponse {
   message Body {
     // Requested container structure
     Container container = 1;
+
+    // Signature of a stable-marshalled container according to RFC-6979
+    neo.fs.v2.refs.Signature signature = 2;
+
+    // Session token if the container was created within a session
+    neo.fs.v2.session.SessionToken session_token = 3;
   }
   // Body of container get response message.
   Body body = 1;
