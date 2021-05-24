@@ -298,6 +298,9 @@ message GetExtendedACLResponse {
 
     // Signature of stable-marshalled Extended ACL according to RFC-6979
     neo.fs.v2.refs.Signature signature = 2;
+
+    // Session token if Extended ACL was set within a session
+    neo.fs.v2.session.SessionToken session_token = 3;
   }
   // Body of get extended acl response message.
   Body body = 1;
