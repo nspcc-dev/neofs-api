@@ -17,6 +17,7 @@
 - [session/types.proto](#session/types.proto)
 
   - Messages
+    - [ContainerSessionContext](#neo.fs.v2.session.ContainerSessionContext)
     - [ObjectSessionContext](#neo.fs.v2.session.ObjectSessionContext)
     - [RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader)
     - [RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader)
@@ -127,6 +128,19 @@ Session creation response body
  <!-- end services -->
 
 
+<a name="neo.fs.v2.session.ContainerSessionContext"></a>
+
+### Message ContainerSessionContext
+Context information for Session Tokens related to ContainerService requests.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| verb | [ContainerSessionContext.Verb](#neo.fs.v2.session.ContainerSessionContext.Verb) |  | Type of request for which the token is issued |
+| wildcard | [bool](#bool) |  | Spreads the action to all owner containers. If set, container_id field is ignored. |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Particular container to which the action applies. Ignored if wildcard flag is set. |
+
+
 <a name="neo.fs.v2.session.ObjectSessionContext"></a>
 
 ### Message ObjectSessionContext
@@ -225,6 +239,7 @@ Session Token body
 | lifetime | [SessionToken.Body.TokenLifetime](#neo.fs.v2.session.SessionToken.Body.TokenLifetime) |  | Lifetime of the session |
 | session_key | [bytes](#bytes) |  | Public key used in session |
 | object | [ObjectSessionContext](#neo.fs.v2.session.ObjectSessionContext) |  | ObjectService session context |
+| container | [ContainerSessionContext](#neo.fs.v2.session.ContainerSessionContext) |  | ContainerService session context |
 
 
 <a name="neo.fs.v2.session.SessionToken.Body.TokenLifetime"></a>
@@ -270,6 +285,20 @@ affect system behaviour:
 | value | [string](#string) |  | Value of the X-Header |
 
  <!-- end messages -->
+
+
+<a name="neo.fs.v2.session.ContainerSessionContext.Verb"></a>
+
+### ContainerSessionContext.Verb
+Container request verbs
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| VERB_UNSPECIFIED | 0 | Unknown verb |
+| PUT | 1 | Refers to container.Put RPC call |
+| DELETE | 2 | Refers to container.Delete RPC call |
+| SETEACL | 3 | Refers to container.SetExtendedACL RPC call |
+
 
 
 <a name="neo.fs.v2.session.ObjectSessionContext.Verb"></a>
