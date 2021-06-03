@@ -1,5 +1,27 @@
 # Changelog
 
+## [2.7.0] - 2021-06-03 - Seongmodo (석모도, 席毛島)
+
+Container service sessions.
+
+### Added
+
+#### Session
+
+- `ContainerSessionContext` message.
+- `ContainerSessionContext` value of `context` oneof to `SessionToken.Body` message.
+
+#### Container
+
+##### Get
+
+- `session_token` field of type `session.SessionToken` to `GetResponse.Body` message.
+- `signature` field of type `refs.Signature` to `GetResponse.Body` message.
+
+##### GetExtendedACL
+
+- `session_token` field of type `session.SessionToken` to `GetExtendedACLResponse.Body` message.
+
 ## [2.6.0] - 2021-05-07 - Daecheongdo (대청도, 大靑島)
 
 ### Added
@@ -351,3 +373,4 @@ Bump major release
 [2.4.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.3.0...v2.4.0
 [2.5.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.4.0...v2.5.0
 [2.6.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.5.0...v2.6.0
+[2.7.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.6.0...v2.7.0
