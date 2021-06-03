@@ -294,6 +294,7 @@ container creation.
 | ----- | ---- | ----- | ----------- |
 | eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL requested, if available |
 | signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled Extended ACL according to RFC-6979 |
+| session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token if Extended ACL was set within a session |
 
 
 <a name="neo.fs.v2.container.GetRequest"></a>
@@ -343,6 +344,8 @@ was already verified on container creation.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container | [Container](#neo.fs.v2.container.Container) |  | Requested container structure |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of a stable-marshalled container according to RFC-6979 |
+| session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token if the container was created within a session |
 
 
 <a name="neo.fs.v2.container.ListRequest"></a>
