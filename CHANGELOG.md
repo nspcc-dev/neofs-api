@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.8.0] - 2021-06-25 - Muuido (무의도, 舞衣島)
+
+Storage nodes with a group of network endpoints.
+
+### Changed
+
+- `address` field of `netmap.NodeInfo` message became `repeated`.
+
 ## [2.7.0] - 2021-06-03 - Seongmodo (석모도, 席毛島)
 
 Container service sessions.
@@ -374,3 +382,4 @@ Bump major release
 [2.5.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.4.0...v2.5.0
 [2.6.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.5.0...v2.6.0
 [2.7.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.6.0...v2.7.0
+[2.8.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.7.0...v2.8.0
