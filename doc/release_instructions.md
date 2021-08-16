@@ -23,6 +23,16 @@ this release. Then add sections with what was added, changed and removed,
 describing each change briefly with a reference to GitHub issues, where
 available.
 
+## Release commit
+
+Release commit summary should follow the template:
+
+`Release v<Version> - <Codename island> (<Hangeul>, <Hanja>)`, e.g.:
+
+```
+Release v2.9.0 - Anmyeondo (안면도, 安眠島)
+```
+
 ## Tag the release
 
 Use `vX.Y.Z` tag following the semantic versioning standard. For pre-release
