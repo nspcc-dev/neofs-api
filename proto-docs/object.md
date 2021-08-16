@@ -793,6 +793,7 @@ Type of match expression
 | STRING_EQUAL | 1 | Full string match |
 | STRING_NOT_EQUAL | 2 | Full string mismatch |
 | NOT_PRESENT | 3 | Lack of key |
+| COMMON_PREFIX | 4 | String prefix match |
 
 
 
