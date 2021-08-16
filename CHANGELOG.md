@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.9.0] - 2021-08-16 - Anmyeondo (안면도, 安眠島)
+
+Support "common prefix" attribute match operation to simplify filesystem
+directory tree-like structures implementation in NeoFS protocol gateways.
+
+### Added
+- `COMMON_PREFIX` object attribute match type.
+- Storage node's attribute escape symbol description.
+
 ## [2.8.0] - 2021-06-25 - Muuido (무의도, 舞衣島)
 
 Storage nodes with a group of network endpoints.
@@ -383,3 +392,4 @@ Bump major release
 [2.6.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.5.0...v2.6.0
 [2.7.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.6.0...v2.7.0
 [2.8.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.7.0...v2.8.0
+[2.9.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.8.0...v2.9.0
