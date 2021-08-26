@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.9.1] - 2021-08-26
+
+### Changed
+- String presentation of object type enum.
+
 ## [2.9.0] - 2021-08-16 - Anmyeondo (안면도, 安眠島)
 
 Support "common prefix" attribute match operation to simplify filesystem
@@ -393,3 +398,4 @@ Bump major release
 [2.7.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.6.0...v2.7.0
 [2.8.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.7.0...v2.8.0
 [2.9.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.8.0...v2.9.0
+[2.9.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.9.0...v2.9.1
