@@ -86,6 +86,10 @@ enum HeaderType {
 
   // Filter object headers
   OBJECT = 2;
+
+  // Filter service headers. These are not processed by NeoFS nodes and
+  // exist for service use only.
+  SERVICE = 3;
 }
 
 // Describes a single eACL rule.
