@@ -228,6 +228,20 @@ message NodeInfo {
   State state = 4 [json_name = "state"];
 }
 
+// NeoFS network configuration
+message NetworkConfig {
+  // Single configuration parameter.
+  message Parameter {
+    // Parameter key. UTF-8 encoded string.
+    bytes key = 1 [json_name = "key"];
+
+    // Parameter value.
+    bytes value = 2 [json_name = "value"];
+  }
+  // List of parameter values.
+  repeated Parameter parameters = 1 [json_name = "parameters"];
+}
+
 // Information about NeoFS network
 message NetworkInfo {
     // Number of the current epoch in the NeoFS network.
