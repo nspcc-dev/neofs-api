@@ -235,4 +235,7 @@ message NetworkInfo {
 
     // Magic number of the sidechain of the NeoFS network.
     uint64 magic_number = 2 [json_name = "magicNumber"];
+
+    // MillisecondsPerBlock network parameter of the sidechain of the NeoFS network.
+    int64 ms_per_block = 3 [json_name = "msPerBlock"];
 }
