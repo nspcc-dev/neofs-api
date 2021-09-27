@@ -166,6 +166,9 @@ message RequestMetaHeader {
 
   // `RequestMetaHeader` of the origin request
   RequestMetaHeader origin = 7 [json_name = "origin"];
+
+  // Network magic of NeoFS sidechain
+  uint64 sidechain_magic = 8 [json_name = "sidechainMagic"];
 }
 
 // Information about the response
