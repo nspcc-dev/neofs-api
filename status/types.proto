@@ -22,3 +22,7 @@ message Status {
 enum Success {
     OK = 0;
 }
+
+enum CommonFail {
+    INTERNAL = 0;
+}
