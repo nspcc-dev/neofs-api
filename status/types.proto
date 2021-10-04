@@ -18,3 +18,7 @@ message Status {
 
     repeated Detail details = 3;
 }
+
+enum Success {
+    OK = 0;
+}
