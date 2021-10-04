@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package neo.fs.v2.status;
+
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/status/grpc;status";
+option csharp_namespace = "Neo.FileStorage.API.Status";
+
+message Status {
+    uint32 code = 1;
+
+    string message = 2;
+
+    message Detail {
+        uint32 id = 1;
+
+        bytes value = 2;
+    }
+
+    repeated Detail details = 3;
+}
