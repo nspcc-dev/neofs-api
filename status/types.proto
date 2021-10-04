@@ -26,3 +26,9 @@ enum Success {
 enum CommonFail {
     INTERNAL = 0;
 }
+
+enum Section {
+    SECTION_SUCCESS = 0;
+
+    SECTION_FAILURE_COMMON = 1;
+}
