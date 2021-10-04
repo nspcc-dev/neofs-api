@@ -7,6 +7,7 @@ option csharp_namespace = "Neo.FileStorage.API.Session";
 
 import "refs/types.proto";
 import "acl/types.proto";
+import "status/types.proto";
 
 // Context information for Session Tokens related to ObjectService requests
 message ObjectSessionContext {
@@ -184,6 +185,8 @@ message ResponseMetaHeader {
 
   // `ResponseMetaHeader` of the origin request
   ResponseMetaHeader origin = 5 [json_name = "origin"];
+
+  neo.fs.v2.status.Status status = 6 [json_name = "status"];
 }
 
 // Verification info for request signed by all intermediate nodes.
