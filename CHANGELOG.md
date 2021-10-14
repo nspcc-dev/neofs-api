@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.10.0] - 2021-10-14 - Udo (우도, 牛島)
+
+NNS integration, detailed network info and ACL rules for non-native services.
+
+### Added
+- ACL header type for services (#173)
+- Side chain block duration and NeoFS network config fields in `NetworkInfo`
+  message (#172)
+- Well-known container attributes for NNS integration (#177)
+
 ## [2.9.1] - 2021-08-26
 
 ### Changed
@@ -399,3 +409,4 @@ Bump major release
 [2.8.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.7.0...v2.8.0
 [2.9.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.8.0...v2.9.0
 [2.9.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.9.0...v2.9.1
+[2.10.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.9.1...v2.10.0

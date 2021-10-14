@@ -549,6 +549,12 @@ There are some "well-known" attributes affecting system behaviour:
 * __NEOFS__SUBNET \
   String ID of container's storage subnet. Container can be attached to
   only one subnet.
+* __NEOFS__NAME \
+  String of human-friendly container name registered as the domain in
+  NNS contract.
+* __NEOFS__ZONE \
+  String of zone for `__NEOFS__NAME`. Used as TLD of domain name in NNS
+  contract. If zone is not specified, use default zone: `container`.
 
 And some well-known attributes used by applications only:
 
