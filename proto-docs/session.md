@@ -58,6 +58,11 @@ rpc Create(CreateRequest) returns (CreateResponse);
 
 Opens a new session between two peers.
 
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+session has been successfully opened;
+- Common failures (SECTION_FAILURE_COMMON).
+
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Create | [CreateRequest](#neo.fs.v2.session.CreateRequest) | [CreateResponse](#neo.fs.v2.session.CreateResponse) |
@@ -198,6 +203,7 @@ Information about the response
 | ttl | [uint32](#uint32) |  | Maximum number of intermediate nodes in the request route |
 | x_headers | [XHeader](#neo.fs.v2.session.XHeader) | repeated | Response X-Headers |
 | origin | [ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | `ResponseMetaHeader` of the origin request |
+| status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Status return. |
 
 
 <a name="neo.fs.v2.session.ResponseVerificationHeader"></a>

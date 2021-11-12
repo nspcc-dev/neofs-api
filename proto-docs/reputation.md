@@ -59,6 +59,11 @@ rpc AnnounceIntermediateResult(AnnounceIntermediateResultRequest) returns (Annou
 
 Announce local client trust information to any node in NeoFS network.
 
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+local trust has been successfully announced;
+- Common failures (SECTION_FAILURE_COMMON).
+
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | AnnounceLocalTrust | [AnnounceLocalTrustRequest](#neo.fs.v2.reputation.AnnounceLocalTrustRequest) | [AnnounceLocalTrustResponse](#neo.fs.v2.reputation.AnnounceLocalTrustResponse) |
@@ -66,6 +71,11 @@ Announce local client trust information to any node in NeoFS network.
 
 Announces the intermediate result of the iterative algorithm for
 calculating the global reputation of the node in NeoFS network.
+
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+intermediate trust estimation has been successfully announced;
+- Common failures (SECTION_FAILURE_COMMON).
 
 | Name | Input | Output |
 | ---- | ----- | ------ |

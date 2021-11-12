@@ -50,6 +50,11 @@ rpc Balance(BalanceRequest) returns (BalanceResponse);
 
 Returns the amount of funds in GAS token for the requested NeoFS account.
 
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+balance has been successfully read;
+- Common failures (SECTION_FAILURE_COMMON).
+
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Balance | [BalanceRequest](#neo.fs.v2.accounting.BalanceRequest) | [BalanceResponse](#neo.fs.v2.accounting.BalanceResponse) |

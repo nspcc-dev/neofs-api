@@ -22,6 +22,8 @@
 
   - Messages
     - [Filter](#neo.fs.v2.netmap.Filter)
+    - [NetworkConfig](#neo.fs.v2.netmap.NetworkConfig)
+    - [NetworkConfig.Parameter](#neo.fs.v2.netmap.NetworkConfig.Parameter)
     - [NetworkInfo](#neo.fs.v2.netmap.NetworkInfo)
     - [NodeInfo](#neo.fs.v2.netmap.NodeInfo)
     - [NodeInfo.Attribute](#neo.fs.v2.netmap.NodeInfo.Attribute)
@@ -64,12 +66,22 @@ want to get recent information directly, or to talk to the node not yet
 present in `Network Map` to find out what API version can be used for
 further communication. Can also be used to check if node is up and running.
 
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+information about the server has been successfully read;
+- Common failures (SECTION_FAILURE_COMMON).
+
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | LocalNodeInfo | [LocalNodeInfoRequest](#neo.fs.v2.netmap.LocalNodeInfoRequest) | [LocalNodeInfoResponse](#neo.fs.v2.netmap.LocalNodeInfoResponse) |
 #### Method NetworkInfo
 
 Read recent information about the NeoFS network.
+
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+information about the current network state has been successfully read;
+- Common failures (SECTION_FAILURE_COMMON).
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -197,6 +209,29 @@ results, that will satisfy filter's conditions.
 | filters | [Filter](#neo.fs.v2.netmap.Filter) | repeated | List of inner filters. Top level operation will be applied to the whole list. |
 
 
+<a name="neo.fs.v2.netmap.NetworkConfig"></a>
+
+### Message NetworkConfig
+NeoFS network configuration
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parameters | [NetworkConfig.Parameter](#neo.fs.v2.netmap.NetworkConfig.Parameter) | repeated | List of parameter values. |
+
+
+<a name="neo.fs.v2.netmap.NetworkConfig.Parameter"></a>
+
+### Message NetworkConfig.Parameter
+Single configuration parameter.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [bytes](#bytes) |  | Parameter key. UTF-8 encoded string. |
+| value | [bytes](#bytes) |  | Parameter value. |
+
+
 <a name="neo.fs.v2.netmap.NetworkInfo"></a>
 
 ### Message NetworkInfo
@@ -207,6 +242,8 @@ Information about NeoFS network
 | ----- | ---- | ----- | ----------- |
 | current_epoch | [uint64](#uint64) |  | Number of the current epoch in the NeoFS network. |
 | magic_number | [uint64](#uint64) |  | Magic number of the sidechain of the NeoFS network. |
+| ms_per_block | [int64](#int64) |  | MillisecondsPerBlock network parameter of the sidechain of the NeoFS network. |
+| network_config | [NetworkConfig](#neo.fs.v2.netmap.NetworkConfig) |  | NeoFS network configuration. |
 
 
 <a name="neo.fs.v2.netmap.NodeInfo"></a>
