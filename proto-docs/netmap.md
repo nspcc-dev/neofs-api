@@ -66,12 +66,22 @@ want to get recent information directly, or to talk to the node not yet
 present in `Network Map` to find out what API version can be used for
 further communication. Can also be used to check if node is up and running.
 
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+information about the server has been successfully read;
+- Common failures (SECTION_FAILURE_COMMON).
+
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | LocalNodeInfo | [LocalNodeInfoRequest](#neo.fs.v2.netmap.LocalNodeInfoRequest) | [LocalNodeInfoResponse](#neo.fs.v2.netmap.LocalNodeInfoResponse) |
 #### Method NetworkInfo
 
 Read recent information about the NeoFS network.
+
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+information about the current network state has been successfully read;
+- Common failures (SECTION_FAILURE_COMMON).
 
 | Name | Input | Output |
 | ---- | ----- | ------ |

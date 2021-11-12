@@ -15,10 +15,20 @@ import "session/types.proto";
 // final result is recorded.
 service ReputationService {
     // Announce local client trust information to any node in NeoFS network.
+    //
+    // Statuses:
+    // - **OK** (0, SECTION_SUCCESS):
+    // local trust has been successfully announced;
+    // - Common failures (SECTION_FAILURE_COMMON).
     rpc AnnounceLocalTrust (AnnounceLocalTrustRequest) returns (AnnounceLocalTrustResponse);
 
     // Announces the intermediate result of the iterative algorithm for
     // calculating the global reputation of the node in NeoFS network.
+    //
+    // Statuses:
+    // - **OK** (0, SECTION_SUCCESS):
+    // intermediate trust estimation has been successfully announced;
+    // - Common failures (SECTION_FAILURE_COMMON).
     rpc AnnounceIntermediateResult (AnnounceIntermediateResultRequest) returns (AnnounceIntermediateResultResponse);
 }
 

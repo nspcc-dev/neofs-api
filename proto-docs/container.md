@@ -84,6 +84,11 @@ response immediately. After a new block is issued in sidechain, request is
 verified by Inner Ring nodes. After one more block in sidechain, container
 is added into smart contract storage.
 
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+request to save the container has been sent to the sidechain;
+- Common failures (SECTION_FAILURE_COMMON).
+
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Put | [PutRequest](#neo.fs.v2.container.PutRequest) | [PutResponse](#neo.fs.v2.container.PutResponse) |
@@ -94,6 +99,11 @@ response immediately. After a new block is issued in sidechain, request is
 verified by Inner Ring nodes. After one more block in sidechain, container
 is added into smart contract storage.
 
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+request to remove the container has been sent to the sidechain;
+- Common failures (SECTION_FAILURE_COMMON).
+
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Delete | [DeleteRequest](#neo.fs.v2.container.DeleteRequest) | [DeleteResponse](#neo.fs.v2.container.DeleteResponse) |
@@ -101,12 +111,22 @@ is added into smart contract storage.
 
 Returns container structure from `Container` smart contract storage.
 
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+container has been successfully read;
+- Common failures (SECTION_FAILURE_COMMON).
+
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Get | [GetRequest](#neo.fs.v2.container.GetRequest) | [GetResponse](#neo.fs.v2.container.GetResponse) |
 #### Method List
 
 Returns all owner's containers from 'Container` smart contract' storage.
+
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+container list has been successfully read;
+- Common failures (SECTION_FAILURE_COMMON).
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -117,6 +137,11 @@ Invokes 'SetEACL' method of 'Container` smart contract and returns response
 immediately. After one more block in sidechain, Extended ACL changes are
 added into smart contract storage.
 
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+request to save container eACL has been sent to the sidechain;
+- Common failures (SECTION_FAILURE_COMMON).
+
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | SetExtendedACL | [SetExtendedACLRequest](#neo.fs.v2.container.SetExtendedACLRequest) | [SetExtendedACLResponse](#neo.fs.v2.container.SetExtendedACLResponse) |
@@ -125,12 +150,22 @@ added into smart contract storage.
 Returns Extended ACL table and signature from `Container` smart contract
 storage.
 
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+container eACL has been successfully read;
+- Common failures (SECTION_FAILURE_COMMON).
+
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | GetExtendedACL | [GetExtendedACLRequest](#neo.fs.v2.container.GetExtendedACLRequest) | [GetExtendedACLResponse](#neo.fs.v2.container.GetExtendedACLResponse) |
 #### Method AnnounceUsedSpace
 
 Announce container used space values for P2P synchronization.
+
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+estimation of used space has been successfully announced;
+- Common failures (SECTION_FAILURE_COMMON).
 
 | Name | Input | Output |
 | ---- | ----- | ------ |

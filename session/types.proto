@@ -186,6 +186,7 @@ message ResponseMetaHeader {
   // `ResponseMetaHeader` of the origin request
   ResponseMetaHeader origin = 5 [json_name = "origin"];
 
+  // Status return
   neo.fs.v2.status.Status status = 6 [json_name = "status"];
 }
 
