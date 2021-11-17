@@ -12,6 +12,7 @@
     - [ObjectID](#neo.fs.v2.refs.ObjectID)
     - [OwnerID](#neo.fs.v2.refs.OwnerID)
     - [Signature](#neo.fs.v2.refs.Signature)
+    - [SubnetID](#neo.fs.v2.refs.SubnetID)
     - [Version](#neo.fs.v2.refs.Version)
     
 
@@ -147,6 +148,21 @@ Signature of something in NeoFS.
 | ----- | ---- | ----- | ----------- |
 | key | [bytes](#bytes) |  | Public key used for signing |
 | sign | [bytes](#bytes) |  | Signature |
+
+
+<a name="neo.fs.v2.refs.SubnetID"></a>
+
+### Message SubnetID
+NeoFS subnetwork identifier.
+
+String representation of a value is base-10 integer.
+
+JSON representation is an object containing single `value` number field.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| value | [fixed32](#fixed32) |  | 4-byte integer subnetwork identifier. |
 
 
 <a name="neo.fs.v2.refs.Version"></a>

@@ -203,7 +203,7 @@ Information about the response
 | ttl | [uint32](#uint32) |  | Maximum number of intermediate nodes in the request route |
 | x_headers | [XHeader](#neo.fs.v2.session.XHeader) | repeated | Response X-Headers |
 | origin | [ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | `ResponseMetaHeader` of the origin request |
-| status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Status return. |
+| status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Status return |
 
 
 <a name="neo.fs.v2.session.ResponseVerificationHeader"></a>
