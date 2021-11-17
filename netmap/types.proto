@@ -5,6 +5,8 @@ package neo.fs.v2.netmap;
 option go_package = "github.com/nspcc-dev/neofs-api-go/v2/netmap/grpc;netmap";
 option csharp_namespace = "Neo.FileStorage.API.Netmap";
 
+import "refs/types.proto";
+
 // Operations on filters
 enum Operation {
   // No Operation defined
@@ -119,6 +121,10 @@ message PlacementPolicy {
 
   // List of named filters to reference in selectors
   repeated Filter filters = 4 [json_name = "filters"];
+
+  // Subnetwork ID to select nodes from. Zero subnet (default) represents
+  // all of the nodes which didn't explicitly opt out of membership.
+  refs.SubnetID subnet_id = 5 [json_name = "subnetId"];
 }
 
 // NeoFS node description

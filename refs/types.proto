@@ -77,6 +77,16 @@ message OwnerID {
   bytes value = 1 [json_name = "value"];
 }
 
+// NeoFS subnetwork identifier.
+//
+// String representation of a value is base-10 integer.
+//
+// JSON representation is an object containing single `value` number field.
+message SubnetID {
+  // 4-byte integer subnetwork identifier.
+  fixed32 value = 1 [json_name = "value"];
+}
+
 // API version used by a node.
 //
 // String presentation is a Semantic Versioning 2.0.0 compatible version string
