@@ -57,8 +57,8 @@ should make the return more detailed.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| code | [uint32](#uint32) |  | The status code. |
-| message | [string](#string) |  | Developer-facing error message. |
+| code | [uint32](#uint32) |  | The status code |
+| message | [string](#string) |  | Developer-facing error message |
 | details | [Status.Detail](#neo.fs.v2.status.Status.Detail) | repeated | Data detailing the outcome of the operation. Must be unique by ID. |
 
 
@@ -86,7 +86,7 @@ Section of failed statuses independent of the operation.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| INTERNAL | 0 | [**1024**] Internal server error, default failure. Not detailed.. If the server cannot match failed outcome to the code , it should use this code. |
+| INTERNAL | 0 | [**1024**] Internal server error, default failure. Not detailed. If the server cannot match failed outcome to the code, it should use this code. |
 
 
 
