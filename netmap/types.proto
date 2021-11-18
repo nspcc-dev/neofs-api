@@ -164,9 +164,13 @@ message NodeInfo {
   //   attributes it's a string presenting floating point number with comma or
   //   point delimiter for decimal part. In the Network Map it will be saved as
   //   64-bit unsigned integer representing number of minimal token fractions.
-  // * Subnet \
-  //   String ID of Node's storage subnet. There can be only one subnet served
-  //   by the Storage Node.
+  // * __NEOFS__SUBNET_%s \
+  //   `True` or `False`. Defines if the node is included in the `%s` subnetwork
+  //   or not. `%s` must be an existing subnetwork's ID (non-negative integer number).
+  //   A node can be included in more than one subnetwork and, therefore, can contain
+  //   more than one subnet attribute. A missing attribute is equivalent to the
+  //   presence of the attribute with `False` value (except default zero subnetwork
+  //   (with `%s` == 0) for which missing attribute means inclusion in that network).
   // * UN-LOCODE \
   //   Node's geographic location in
   //   [UN/LOCODE](https://www.unece.org/cefact/codesfortrade/codes_index.html)
