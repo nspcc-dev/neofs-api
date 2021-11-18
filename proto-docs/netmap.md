@@ -217,19 +217,19 @@ NeoFS network configuration
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parameters | [NetworkConfig.Parameter](#neo.fs.v2.netmap.NetworkConfig.Parameter) | repeated | List of parameter values. |
+| parameters | [NetworkConfig.Parameter](#neo.fs.v2.netmap.NetworkConfig.Parameter) | repeated | List of parameter values |
 
 
 <a name="neo.fs.v2.netmap.NetworkConfig.Parameter"></a>
 
 ### Message NetworkConfig.Parameter
-Single configuration parameter.
+Single configuration parameter
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [bytes](#bytes) |  | Parameter key. UTF-8 encoded string. |
-| value | [bytes](#bytes) |  | Parameter value. |
+| key | [bytes](#bytes) |  | Parameter key. UTF-8 encoded string |
+| value | [bytes](#bytes) |  | Parameter value |
 
 
 <a name="neo.fs.v2.netmap.NetworkInfo"></a>
@@ -240,10 +240,10 @@ Information about NeoFS network
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| current_epoch | [uint64](#uint64) |  | Number of the current epoch in the NeoFS network. |
-| magic_number | [uint64](#uint64) |  | Magic number of the sidechain of the NeoFS network. |
-| ms_per_block | [int64](#int64) |  | MillisecondsPerBlock network parameter of the sidechain of the NeoFS network. |
-| network_config | [NetworkConfig](#neo.fs.v2.netmap.NetworkConfig) |  | NeoFS network configuration. |
+| current_epoch | [uint64](#uint64) |  | Number of the current epoch in the NeoFS network |
+| magic_number | [uint64](#uint64) |  | Magic number of the sidechain of the NeoFS network |
+| ms_per_block | [int64](#int64) |  | MillisecondsPerBlock network parameter of the sidechain of the NeoFS network |
+| network_config | [NetworkConfig](#neo.fs.v2.netmap.NetworkConfig) |  | NeoFS network configuration |
 
 
 <a name="neo.fs.v2.netmap.NodeInfo"></a>
@@ -254,10 +254,10 @@ NeoFS node description
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| public_key | [bytes](#bytes) |  | Public key of the NeoFS node in a binary format. |
+| public_key | [bytes](#bytes) |  | Public key of the NeoFS node in a binary format |
 | addresses | [string](#string) | repeated | Ways to connect to a node |
 | attributes | [NodeInfo.Attribute](#neo.fs.v2.netmap.NodeInfo.Attribute) | repeated | Carries list of the NeoFS node attributes in a key-value form. Key name must be a node-unique valid UTF-8 string. Value can't be empty. NodeInfo structures with duplicated attribute names or attributes with empty values will be considered invalid. |
-| state | [NodeInfo.State](#neo.fs.v2.netmap.NodeInfo.State) |  | Carries state of the NeoFS node. |
+| state | [NodeInfo.State](#neo.fs.v2.netmap.NodeInfo.State) |  | Carries state of the NeoFS node |
 
 
 <a name="neo.fs.v2.netmap.NodeInfo.Attribute"></a>
@@ -292,9 +292,13 @@ explicitly set:
   attributes it's a string presenting floating point number with comma or
   point delimiter for decimal part. In the Network Map it will be saved as
   64-bit unsigned integer representing number of minimal token fractions.
-* Subnet \
-  String ID of Node's storage subnet. There can be only one subnet served
-  by the Storage Node.
+* __NEOFS__SUBNET_%s \
+  `True` or `False`. Defines if the node is included in the `%s` subnetwork
+  or not. `%s` must be an existing subnetwork's ID (non-negative integer number).
+  A node can be included in more than one subnetwork and, therefore, can contain
+  more than one subnet attribute. A missing attribute is equivalent to the
+  presence of the attribute with `False` value (except default zero subnetwork
+  (with `%s` == 0) for which missing attribute means inclusion in that network).
 * UN-LOCODE \
   Node's geographic location in
   [UN/LOCODE](https://www.unece.org/cefact/codesfortrade/codes_index.html)
@@ -333,8 +337,8 @@ corresponding section in NeoFS Technical specification.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  | Key of the node attribute. |
-| value | [string](#string) |  | Value of the node attribute. |
+| key | [string](#string) |  | Key of the node attribute |
+| value | [string](#string) |  | Value of the node attribute |
 | parents | [string](#string) | repeated | Parent keys, if any. For example for `City` it could be `Region` and `Country`. |
 
 
@@ -409,9 +413,9 @@ Represents the enumeration of various states of the NeoFS node.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| UNSPECIFIED | 0 | Unknown state. |
-| ONLINE | 1 | Active state in the network. |
-| OFFLINE | 2 | Network unavailable state. |
+| UNSPECIFIED | 0 | Unknown state |
+| ONLINE | 1 | Active state in the network |
+| OFFLINE | 2 | Network unavailable state |
 
 
 
