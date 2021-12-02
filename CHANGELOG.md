@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.11.0] - 2021-12-02 - Sinjido (신지도, 薪智島)
+
+Subnets and status responses.
+
+### Added
+- `Status` message structure (#150)
+- `status` field of `Status` type to `ResponseMetaHeader` message (#150)
+- `Subnet` message structure (#180)
+- `subnet` field of `Subnet` type to `PlacementPolicy` message (#179)
+
+### Changed
+- Subnet attributes in `NodeInfo` (#181)
+
 ## [2.10.0] - 2021-10-14 - Udo (우도, 牛島)
 
 NNS integration, detailed network info and ACL rules for non-native services.
@@ -410,3 +423,4 @@ Bump major release
 [2.9.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.8.0...v2.9.0
 [2.9.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.9.0...v2.9.1
 [2.10.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.9.1...v2.10.0
+[2.11.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.10.0...v2.11.0
