@@ -167,6 +167,10 @@ message RequestMetaHeader {
 
   // `RequestMetaHeader` of the origin request
   RequestMetaHeader origin = 7 [json_name = "origin"];
+
+  // NeoFS network magic. Must match the value for the network
+  // that the server belongs to.
+  uint64 magic_number = 8 [json_name = "magicNumber"];
 }
 
 // Information about the response
