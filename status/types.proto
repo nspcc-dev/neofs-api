@@ -81,6 +81,9 @@ enum CommonFail {
     // use this code.
     INTERNAL = 0;
 
-    // [**1025**] Wrong magic of the NeoFS network. Not detailed.
+    // [**1025**] Wrong magic of the NeoFS network.
+    // Details:
+    //  - [**0**] Magic number of the served NeoFS network (big-endian 64-bit
+    //  unsigned integer).
     WRONG_MAGIC_NUMBER = 1;
 }
