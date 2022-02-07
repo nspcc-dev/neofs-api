@@ -105,6 +105,18 @@ message Signature {
   bytes key = 1 [json_name = "key"];
   // Signature
   bytes sign = 2 [json_name = "signature"];
+  // Scheme contains digital signature scheme identifier.
+  SignatureScheme scheme = 3 [json_name = "scheme"];
+}
+
+// Signature scheme describes digital signing scheme used for (key, signature) pair.
+enum SignatureScheme {
+  // Unknown. The default interpretation depends on a particular structure type.
+  UNSPECIFIED = 0;
+  // ECDSA with SHA-512 hashing (FIPS 186-3).
+  ECDSA_SHA512 = 1;
+  // Deterministic ECDSA with SHA-256 hashing (RFC 6979)
+  ECDSA_RFC6979_SHA256 = 2;
 }
 
 // Checksum algorithm type.
