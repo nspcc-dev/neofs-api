@@ -148,6 +148,7 @@ Signature of something in NeoFS.
 | ----- | ---- | ----- | ----------- |
 | key | [bytes](#bytes) |  | Public key used for signing |
 | sign | [bytes](#bytes) |  | Signature |
+| scheme | [SignatureScheme](#neo.fs.v2.refs.SignatureScheme) |  | Scheme contains digital signature scheme identifier. |
 
 
 <a name="neo.fs.v2.refs.SubnetID"></a>
@@ -192,6 +193,19 @@ Checksum algorithm type.
 | CHECKSUM_TYPE_UNSPECIFIED | 0 | Unknown. Not used |
 | TZ | 1 | Tillich-Zemor homomorphic hash function |
 | SHA256 | 2 | SHA-256 |
+
+
+
+<a name="neo.fs.v2.refs.SignatureScheme"></a>
+
+### SignatureScheme
+Signature scheme describes digital signing scheme used for (key, signature) pair.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| UNSPECIFIED | 0 | Unknown. The default interpretation depends on a particular structure type. |
+| ECDSA_SHA512 | 1 | ECDSA with SHA-512 hashing (FIPS 186-3). |
+| ECDSA_RFC6979_SHA256 | 2 | Deterministic ECDSA with SHA-256 hashing (RFC 6979) |
 
 
  <!-- end enums -->
