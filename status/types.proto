@@ -67,6 +67,9 @@ enum Section {
 
     // Object service-specific errors.
     SECTION_OBJECT = 2;
+
+    // Container service-specific errors.
+    SECTION_CONTAINER = 3;
 }
 
 // Section of NeoFS successful return codes.
@@ -100,4 +103,9 @@ enum Object {
     // [**2049**] Object not found.
     OBJECT_NOT_FOUND = 1;
 }
+
+// Section of statuses for container-related operations.
+enum Container {
+    // [**3072**] Container not found.
+    CONTAINER_NOT_FOUND = 0;
 }
