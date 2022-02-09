@@ -70,6 +70,9 @@ enum Section {
 
     // Container service-specific errors.
     SECTION_CONTAINER = 3;
+
+    // Session service-specific errors.
+    SECTION_SESSION = 4;
 }
 
 // Section of NeoFS successful return codes.
@@ -108,4 +111,12 @@ enum Object {
 enum Container {
     // [**3072**] Container not found.
     CONTAINER_NOT_FOUND = 0;
+}
+
+// Section of statuses for session-related operations.
+enum Session {
+    // [**4096**] Token not found.
+    TOKEN_NOT_FOUND = 0;
+    // [**4097**] Token has expired.
+    TOKEN_EXPIRED = 1;
 }
