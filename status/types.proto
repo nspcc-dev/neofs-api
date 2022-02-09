@@ -64,6 +64,9 @@ enum Section {
 
     // Failure codes regardless of the operation.
     SECTION_FAILURE_COMMON = 1;
+
+    // Object service-specific errors.
+    SECTION_OBJECT = 2;
 }
 
 // Section of NeoFS successful return codes.
@@ -86,4 +89,12 @@ enum CommonFail {
     //  - [**0**] Magic number of the served NeoFS network (big-endian 64-bit
     //  unsigned integer).
     WRONG_MAGIC_NUMBER = 1;
+}
+
+// Section of statuses for object-related operations.
+enum Object {
+    // [**2048**] Access denied by ACL.
+    // Details:
+    // - [**0**] Human-readable description.
+    ACCESS_DENIED = 0;
 }
