@@ -174,6 +174,7 @@ request meta headers are folded in matryoshka style.
 | session_token | [SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token within which the request is sent |
 | bearer_token | [neo.fs.v2.acl.BearerToken](#neo.fs.v2.acl.BearerToken) |  | `BearerToken` with eACL overrides for the request |
 | origin | [RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | `RequestMetaHeader` of the origin request |
+| magic_number | [uint64](#uint64) |  | NeoFS network magic. Must match the value for the network that the server belongs to. |
 
 
 <a name="neo.fs.v2.session.RequestVerificationHeader"></a>
