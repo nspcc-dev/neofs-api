@@ -117,6 +117,13 @@ message Header {
   //   Marks smaller parts of a split bigger object
   // * __NEOFS__EXPIRATION_EPOCH \
   //   Tells GC to delete object after that epoch
+  // * __NEOFS__TICK_EPOCH \
+  //   Decimal number that defines what epoch must produce
+  //   object notification with UTF-8 object address in a
+  //   body (`0` value produces notification right after
+  //   object put)
+  // * __NEOFS__TICK_TOPIC \
+  //   UTF-8 string topic ID that is used for object notification
   //
   // And some well-known attributes used by applications only:
   //
