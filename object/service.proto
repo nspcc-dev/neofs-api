@@ -35,7 +35,13 @@ service ObjectService {
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS):
   // object has been successfully saved in the container;
-  // - Common failures (SECTION_FAILURE_COMMON).
+  // - Common failures (SECTION_FAILURE_COMMON);
+  // - **LOCKED** (2048, SECTION_OBJECT):
+  // placement of an object of type TOMBSTONE that includes at least one locked
+  // object is prohibited;
+  // - **LOCK_NON_REGULAR_OBJECT** (2049, SECTION_OBJECT):
+  // placement of an object of type LOCK that includes at least one object of
+  // type other than REGULAR is prohibited.
   rpc Put(stream PutRequest) returns (PutResponse);
 
   // Delete the object from a container. There is no immediate removal
@@ -44,7 +50,9 @@ service ObjectService {
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS):
   // object has been successfully marked to be removed from the container;
-  // - Common failures (SECTION_FAILURE_COMMON).
+  // - Common failures (SECTION_FAILURE_COMMON);
+  // - **LOCKED** (2048, SECTION_OBJECT):
+  // deleting a locked object is prohibited.
   rpc Delete(DeleteRequest) returns (DeleteResponse);
 
   // Returns the object Headers without data payload. By default full header is

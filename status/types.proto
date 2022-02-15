@@ -103,8 +103,15 @@ enum Object {
     // Details:
     // - [**0**] Human-readable description.
     ACCESS_DENIED = 0;
+
     // [**2049**] Object not found.
     OBJECT_NOT_FOUND = 1;
+
+    // [**2050**] Operation rejected by the object lock.
+    LOCKED = 2;
+
+    // [**2051**] Locking an object with a non-REGULAR type rejected.
+    LOCK_NON_REGULAR_OBJECT = 3;
 }
 
 // Section of statuses for container-related operations.
@@ -117,6 +124,7 @@ enum Container {
 enum Session {
     // [**4096**] Token not found.
     TOKEN_NOT_FOUND = 0;
+
     // [**4097**] Token has expired.
     TOKEN_EXPIRED = 1;
 }
