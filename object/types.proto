@@ -9,13 +9,14 @@ import "refs/types.proto";
 import "session/types.proto";
 
 // Type of the object payload content. Only `REGULAR` type objects can be split,
-// hence `TOMBSTONE` and `STORAGE_GROUP` payload is limited by maximal object
-// size.
+// hence `TOMBSTONE`, `STORAGE_GROUP` and `LOCK` payload is limited by maximal
+// object size.
 //
 // String presentation of object type is the same as definition:
 // * REGULAR
 // * TOMBSTONE
 // * STORAGE_GROUP
+// * LOCK
 enum ObjectType {
   // Just a normal object
   REGULAR = 0;
@@ -25,6 +26,9 @@ enum ObjectType {
 
   // StorageGroup information
   STORAGE_GROUP = 2;
+
+  // Object lock
+  LOCK = 3;
 }
 
 // Type of match expression
