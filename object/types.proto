@@ -184,6 +184,14 @@ message Header {
 // Object structure. Object is immutable and content-addressed. It means
 // `ObjectID` will change if header or payload changes. It's calculated as a
 // hash of header field, which contains hash of object's payload.
+//
+// Payload format depends on object type specified in the header:
+// * **LOCK** \
+// Must be encoded message of type `Lock` in Protocol Buffers binary format
+// with direct field order. Member list must no be empty or carry empty IDs.
+// All members must regular objects (`REGULAR` type). Lifetime of the lock
+// object is limited similar to regular objects in `__NEOFS__EXPIRATION_EPOCH`
+// attribute.
 message Object {
   // Object's unique identifier.
   neo.fs.v2.refs.ObjectID object_id = 1 [json_name = "objectID"];

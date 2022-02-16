@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package neo.fs.v2.lock;
+
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/lock/grpc;lock";
+option csharp_namespace = "Neo.FileStorage.API.Lock";
+
+import "refs/types.proto";
+
+// Lock keeps record of objects that are locked.
+message Lock {
+  // List of objects to be locked.
+  repeated neo.fs.v2.refs.ObjectID members = 1 [json_name = "members"];
+}
