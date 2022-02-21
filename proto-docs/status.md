@@ -109,8 +109,11 @@ Section of statuses for object-related operations.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| ACCESS_DENIED | 0 | [**2048**] Access denied by ACL. Details: - [**0**] Human-readable description. |
+| ACCESS_DENIED | 0 | [**2048**] Access denied by ACL. Details: - [**0**] Human-readable description (UTF-8 encoded string). |
 | OBJECT_NOT_FOUND | 1 | [**2049**] Object not found. |
+| LOCKED | 2 | [**2050**] Operation rejected by the object lock. |
+| LOCK_NON_REGULAR_OBJECT | 3 | [**2051**] Locking an object with a non-REGULAR type rejected. |
+| OBJECT_ALREADY_REMOVED | 4 | [**2052**] Object has been marked deleted. |
 
 
 

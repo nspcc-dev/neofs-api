@@ -21,8 +21,8 @@ service ContainerService {
   // is added into smart contract storage.
   //
   // Statuses:
-  // - **OK** (0, SECTION_SUCCESS):
-  // request to save the container has been sent to the sidechain;
+  // - **OK** (0, SECTION_SUCCESS): \
+  //   request to save the container has been sent to the sidechain;
   // - Common failures (SECTION_FAILURE_COMMON).
   rpc Put(PutRequest) returns (PutResponse);
 
@@ -32,26 +32,26 @@ service ContainerService {
   // is added into smart contract storage.
   //
   // Statuses:
-  // - **OK** (0, SECTION_SUCCESS):
-  // request to remove the container has been sent to the sidechain;
+  // - **OK** (0, SECTION_SUCCESS): \
+  //   request to remove the container has been sent to the sidechain;
   // - Common failures (SECTION_FAILURE_COMMON).
   rpc Delete(DeleteRequest) returns (DeleteResponse);
 
   // Returns container structure from `Container` smart contract storage.
   //
   // Statuses:
-  // - **OK** (0, SECTION_SUCCESS):
-  // container has been successfully read;
+  // - **OK** (0, SECTION_SUCCESS): \
+  //   container has been successfully read;
   // - Common failures (SECTION_FAILURE_COMMON);
-  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER):
-  // requested container not found.
+  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
+  //   requested container not found.
   rpc Get(GetRequest) returns (GetResponse);
 
   // Returns all owner's containers from 'Container` smart contract' storage.
   //
   // Statuses:
-  // - **OK** (0, SECTION_SUCCESS):
-  // container list has been successfully read;
+  // - **OK** (0, SECTION_SUCCESS): \
+  //   container list has been successfully read;
   // - Common failures (SECTION_FAILURE_COMMON).
   rpc List(ListRequest) returns (ListResponse);
 
@@ -60,8 +60,8 @@ service ContainerService {
   // added into smart contract storage.
   //
   // Statuses:
-  // - **OK** (0, SECTION_SUCCESS):
-  // request to save container eACL has been sent to the sidechain;
+  // - **OK** (0, SECTION_SUCCESS): \
+  //   request to save container eACL has been sent to the sidechain;
   // - Common failures (SECTION_FAILURE_COMMON).
   rpc SetExtendedACL(SetExtendedACLRequest) returns (SetExtendedACLResponse);
 
@@ -69,18 +69,18 @@ service ContainerService {
   // storage.
   //
   // Statuses:
-  // - **OK** (0, SECTION_SUCCESS):
-  // container eACL has been successfully read;
+  // - **OK** (0, SECTION_SUCCESS): \
+  //   container eACL has been successfully read;
   // - Common failures (SECTION_FAILURE_COMMON);
-  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER):
-  // container not found.
+  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
+  //   container not found.
   rpc GetExtendedACL(GetExtendedACLRequest) returns (GetExtendedACLResponse);
 
   // Announce container used space values for P2P synchronization.
   //
   // Statuses:
-  // - **OK** (0, SECTION_SUCCESS):
-  // estimation of used space has been successfully announced;
+  // - **OK** (0, SECTION_SUCCESS): \
+  //   estimation of used space has been successfully announced;
   // - Common failures (SECTION_FAILURE_COMMON).
   rpc AnnounceUsedSpace(AnnounceUsedSpaceRequest) returns (AnnounceUsedSpaceResponse);
 }
