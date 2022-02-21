@@ -101,7 +101,7 @@ enum CommonFail {
 enum Object {
     // [**2048**] Access denied by ACL.
     // Details:
-    // - [**0**] Human-readable description.
+    // - [**0**] Human-readable description (UTF-8 encoded string).
     ACCESS_DENIED = 0;
 
     // [**2049**] Object not found.
