@@ -7,8 +7,11 @@ option csharp_namespace = "Neo.FileStorage.API.Lock";
 
 import "refs/types.proto";
 
-// Lock keeps record of objects that are locked.
+// Lock objects protects a list of objects from being deleted. Lifetime of the
+// lock object is limited similar to regular objects in
+// `__NEOFS__EXPIRATION_EPOCH` attribute.
 message Lock {
-  // List of objects to be locked.
+  // List of objects to lock. Must not be empty or carry empty IDs.
+  // All members must be of the `REGULAR` type.
   repeated neo.fs.v2.refs.ObjectID members = 1 [json_name = "members"];
 }
