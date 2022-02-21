@@ -85,8 +85,8 @@ verified by Inner Ring nodes. After one more block in sidechain, container
 is added into smart contract storage.
 
 Statuses:
-- **OK** (0, SECTION_SUCCESS):
-request to save the container has been sent to the sidechain;
+- **OK** (0, SECTION_SUCCESS): \
+  request to save the container has been sent to the sidechain;
 - Common failures (SECTION_FAILURE_COMMON).
 
 | Name | Input | Output |
@@ -100,8 +100,8 @@ verified by Inner Ring nodes. After one more block in sidechain, container
 is added into smart contract storage.
 
 Statuses:
-- **OK** (0, SECTION_SUCCESS):
-request to remove the container has been sent to the sidechain;
+- **OK** (0, SECTION_SUCCESS): \
+  request to remove the container has been sent to the sidechain;
 - Common failures (SECTION_FAILURE_COMMON).
 
 | Name | Input | Output |
@@ -112,9 +112,11 @@ request to remove the container has been sent to the sidechain;
 Returns container structure from `Container` smart contract storage.
 
 Statuses:
-- **OK** (0, SECTION_SUCCESS):
-container has been successfully read;
-- Common failures (SECTION_FAILURE_COMMON).
+- **OK** (0, SECTION_SUCCESS): \
+  container has been successfully read;
+- Common failures (SECTION_FAILURE_COMMON);
+- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
+  requested container not found.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -124,8 +126,8 @@ container has been successfully read;
 Returns all owner's containers from 'Container` smart contract' storage.
 
 Statuses:
-- **OK** (0, SECTION_SUCCESS):
-container list has been successfully read;
+- **OK** (0, SECTION_SUCCESS): \
+  container list has been successfully read;
 - Common failures (SECTION_FAILURE_COMMON).
 
 | Name | Input | Output |
@@ -138,8 +140,8 @@ immediately. After one more block in sidechain, Extended ACL changes are
 added into smart contract storage.
 
 Statuses:
-- **OK** (0, SECTION_SUCCESS):
-request to save container eACL has been sent to the sidechain;
+- **OK** (0, SECTION_SUCCESS): \
+  request to save container eACL has been sent to the sidechain;
 - Common failures (SECTION_FAILURE_COMMON).
 
 | Name | Input | Output |
@@ -151,9 +153,11 @@ Returns Extended ACL table and signature from `Container` smart contract
 storage.
 
 Statuses:
-- **OK** (0, SECTION_SUCCESS):
-container eACL has been successfully read;
-- Common failures (SECTION_FAILURE_COMMON).
+- **OK** (0, SECTION_SUCCESS): \
+  container eACL has been successfully read;
+- Common failures (SECTION_FAILURE_COMMON);
+- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
+  container not found.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -163,8 +167,8 @@ container eACL has been successfully read;
 Announce container used space values for P2P synchronization.
 
 Statuses:
-- **OK** (0, SECTION_SUCCESS):
-estimation of used space has been successfully announced;
+- **OK** (0, SECTION_SUCCESS): \
+  estimation of used space has been successfully announced;
 - Common failures (SECTION_FAILURE_COMMON).
 
 | Name | Input | Output |
