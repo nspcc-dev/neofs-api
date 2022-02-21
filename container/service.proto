@@ -92,7 +92,8 @@ message PutRequest {
     // Container structure to register in NeoFS
     container.Container container = 1;
 
-    // Signature of a stable-marshalled container according to RFC-6979
+    // Signature of a stable-marshalled container according to RFC-6979.
+    // Signature scheme must be either UNSPECIFIED or ECDSA_RFC6979_SHA256.
     neo.fs.v2.refs.Signature signature =2;
   }
   // Body of container put request message.
@@ -140,7 +141,8 @@ message DeleteRequest {
     // Identifier of the container to delete from NeoFS
     neo.fs.v2.refs.ContainerID container_id = 1;
 
-    // `ContainerID` signed with the container owner's key according to RFC-6979
+    // `ContainerID` signed with the container owner's key according to RFC-6979.
+    // Signature scheme must be either UNSPECIFIED or ECDSA_RFC6979_SHA256.
     neo.fs.v2.refs.Signature signature = 2;
   }
   // Body of container delete request message.
@@ -203,7 +205,8 @@ message GetResponse {
     // Requested container structure
     Container container = 1;
 
-    // Signature of a stable-marshalled container according to RFC-6979
+    // Signature of a stable-marshalled container according to RFC-6979.
+    // Signature scheme must be either UNSPECIFIED or ECDSA_RFC6979_SHA256.
     neo.fs.v2.refs.Signature signature = 2;
 
     // Session token if the container was created within a session
@@ -271,7 +274,8 @@ message SetExtendedACLRequest {
     // Extended ACL table to set for container
     neo.fs.v2.acl.EACLTable eacl = 1;
 
-    // Signature of stable-marshalled Extended ACL table according to RFC-6979
+    // Signature of stable-marshalled Extended ACL table according to RFC-6979.
+    // Signature scheme must be either UNSPECIFIED or ECDSA_RFC6979_SHA256.
     neo.fs.v2.refs.Signature signature = 2;
   }
   // Body of set extended acl request message.
@@ -337,7 +341,8 @@ message GetExtendedACLResponse {
     // Extended ACL requested, if available
     neo.fs.v2.acl.EACLTable eacl = 1;
 
-    // Signature of stable-marshalled Extended ACL according to RFC-6979
+    // Signature of stable-marshalled Extended ACL according to RFC-6979.
+    // Signature scheme must be either UNSPECIFIED or ECDSA_RFC6979_SHA256.
     neo.fs.v2.refs.Signature signature = 2;
 
     // Session token if Extended ACL was set within a session
