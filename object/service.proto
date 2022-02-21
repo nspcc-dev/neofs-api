@@ -22,7 +22,15 @@ service ObjectService {
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS):
   // object has been successfully read;
-  // - Common failures (SECTION_FAILURE_COMMON).
+  // - Common failures (SECTION_FAILURE_COMMON);
+  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER):
+  // object container not found;
+  // - **ACCESS_DENIED** (2048, SECTION_OBJECT):
+  // read access to the object is denied;
+  // - **OBJECT_NOT_FOUND** (2049, SECTION_OBJECT):
+  // object not found in container;
+  // - **TOKEN_EXPIRED** (4097, SECTION_SESSION):
+  // provided session token has expired.
   rpc Get(GetRequest) returns (stream GetResponse);
 
   // Put the object into container. Request uses gRPC stream. First message
@@ -36,12 +44,21 @@ service ObjectService {
   // - **OK** (0, SECTION_SUCCESS):
   // object has been successfully saved in the container;
   // - Common failures (SECTION_FAILURE_COMMON);
-  // - **LOCKED** (2048, SECTION_OBJECT):
+  // - **LOCKED** (2050, SECTION_OBJECT):
   // placement of an object of type TOMBSTONE that includes at least one locked
   // object is prohibited;
-  // - **LOCK_NON_REGULAR_OBJECT** (2049, SECTION_OBJECT):
+  // - **LOCK_NON_REGULAR_OBJECT** (2051, SECTION_OBJECT):
   // placement of an object of type LOCK that includes at least one object of
-  // type other than REGULAR is prohibited.
+  // type other than REGULAR is prohibited;
+  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER):
+  // object storage container not found;
+  // - **ACCESS_DENIED** (2048, SECTION_OBJECT):
+  // write access to the container is denied;
+  // - **TOKEN_NOT_FOUND** (4096, SECTION_SESSION):
+  // (for trusted object preparation) session private key does not exist or has
+  // been deleted;
+  // - **TOKEN_EXPIRED** (4097, SECTION_SESSION):
+  // provided session token has expired.
   rpc Put(stream PutRequest) returns (PutResponse);
 
   // Delete the object from a container. There is no immediate removal
@@ -51,8 +68,14 @@ service ObjectService {
   // - **OK** (0, SECTION_SUCCESS):
   // object has been successfully marked to be removed from the container;
   // - Common failures (SECTION_FAILURE_COMMON);
-  // - **LOCKED** (2048, SECTION_OBJECT):
-  // deleting a locked object is prohibited.
+  // - **LOCKED** (2050, SECTION_OBJECT):
+  // deleting a locked object is prohibited;
+  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER):
+  // object container not found;
+  // - **ACCESS_DENIED** (2048, SECTION_OBJECT):
+  // delete access to the object is denied;
+  // - **TOKEN_EXPIRED** (4097, SECTION_SESSION):
+  // provided session token has expired.
   rpc Delete(DeleteRequest) returns (DeleteResponse);
 
   // Returns the object Headers without data payload. By default full header is
@@ -62,7 +85,15 @@ service ObjectService {
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS):
   // object header has been successfully read;
-  // - Common failures (SECTION_FAILURE_COMMON).
+  // - Common failures (SECTION_FAILURE_COMMON);
+  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER):
+  // object container not found;
+  // - **ACCESS_DENIED** (2048, SECTION_OBJECT):
+  // access to operation HEAD of the object is denied;
+  // - **OBJECT_NOT_FOUND** (2049, SECTION_OBJECT):
+  // object not found in container;
+  // - **TOKEN_EXPIRED** (4097, SECTION_SESSION):
+  // provided session token has expired.
   rpc Head(HeadRequest) returns (HeadResponse);
 
   // Search objects in container. Search query allows to match by Object
@@ -72,7 +103,13 @@ service ObjectService {
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS):
   // objects have been successfully selected;
-  // - Common failures (SECTION_FAILURE_COMMON).
+  // - Common failures (SECTION_FAILURE_COMMON);
+  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER):
+  // search container not found;
+  // - **ACCESS_DENIED** (2048, SECTION_OBJECT):
+  // access to operation SEARCH of the object is denied;
+  // - **TOKEN_EXPIRED** (4097, SECTION_SESSION):
+  // provided session token has expired.
   rpc Search(SearchRequest) returns (stream SearchResponse);
 
   // Get byte range of data payload. Range is set as an (offset, length) tuple.
@@ -83,7 +120,15 @@ service ObjectService {
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS):
   // data range of the object payload has been successfully read;
-  // - Common failures (SECTION_FAILURE_COMMON).
+  // - Common failures (SECTION_FAILURE_COMMON);
+  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER):
+  // object container not found;
+  // - **ACCESS_DENIED** (2048, SECTION_OBJECT):
+  // access to operation RANGE of the object is denied;
+  // - **OBJECT_NOT_FOUND** (2049, SECTION_OBJECT):
+  // object not found in container;
+  // - **TOKEN_EXPIRED** (4097, SECTION_SESSION):
+  // provided session token has expired.
   rpc GetRange(GetRangeRequest) returns (stream GetRangeResponse);
 
   // Returns homomorphic or regular hash of object's payload range after
@@ -94,7 +139,15 @@ service ObjectService {
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS):
   // data range of the object payload has been successfully hashed;
-  // - Common failures (SECTION_FAILURE_COMMON).
+  // - Common failures (SECTION_FAILURE_COMMON);
+  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER):
+  // object container not found;
+  // - **ACCESS_DENIED** (2048, SECTION_OBJECT):
+  // access to operation RANGEHASH of the object is denied;
+  // - **OBJECT_NOT_FOUND** (2049, SECTION_OBJECT):
+  // object not found in container;
+  // - **TOKEN_EXPIRED** (4097, SECTION_SESSION):
+  // provided session token has expired.
   rpc GetRangeHash(GetRangeHashRequest) returns (GetRangeHashResponse);
 }
 

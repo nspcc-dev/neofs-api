@@ -42,7 +42,9 @@ service ContainerService {
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS):
   // container has been successfully read;
-  // - Common failures (SECTION_FAILURE_COMMON).
+  // - Common failures (SECTION_FAILURE_COMMON);
+  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER):
+  // requested container not found.
   rpc Get(GetRequest) returns (GetResponse);
 
   // Returns all owner's containers from 'Container` smart contract' storage.
@@ -69,7 +71,9 @@ service ContainerService {
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS):
   // container eACL has been successfully read;
-  // - Common failures (SECTION_FAILURE_COMMON).
+  // - Common failures (SECTION_FAILURE_COMMON);
+  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER):
+  // container not found.
   rpc GetExtendedACL(GetExtendedACLRequest) returns (GetExtendedACLResponse);
 
   // Announce container used space values for P2P synchronization.
