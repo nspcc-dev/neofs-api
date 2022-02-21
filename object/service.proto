@@ -30,7 +30,9 @@ service ObjectService {
   // - **OBJECT_NOT_FOUND** (2049, SECTION_OBJECT):
   // object not found in container;
   // - **TOKEN_EXPIRED** (4097, SECTION_SESSION):
-  // provided session token has expired.
+  // provided session token has expired;
+  // - **OBJECT_ALREADY_REMOVED** (2052, SECTION_OBJECT):
+  // the requested object has been marked as deleted.
   rpc Get(GetRequest) returns (stream GetResponse);
 
   // Put the object into container. Request uses gRPC stream. First message
@@ -93,7 +95,9 @@ service ObjectService {
   // - **OBJECT_NOT_FOUND** (2049, SECTION_OBJECT):
   // object not found in container;
   // - **TOKEN_EXPIRED** (4097, SECTION_SESSION):
-  // provided session token has expired.
+  // provided session token has expired;
+  // - **OBJECT_ALREADY_REMOVED** (2052, SECTION_OBJECT):
+  // the requested object has been marked as deleted.
   rpc Head(HeadRequest) returns (HeadResponse);
 
   // Search objects in container. Search query allows to match by Object
@@ -128,7 +132,9 @@ service ObjectService {
   // - **OBJECT_NOT_FOUND** (2049, SECTION_OBJECT):
   // object not found in container;
   // - **TOKEN_EXPIRED** (4097, SECTION_SESSION):
-  // provided session token has expired.
+  // provided session token has expired;
+  // - **OBJECT_ALREADY_REMOVED** (2052, SECTION_OBJECT):
+  // the requested object has been marked as deleted.
   rpc GetRange(GetRangeRequest) returns (stream GetRangeResponse);
 
   // Returns homomorphic or regular hash of object's payload range after
