@@ -112,6 +112,9 @@ enum Object {
 
     // [**2051**] Locking an object with a non-REGULAR type rejected.
     LOCK_NON_REGULAR_OBJECT = 3;
+
+    // [**2052**] Object has been marked deleted.
+    OBJECT_ALREADY_REMOVED = 4;
 }
 
 // Section of statuses for container-related operations.
