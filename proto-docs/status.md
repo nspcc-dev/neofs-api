@@ -91,6 +91,29 @@ Section of failed statuses independent of the operation.
 
 
 
+<a name="neo.fs.v2.status.Container"></a>
+
+### Container
+Section of statuses for container-related operations.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CONTAINER_NOT_FOUND | 0 | [**3072**] Container not found. |
+
+
+
+<a name="neo.fs.v2.status.Object"></a>
+
+### Object
+Section of statuses for object-related operations.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| ACCESS_DENIED | 0 | [**2048**] Access denied by ACL. Details: - [**0**] Human-readable description. |
+| OBJECT_NOT_FOUND | 1 | [**2049**] Object not found. |
+
+
+
 <a name="neo.fs.v2.status.Section"></a>
 
 ### Section
@@ -100,6 +123,21 @@ Section identifiers.
 | ---- | ------ | ----------- |
 | SECTION_SUCCESS | 0 | Successful return codes. |
 | SECTION_FAILURE_COMMON | 1 | Failure codes regardless of the operation. |
+| SECTION_OBJECT | 2 | Object service-specific errors. |
+| SECTION_CONTAINER | 3 | Container service-specific errors. |
+| SECTION_SESSION | 4 | Session service-specific errors. |
+
+
+
+<a name="neo.fs.v2.status.Session"></a>
+
+### Session
+Section of statuses for session-related operations.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| TOKEN_NOT_FOUND | 0 | [**4096**] Token not found. |
+| TOKEN_EXPIRED | 1 | [**4097**] Token has expired. |
 
 
 
