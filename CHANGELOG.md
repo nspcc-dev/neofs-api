@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.12.0] - 2022-02-22 - Heuksando (흑산도, 黑山島)
+
+Network magic, main status codes, object locks and notifications.
+
+### Added
+- `magic_number` field to `RequestMetaHeader` message (#82)
+- `WRONG_MAGIC_NUMBER` status code to `CommonFail` section (#82)
+- Well-known object attributes related to notifications `__NEOFS__TICK_EPOCH`
+  and `__NEOFS__TICK_TOPIC` (#193)
+- `ACCESS_DENIED` status code to `Object` section (#189)
+- `OBJECT_NOT_FOUND`, `CONTAINER_NOT_FOUND` and `OBJECT_ALREADY_REMOVED` status codes (#190)
+- `TOKEN_NOT_FOUND` and `TOKEN_EXPIRED` status codes to `Session` section (#191)
+- `LOCK` value of `object.Type` enum (#194)
+- `Lock` message with payload content of `LOCK` objects (#194)
+- `LOCKED` and `LOCK_NON_REGULAR_OBJECT` status codes to `Object` section (#194)
+- `scheme` field of type `SignatureScheme` to `Signature` message which determines 
+  signature scheme (#55)
+
 ## [2.11.0] - 2021-12-02 - Sinjido (신지도, 薪智島)
 
 Subnets and status responses.
@@ -424,3 +442,4 @@ Bump major release
 [2.9.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.9.0...v2.9.1
 [2.10.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.9.1...v2.10.0
 [2.11.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.10.0...v2.11.0
+[2.12.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.11.0...v2.12.0
