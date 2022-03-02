@@ -17,6 +17,10 @@ Network magic, main status codes, object locks and notifications.
 - `LOCKED` and `LOCK_NON_REGULAR_OBJECT` status codes to `Object` section (#194)
 - `scheme` field of type `SignatureScheme` to `Signature` message which determines 
   signature scheme (#55)
+- `SignatureRFC6979` message (#203)
+
+### Changed
+- Type of `signature` field in `ContainerService` requests to `SignatureRFC6979` (#203)
 
 ## [2.11.0] - 2021-12-02 - Sinjido (신지도, 薪智島)
 
