@@ -12,6 +12,7 @@
     - [ObjectID](#neo.fs.v2.refs.ObjectID)
     - [OwnerID](#neo.fs.v2.refs.OwnerID)
     - [Signature](#neo.fs.v2.refs.Signature)
+    - [SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979)
     - [SubnetID](#neo.fs.v2.refs.SubnetID)
     - [Version](#neo.fs.v2.refs.Version)
     
@@ -148,7 +149,19 @@ Signature of something in NeoFS.
 | ----- | ---- | ----- | ----------- |
 | key | [bytes](#bytes) |  | Public key used for signing |
 | sign | [bytes](#bytes) |  | Signature |
-| scheme | [SignatureScheme](#neo.fs.v2.refs.SignatureScheme) |  | Scheme contains digital signature scheme identifier. |
+| scheme | [SignatureScheme](#neo.fs.v2.refs.SignatureScheme) |  | Scheme contains digital signature scheme identifier |
+
+
+<a name="neo.fs.v2.refs.SignatureRFC6979"></a>
+
+### Message SignatureRFC6979
+RFC 6979 signature.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [bytes](#bytes) |  | Public key used for signing |
+| sign | [bytes](#bytes) |  | Deterministic ECDSA with SHA-256 hashing |
 
 
 <a name="neo.fs.v2.refs.SubnetID"></a>
@@ -203,9 +216,8 @@ Signature scheme describes digital signing scheme used for (key, signature) pair
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| UNSPECIFIED | 0 | Unknown. The default interpretation depends on a particular structure type. |
-| ECDSA_SHA512 | 1 | ECDSA with SHA-512 hashing (FIPS 186-3). |
-| ECDSA_RFC6979_SHA256 | 2 | Deterministic ECDSA with SHA-256 hashing (RFC 6979) |
+| ECDSA_SHA512 | 0 | ECDSA with SHA-512 hashing (FIPS 186-3) |
+| ECDSA_RFC6979_SHA256 | 1 | Deterministic ECDSA with SHA-256 hashing (RFC 6979) |
 
 
  <!-- end enums -->

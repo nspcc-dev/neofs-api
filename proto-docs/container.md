@@ -259,7 +259,7 @@ smart contract, so signing algorithm must be supported by NeoVM.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container to delete from NeoFS |
-| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | `ContainerID` signed with the container owner's key according to RFC-6979. Signature scheme must be either UNSPECIFIED or ECDSA_RFC6979_SHA256. |
+| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | `ContainerID` signed with the container owner's key according to RFC-6979. |
 
 
 <a name="neo.fs.v2.container.DeleteResponse"></a>
@@ -332,7 +332,7 @@ container creation.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL requested, if available |
-| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. Signature scheme must be either UNSPECIFIED or ECDSA_RFC6979_SHA256. |
+| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
 | session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token if Extended ACL was set within a session |
 
 
@@ -383,7 +383,7 @@ was already verified on container creation.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container | [Container](#neo.fs.v2.container.Container) |  | Requested container structure |
-| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of a stable-marshalled container according to RFC-6979. Signature scheme must be either UNSPECIFIED or ECDSA_RFC6979_SHA256. |
+| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | Signature of a stable-marshalled container according to RFC-6979. |
 | session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token if the container was created within a session |
 
 
@@ -461,7 +461,7 @@ additional signature checks.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container | [Container](#neo.fs.v2.container.Container) |  | Container structure to register in NeoFS |
-| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of a stable-marshalled container according to RFC-6979. Signature scheme must be either UNSPECIFIED or ECDSA_RFC6979_SHA256. |
+| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | Signature of a stable-marshalled container according to RFC-6979. |
 
 
 <a name="neo.fs.v2.container.PutResponse"></a>
@@ -514,7 +514,7 @@ reference. It will be taken from `EACLTable.container_id` field.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL table to set for container |
-| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled Extended ACL table according to RFC-6979. Signature scheme must be either UNSPECIFIED or ECDSA_RFC6979_SHA256. |
+| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | Signature of stable-marshalled Extended ACL table according to RFC-6979. |
 
 
 <a name="neo.fs.v2.container.SetExtendedACLResponse"></a>
