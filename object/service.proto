@@ -19,6 +19,16 @@ service ObjectService {
   // be restored by concatenation of object message payload and all chunks
   // keeping the receiving order.
   //
+  // Extended headers can change `Get` behaviour:
+  // * __NEOFS__NETMAP_EPOCH \
+  //   Will use the requsted version of Network Map for object placement
+  //   calculation.
+  // * __NEOFS__NETMAP_LOOKUP_DEPTH \
+  //   Will try older versions of network map to find an object until the depth
+  //   limit reached.
+  //
+  // Please refer to detailed `XHeader` description.
+  //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
   //   object has been successfully read;
@@ -41,6 +51,13 @@ service ObjectService {
   // session package). Chunk messages are considered by server as a part of an
   // object payload. All messages, except first one, SHOULD be payload chunks.
   // Chunk messages SHOULD be sent in the direct order of fragmentation.
+  //
+  // Extended headers can change `Put` behaviour:
+  // * __NEOFS__NETMAP_EPOCH \
+  //   Will use the requsted version of Network Map for object placement
+  //   calculation.
+  //
+  // Please refer to detailed `XHeader` description.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
@@ -66,6 +83,13 @@ service ObjectService {
   // Delete the object from a container. There is no immediate removal
   // guarantee. Object will be marked for removal and deleted eventually.
   //
+  // Extended headers can change `Delete` behaviour:
+  // * __NEOFS__NETMAP_EPOCH \
+  //   Will use the requsted version of Network Map for object placement
+  //   calculation.
+  //
+  // Please refer to detailed `XHeader` description.
+  //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
   //   object has been successfully marked to be removed from the container;
@@ -83,6 +107,13 @@ service ObjectService {
   // Returns the object Headers without data payload. By default full header is
   // returned. If `main_only` request field is set, the short header with only
   // the very minimal information will be returned instead.
+  //
+  // Extended headers can change `Head` behaviour:
+  // * __NEOFS__NETMAP_EPOCH \
+  //   Will use the requsted version of Network Map for object placement
+  //   calculation.
+  //
+  // Please refer to detailed `XHeader` description.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
@@ -104,6 +135,13 @@ service ObjectService {
   // Header's filed values. Please see the corresponding NeoFS Technical
   // Specification section for more details.
   //
+  // Extended headers can change `Search` behaviour:
+  // * __NEOFS__NETMAP_EPOCH \
+  //   Will use the requsted version of Network Map for object placement
+  //   calculation.
+  //
+  // Please refer to detailed `XHeader` description.
+  //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
   //   objects have been successfully selected;
@@ -120,6 +158,16 @@ service ObjectService {
   // Like in `Get` method, the response uses gRPC stream. Requested range can be
   // restored by concatenation of all received payload chunks keeping the receiving
   // order.
+  //
+  // Extended headers can change `GetRange` behaviour:
+  // * __NEOFS__NETMAP_EPOCH \
+  //   Will use the requsted version of Network Map for object placement
+  //   calculation.
+  // * __NEOFS__NETMAP_LOOKUP_DEPTH \
+  //   Will try older versions of network map to find an object until the depth
+  //   limit reached.
+  //
+  // Please refer to detailed `XHeader` description.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
@@ -141,6 +189,16 @@ service ObjectService {
   // applying XOR operation with the provided `salt`. Ranges are set of (offset,
   // length) tuples. Hashes order in response corresponds to the ranges order in
   // the request. Note that hash is calculated for XORed data.
+  //
+  // Extended headers can change `GetRangeHash` behaviour:
+  // * __NEOFS__NETMAP_EPOCH \
+  //   Will use the requsted version of Network Map for object placement
+  //   calculation.
+  // * __NEOFS__NETMAP_LOOKUP_DEPTH \
+  //   Will try older versions of network map to find an object until the depth
+  //   limit reached.
+  //
+  // Please refer to detailed `XHeader` description.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
