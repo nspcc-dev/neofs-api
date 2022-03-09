@@ -11,6 +11,12 @@ import "refs/types.proto";
 // that require paid storage guarantees are gathered in `StorageGroups` with
 // additional information used for the proof of storage. `StorageGroup` only
 // contains objects from the same container.
+//
+// Being an object payload, StorageGroup may have expiration Epoch set with
+// `__NEOFS__EXPIRATION_EPOCH` well-known attribute. When expired, StorageGroup
+// will be ignored by InnerRing nodes during Data Audit cycles and will be
+// deleted by Storage Nodes.
+//
 message StorageGroup {
   // Total size of the payloads of objects in the storage group
   uint64 validation_data_size = 1 [json_name = "validationDataSize"];
@@ -20,8 +26,8 @@ message StorageGroup {
   // members in the `members` field.
   neo.fs.v2.refs.Checksum validation_hash = 2 [json_name = "validationHash"];
 
-  // Last NeoFS epoch number of the storage group lifetime
-  uint64 expiration_epoch = 3 [json_name = "expirationEpoch"];
+  // DEPRECATED. Last NeoFS epoch number of the storage group lifetime
+  uint64 expiration_epoch = 3 [json_name = "expirationEpoch", deprecated = true];
 
   // Strictly ordered list of storage group member objects
   repeated neo.fs.v2.refs.ObjectID members = 4 [json_name = "members"];
