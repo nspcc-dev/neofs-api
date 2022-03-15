@@ -116,6 +116,10 @@ enum SignatureScheme {
 
   // Deterministic ECDSA with SHA-256 hashing (RFC 6979)
   ECDSA_RFC6979_SHA256 = 1;
+
+  // Deterministic ECDSA with SHA-256 hashing using WalletConnect API.
+  // Here the algorithm is the same, but the message format differs.
+  ECDSA_RFC6979_SHA256_WALLET_CONNECT = 2;
 }
 
 // RFC 6979 signature.
