@@ -115,6 +115,9 @@ enum Object {
 
     // [**2052**] Object has been marked deleted.
     OBJECT_ALREADY_REMOVED = 4;
+
+    // [**2053**] Invalid range has been requested for an object.
+    OUT_OF_RANGE = 5;
 }
 
 // Section of statuses for container-related operations.

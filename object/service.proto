@@ -135,6 +135,8 @@ service ObjectService {
   //   provided session token has expired;
   // - **OBJECT_ALREADY_REMOVED** (2052, SECTION_OBJECT): \
   //   the requested object has been marked as deleted.
+  // - **OUT_OF_RANGE** (2053, SECTION_OBJECT): \
+  //   the requested range is out of bounds.
   rpc GetRange(GetRangeRequest) returns (stream GetRangeResponse);
 
   // Returns homomorphic or regular hash of object's payload range after
@@ -152,6 +154,8 @@ service ObjectService {
   //   access to operation RANGEHASH of the object is denied;
   // - **OBJECT_NOT_FOUND** (2049, SECTION_OBJECT): \
   //   object not found in container;
+  // - **OUT_OF_RANGE** (2053, SECTION_OBJECT): \
+  //   the requested range is out of bounds.
   // - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   //   provided session token has expired.
   rpc GetRangeHash(GetRangeHashRequest) returns (GetRangeHashResponse);
