@@ -10,7 +10,7 @@ import "refs/types.proto";
 // DataAuditResult keeps record of conducted Data Audits. The detailed report is
 // generated separately.
 message DataAuditResult {
-  // Data Audit Result format version. Effectively the version of API library
+  // Data Audit Result format version. Effectively, the version of API library
   // used to report DataAuditResult structure.
   neo.fs.v2.refs.Version version = 1 [json_name = "version"];
 
@@ -38,16 +38,16 @@ message DataAuditResult {
   // List of Storage Groups that failed audit PoR stage
   repeated neo.fs.v2.refs.ObjectID fail_sg = 9 [json_name = "failSG"];
 
-  // Number of sampled objects under audit placed in an optimal way according to
+  // Number of sampled objects under the audit placed in an optimal way according to
   // the containers placement policy when checking PoP
   uint32 hit = 10 [json_name = "hit"];
 
-  // Number of sampled objects under audit placed in suboptimal way according to
+  // Number of sampled objects under the audit placed in suboptimal way according to
   // the containers placement policy, but still at a satisfactory level when
   // checking PoP
   uint32 miss = 11 [json_name = "miss"];
 
-  // Number of sampled objects under audit stored in a way not confirming
+  // Number of sampled objects under the audit stored inconsistently with the
   // placement policy or not found at all when checking PoP
   uint32 fail = 12 [json_name = "fail"];
 

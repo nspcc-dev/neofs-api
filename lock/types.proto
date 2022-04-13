@@ -7,7 +7,7 @@ option csharp_namespace = "Neo.FileStorage.API.Lock";
 
 import "refs/types.proto";
 
-// Lock objects protects a list of objects from being deleted. Lifetime of the
+// Lock objects protects a list of objects from being deleted. The lifetime of a
 // lock object is limited similar to regular objects in
 // `__NEOFS__EXPIRATION_EPOCH` attribute.
 message Lock {

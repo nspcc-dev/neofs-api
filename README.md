@@ -29,7 +29,7 @@ This repository contains:
 Feel free to contribute to this project after reading the [contributing
 guidelines](CONTRIBUTING.md).
 
-Before starting to work on a certain topic, create a new issue first,
+Before you start working on a certain topic, first create a new issue
 describing the feature/topic you are going to implement.
 
 ## License

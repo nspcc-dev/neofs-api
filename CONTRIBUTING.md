@@ -44,8 +44,8 @@ $ git merge upstream/master
 ```
 
 ### Create your feature branch
-Before making code changes, make sure you create a separate branch for these
-changes. Maybe you will find it convenient to name branch in
+Before making code changes, make sure you have created a separate branch for these
+changes. Maybe you will find it convenient to name branch in the
 `<type>/<Issue>-<changes_topic>` format.
 
 ```sh
@@ -106,9 +106,9 @@ To sign your work, just add a line like this at the end of your commit message:
 Signed-off-by: Samii Sakisaka <samii@nspcc.ru>
 ```
 
-This can easily be done with the `--signoff` option to `git commit`.
+This can be done easily with the `--signoff` option to `git commit`.
 
-By doing this you state that you can certify the following (from [The Developer
+By doing this, you state that you can certify the following (from [The Developer
 Certificate of Origin](https://developercertificate.org/)):
 
 ```

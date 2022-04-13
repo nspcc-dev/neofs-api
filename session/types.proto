@@ -117,10 +117,10 @@ message SessionToken {
   neo.fs.v2.refs.Signature signature = 2 [json_name = "signature"];
 }
 
-// Extended headers for Request/Response. May contain any user-defined headers
+// Extended headers for Request/Response. They may contain any user-defined headers
 // to be interpreted on application level.
 //
-// Key name must be unique valid UTF-8 string. Value can't be empty. Requests or
+// Key name must be a unique valid UTF-8 string. Value can't be empty. Requests or
 // Responses with duplicated header names or headers with empty values will be
 // considered invalid.
 //
@@ -133,9 +133,9 @@ message SessionToken {
 //   current epoch only will be used.
 // * __NEOFS__NETMAP_LOOKUP_DEPTH \
 //   If object can't be found using current epoch's netmap, this header limits
-//   how many past epochs back the node can lookup. The `value` is string
-//   encoded `uint64` in decimal presentation. If set to '0' or not set, the
-//   current epoch only will be used.
+//   how many past epochs the node can look up through. The `value` is string
+//   encoded `uint64` in decimal presentation. If set to '0' or not set, only the
+//   current epoch will be used.
 message XHeader {
   // Key of the X-Header
   string key = 1 [json_name = "key"];
@@ -194,9 +194,9 @@ message ResponseMetaHeader {
   neo.fs.v2.status.Status status = 6 [json_name = "status"];
 }
 
-// Verification info for request signed by all intermediate nodes.
+// Verification info for the request signed by all intermediate nodes.
 message RequestVerificationHeader {
-  // Request Body signature. Should be generated once by request initiator.
+  // Request Body signature. Should be generated once by the request initiator.
   neo.fs.v2.refs.Signature body_signature = 1 [json_name = "bodySignature"];
   // Request Meta signature is added and signed by each intermediate node
   neo.fs.v2.refs.Signature meta_signature = 2 [json_name = "metaSignature"];
@@ -207,9 +207,9 @@ message RequestVerificationHeader {
   RequestVerificationHeader origin = 4 [json_name = "origin"];
 }
 
-// Verification info for response signed by all intermediate nodes
+// Verification info for the response signed by all intermediate nodes
 message ResponseVerificationHeader {
-  // Response Body signature. Should be generated once by answering node.
+  // Response Body signature. Should be generated once by an answering node.
   neo.fs.v2.refs.Signature body_signature = 1 [json_name = "bodySignature"];
   // Response Meta signature is added and signed by each intermediate node
   neo.fs.v2.refs.Signature meta_signature = 2 [json_name = "metaSignature"];

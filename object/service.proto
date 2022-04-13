@@ -10,14 +10,14 @@ import "refs/types.proto";
 import "session/types.proto";
 
 // `ObjectService` provides API for manipulating objects. Object operations do
-// not interact with sidechain and are only served by nodes in p2p style.
+// not affect the sidechain and are only served by nodes in p2p style.
 service ObjectService {
   // Receive full object structure, including Headers and payload. Response uses
-  // gRPC stream. First response message carries object with requested address.
+  // gRPC stream. First response message carries the object with the requested address.
   // Chunk messages are parts of the object's payload if it is needed. All
-  // messages, except the first one, carry payload chunks. Requested object can
+  // messages, except the first one, carry payload chunks. The requested object can
   // be restored by concatenation of object message payload and all chunks
-  // keeping receiving order.
+  // keeping the receiving order.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
@@ -40,7 +40,7 @@ service ObjectService {
   // SHOULD be set. Session token SHOULD be obtained before `PUT` operation (see
   // session package). Chunk messages are considered by server as a part of an
   // object payload. All messages, except first one, SHOULD be payload chunks.
-  // Chunk messages SHOULD be sent in direct order of fragmentation.
+  // Chunk messages SHOULD be sent in the direct order of fragmentation.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
@@ -82,7 +82,7 @@ service ObjectService {
 
   // Returns the object Headers without data payload. By default full header is
   // returned. If `main_only` request field is set, the short header with only
-  // the very minimal information would be returned instead.
+  // the very minimal information will be returned instead.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
@@ -118,7 +118,7 @@ service ObjectService {
 
   // Get byte range of data payload. Range is set as an (offset, length) tuple.
   // Like in `Get` method, the response uses gRPC stream. Requested range can be
-  // restored by concatenation of all received payload chunks keeping receiving
+  // restored by concatenation of all received payload chunks keeping the receiving
   // order.
   //
   // Statuses:
@@ -139,8 +139,8 @@ service ObjectService {
 
   // Returns homomorphic or regular hash of object's payload range after
   // applying XOR operation with the provided `salt`. Ranges are set of (offset,
-  // length) tuples. Hashes order in response corresponds to ranges order in
-  // request. Note that hash is calculated for XORed data.
+  // length) tuples. Hashes order in response corresponds to the ranges order in
+  // the request. Note that hash is calculated for XORed data.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
@@ -353,12 +353,12 @@ message HeadRequest {
   neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
-// Tuple of full object header and signature of `ObjectID`. \
+// Tuple of a full object header and signature of an `ObjectID`. \
 // Signed `ObjectID` is present to verify full header's authenticity through the
 // following steps:
 //
-// 1. Calculate `SHA-256` of marshalled `Header` structure
-// 2. Check if the resulting hash matched `ObjectID`
+// 1. Calculate `SHA-256` of the marshalled `Header` structure
+// 2. Check if the resulting hash matches `ObjectID`
 // 3. Check if `ObjectID` signature in `signature` field is correct
 message HeaderWithSignature {
   // Full object header
@@ -407,13 +407,13 @@ message SearchRequest {
 
     // Version of the Query Language used
     uint32 version = 2;
-    // Filter structure checks if object header field or attribute content
+    // Filter structure checks if the object header field or the attribute content
     // matches a value.
     //
-    // If no filters set, search request will return all objects of the
+    // If no filters are set, search request will return all objects of the
     // container, including Regular object, Tombstones and Storage Group
     // objects. Most human users expect to get only object they can directly
-    // work with. In that case the `$Object:ROOT` filter should be used.
+    // work with. In that case, `$Object:ROOT` filter should be used.
     //
     // By default `key` field refers to the corresponding object's `Attribute`.
     // Some Object's header fields can also be accessed by adding `$Object:`
@@ -446,10 +446,10 @@ message SearchRequest {
     // properties:
     //
     // * $Object:ROOT \
-    //   Returns only `REGULAR` type objects that are not split or are the top
+    //   Returns only `REGULAR` type objects that are not split or that are the top
     //   level root objects in a split hierarchy. This includes objects not
     //   present physically, like large objects split into smaller objects
-    //   without separate top-level root object. Other type objects like
+    //   without a separate top-level root object. Objects of other types like
     //   StorageGroups and Tombstones will not be shown. This filter may be
     //   useful for listing objects like `ls` command of some virtual file
     //   system. This filter is activated if the `key` exists, disregarding the

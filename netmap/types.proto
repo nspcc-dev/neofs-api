@@ -41,7 +41,7 @@ enum Operation {
 // just groups nodes into a bucket by attribute, selecting nodes only by their
 // hash distance.
 enum Clause {
-  // No modifier defined. Will select nodes from bucket randomly.
+  // No modifier defined. Nodes will be selected from the bucket randomly
   CLAUSE_UNSPECIFIED = 0;
 
   // SAME will select only nodes having the same value of bucket attribute
@@ -51,10 +51,10 @@ enum Clause {
   DISTINCT = 2;
 }
 
-// Filter will return the subset of nodes from `NetworkMap` or another filter's
-// results, that will satisfy filter's conditions.
+// This filter will return the subset of nodes from `NetworkMap` or another filter's
+// results that will satisfy filter's conditions.
 message Filter {
-  // Name of the filter or a reference to the named filter. '*' means
+  // Name of the filter or a reference to a named filter. '*' means
   // application to the whole unfiltered NetworkMap. At top level it's used as a
   // filter name. At lower levels it's considered to be a reference to another
   // named filter
@@ -86,7 +86,7 @@ message Selector {
   // Selector modifier showing how to form a bucket
   Clause clause = 3 [json_name = "clause"];
 
-  // Attribute bucket to select from
+  // Bucket attribute to select from
   string attribute = 4 [json_name = "attribute"];
 
   // Filter reference to select from
@@ -94,7 +94,7 @@ message Selector {
 }
 
 // Number of object replicas in a set of nodes from the defined selector. If no
-// selector set the root bucket containing all possible nodes will be used by
+// selector set, the root bucket containing all possible nodes will be used by
 // default.
 message Replica {
   // How many object replicas to put
@@ -204,7 +204,7 @@ message NodeInfo {
   //   automatically from `UN-LOCODE` attribute.
   //
   // For detailed description of each well-known attribute please see the
-  // corresponding section in NeoFS Technical specification.
+  // corresponding section in NeoFS Technical Specification.
   message Attribute {
     // Key of the node attribute
     string key = 1 [json_name = "key"];

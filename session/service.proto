@@ -13,7 +13,7 @@ import "session/types.proto";
 // attached in requests for further verification. Please see corresponding
 // section of NeoFS Technical Specification for details.
 service SessionService {
-  // Opens a new session between two peers.
+  // Open a new session between two peers.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS):
@@ -31,7 +31,7 @@ message CreateRequest {
     // Session expiration `Epoch`
     uint64 expiration = 2;
   }
-  // Body of create session token request message.
+  // Body of a create session token request message.
   Body body = 1;
 
   // Carries request meta information. Header data is used only to regulate

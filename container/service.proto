@@ -17,7 +17,7 @@ import "session/types.proto";
 service ContainerService {
   // `Put` invokes `Container` smart contract's `Put` method and returns
   // response immediately. After a new block is issued in sidechain, request is
-  // verified by Inner Ring nodes. After one more block in sidechain, container
+  // verified by Inner Ring nodes. After one more block in sidechain, the container
   // is added into smart contract storage.
   //
   // Statuses:
@@ -28,7 +28,7 @@ service ContainerService {
 
   // `Delete` invokes `Container` smart contract's `Delete` method and returns
   // response immediately. After a new block is issued in sidechain, request is
-  // verified by Inner Ring nodes. After one more block in sidechain, container
+  // verified by Inner Ring nodes. After one more block in sidechain, the container
   // is added into smart contract storage.
   //
   // Statuses:
@@ -56,7 +56,7 @@ service ContainerService {
   rpc List(ListRequest) returns (ListResponse);
 
   // Invokes 'SetEACL' method of 'Container` smart contract and returns response
-  // immediately. After one more block in sidechain, Extended ACL changes are
+  // immediately. After one more block in sidechain, changes in an Extended ACL are
   // added into smart contract storage.
   //
   // Statuses:
@@ -76,7 +76,7 @@ service ContainerService {
   //   container not found.
   rpc GetExtendedACL(GetExtendedACLRequest) returns (GetExtendedACLResponse);
 
-  // Announce container used space values for P2P synchronization.
+  // Announces the space values used by the container for P2P synchronization.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
@@ -117,7 +117,7 @@ message PutResponse {
   // Container put response body contains information about the newly registered
   // container as seen by `Container` smart contract. `ContainerID` can be
   // calculated beforehand from the container structure and compared to the one
-  // returned here to make sure everything was done as expected.
+  // returned here to make sure everything has been done as expected.
   message Body {
     // Unique identifier of the newly created container
     neo.fs.v2.refs.ContainerID container_id = 1;
@@ -137,8 +137,8 @@ message PutResponse {
 
 // Container removal request
 message DeleteRequest {
-  // Container removal request body has a signed `ContainerID` as a proof of
-  // container owner's intent. The signature will be verified by `Container`
+  // Container removal request body has signed `ContainerID` as a proof of
+  // the container owner's intent. The signature will be verified by `Container`
   // smart contract, so signing algorithm must be supported by NeoVM.
   message Body {
     // Identifier of the container to delete from NeoFS
@@ -202,7 +202,7 @@ message GetRequest {
 // Get container structure
 message GetResponse {
   // Get container response body does not have container structure signature. It
-  // was already verified on container creation.
+  // has been already verified upon container creation.
   message Body {
     // Requested container structure
     Container container = 1;
@@ -210,7 +210,7 @@ message GetResponse {
     // Signature of a stable-marshalled container according to RFC-6979.
     neo.fs.v2.refs.SignatureRFC6979 signature = 2;
 
-    // Session token if the container was created within a session
+    // Session token if the container has been created within the session
     neo.fs.v2.session.SessionToken session_token = 3;
   }
   // Body of container get response message.
@@ -272,7 +272,7 @@ message SetExtendedACLRequest {
   // Set Extended ACL request body does not have separate `ContainerID`
   // reference. It will be taken from `EACLTable.container_id` field.
   message Body {
-    // Extended ACL table to set for container
+    // Extended ACL table to set for the container
     neo.fs.v2.acl.EACLTable eacl = 1;
 
     // Signature of stable-marshalled Extended ACL table according to RFC-6979.
@@ -294,7 +294,7 @@ message SetExtendedACLRequest {
 // Set Extended ACL
 message SetExtendedACLResponse {
   // `SetExtendedACLResponse` has an empty body because the operation is
-  // asynchronous and update should be reflected in `Container` smart contract's
+  // asynchronous and the update should be reflected in `Container` smart contract's
   // storage after next block is issued in sidechain.
   message Body { }
 
@@ -334,9 +334,9 @@ message GetExtendedACLRequest {
 
 // Get Extended ACL
 message GetExtendedACLResponse {
-  // Get Extended ACL Response body can be empty if the requested container did
-  // not have Extended ACL Table attached or Extended ACL was not allowed at
-  // container creation.
+  // Get Extended ACL Response body can be empty if the requested container does
+  // not have Extended ACL Table attached or Extended ACL has not been allowed at
+  // the time of container creation.
   message Body {
     // Extended ACL requested, if available
     neo.fs.v2.acl.EACLTable eacl = 1;
@@ -364,21 +364,21 @@ message GetExtendedACLResponse {
 message AnnounceUsedSpaceRequest {
   // Container used space announcement body.
   message Body {
-    // Announcement contains used space information about single container.
+    // Announcement contains used space information for a single container.
     message Announcement {
-      // Epoch number for which container size estimation was produced.
+      // Epoch number for which the container size estimation was produced.
       uint64 epoch = 1;
 
       // Identifier of the container.
       neo.fs.v2.refs.ContainerID container_id = 2;
 
-      // Used space is a sum of object payload sizes of specified
+      // Used space is a sum of object payload sizes of a specified
       // container, stored in the node. It must not include inhumed objects.
       uint64 used_space = 3;
     }
 
-    // List of announcements. If nodes share several containers, then
-    // announcements transferred in a batch.
+    // List of announcements. If nodes share several containers,
+    // announcements are transferred in a batch.
     repeated Announcement announcements = 1;
   }
 
