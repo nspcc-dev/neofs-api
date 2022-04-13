@@ -1,25 +1,25 @@
 # Release instructions
 
-This documents outlines the neofs-api release process, and can be used as a TODO
+This documents outlines the neofs-api release process and can be used as a TODO
 list for a new release.
 
 ## Pre-release checks
 
-These should run successfully:
+This should run successfully:
 * `make lint`
 
 ## Pre-release actions
 
-These must be run:
+This must be run:
 * `make doc`
 
 ## Writing CHANGELOG
 
 Add an entry to the CHANGELOG.md following the style established there.
 
-Add a codename for releases with new major version, version and release date in
+Add a codename for releases with the new major version, version and release date in
 the heading. Write a paragraph describing the most significant changes done in
-this release. Then add sections with what was added, changed and removed,
+this release. Then add sections with what has been added, changed and removed,
 describing each change briefly with a reference to GitHub issues, where
 available.
 

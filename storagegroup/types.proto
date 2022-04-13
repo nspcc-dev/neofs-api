@@ -8,8 +8,8 @@ option csharp_namespace = "Neo.FileStorage.API.StorageGroup";
 import "refs/types.proto";
 
 // StorageGroup keeps verification information for Data Audit sessions. Objects
-// that require payed storage guaranties are gathered in `StorageGroups` with
-// additional information used for proof of storage. `StorageGroup` only
+// that require paid storage guarantees are gathered in `StorageGroups` with
+// additional information used for the proof of storage. `StorageGroup` only
 // contains objects from the same container.
 message StorageGroup {
   // Total size of the payloads of objects in the storage group

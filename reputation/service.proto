@@ -22,7 +22,7 @@ service ReputationService {
     // - Common failures (SECTION_FAILURE_COMMON).
     rpc AnnounceLocalTrust (AnnounceLocalTrustRequest) returns (AnnounceLocalTrustResponse);
 
-    // Announces the intermediate result of the iterative algorithm for
+    // Announce the intermediate result of the iterative algorithm for
     // calculating the global reputation of the node in NeoFS network.
     //
     // Statuses:
@@ -41,7 +41,7 @@ message AnnounceLocalTrustRequest {
 
         // List of normalized local trust values to other NeoFS nodes. The value
         // is calculated according to EigenTrust++ algorithm and must be a
-        // floating point number in the [0;1] range.
+        // floating point number in [0;1] range.
         repeated Trust trusts = 2;
     }
 
@@ -58,11 +58,11 @@ message AnnounceLocalTrustRequest {
     neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
-// Node's local trust information announce response.
+// Node's local trust information announcement response.
 message AnnounceLocalTrustResponse {
-    // Response to the node's local trust information announce has an empty body
+    // Response to the node's local trust information announcement has an empty body
     // because the trust exchange operation is asynchronous. If Trust information
-    // will not pass sanity checks it is silently ignored.
+    // does not pass sanity checks, it is silently ignored.
     message Body {
     }
 
@@ -106,11 +106,11 @@ message AnnounceIntermediateResultRequest {
     neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
-// Intermediate global trust information announce response.
+// Intermediate global trust information announcement response.
 message AnnounceIntermediateResultResponse {
-    // Response to the node's intermediate global trust information announce has
+    // Response to the node's intermediate global trust information announcement has
     // an empty body because the trust exchange operation is asynchronous. If
-    // Trust information will not pass sanity checks it is silently ignored.
+    // Trust information does not pass sanity checks, it is silently ignored.
     message Body {
     }
 

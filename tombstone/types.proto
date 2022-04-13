@@ -7,17 +7,17 @@ option csharp_namespace = "Neo.FileStorage.API.Tombstone";
 
 import "refs/types.proto";
 
-// Tombstone keeps record of deleted objects for few epochs until they are
+// Tombstone keeps record of deleted objects for a few epochs until they are
 // purged from the NeoFS network.
 message Tombstone {
-  // Last NeoFS epoch number of the tombstone lifetime. It's set by tombstone
-  // creator depending on current NeoFS network settings. Tombstone object
+  // Last NeoFS epoch number of the tombstone lifetime. It's set by the tombstone
+  // creator depending on the current NeoFS network settings. A tombstone object
   // must have the same expiration epoch value in `__NEOFS__EXPIRATION_EPOCH`
-  // attribute. Otherwise tombstone will be rejected by storage node.
+  // attribute. Otherwise, the tombstone will be rejected by a storage node.
   uint64 expiration_epoch = 1 [json_name = "expirationEpoch"];
 
   // 16 byte UUID used to identify the split object hierarchy parts. Must be
-  // unique inside container. All objects participating in the split must
+  // unique inside a container. All objects participating in the split must
   // have the same `split_id` value.
   bytes split_id = 2 [json_name = "splitID"];
 

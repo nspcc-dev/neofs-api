@@ -9,16 +9,16 @@ import "netmap/types.proto";
 import "refs/types.proto";
 import "session/types.proto";
 
-// `NetmapService` provides methods to work with `Network Map` and information
+// `NetmapService` provides methods to work with `Network Map` and the information
 // required to build it. The resulting `Network Map` is stored in sidechain
 // `Netmap` smart contract, while related information can be obtained from other
 // NeoFS nodes.
 service NetmapService {
-  // Get NodeInfo structure from the particular node directly. Node information
-  // can be taken from `Netmap` smart contract, but in some cases the one may
-  // want to get recent information directly, or to talk to the node not yet
-  // present in `Network Map` to find out what API version can be used for
-  // further communication. Can also be used to check if node is up and running.
+  // Get NodeInfo structure from the particular node directly. 
+  // Node information can be taken from `Netmap` smart contract. In some cases, though,
+  // one may want to get recent information directly or to talk to the node not yet
+  // present in the `Network Map` to find out what API version can be used for
+  // further communication. This can be also used to check if a node is up and running.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS):
@@ -35,7 +35,7 @@ service NetmapService {
   rpc NetworkInfo (NetworkInfoRequest) returns (NetworkInfoResponse);
 }
 
-// Get NodeInfo structure from the particular node directly
+// Get NodeInfo structure directly from a particular node
 message LocalNodeInfoRequest {
   // LocalNodeInfo request body is empty.
   message Body {
@@ -76,7 +76,7 @@ message LocalNodeInfoResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// Get NetworkInfo structure with the network view from particular node.
+// Get NetworkInfo structure with the network view from a particular node.
 message NetworkInfoRequest {
     // NetworkInfo request body is empty.
     message Body {
