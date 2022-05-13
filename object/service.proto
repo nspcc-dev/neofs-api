@@ -24,8 +24,9 @@ service ObjectService {
   //   Will use the requsted version of Network Map for object placement
   //   calculation.
   // * __NEOFS__NETMAP_LOOKUP_DEPTH \
-  //   Will try older versions of network map to find an object until the depth
-  //   limit reached.
+  //   Will try older versions (starting from `__NEOFS__NETMAP_EPOCH` if specified or
+  //   the latest one otherwise) of Network Map to find an object until the depth
+  //   limit is reached.
   //
   // Please refer to detailed `XHeader` description.
   //
@@ -164,8 +165,8 @@ service ObjectService {
   //   Will use the requsted version of Network Map for object placement
   //   calculation.
   // * __NEOFS__NETMAP_LOOKUP_DEPTH \
-  //   Will try older versions of network map to find an object until the depth
-  //   limit reached.
+  //   Will try older versions of Network Map to find an object until the depth
+  //   limit is reached.
   //
   // Please refer to detailed `XHeader` description.
   //
@@ -195,8 +196,8 @@ service ObjectService {
   //   Will use the requsted version of Network Map for object placement
   //   calculation.
   // * __NEOFS__NETMAP_LOOKUP_DEPTH \
-  //   Will try older versions of network map to find an object until the depth
-  //   limit reached.
+  //   Will try older versions of Network Map to find an object until the depth
+  //   limit is reached.
   //
   // Please refer to detailed `XHeader` description.
   //
