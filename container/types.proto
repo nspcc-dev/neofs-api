@@ -46,6 +46,12 @@ message Container {
   // * __NEOFS__ZONE \
   //   String of a zone for `__NEOFS__NAME`. Used as a TLD of a domain name in NNS
   //   contract. If no zone is specified, use default zone: `container`.
+  // * __NEOFS__DISABLE_HOMOMORPHIC_HASHING \
+  //   Disables homomorphic hashing for the container if the value equals "true" string.
+  //   Any other values are interpreted as missing attribute. Container could be
+  //   accepted in a NeoFS network only if the global network hashing configuration
+  //   value corresponds with that attribute's value. After container inclusion, network
+  //   setting is ignored.
   //
   // And some well-known attributes used by applications only:
   //
