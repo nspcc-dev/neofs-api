@@ -29,6 +29,6 @@ message StorageGroup {
   // DEPRECATED. Last NeoFS epoch number of the storage group lifetime
   uint64 expiration_epoch = 3 [json_name = "expirationEpoch", deprecated = true];
 
-  // Strictly ordered list of storage group member objects
+  // Strictly ordered list of storage group member objects. Members MUST be unique
   repeated neo.fs.v2.refs.ObjectID members = 4 [json_name = "members"];
 }
