@@ -95,6 +95,9 @@ enum CommonFail {
     //  - [**0**] Magic number of the served NeoFS network (big-endian 64-bit
     //  unsigned integer).
     WRONG_MAGIC_NUMBER = 1;
+
+    // [**1026**] Signature verification failure.
+    SIGNATURE_VERIFICATION_FAIL = 2;
 }
 
 // Section of statuses for object-related operations.
