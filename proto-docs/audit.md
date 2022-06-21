@@ -31,7 +31,7 @@ generated separately.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Data Audit Result format version. Effectively the version of API library used to report DataAuditResult structure. |
+| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Data Audit Result format version. Effectively, the version of API library used to report DataAuditResult structure. |
 | audit_epoch | [fixed64](#fixed64) |  | Epoch number when the Data Audit was conducted |
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Container under audit |
 | public_key | [bytes](#bytes) |  | Public key of the auditing InnerRing node in a binary format |
@@ -40,9 +40,9 @@ generated separately.
 | retries | [uint32](#uint32) |  | Number of retries done at PoR stage |
 | pass_sg | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | List of Storage Groups that passed audit PoR stage |
 | fail_sg | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | List of Storage Groups that failed audit PoR stage |
-| hit | [uint32](#uint32) |  | Number of sampled objects under audit placed in an optimal way according to the containers placement policy when checking PoP |
-| miss | [uint32](#uint32) |  | Number of sampled objects under audit placed in suboptimal way according to the containers placement policy, but still at a satisfactory level when checking PoP |
-| fail | [uint32](#uint32) |  | Number of sampled objects under audit stored in a way not confirming placement policy or not found at all when checking PoP |
+| hit | [uint32](#uint32) |  | Number of sampled objects under the audit placed in an optimal way according to the containers placement policy when checking PoP |
+| miss | [uint32](#uint32) |  | Number of sampled objects under the audit placed in suboptimal way according to the containers placement policy, but still at a satisfactory level when checking PoP |
+| fail | [uint32](#uint32) |  | Number of sampled objects under the audit stored inconsistently with the placement policy or not found at all when checking PoP |
 | pass_nodes | [bytes](#bytes) | repeated | List of storage node public keys that passed at least one PDP |
 | fail_nodes | [bytes](#bytes) | repeated | List of storage node public keys that failed at least one PDP |
 

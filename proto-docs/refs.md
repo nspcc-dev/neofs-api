@@ -35,7 +35,7 @@
 ### Message Address
 Objects in NeoFS are addressed by their ContainerID and ObjectID.
 
-String presentation of `Address` is the concatenation of string encoded
+String presentation of `Address` is a concatenation of string encoded
 `ContainerID` and `ObjectID` delimited by '/' character.
 
 
@@ -49,7 +49,7 @@ String presentation of `Address` is the concatenation of string encoded
 
 ### Message Checksum
 Checksum message.
-Depending on checksum algorithm type the string presentation may vary:
+Depending on checksum algorithm type, the string presentation may vary:
 
 * TZ \
   Hex encoded string without `0x` prefix
@@ -73,10 +73,10 @@ content-addressed.
 [SHA256](https://csrc.nist.gov/publications/detail/fips/180/4/final) hash of
 stable-marshalled container message.
 
-String presentation is
+String presentation is a
 [base58](https://tools.ietf.org/html/draft-msporny-base58-02) encoded string.
 
-JSON value will be the data encoded as a string using standard base64
+JSON value will be data encoded as a string using standard base64
 encoding with paddings. Either
 [standard](https://tools.ietf.org/html/rfc4648#section-4) or
 [URL-safe](https://tools.ietf.org/html/rfc4648#section-5) base64 encoding
@@ -92,17 +92,17 @@ with/without paddings are accepted.
 
 ### Message ObjectID
 NeoFS Object unique identifier. Objects are immutable and content-addressed.
-It means `ObjectID` will change if `header` or `payload` changes.
+It means `ObjectID` will change if the `header` or the `payload` changes.
 
 `ObjectID` is a 32 byte long
 [SHA256](https://csrc.nist.gov/publications/detail/fips/180/4/final) hash of
-object's `header` field, which, in it's turn, contains hash of object's
+the object's `header` field, which, in it's turn, contains the hash of the object's
 payload.
 
-String presentation is
+String presentation is a
 [base58](https://tools.ietf.org/html/draft-msporny-base58-02) encoded string.
 
-JSON value will be the data encoded as a string using standard base64
+JSON value will be data encoded as a string using standard base64
 encoding with paddings. Either
 [standard](https://tools.ietf.org/html/rfc4648#section-4) or
 [URL-safe](https://tools.ietf.org/html/rfc4648#section-5) base64 encoding
@@ -124,10 +124,10 @@ be directly used as `OwnerID`.
 `OwnerID` is a 25 bytes sequence starting with Neo version prefix byte
 followed by 20 bytes of ScrptHash and 4 bytes of checksum.
 
-String presentation is [Base58
+String presentation is a [Base58
 Check](https://en.bitcoin.it/wiki/Base58Check_encoding) Encoded string.
 
-JSON value will be the data encoded as a string using standard base64
+JSON value will be data encoded as a string using standard base64
 encoding with paddings. Either
 [standard](https://tools.ietf.org/html/rfc4648#section-4) or
 [URL-safe](https://tools.ietf.org/html/rfc4648#section-5) base64 encoding
@@ -171,7 +171,7 @@ NeoFS subnetwork identifier.
 
 String representation of a value is base-10 integer.
 
-JSON representation is an object containing single `value` number field.
+JSON representation is an object containing a single `value` number field.
 
 
 | Field | Type | Label | Description |
@@ -185,7 +185,7 @@ JSON representation is an object containing single `value` number field.
 API version used by a node.
 
 String presentation is a Semantic Versioning 2.0.0 compatible version string
-with 'v' prefix. I.e. `vX.Y`, where `X` - major number, `Y` - minor number.
+with 'v' prefix. i.e. `vX.Y`, where `X` is the major number, `Y` is the minor number.
 
 
 | Field | Type | Label | Description |
@@ -218,6 +218,7 @@ Signature scheme describes digital signing scheme used for (key, signature) pair
 | ---- | ------ | ----------- |
 | ECDSA_SHA512 | 0 | ECDSA with SHA-512 hashing (FIPS 186-3) |
 | ECDSA_RFC6979_SHA256 | 1 | Deterministic ECDSA with SHA-256 hashing (RFC 6979) |
+| ECDSA_RFC6979_SHA256_WALLET_CONNECT | 2 | Deterministic ECDSA with SHA-256 hashing using WalletConnect API. Here the algorithm is the same, but the message format differs. |
 
 
  <!-- end enums -->

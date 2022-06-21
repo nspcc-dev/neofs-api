@@ -69,7 +69,7 @@ local trust has been successfully announced;
 | AnnounceLocalTrust | [AnnounceLocalTrustRequest](#neo.fs.v2.reputation.AnnounceLocalTrustRequest) | [AnnounceLocalTrustResponse](#neo.fs.v2.reputation.AnnounceLocalTrustResponse) |
 #### Method AnnounceIntermediateResult
 
-Announces the intermediate result of the iterative algorithm for
+Announce the intermediate result of the iterative algorithm for
 calculating the global reputation of the node in NeoFS network.
 
 Statuses:
@@ -112,7 +112,7 @@ Announce intermediate global trust information.
 <a name="neo.fs.v2.reputation.AnnounceIntermediateResultResponse"></a>
 
 ### Message AnnounceIntermediateResultResponse
-Intermediate global trust information announce response.
+Intermediate global trust information announcement response.
 
 
 | Field | Type | Label | Description |
@@ -125,9 +125,9 @@ Intermediate global trust information announce response.
 <a name="neo.fs.v2.reputation.AnnounceIntermediateResultResponse.Body"></a>
 
 ### Message AnnounceIntermediateResultResponse.Body
-Response to the node's intermediate global trust information announce has
+Response to the node's intermediate global trust information announcement has
 an empty body because the trust exchange operation is asynchronous. If
-Trust information will not pass sanity checks it is silently ignored.
+Trust information does not pass sanity checks, it is silently ignored.
 
 
 
@@ -153,13 +153,13 @@ Announce node's local trust information.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | epoch | [uint64](#uint64) |  | Trust assessment Epoch number |
-| trusts | [Trust](#neo.fs.v2.reputation.Trust) | repeated | List of normalized local trust values to other NeoFS nodes. The value is calculated according to EigenTrust++ algorithm and must be a floating point number in the [0;1] range. |
+| trusts | [Trust](#neo.fs.v2.reputation.Trust) | repeated | List of normalized local trust values to other NeoFS nodes. The value is calculated according to EigenTrust++ algorithm and must be a floating point number in [0;1] range. |
 
 
 <a name="neo.fs.v2.reputation.AnnounceLocalTrustResponse"></a>
 
 ### Message AnnounceLocalTrustResponse
-Node's local trust information announce response.
+Node's local trust information announcement response.
 
 
 | Field | Type | Label | Description |
@@ -172,9 +172,9 @@ Node's local trust information announce response.
 <a name="neo.fs.v2.reputation.AnnounceLocalTrustResponse.Body"></a>
 
 ### Message AnnounceLocalTrustResponse.Body
-Response to the node's local trust information announce has an empty body
+Response to the node's local trust information announcement has an empty body
 because the trust exchange operation is asynchronous. If Trust information
-will not pass sanity checks it is silently ignored.
+does not pass sanity checks, it is silently ignored.
 
 
  <!-- end messages -->
@@ -200,7 +200,7 @@ Global trust level to NeoFS node.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Message format version. Effectively the version of API library used to create the message. |
+| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Message format version. Effectively, the version of API library used to create the message. |
 | body | [GlobalTrust.Body](#neo.fs.v2.reputation.GlobalTrust.Body) |  | Message body |
 | signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of the binary `body` field by the manager. |
 
@@ -220,13 +220,13 @@ Message body structure.
 <a name="neo.fs.v2.reputation.PeerID"></a>
 
 ### Message PeerID
-NeoFS unique peer identifier is 33 byte long compressed public key of the
+NeoFS unique peer identifier is a 33 byte long compressed public key of the
 node, the same as the one stored in the network map.
 
-String presentation is
+String presentation is a
 [base58](https://tools.ietf.org/html/draft-msporny-base58-02) encoded string.
 
-JSON value will be the data encoded as a string using standard base64
+JSON value will be data encoded as a string using standard base64
 encoding with paddings. Either
 [standard](https://tools.ietf.org/html/rfc4648#section-4) or
 [URL-safe](https://tools.ietf.org/html/rfc4648#section-5) base64 encoding
