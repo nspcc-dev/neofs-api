@@ -25,14 +25,14 @@
 <a name="neo.fs.v2.tombstone.Tombstone"></a>
 
 ### Message Tombstone
-Tombstone keeps record of deleted objects for few epochs until they are
+Tombstone keeps record of deleted objects for a few epochs until they are
 purged from the NeoFS network.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| expiration_epoch | [uint64](#uint64) |  | Last NeoFS epoch number of the tombstone lifetime. It's set by tombstone creator depending on current NeoFS network settings. Tombstone object must have the same expiration epoch value in `__NEOFS__EXPIRATION_EPOCH` attribute. Otherwise tombstone will be rejected by storage node. |
-| split_id | [bytes](#bytes) |  | 16 byte UUID used to identify the split object hierarchy parts. Must be unique inside container. All objects participating in the split must have the same `split_id` value. |
+| expiration_epoch | [uint64](#uint64) |  | Last NeoFS epoch number of the tombstone lifetime. It's set by the tombstone creator depending on the current NeoFS network settings. A tombstone object must have the same expiration epoch value in `__NEOFS__EXPIRATION_EPOCH` attribute. Otherwise, the tombstone will be rejected by a storage node. |
+| split_id | [bytes](#bytes) |  | 16 byte UUID used to identify the split object hierarchy parts. Must be unique inside a container. All objects participating in the split must have the same `split_id` value. |
 | members | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | List of objects to be deleted. |
 
  <!-- end messages -->

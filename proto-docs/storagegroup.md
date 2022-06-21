@@ -26,8 +26,8 @@
 
 ### Message StorageGroup
 StorageGroup keeps verification information for Data Audit sessions. Objects
-that require payed storage guaranties are gathered in `StorageGroups` with
-additional information used for proof of storage. `StorageGroup` only
+that require paid storage guarantees are gathered in `StorageGroups` with
+additional information used for the proof of storage. `StorageGroup` only
 contains objects from the same container.
 
 Being an object payload, StorageGroup may have expiration Epoch set with
@@ -41,7 +41,7 @@ deleted by Storage Nodes.
 | validation_data_size | [uint64](#uint64) |  | Total size of the payloads of objects in the storage group |
 | validation_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash from the concatenation of the payloads of the storage group members. The order of concatenation is the same as the order of the members in the `members` field. |
 | expiration_epoch | [uint64](#uint64) |  | DEPRECATED. Last NeoFS epoch number of the storage group lifetime |
-| members | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | Strictly ordered list of storage group member objects |
+| members | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | Strictly ordered list of storage group member objects. Members MUST be unique |
 
  <!-- end messages -->
 

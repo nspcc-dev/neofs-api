@@ -25,9 +25,10 @@
 <a name="neo.fs.v2.lock.Lock"></a>
 
 ### Message Lock
-Lock objects protects a list of objects from being deleted. Lifetime of the
+Lock objects protects a list of objects from being deleted. The lifetime of a
 lock object is limited similar to regular objects in
-`__NEOFS__EXPIRATION_EPOCH` attribute.
+`__NEOFS__EXPIRATION_EPOCH` attribute. Lock object MUST have expiration epoch.
+It is impossible to delete a lock object via ObjectService.Delete RPC call.
 
 
 | Field | Type | Label | Description |

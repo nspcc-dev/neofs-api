@@ -47,7 +47,7 @@
 <a name="neo.fs.v2.netmap.NetmapService"></a>
 
 ### Service "neo.fs.v2.netmap.NetmapService"
-`NetmapService` provides methods to work with `Network Map` and information
+`NetmapService` provides methods to work with `Network Map` and the information
 required to build it. The resulting `Network Map` is stored in sidechain
 `Netmap` smart contract, while related information can be obtained from other
 NeoFS nodes.
@@ -60,11 +60,11 @@ rpc NetworkInfo(NetworkInfoRequest) returns (NetworkInfoResponse);
 
 #### Method LocalNodeInfo
 
-Get NodeInfo structure from the particular node directly. Node information
-can be taken from `Netmap` smart contract, but in some cases the one may
-want to get recent information directly, or to talk to the node not yet
-present in `Network Map` to find out what API version can be used for
-further communication. Can also be used to check if node is up and running.
+Get NodeInfo structure from the particular node directly. 
+Node information can be taken from `Netmap` smart contract. In some cases, though,
+one may want to get recent information directly or to talk to the node not yet
+present in the `Network Map` to find out what API version can be used for
+further communication. This can be also used to check if a node is up and running.
 
 Statuses:
 - **OK** (0, SECTION_SUCCESS):
@@ -92,7 +92,7 @@ information about the current network state has been successfully read;
 <a name="neo.fs.v2.netmap.LocalNodeInfoRequest"></a>
 
 ### Message LocalNodeInfoRequest
-Get NodeInfo structure from the particular node directly
+Get NodeInfo structure directly from a particular node
 
 
 | Field | Type | Label | Description |
@@ -137,7 +137,7 @@ Local Node Info, including API Version in use.
 <a name="neo.fs.v2.netmap.NetworkInfoRequest"></a>
 
 ### Message NetworkInfoRequest
-Get NetworkInfo structure with the network view from particular node.
+Get NetworkInfo structure with the network view from a particular node.
 
 
 | Field | Type | Label | Description |
@@ -196,13 +196,13 @@ Information about the network.
 <a name="neo.fs.v2.netmap.Filter"></a>
 
 ### Message Filter
-Filter will return the subset of nodes from `NetworkMap` or another filter's
-results, that will satisfy filter's conditions.
+This filter will return the subset of nodes from `NetworkMap` or another filter's
+results that will satisfy filter's conditions.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Name of the filter or a reference to the named filter. '*' means application to the whole unfiltered NetworkMap. At top level it's used as a filter name. At lower levels it's considered to be a reference to another named filter |
+| name | [string](#string) |  | Name of the filter or a reference to a named filter. '*' means application to the whole unfiltered NetworkMap. At top level it's used as a filter name. At lower levels it's considered to be a reference to another named filter |
 | key | [string](#string) |  | Key to filter |
 | op | [Operation](#neo.fs.v2.netmap.Operation) |  | Filtering operation |
 | value | [string](#string) |  | Value to match |
@@ -332,7 +332,7 @@ explicitly set:
   automatically from `UN-LOCODE` attribute.
 
 For detailed description of each well-known attribute please see the
-corresponding section in NeoFS Technical specification.
+corresponding section in NeoFS Technical Specification.
 
 
 | Field | Type | Label | Description |
@@ -363,7 +363,7 @@ storage policy definition languages.
 
 ### Message Replica
 Number of object replicas in a set of nodes from the defined selector. If no
-selector set the root bucket containing all possible nodes will be used by
+selector set, the root bucket containing all possible nodes will be used by
 default.
 
 
@@ -385,7 +385,7 @@ to the provided `ContainerID` by hash distance.
 | name | [string](#string) |  | Selector name to reference in object placement section |
 | count | [uint32](#uint32) |  | How many nodes to select from the bucket |
 | clause | [Clause](#neo.fs.v2.netmap.Clause) |  | Selector modifier showing how to form a bucket |
-| attribute | [string](#string) |  | Attribute bucket to select from |
+| attribute | [string](#string) |  | Bucket attribute to select from |
 | filter | [string](#string) |  | Filter reference to select from |
 
  <!-- end messages -->
@@ -400,7 +400,7 @@ hash distance.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| CLAUSE_UNSPECIFIED | 0 | No modifier defined. Will select nodes from bucket randomly. |
+| CLAUSE_UNSPECIFIED | 0 | No modifier defined. Nodes will be selected from the bucket randomly |
 | SAME | 1 | SAME will select only nodes having the same value of bucket attribute |
 | DISTINCT | 2 | DISTINCT will select nodes having different values of bucket attribute |
 

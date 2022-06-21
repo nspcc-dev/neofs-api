@@ -56,7 +56,7 @@ rpc Create(CreateRequest) returns (CreateResponse);
 
 #### Method Create
 
-Opens a new session between two peers.
+Open a new session between two peers.
 
 Statuses:
 - **OK** (0, SECTION_SUCCESS):
@@ -77,7 +77,7 @@ Information necessary for opening a session.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [CreateRequest.Body](#neo.fs.v2.session.CreateRequest.Body) |  | Body of create session token request message. |
+| body | [CreateRequest.Body](#neo.fs.v2.session.CreateRequest.Body) |  | Body of a create session token request message. |
 | meta_header | [RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
 | verify_header | [RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
@@ -180,12 +180,12 @@ request meta headers are folded in matryoshka style.
 <a name="neo.fs.v2.session.RequestVerificationHeader"></a>
 
 ### Message RequestVerificationHeader
-Verification info for request signed by all intermediate nodes.
+Verification info for the request signed by all intermediate nodes.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request Body signature. Should be generated once by request initiator. |
+| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request Body signature. Should be generated once by the request initiator. |
 | meta_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request Meta signature is added and signed by each intermediate node |
 | origin_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of previous hops |
 | origin | [RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Chain of previous hops signatures |
@@ -210,12 +210,12 @@ Information about the response
 <a name="neo.fs.v2.session.ResponseVerificationHeader"></a>
 
 ### Message ResponseVerificationHeader
-Verification info for response signed by all intermediate nodes
+Verification info for the response signed by all intermediate nodes
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Response Body signature. Should be generated once by answering node. |
+| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Response Body signature. Should be generated once by an answering node. |
 | meta_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Response Meta signature is added and signed by each intermediate node |
 | origin_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of previous hops |
 | origin | [ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Chain of previous hops signatures |
@@ -265,10 +265,10 @@ Lifetime parameters of the token. Field names taken from rfc7519.
 <a name="neo.fs.v2.session.XHeader"></a>
 
 ### Message XHeader
-Extended headers for Request/Response. May contain any user-defined headers
+Extended headers for Request/Response. They may contain any user-defined headers
 to be interpreted on application level.
 
-Key name must be unique valid UTF-8 string. Value can't be empty. Requests or
+Key name must be a unique valid UTF-8 string. Value can't be empty. Requests or
 Responses with duplicated header names or headers with empty values will be
 considered invalid.
 
@@ -281,9 +281,9 @@ affect system behaviour:
   current epoch only will be used.
 * __NEOFS__NETMAP_LOOKUP_DEPTH \
   If object can't be found using current epoch's netmap, this header limits
-  how many past epochs back the node can lookup. The `value` is string
-  encoded `uint64` in decimal presentation. If set to '0' or not set, the
-  current epoch only will be used.
+  how many past epochs the node can look up through. The `value` is string
+  encoded `uint64` in decimal presentation. If set to '0' or not set, only the
+  current epoch will be used.
 
 
 | Field | Type | Label | Description |
