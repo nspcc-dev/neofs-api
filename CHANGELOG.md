@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.13.0] - 2022-06-21 - Yeonpyeongdo (연평도, 延坪島)
+
+### Added
+- Extended headers usage clarification (#204)
+- `OUT_OF_RANGE` status code to the `object` section (#208)
+- Disabling homomorphic hashing container setting (#217)
+- `LOCK` object behaviour clarification (#221)
+- Storage group members uniqueness constraint (#222)
+- WalletConnect signature scheme (#206)
+- `SIGNATURE_VERIFICATION_FAIL` status code to the `CommonFail` section (#225)
+
+### Deprecated
+- Storage group's expiration epoch field (#205)
+
+### Fixed
+- English language typos (#216)
+
 ## [2.12.0] - 2022-02-22 - Heuksando (흑산도, 黑山島)
 
 Network magic, main status codes, object locks and notifications.
@@ -447,3 +464,4 @@ Bump major release
 [2.10.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.9.1...v2.10.0
 [2.11.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.10.0...v2.11.0
 [2.12.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.11.0...v2.12.0
+[2.13.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.12.0...v2.13.0
