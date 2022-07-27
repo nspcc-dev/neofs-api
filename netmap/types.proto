@@ -238,6 +238,15 @@ message NodeInfo {
   State state = 4 [json_name = "state"];
 }
 
+// Network map structure
+message Netmap {
+    // Network map revision number.
+    uint64 epoch = 1 [json_name = "epoch"];
+
+    // Nodes presented in network.
+    repeated NodeInfo nodes = 2 [json_name = "nodes"];
+}
+
 // NeoFS network configuration
 message NetworkConfig {
   // Single configuration parameter
