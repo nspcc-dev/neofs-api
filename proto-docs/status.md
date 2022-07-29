@@ -100,6 +100,7 @@ Section of statuses for container-related operations.
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | CONTAINER_NOT_FOUND | 0 | [**3072**] Container not found. |
+| EACL_NOT_FOUND | 1 | [**3073**] eACL table not found. |
 
 
 

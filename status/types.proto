@@ -127,6 +127,9 @@ enum Object {
 enum Container {
     // [**3072**] Container not found.
     CONTAINER_NOT_FOUND = 0;
+
+    // [**3073**] eACL table not found.
+    EACL_NOT_FOUND = 1;
 }
 
 // Section of statuses for session-related operations.
