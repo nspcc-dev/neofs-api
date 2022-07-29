@@ -157,7 +157,9 @@ Statuses:
   container eACL has been successfully read;
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
-  container not found.
+  container not found;
+- **EACL_NOT_FOUND** (3073, SECTION_CONTAINER): \
+  eACL table not found.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
