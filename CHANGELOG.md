@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.13.1] - 2022-08-01
+
+### Added
+- `EACL_NOT_FOUND` status code to the `container` section (#230)
+
 ## [2.13.0] - 2022-06-21 - Yeonpyeongdo (연평도, 延坪島)
 
 ### Added
@@ -465,3 +470,4 @@ Bump major release
 [2.11.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.10.0...v2.11.0
 [2.12.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.11.0...v2.12.0
 [2.13.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.12.0...v2.13.0
+[2.13.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.13.0...v2.13.1
