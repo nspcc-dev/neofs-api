@@ -232,6 +232,9 @@ message NodeInfo {
 
     // Network unavailable state
     OFFLINE = 2;
+
+    // Maintenance state
+    MAINTENANCE = 3;
   }
 
   // Carries state of the NeoFS node
