@@ -98,6 +98,9 @@ enum CommonFail {
 
     // [**1026**] Signature verification failure.
     SIGNATURE_VERIFICATION_FAIL = 2;
+
+    // [**1027**] Node is under maintenance.
+    NODE_UNDER_MAINTENANCE = 3;
 }
 
 // Section of statuses for object-related operations.
