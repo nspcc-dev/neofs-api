@@ -40,14 +40,21 @@ message ObjectSessionContext {
   // Type of request for which the token is issued
   Verb verb = 1 [json_name = "verb"];
 
-  // Objects involved in the session. `address` MUST be set.
-  // `container_id` field indicates which container the session is spread to.
-  // `container_id` MUST be correctly filled and set.
-  // `object_id` field indicates which objects in the specified container the
-  // session is spread to. `object_id` MUST be correctly filled or unset.
-  // If `object_id` field is set, then the session applies only to this object,
-  // otherwise, to all objects of the specified container.
-  neo.fs.v2.refs.Address address = 2 [json_name = "address"];
+  // Carries objects involved in the object session.
+  message Target {
+    // Indicates which container the session is spread to. Field MUST be set
+    // and correct.
+    refs.ContainerID container = 1 [json_name = "container"];
+
+    // Indicates which objects the session is spread to. Objects are expected
+    // to be stored in the NeoFS container referenced by `container` field.
+    // Each element MUST have correct format.
+    repeated refs.ObjectID objects = 2 [json_name = "objects"];
+  }
+  // Object session target. MUST be correctly formed and set. If `objects`
+  // field is not empty, then the session applies only to these elements,
+  // otherwise, to all objects from the specified container.
+  Target target = 2 [json_name = "target"];
 }
 
 // Context information for Session Tokens related to ContainerService requests.
