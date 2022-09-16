@@ -40,7 +40,13 @@ message ObjectSessionContext {
   // Type of request for which the token is issued
   Verb verb = 1 [json_name = "verb"];
 
-  // Related Object address
+  // Objects involved in the session. `address` MUST be set.
+  // `container_id` field indicates which container the session is spread to.
+  // `container_id` MUST be correctly filled and set.
+  // `object_id` field indicates which objects in the specified container the
+  // session is spread to. `object_id` MUST be correctly filled or unset.
+  // If `object_id` field is set, then the session applies only to this object,
+  // otherwise, to all objects of the specified container.
   neo.fs.v2.refs.Address address = 2 [json_name = "address"];
 }
 
