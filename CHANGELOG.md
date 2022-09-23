@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.14.0] - 2022-09-23 - Anmado (안마도, 鞍馬島)
+
+### Added
+- `NetmapSnapsot` RPC to `netmap.NetmapService` (#228)
+- Well-known object attribute `FilePath` of `object.Header.Attribute` (#238)
+- `MAINTENANCE` value of `netmap.NodeInfo.State` enum (#237)
+- `NODE_UNDER_MAINTENANCE` code to `status.CommonFail` status section (#237)
+- Well-known node attribute `ExternalAddr` of `netmap.NodeInfo.Attribute` (#235)
+
+### Changed
+- Object session can be issued for a group of objects (#202)
+- System network parameters are explicitly declared in `NetworkConfig.Parameter` (#214)
+
 ## [2.13.1] - 2022-08-01
 
 ### Added
@@ -471,3 +484,4 @@ Bump major release
 [2.12.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.11.0...v2.12.0
 [2.13.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.12.0...v2.13.0
 [2.13.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.13.0...v2.13.1
+[2.14.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.13.1...v2.14.0
