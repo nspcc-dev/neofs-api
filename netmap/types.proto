@@ -252,7 +252,47 @@ message Netmap {
 
 // NeoFS network configuration
 message NetworkConfig {
-  // Single configuration parameter
+  // Single configuration parameter. Key MUST be network-unique.
+  //
+  // System parameters:
+  // - **AuditFee** \
+  //   Fee paid by the storage group owner to the Inner Ring member.
+  //   Value: little-endian integer. Default: 0.
+  // - **BasicIncomeRate** \
+  //   Cost of storing one gigabyte of data for a period of one epoch. Paid by
+  //   container owner to container nodes.
+  //   Value: little-endian integer. Default: 0.
+  // - **ContainerAliasFee** \
+  //   Fee paid for named container's creation by the container owner.
+  //   Value: little-endian integer. Default: 0.
+  // - **ContainerFee** \
+  //   Fee paid for container creation by the container owner.
+  //   Value: little-endian integer. Default: 0.
+  // - **EigenTrustAlpha** \
+  //   Alpha parameter of EigenTrust algorithm used in the Reputation system.
+  //   Value: decimal floating-point number in UTF-8 string representation.
+  //   Default: 0.
+  // - **EigenTrustIterations** \
+  //   Number of EigenTrust algorithm iterations to pass in the Reputation system.
+  //   Value: little-endian integer. Default: 0.
+  // - **EpochDuration** \
+  //   NeoFS epoch duration measured in Sidechain blocks.
+  //   Value: little-endian integer. Default: 0.
+  // - **HomomorphicHashingDisabled** \
+  //   Flag of disabling the homomorphic hashing of objects' payload.
+  //   Value: true if any byte != 0. Default: false.
+  // - **InnerRingCandidateFee** \
+  //   Fee for entrance to the Inner Ring paid by the candidate.
+  //   Value: little-endian integer. Default: 0.
+  // - **MaintenanceModeAllowed** \
+  //   Flag allowing setting the MAINTENANCE state to storage nodes.
+  //   Value: true if any byte != 0. Default: false.
+  // - **MaxObjectSize** \
+  //   Maximum size of physically stored NeoFS object measured in bytes.
+  //   Value: little-endian integer. Default: 0.
+  // - **WithdrawFee** \
+  //   Fee paid for withdrawal of funds paid by the account owner.
+  //   Value: little-endian integer. Default: 0.
   message Parameter {
     // Parameter key. UTF-8 encoded string
     bytes key = 1 [json_name = "key"];
