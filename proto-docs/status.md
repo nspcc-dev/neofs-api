@@ -89,6 +89,7 @@ Section of failed statuses independent of the operation.
 | INTERNAL | 0 | [**1024**] Internal server error, default failure. Not detailed. If the server cannot match failed outcome to the code, it should use this code. |
 | WRONG_MAGIC_NUMBER | 1 | [**1025**] Wrong magic of the NeoFS network. Details: - [**0**] Magic number of the served NeoFS network (big-endian 64-bit unsigned integer). |
 | SIGNATURE_VERIFICATION_FAIL | 2 | [**1026**] Signature verification failure. |
+| NODE_UNDER_MAINTENANCE | 3 | [**1027**] Node is under maintenance. |
 
 
 

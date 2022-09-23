@@ -12,6 +12,10 @@
     - [LocalNodeInfoRequest.Body](#neo.fs.v2.netmap.LocalNodeInfoRequest.Body)
     - [LocalNodeInfoResponse](#neo.fs.v2.netmap.LocalNodeInfoResponse)
     - [LocalNodeInfoResponse.Body](#neo.fs.v2.netmap.LocalNodeInfoResponse.Body)
+    - [NetmapSnapshotRequest](#neo.fs.v2.netmap.NetmapSnapshotRequest)
+    - [NetmapSnapshotRequest.Body](#neo.fs.v2.netmap.NetmapSnapshotRequest.Body)
+    - [NetmapSnapshotResponse](#neo.fs.v2.netmap.NetmapSnapshotResponse)
+    - [NetmapSnapshotResponse.Body](#neo.fs.v2.netmap.NetmapSnapshotResponse.Body)
     - [NetworkInfoRequest](#neo.fs.v2.netmap.NetworkInfoRequest)
     - [NetworkInfoRequest.Body](#neo.fs.v2.netmap.NetworkInfoRequest.Body)
     - [NetworkInfoResponse](#neo.fs.v2.netmap.NetworkInfoResponse)
@@ -22,6 +26,7 @@
 
   - Messages
     - [Filter](#neo.fs.v2.netmap.Filter)
+    - [Netmap](#neo.fs.v2.netmap.Netmap)
     - [NetworkConfig](#neo.fs.v2.netmap.NetworkConfig)
     - [NetworkConfig.Parameter](#neo.fs.v2.netmap.NetworkConfig.Parameter)
     - [NetworkInfo](#neo.fs.v2.netmap.NetworkInfo)
@@ -55,6 +60,7 @@ NeoFS nodes.
 ```
 rpc LocalNodeInfo(LocalNodeInfoRequest) returns (LocalNodeInfoResponse);
 rpc NetworkInfo(NetworkInfoRequest) returns (NetworkInfoResponse);
+rpc NetmapSnapshot(NetmapSnapshotRequest) returns (NetmapSnapshotResponse);
 
 ```
 
@@ -86,6 +92,18 @@ information about the current network state has been successfully read;
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | NetworkInfo | [NetworkInfoRequest](#neo.fs.v2.netmap.NetworkInfoRequest) | [NetworkInfoResponse](#neo.fs.v2.netmap.NetworkInfoResponse) |
+#### Method NetmapSnapshot
+
+Returns network map snapshot of the current NeoFS epoch.
+
+Statuses:
+- **OK** (0, SECTION_SUCCESS):
+information about the current network map has been successfully read;
+- Common failures (SECTION_FAILURE_COMMON).
+
+| Name | Input | Output |
+| ---- | ----- | ------ |
+| NetmapSnapshot | [NetmapSnapshotRequest](#neo.fs.v2.netmap.NetmapSnapshotRequest) | [NetmapSnapshotResponse](#neo.fs.v2.netmap.NetmapSnapshotResponse) |
  <!-- end services -->
 
 
@@ -132,6 +150,50 @@ Local Node Info, including API Version in use.
 | ----- | ---- | ----- | ----------- |
 | version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Latest NeoFS API version in use |
 | node_info | [NodeInfo](#neo.fs.v2.netmap.NodeInfo) |  | NodeInfo structure with recent information from node itself |
+
+
+<a name="neo.fs.v2.netmap.NetmapSnapshotRequest"></a>
+
+### Message NetmapSnapshotRequest
+Get netmap snapshot request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [NetmapSnapshotRequest.Body](#neo.fs.v2.netmap.NetmapSnapshotRequest.Body) |  | Body of get netmap snapshot request message. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="neo.fs.v2.netmap.NetmapSnapshotRequest.Body"></a>
+
+### Message NetmapSnapshotRequest.Body
+Get netmap snapshot request body.
+
+
+
+<a name="neo.fs.v2.netmap.NetmapSnapshotResponse"></a>
+
+### Message NetmapSnapshotResponse
+Response with current netmap snapshot
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [NetmapSnapshotResponse.Body](#neo.fs.v2.netmap.NetmapSnapshotResponse.Body) |  | Body of get netmap snapshot response message. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect response execution. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="neo.fs.v2.netmap.NetmapSnapshotResponse.Body"></a>
+
+### Message NetmapSnapshotResponse.Body
+Get netmap snapshot response body
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| netmap | [Netmap](#neo.fs.v2.netmap.Netmap) |  | Structure of the requested network map. |
 
 
 <a name="neo.fs.v2.netmap.NetworkInfoRequest"></a>
@@ -209,6 +271,18 @@ results that will satisfy filter's conditions.
 | filters | [Filter](#neo.fs.v2.netmap.Filter) | repeated | List of inner filters. Top level operation will be applied to the whole list. |
 
 
+<a name="neo.fs.v2.netmap.Netmap"></a>
+
+### Message Netmap
+Network map structure
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| epoch | [uint64](#uint64) |  | Network map revision number. |
+| nodes | [NodeInfo](#neo.fs.v2.netmap.NodeInfo) | repeated | Nodes presented in network. |
+
+
 <a name="neo.fs.v2.netmap.NetworkConfig"></a>
 
 ### Message NetworkConfig
@@ -223,7 +297,47 @@ NeoFS network configuration
 <a name="neo.fs.v2.netmap.NetworkConfig.Parameter"></a>
 
 ### Message NetworkConfig.Parameter
-Single configuration parameter
+Single configuration parameter. Key MUST be network-unique.
+
+System parameters:
+- **AuditFee** \
+  Fee paid by the storage group owner to the Inner Ring member.
+  Value: little-endian integer. Default: 0.
+- **BasicIncomeRate** \
+  Cost of storing one gigabyte of data for a period of one epoch. Paid by
+  container owner to container nodes.
+  Value: little-endian integer. Default: 0.
+- **ContainerAliasFee** \
+  Fee paid for named container's creation by the container owner.
+  Value: little-endian integer. Default: 0.
+- **ContainerFee** \
+  Fee paid for container creation by the container owner.
+  Value: little-endian integer. Default: 0.
+- **EigenTrustAlpha** \
+  Alpha parameter of EigenTrust algorithm used in the Reputation system.
+  Value: decimal floating-point number in UTF-8 string representation.
+  Default: 0.
+- **EigenTrustIterations** \
+  Number of EigenTrust algorithm iterations to pass in the Reputation system.
+  Value: little-endian integer. Default: 0.
+- **EpochDuration** \
+  NeoFS epoch duration measured in Sidechain blocks.
+  Value: little-endian integer. Default: 0.
+- **HomomorphicHashingDisabled** \
+  Flag of disabling the homomorphic hashing of objects' payload.
+  Value: true if any byte != 0. Default: false.
+- **InnerRingCandidateFee** \
+  Fee for entrance to the Inner Ring paid by the candidate.
+  Value: little-endian integer. Default: 0.
+- **MaintenanceModeAllowed** \
+  Flag allowing setting the MAINTENANCE state to storage nodes.
+  Value: true if any byte != 0. Default: false.
+- **MaxObjectSize** \
+  Maximum size of physically stored NeoFS object measured in bytes.
+  Value: little-endian integer. Default: 0.
+- **WithdrawFee** \
+  Fee paid for withdrawal of funds paid by the account owner.
+  Value: little-endian integer. Default: 0.
 
 
 | Field | Type | Label | Description |
@@ -330,6 +444,10 @@ explicitly set:
   Node's continent name according to the [Seven-Continent model]
   (https://en.wikipedia.org/wiki/Continent#Number). Calculated
   automatically from `UN-LOCODE` attribute.
+* ExternalAddr
+  Node's preferred way for communications with external clients.
+  Clients SHOULD use these addresses if possible.
+  Must contain a comma-separated list of multi-addresses.
 
 For detailed description of each well-known attribute please see the
 corresponding section in NeoFS Technical Specification.
@@ -416,6 +534,7 @@ Represents the enumeration of various states of the NeoFS node.
 | UNSPECIFIED | 0 | Unknown state |
 | ONLINE | 1 | Active state in the network |
 | OFFLINE | 2 | Network unavailable state |
+| MAINTENANCE | 3 | Maintenance state |
 
 
 

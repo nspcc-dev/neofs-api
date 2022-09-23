@@ -19,6 +19,7 @@
   - Messages
     - [ContainerSessionContext](#neo.fs.v2.session.ContainerSessionContext)
     - [ObjectSessionContext](#neo.fs.v2.session.ObjectSessionContext)
+    - [ObjectSessionContext.Target](#neo.fs.v2.session.ObjectSessionContext.Target)
     - [RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader)
     - [RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader)
     - [ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader)
@@ -155,7 +156,19 @@ Context information for Session Tokens related to ObjectService requests
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | verb | [ObjectSessionContext.Verb](#neo.fs.v2.session.ObjectSessionContext.Verb) |  | Type of request for which the token is issued |
-| address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Related Object address |
+| target | [ObjectSessionContext.Target](#neo.fs.v2.session.ObjectSessionContext.Target) |  | Object session target. MUST be correctly formed and set. If `objects` field is not empty, then the session applies only to these elements, otherwise, to all objects from the specified container. |
+
+
+<a name="neo.fs.v2.session.ObjectSessionContext.Target"></a>
+
+### Message ObjectSessionContext.Target
+Carries objects involved in the object session.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| container | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Indicates which container the session is spread to. Field MUST be set and correct. |
+| objects | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | Indicates which objects the session is spread to. Objects are expected to be stored in the NeoFS container referenced by `container` field. Each element MUST have correct format. |
 
 
 <a name="neo.fs.v2.session.RequestMetaHeader"></a>

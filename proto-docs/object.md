@@ -107,16 +107,16 @@ Statuses:
 - **OK** (0, SECTION_SUCCESS): \
   object has been successfully read;
 - Common failures (SECTION_FAILURE_COMMON);
-- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
-  object container not found;
 - **ACCESS_DENIED** (2048, SECTION_OBJECT): \
   read access to the object is denied;
 - **OBJECT_NOT_FOUND** (2049, SECTION_OBJECT): \
   object not found in container;
-- **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
-  provided session token has expired;
 - **OBJECT_ALREADY_REMOVED** (2052, SECTION_OBJECT): \
-  the requested object has been marked as deleted.
+  the requested object has been marked as deleted;
+- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
+  object container not found;
+- **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
+  provided session token has expired.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -141,6 +141,8 @@ Statuses:
 - **OK** (0, SECTION_SUCCESS): \
   object has been successfully saved in the container;
 - Common failures (SECTION_FAILURE_COMMON);
+- **ACCESS_DENIED** (2048, SECTION_OBJECT): \
+  write access to the container is denied;
 - **LOCKED** (2050, SECTION_OBJECT): \
   placement of an object of type TOMBSTONE that includes at least one locked
   object is prohibited;
@@ -149,8 +151,6 @@ Statuses:
   type other than REGULAR is prohibited;
 - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   object storage container not found;
-- **ACCESS_DENIED** (2048, SECTION_OBJECT): \
-  write access to the container is denied;
 - **TOKEN_NOT_FOUND** (4096, SECTION_SESSION): \
   (for trusted object preparation) session private key does not exist or has
 been deleted;
@@ -176,12 +176,12 @@ Statuses:
 - **OK** (0, SECTION_SUCCESS): \
   object has been successfully marked to be removed from the container;
 - Common failures (SECTION_FAILURE_COMMON);
+- **ACCESS_DENIED** (2048, SECTION_OBJECT): \
+  delete access to the object is denied;
 - **LOCKED** (2050, SECTION_OBJECT): \
   deleting a locked object is prohibited;
 - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   object container not found;
-- **ACCESS_DENIED** (2048, SECTION_OBJECT): \
-  delete access to the object is denied;
 - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   provided session token has expired.
 
@@ -205,16 +205,16 @@ Statuses:
 - **OK** (0, SECTION_SUCCESS): \
   object header has been successfully read;
 - Common failures (SECTION_FAILURE_COMMON);
-- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
-  object container not found;
 - **ACCESS_DENIED** (2048, SECTION_OBJECT): \
   access to operation HEAD of the object is denied;
 - **OBJECT_NOT_FOUND** (2049, SECTION_OBJECT): \
   object not found in container;
-- **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
-  provided session token has expired;
 - **OBJECT_ALREADY_REMOVED** (2052, SECTION_OBJECT): \
-  the requested object has been marked as deleted.
+  the requested object has been marked as deleted;
+- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
+  object container not found;
+- **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
+  provided session token has expired.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -236,10 +236,10 @@ Statuses:
 - **OK** (0, SECTION_SUCCESS): \
   objects have been successfully selected;
 - Common failures (SECTION_FAILURE_COMMON);
-- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
-  search container not found;
 - **ACCESS_DENIED** (2048, SECTION_OBJECT): \
   access to operation SEARCH of the object is denied;
+- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
+  search container not found;
 - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   provided session token has expired.
 
@@ -267,18 +267,18 @@ Statuses:
 - **OK** (0, SECTION_SUCCESS): \
   data range of the object payload has been successfully read;
 - Common failures (SECTION_FAILURE_COMMON);
-- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
-  object container not found;
 - **ACCESS_DENIED** (2048, SECTION_OBJECT): \
   access to operation RANGE of the object is denied;
 - **OBJECT_NOT_FOUND** (2049, SECTION_OBJECT): \
   object not found in container;
-- **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
-  provided session token has expired;
 - **OBJECT_ALREADY_REMOVED** (2052, SECTION_OBJECT): \
   the requested object has been marked as deleted.
 - **OUT_OF_RANGE** (2053, SECTION_OBJECT): \
-  the requested range is out of bounds.
+  the requested range is out of bounds;
+- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
+  object container not found;
+- **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
+  provided session token has expired.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -304,14 +304,14 @@ Statuses:
 - **OK** (0, SECTION_SUCCESS): \
   data range of the object payload has been successfully hashed;
 - Common failures (SECTION_FAILURE_COMMON);
-- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
-  object container not found;
 - **ACCESS_DENIED** (2048, SECTION_OBJECT): \
   access to operation RANGEHASH of the object is denied;
 - **OBJECT_NOT_FOUND** (2049, SECTION_OBJECT): \
   object not found in container;
 - **OUT_OF_RANGE** (2053, SECTION_OBJECT): \
-  the requested range is out of bounds.
+  the requested range is out of bounds;
+- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
+  object container not found;
 - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   provided session token has expired.
 
@@ -869,6 +869,13 @@ And some well-known attributes used by applications only:
   Human-friendly name
 * FileName \
   File name to be associated with the object on saving
+* FilePath \
+  Full path to be associated with the object on saving. Should start with a
+  '/' and use '/' as a delimiting symbol. Trailing '/' should be
+  interpreted as a virtual directory marker. If an object has conflicting
+  FilePath and FileName, FilePath should have higher priority, because it
+  is used to construct the directory tree. FilePath with trailing '/' and
+  non-empty FileName attribute should not be used together.
 * Timestamp \
   User-defined local time of object creation in Unix Timestamp format
 * Content-Type \

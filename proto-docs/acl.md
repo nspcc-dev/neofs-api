@@ -118,7 +118,7 @@ prefix to the name. Here is the list of fields available via this prefix:
 * $Object:homomorphicHash \
   homomorphic_hash
 
-Please note, that if request or response does not have object's headers or
+Please note, that if request or response does not have object's headers of
 full object (Range, RangeHash, Search, Delete), it will not be possible to
 filter by object header fields or user attributes. From the well-known list
 only `$Object:objectID` and `$Object:containerID` will be available, as
