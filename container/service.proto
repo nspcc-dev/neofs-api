@@ -47,7 +47,8 @@ service ContainerService {
   //   requested container not found.
   rpc Get(GetRequest) returns (GetResponse);
 
-  // Returns all owner's containers from 'Container` smart contract' storage.
+  // Returns all owner's containers from 'Container` smart contract' storage if owner is set in request.
+  // Otherwise returns all containers.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
@@ -232,7 +233,7 @@ message GetResponse {
 message ListRequest {
   // List containers request body.
   message Body {
-    // Identifier of the container owner
+    // Identifier of the container owner. Possible to leave it empty.
     neo.fs.v2.refs.OwnerID owner_id = 1;
   }
   // Body of list containers request message
