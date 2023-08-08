@@ -448,6 +448,8 @@ explicitly set:
   Node's preferred way for communications with external clients.
   Clients SHOULD use these addresses if possible.
   Must contain a comma-separated list of multi-addresses.
+* Version
+  Node implementation's version in a free string form.
 
 For detailed description of each well-known attribute please see the
 corresponding section in NeoFS Technical Specification.
