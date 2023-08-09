@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- Well-known `Version` node attribute (#267)
+
 ## [2.14.0] - 2022-09-23 - Anmado (안마도, 鞍馬島)
 
 ### Added
@@ -485,3 +490,4 @@ Bump major release
 [2.13.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.12.0...v2.13.0
 [2.13.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.13.0...v2.13.1
 [2.14.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.13.1...v2.14.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.14.0...master
