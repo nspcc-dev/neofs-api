@@ -5,6 +5,9 @@
 ### Added
 - Well-known `Version` node attribute (#267)
 
+### Removed
+- Redundant object system attribute `__NEOFS__UPLOAD_ID` (#271)
+
 ## [2.14.0] - 2022-09-23 - Anmado (안마도, 鞍馬島)
 
 ### Added
