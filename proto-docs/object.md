@@ -851,8 +851,6 @@ will be considered invalid.
 There are some "well-known" attributes starting with `__NEOFS__` prefix
 that affect system behaviour:
 
-* __NEOFS__UPLOAD_ID \
-  Marks smaller parts of a split bigger object
 * __NEOFS__EXPIRATION_EPOCH \
   Tells GC to delete object after that epoch
 * __NEOFS__TICK_EPOCH \
