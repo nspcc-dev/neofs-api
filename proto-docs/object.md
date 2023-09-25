@@ -678,7 +678,7 @@ PUT Object response body
 <a name="neo.fs.v2.object.Range"></a>
 
 ### Message Range
-Object payload range.Ranges of zero length SHOULD be considered as invalid.
+Object payload range. Ranges of zero length SHOULD be considered as invalid.
 
 
 | Field | Type | Label | Description |
