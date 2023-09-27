@@ -208,6 +208,18 @@ message NodeInfo {
   //   Must contain a comma-separated list of multi-addresses.
   // * Version
   //   Node implementation's version in a free string form.
+  // * VerifiedNodesDomain
+  //   Confirmation of admission to a group of storage nodes.
+  //   The value is the domain name registered in the NeoFS NNS. If attribute
+  //   is specified, the storage node requesting entry into the NeoFS network
+  //   map with this attribute must be included in the access list located on
+  //   the specified domain. The access list is represented by a set of TXT
+  //   records: Neo addresses resolved from public keys. To be admitted to the
+  //   network, Neo address of the node's public key declared in 'public_key'
+  //   field must be present in domain records. Otherwise, registration will be
+  //   denied.
+  //   Value must be a valid NeoFS NNS domain name. Note that if this attribute
+  //   is absent, this check is not carried out.
   //
   // For detailed description of each well-known attribute please see the
   // corresponding section in NeoFS Technical Specification.
