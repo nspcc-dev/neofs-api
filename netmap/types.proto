@@ -122,9 +122,9 @@ message PlacementPolicy {
   // List of named filters to reference in selectors
   repeated Filter filters = 4 [json_name = "filters"];
 
-  // Subnetwork ID to select nodes from. Zero subnet (default) represents
-  // all of the nodes which didn't explicitly opt out of membership.
-  refs.SubnetID subnet_id = 5 [json_name = "subnetId"];
+  // DEPRECATED. Was used for subnetwork ID to select nodes from, currently
+  // ignored.
+  refs.SubnetID subnet_id = 5 [json_name = "subnetId", deprecated = true];
 }
 
 // NeoFS node description
@@ -165,12 +165,8 @@ message NodeInfo {
   //   point delimiter for decimal part. In the Network Map it will be saved as
   //   64-bit unsigned integer representing number of minimal token fractions.
   // * __NEOFS__SUBNET_%s \
-  //   `True` or `False`. Defines if the node is included in the `%s` subnetwork
-  //   or not. `%s` must be an existing subnetwork's ID (non-negative integer number).
-  //   A node can be included in more than one subnetwork and, therefore, can contain
-  //   more than one subnet attribute. A missing attribute is equivalent to the
-  //   presence of the attribute with `False` value (except default zero subnetwork
-  //   (with `%s` == 0) for which missing attribute means inclusion in that network).
+  //   DEPRECATED. Defined if the node is included in the `%s` subnetwork
+  //   or not. Currently ignored.
   // * UN-LOCODE \
   //   Node's geographic location in
   //   [UN/LOCODE](https://www.unece.org/cefact/codesfortrade/codes_index.html)

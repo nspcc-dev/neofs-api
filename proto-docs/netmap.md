@@ -407,12 +407,8 @@ explicitly set:
   point delimiter for decimal part. In the Network Map it will be saved as
   64-bit unsigned integer representing number of minimal token fractions.
 * __NEOFS__SUBNET_%s \
-  `True` or `False`. Defines if the node is included in the `%s` subnetwork
-  or not. `%s` must be an existing subnetwork's ID (non-negative integer number).
-  A node can be included in more than one subnetwork and, therefore, can contain
-  more than one subnet attribute. A missing attribute is equivalent to the
-  presence of the attribute with `False` value (except default zero subnetwork
-  (with `%s` == 0) for which missing attribute means inclusion in that network).
+  DEPRECATED. Defined if the node is included in the `%s` subnetwork
+  or not. Currently ignored.
 * UN-LOCODE \
   Node's geographic location in
   [UN/LOCODE](https://www.unece.org/cefact/codesfortrade/codes_index.html)
@@ -488,7 +484,7 @@ storage policy definition languages.
 | container_backup_factor | [uint32](#uint32) |  | Container backup factor controls how deep NeoFS will search for nodes alternatives to include into container's nodes subset |
 | selectors | [Selector](#neo.fs.v2.netmap.Selector) | repeated | Set of Selectors to form the container's nodes subset |
 | filters | [Filter](#neo.fs.v2.netmap.Filter) | repeated | List of named filters to reference in selectors |
-| subnet_id | [neo.fs.v2.refs.SubnetID](#neo.fs.v2.refs.SubnetID) |  | Subnetwork ID to select nodes from. Zero subnet (default) represents all of the nodes which didn't explicitly opt out of membership. |
+| subnet_id | [neo.fs.v2.refs.SubnetID](#neo.fs.v2.refs.SubnetID) |  | DEPRECATED. Was used for subnetwork ID to select nodes from, currently ignored. |
 
 
 <a name="neo.fs.v2.netmap.Replica"></a>

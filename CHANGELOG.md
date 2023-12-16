@@ -8,6 +8,9 @@
 ### Removed
 - Redundant object system attribute `__NEOFS__UPLOAD_ID` (#271)
 
+### Deprecated
+- Subnets (#261)
+
 ## [2.14.0] - 2022-09-23 - Anmado (안마도, 鞍馬島)
 
 ### Added

@@ -8,6 +8,8 @@ option csharp_namespace = "Neo.FileStorage.API.Subnet";
 import "refs/types.proto";
 
 // NeoFS subnetwork description
+//
+// DEPRECATED. Ignored and kept for compatibility only.
 message SubnetInfo {
     // Unique subnet identifier. Missing ID is
     // equivalent to zero (default subnetwork) ID.
