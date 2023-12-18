@@ -82,6 +82,8 @@ message OwnerID {
 // String representation of a value is base-10 integer.
 //
 // JSON representation is an object containing a single `value` number field.
+//
+// DEPRECATED. Kept for compatibility only.
 message SubnetID {
   // 4-byte integer subnetwork identifier.
   fixed32 value = 1 [json_name = "value"];

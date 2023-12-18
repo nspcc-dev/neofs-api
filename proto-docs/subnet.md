@@ -27,6 +27,8 @@
 ### Message SubnetInfo
 NeoFS subnetwork description
 
+DEPRECATED. Ignored and kept for compatibility only.
+
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |

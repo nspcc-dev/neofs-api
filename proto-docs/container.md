@@ -591,8 +591,8 @@ values will be considered invalid.
 There are some "well-known" attributes affecting system behaviour:
 
 * __NEOFS__SUBNET \
-  String ID of a container's storage subnet. Any container can be attached to
-  one subnet only.
+  DEPRECATED. Was used for a string ID of a container's storage subnet.
+  Currently doesn't affect anything.
 * __NEOFS__NAME \
   String of a human-friendly container name registered as a domain in
   NNS contract.
