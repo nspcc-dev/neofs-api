@@ -36,6 +36,8 @@
     - [PutResponse](#neo.fs.v2.object.PutResponse)
     - [PutResponse.Body](#neo.fs.v2.object.PutResponse.Body)
     - [Range](#neo.fs.v2.object.Range)
+    - [ReplicateRequest](#neo.fs.v2.object.ReplicateRequest)
+    - [ReplicateResponse](#neo.fs.v2.object.ReplicateResponse)
     - [SearchRequest](#neo.fs.v2.object.SearchRequest)
     - [SearchRequest.Body](#neo.fs.v2.object.SearchRequest.Body)
     - [SearchRequest.Body.Filter](#neo.fs.v2.object.SearchRequest.Body.Filter)
@@ -80,6 +82,7 @@ rpc Head(HeadRequest) returns (HeadResponse);
 rpc Search(SearchRequest) returns (stream SearchResponse);
 rpc GetRange(GetRangeRequest) returns (stream GetRangeResponse);
 rpc GetRangeHash(GetRangeHashRequest) returns (GetRangeHashResponse);
+rpc Replicate(ReplicateRequest) returns (ReplicateResponse);
 
 ```
 
@@ -318,6 +321,27 @@ Statuses:
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | GetRangeHash | [GetRangeHashRequest](#neo.fs.v2.object.GetRangeHashRequest) | [GetRangeHashResponse](#neo.fs.v2.object.GetRangeHashResponse) |
+#### Method Replicate
+
+Save replica of the object on the NeoFS storage node. Both client and
+server must authenticate NeoFS storage nodes matching storage policy of
+the container referenced by the replicated object. Thus, this operation is
+purely system: regular users should not pay attention to it but use Put.
+
+Statuses:
+- **OK** (0, SECTION_SUCCESS): \
+  the object has been successfully replicated;
+- **INTERNAL_SERVER_ERROR** (1024, SECTION_FAILURE_COMMON): \
+  internal server error described in the text message;
+- **ACCESS_DENIED** (2048, SECTION_OBJECT): \
+  the client does not authenticate any NeoFS storage node matching storage
+  policy of the container referenced by the replicated object
+- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
+  the container to which the replicated object is associated was not found.
+
+| Name | Input | Output |
+| ---- | ----- | ------ |
+| Replicate | [ReplicateRequest](#neo.fs.v2.object.ReplicateRequest) | [ReplicateResponse](#neo.fs.v2.object.ReplicateResponse) |
  <!-- end services -->
 
 
@@ -685,6 +709,29 @@ Object payload range. Ranges of zero length SHOULD be considered as invalid.
 | ----- | ---- | ----- | ----------- |
 | offset | [uint64](#uint64) |  | Offset of the range from the object payload start |
 | length | [uint64](#uint64) |  | Length in bytes of the object payload range |
+
+
+<a name="neo.fs.v2.object.ReplicateRequest"></a>
+
+### Message ReplicateRequest
+Replicate RPC request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| object | [Object](#neo.fs.v2.object.Object) |  | Object to be replicated. |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of all other request fields serialized in Protocol Buffers v3 format in ascending order of fields. |
+
+
+<a name="neo.fs.v2.object.ReplicateResponse"></a>
+
+### Message ReplicateResponse
+Replicate RPC response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Operation execution status with one of the enumerated codes. |
 
 
 <a name="neo.fs.v2.object.SearchRequest"></a>

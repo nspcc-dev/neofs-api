@@ -8,6 +8,7 @@ option csharp_namespace = "Neo.FileStorage.API.Object";
 import "object/types.proto";
 import "refs/types.proto";
 import "session/types.proto";
+import "status/types.proto";
 
 // `ObjectService` provides API for manipulating objects. Object operations do
 // not affect the sidechain and are only served by nodes in p2p style.
@@ -218,6 +219,23 @@ service ObjectService {
   // - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   //   provided session token has expired.
   rpc GetRangeHash(GetRangeHashRequest) returns (GetRangeHashResponse);
+
+  // Save replica of the object on the NeoFS storage node. Both client and
+  // server must authenticate NeoFS storage nodes matching storage policy of
+  // the container referenced by the replicated object. Thus, this operation is
+  // purely system: regular users should not pay attention to it but use Put.
+  //
+  // Statuses:
+  // - **OK** (0, SECTION_SUCCESS): \
+  //   the object has been successfully replicated;
+  // - **INTERNAL_SERVER_ERROR** (1024, SECTION_FAILURE_COMMON): \
+  //   internal server error described in the text message;
+  // - **ACCESS_DENIED** (2048, SECTION_OBJECT): \
+  //   the client does not authenticate any NeoFS storage node matching storage
+  //   policy of the container referenced by the replicated object
+  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
+  //   the container to which the replicated object is associated was not found.
+  rpc Replicate(ReplicateRequest) returns (ReplicateResponse);
 }
 
 // GET object request
@@ -687,4 +705,20 @@ message GetRangeHashResponse {
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
+}
+
+// Replicate RPC request
+message ReplicateRequest {
+  // Object to be replicated.
+  neo.fs.v2.object.Object object = 1;
+
+  // Signature of all other request fields serialized in Protocol Buffers v3
+  // format in ascending order of fields.
+  neo.fs.v2.refs.Signature signature = 2;
+}
+
+// Replicate RPC response
+message ReplicateResponse {
+  // Operation execution status with one of the enumerated codes.
+  neo.fs.v2.status.Status status = 1;
 }
