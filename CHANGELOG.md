@@ -6,6 +6,7 @@
 - Numeric operands for object search queries (#265)
 - Link object payload message (#263)
 - Children sizes index to the link objects (#264)
+- `LINK` split chain object type (#283)
 
 ### Changed
 

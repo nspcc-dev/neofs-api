@@ -1043,6 +1043,7 @@ String presentation of object type is the same as definition:
 * TOMBSTONE
 * STORAGE_GROUP
 * LOCK
+* LINK
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -1050,6 +1051,7 @@ String presentation of object type is the same as definition:
 | TOMBSTONE | 1 | Used internally to identify deleted objects |
 | STORAGE_GROUP | 2 | StorageGroup information |
 | LOCK | 3 | Object lock |
+| LINK | 4 | Object that stores child object IDs for the split objects. |
 
 
  <!-- end enums -->

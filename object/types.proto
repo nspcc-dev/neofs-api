@@ -17,6 +17,7 @@ import "session/types.proto";
 // * TOMBSTONE
 // * STORAGE_GROUP
 // * LOCK
+// * LINK
 enum ObjectType {
   // Just a normal object
   REGULAR = 0;
@@ -29,6 +30,9 @@ enum ObjectType {
 
   // Object lock
   LOCK = 3;
+
+  // Object that stores child object IDs for the split objects.
+  LINK = 4;
 }
 
 // Type of match expression
