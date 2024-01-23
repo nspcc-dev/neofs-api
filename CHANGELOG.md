@@ -4,6 +4,7 @@
 
 ### Added
 - Numeric operands for object search queries (#265)
+- Link object payload message (#263)
 
 ### Changed
 

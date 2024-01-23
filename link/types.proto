@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package neo.fs.v2.link;
+
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/link/grpc;link";
+option csharp_namespace = "Neo.FileStorage.API.Link";
+
+import "refs/types.proto";
+
+// Link is a payload of helper objects that contain the full list of the split
+// chain objects' IDs. It is created only after the whole split chain is known
+// and signed. This object is the only object that refers to every "child object"
+// ID. It is NOT required for the original object assembling. It MUST have ALL
+// the "child objects" IDs. IDs MUST be ordered according to the original payload
+// split, meaning the first payload part holder MUST be placed at the first place
+// in the corresponding link object.
+message Link {
+  // Full list of the "child" object IDs.
+  repeated neo.fs.v2.refs.ObjectID children = 1 [json_name = "children"];
+}
