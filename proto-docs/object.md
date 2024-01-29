@@ -771,6 +771,9 @@ container, including Regular object, Tombstones and Storage Group
 objects. Most human users expect to get only object they can directly
 work with. In that case, `$Object:ROOT` filter should be used.
 
+If `match_type` field is numerical, both `value` field and object
+attribute MUST be base-10 integers.
+
 By default `key` field refers to the corresponding object's `Attribute`.
 Some Object's header fields can also be accessed by adding `$Object:`
 prefix to the name. Here is the list of fields available via this prefix:
@@ -1021,6 +1024,10 @@ Type of match expression
 | STRING_NOT_EQUAL | 2 | Full string mismatch |
 | NOT_PRESENT | 3 | Lack of key |
 | COMMON_PREFIX | 4 | String prefix match |
+| NUM_GT | 5 | Numerical 'greater than' |
+| NUM_GE | 6 | Numerical 'greater or equal than' |
+| NUM_LT | 7 | Numerical 'less than' |
+| NUM_LE | 8 | Numerical 'less or equal than' |
 
 
 
