@@ -3,7 +3,22 @@
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+### Deprecated
+
+## [2.15.0] - 2024-01-30
+
+### Added
 - Well-known `Version` node attribute (#267)
+- Reserved node attribute for verified domains (#277)
+- Fast object replication API (#280)
+
+### Changed
+- Improved documentation (#224, #275)
 
 ### Removed
 - Redundant object system attribute `__NEOFS__UPLOAD_ID` (#271)
@@ -496,4 +511,5 @@ Bump major release
 [2.13.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.12.0...v2.13.0
 [2.13.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.13.0...v2.13.1
 [2.14.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.13.1...v2.14.0
-[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.14.0...master
+[2.15.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.14.0...v2.15.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.15.0...master
