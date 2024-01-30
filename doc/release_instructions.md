@@ -27,10 +27,10 @@ available.
 
 Release commit summary should follow the template:
 
-`Release v<Version> - <Codename island> (<Hangeul>, <Hanja>)`, e.g.:
+`Release v<Version>`, e.g.:
 
 ```
-Release v2.9.0 - Anmyeondo (안면도, 安眠島)
+Release v2.9.0
 ```
 
 ## Tag the release
