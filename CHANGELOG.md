@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- Numeric operands for object search queries (#265)
 
 ### Changed
 

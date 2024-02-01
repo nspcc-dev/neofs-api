@@ -47,6 +47,18 @@ enum MatchType {
 
   // String prefix match
   COMMON_PREFIX = 4;
+
+  // Numerical 'greater than'
+  NUM_GT = 5;
+
+  // Numerical 'greater or equal than'
+  NUM_GE = 6;
+
+  // Numerical 'less than'
+  NUM_LT = 7;
+
+  // Numerical 'less or equal than'
+  NUM_LE = 8;
 }
 
 // Short header fields
