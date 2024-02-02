@@ -33,6 +33,9 @@ enum MatchType {
 
   // Return true if strings are different
   STRING_NOT_EQUAL = 2;
+
+  // Absence of attribute
+  NOT_PRESENT = 3;
 }
 
 // Request's operation type to match if the rule is applicable to a particular
@@ -102,9 +105,13 @@ message EACLRecord {
 
   // Filter to check particular properties of the request or the object.
   //
+  // The `value` field must be empty if `match_type` is an unary operator
+  // (e.g. `NOT_PRESENT`).
+  //
   // By default `key` field refers to the corresponding object's `Attribute`.
   // Some Object's header fields can also be accessed by adding `$Object:`
-  // prefix to the name. Here is the list of fields available via this prefix:
+  // prefix to the name. For such attributes, field 'match_type' must not be
+  // 'NOT_PRESENT'. Here is the list of fields available via this prefix:
   //
   // * $Object:version \
   //   version

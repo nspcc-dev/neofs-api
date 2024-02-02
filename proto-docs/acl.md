@@ -95,9 +95,13 @@ Describes a single eACL rule.
 ### Message EACLRecord.Filter
 Filter to check particular properties of the request or the object.
 
+The `value` field must be empty if `match_type` is an unary operator
+(e.g. `NOT_PRESENT`).
+
 By default `key` field refers to the corresponding object's `Attribute`.
 Some Object's header fields can also be accessed by adding `$Object:`
-prefix to the name. Here is the list of fields available via this prefix:
+prefix to the name. For such attributes, field 'match_type' must not be
+'NOT_PRESENT'. Here is the list of fields available via this prefix:
 
 * $Object:version \
   version
@@ -202,6 +206,7 @@ MatchType is an enumeration of match types.
 | MATCH_TYPE_UNSPECIFIED | 0 | Unspecified match type, default value. |
 | STRING_EQUAL | 1 | Return true if strings are equal |
 | STRING_NOT_EQUAL | 2 | Return true if strings are different |
+| NOT_PRESENT | 3 | Absence of attribute |
 
 
 
