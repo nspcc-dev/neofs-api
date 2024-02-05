@@ -95,9 +95,14 @@ Describes a single eACL rule.
 ### Message EACLRecord.Filter
 Filter to check particular properties of the request or the object.
 
+The `value` field must be empty if `match_type` is an unary operator
+(e.g. `NOT_PRESENT`). If `match_type` field is numeric (e.g. `NUM_GT`),
+the `value` field must be a base-10 integer.
+
 By default `key` field refers to the corresponding object's `Attribute`.
 Some Object's header fields can also be accessed by adding `$Object:`
-prefix to the name. Here is the list of fields available via this prefix:
+prefix to the name. For such attributes, field 'match_type' must not be
+'NOT_PRESENT'. Here is the list of fields available via this prefix:
 
 * $Object:version \
   version
@@ -117,6 +122,9 @@ prefix to the name. Here is the list of fields available via this prefix:
   object_type
 * $Object:homomorphicHash \
   homomorphic_hash
+
+Numeric `match_type` field can only be used with `$Object:creationEpoch`
+and `$Object:payloadLength` system attributes.
 
 Please note, that if request or response does not have object's headers of
 full object (Range, RangeHash, Search, Delete), it will not be possible to
@@ -202,6 +210,11 @@ MatchType is an enumeration of match types.
 | MATCH_TYPE_UNSPECIFIED | 0 | Unspecified match type, default value. |
 | STRING_EQUAL | 1 | Return true if strings are equal |
 | STRING_NOT_EQUAL | 2 | Return true if strings are different |
+| NOT_PRESENT | 3 | Absence of attribute |
+| NUM_GT | 4 | Numeric 'greater than' |
+| NUM_GE | 5 | Numeric 'greater or equal than' |
+| NUM_LT | 6 | Numeric 'less than' |
+| NUM_LE | 7 | Numeric 'less or equal than' |
 
 
 
