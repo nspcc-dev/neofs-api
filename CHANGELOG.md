@@ -4,8 +4,12 @@
 
 ### Added
 - Numeric operands for object search queries (#265)
+- Link object payload message (#263)
+- Children sizes index to the link objects (#264)
+- `LINK` split chain object type (#283)
 
 ### Changed
+- Split ID is deprecated, the first child part is used instead and is known to the other parts (#283)
 
 ### Removed
 
