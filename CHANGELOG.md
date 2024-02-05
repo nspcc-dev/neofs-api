@@ -9,6 +9,7 @@
 - `LINK` split chain object type (#283)
 
 ### Changed
+- Split ID is deprecated, the first child part is used instead and is known to the other parts (#283)
 
 ### Removed
 
