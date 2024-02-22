@@ -671,7 +671,7 @@ are not set, they will be calculated by a peer node.
 | ----- | ---- | ----- | ----------- |
 | object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | ObjectID if available. |
 | signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Object signature if available |
-| header | [Header](#neo.fs.v2.object.Header) |  | Object's Header |
+| header | [Header](#neo.fs.v2.object.Header) |  | Object's Header. The maximum length is 16KB. The only exclusion are replication requests, i.e. requests sent by container nodes with 'meta_header.ttl=1': for such cases the limit is 4MB. |
 | copies_number | [uint32](#uint32) |  | Number of the object copies to store within the RPC call. By default object is processed according to the container's placement policy. |
 
 
@@ -884,7 +884,7 @@ Object Header
 | object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Type of the object payload content |
 | homomorphic_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash of the object payload |
 | session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token, if it was used during Object creation. Need it to verify integrity and authenticity out of Request scope. |
-| attributes | [Header.Attribute](#neo.fs.v2.object.Header.Attribute) | repeated | User-defined object attributes |
+| attributes | [Header.Attribute](#neo.fs.v2.object.Header.Attribute) | repeated | User-defined object attributes. Attributes vary in length from object to object, so keep an eye on the entire Header limit depending on the context. |
 | split | [Header.Split](#neo.fs.v2.object.Header.Split) |  | Position of the object in the split hierarchy |
 
 

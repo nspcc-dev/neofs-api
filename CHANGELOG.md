@@ -10,6 +10,7 @@
 
 ### Changed
 - Split ID is deprecated, the first child part is used instead and is known to the other parts (#283)
+- Object header is now limited to 16KB (#262)
 
 ### Removed
 
