@@ -11,10 +11,10 @@ import "refs/types.proto";
 // purged from the NeoFS network.
 message Tombstone {
   // Last NeoFS epoch number of the tombstone lifetime. It's set by the tombstone
-  // creator depending on the current NeoFS network settings. A tombstone object
-  // must have the same expiration epoch value in `__NEOFS__EXPIRATION_EPOCH`
-  // attribute. Otherwise, the tombstone will be rejected by a storage node.
-  uint64 expiration_epoch = 1 [json_name = "expirationEpoch"];
+  // creator depending on the current NeoFS network settings.
+  // DEPRECATED. Field ignored by servers, set corresponding object attribute
+  // `__NEOFS__EXPIRATION_EPOCH` only.
+  uint64 expiration_epoch = 1 [json_name = "expirationEpoch", deprecated = true];
 
   // 16 byte UUID used to identify the split object hierarchy parts. Must be
   // unique inside a container. All objects participating in the split must
