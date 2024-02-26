@@ -14,6 +14,7 @@
 ### Removed
 
 ### Deprecated
+- Object attributes `__NEOFS__TICK_EPOCH` and `__NEOFS__TICK_TOPIC` (#279)
 
 ## [2.15.0] - 2024-01-30
 
