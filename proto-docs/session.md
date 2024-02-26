@@ -291,12 +291,12 @@ affect system behaviour:
 * __NEOFS__NETMAP_EPOCH \
   Netmap epoch to use for object placement calculation. The `value` is string
   encoded `uint64` in decimal presentation. If set to '0' or not set, the
-  current epoch only will be used.
+  current epoch only will be used. DEPRECATED: header ignored by servers.
 * __NEOFS__NETMAP_LOOKUP_DEPTH \
   If object can't be found using current epoch's netmap, this header limits
   how many past epochs the node can look up through. The `value` is string
   encoded `uint64` in decimal presentation. If set to '0' or not set, only the
-  current epoch will be used.
+  current epoch will be used. DEPRECATED: header ignored by servers.
 
 
 | Field | Type | Label | Description |

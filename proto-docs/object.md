@@ -98,11 +98,11 @@ keeping the receiving order.
 Extended headers can change `Get` behaviour:
 * __NEOFS__NETMAP_EPOCH \
   Will use the requsted version of Network Map for object placement
-  calculation.
+  calculation. DEPRECATED: header ignored by servers.
 * __NEOFS__NETMAP_LOOKUP_DEPTH \
   Will try older versions (starting from `__NEOFS__NETMAP_EPOCH` if specified or
   the latest one otherwise) of Network Map to find an object until the depth
-  limit is reached.
+  limit is reached. DEPRECATED: header ignored by servers.
 
 Please refer to detailed `XHeader` description.
 
@@ -136,7 +136,7 @@ Chunk messages SHOULD be sent in the direct order of fragmentation.
 Extended headers can change `Put` behaviour:
 * __NEOFS__NETMAP_EPOCH \
   Will use the requsted version of Network Map for object placement
-  calculation.
+  calculation. DEPRECATED: header ignored by servers.
 
 Please refer to detailed `XHeader` description.
 
@@ -171,7 +171,7 @@ guarantee. Object will be marked for removal and deleted eventually.
 Extended headers can change `Delete` behaviour:
 * __NEOFS__NETMAP_EPOCH \
   Will use the requsted version of Network Map for object placement
-  calculation.
+  calculation. DEPRECATED: header ignored by servers.
 
 Please refer to detailed `XHeader` description.
 
@@ -259,10 +259,10 @@ order.
 Extended headers can change `GetRange` behaviour:
 * __NEOFS__NETMAP_EPOCH \
   Will use the requsted version of Network Map for object placement
-  calculation.
+  calculation. DEPRECATED: header ignored by servers.
 * __NEOFS__NETMAP_LOOKUP_DEPTH \
   Will try older versions of Network Map to find an object until the depth
-  limit is reached.
+  limit is reached. DEPRECATED: header ignored by servers.
 
 Please refer to detailed `XHeader` description.
 
@@ -296,10 +296,10 @@ the request. Note that hash is calculated for XORed data.
 Extended headers can change `GetRangeHash` behaviour:
 * __NEOFS__NETMAP_EPOCH \
   Will use the requsted version of Network Map for object placement
-  calculation.
+  calculation. DEPRECATED: header ignored by servers.
 * __NEOFS__NETMAP_LOOKUP_DEPTH \
   Will try older versions of Network Map to find an object until the depth
-  limit is reached.
+  limit is reached. DEPRECATED: header ignored by servers.
 
 Please refer to detailed `XHeader` description.
 

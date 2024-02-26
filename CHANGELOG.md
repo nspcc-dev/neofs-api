@@ -11,11 +11,13 @@
 ### Changed
 - Split ID is deprecated, the first child part is used instead and is known to the other parts (#283)
 - Object header is now limited to 16KB (#262)
+- X-headers `__NEOFS__NETMAP_EPOCH` and `__NEOFS__NETMAP_LOOKUP_DEPTH` are ignored by servers now (#282)
 
 ### Removed
 
 ### Deprecated
 - Object attributes `__NEOFS__TICK_EPOCH` and `__NEOFS__TICK_TOPIC` (#279)
+- X-headers `__NEOFS__NETMAP_EPOCH` and `__NEOFS__NETMAP_LOOKUP_DEPTH` (#282)
 
 ## [2.15.0] - 2024-01-30
 
