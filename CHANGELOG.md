@@ -7,6 +7,7 @@
 - Link object payload message (#263)
 - Children sizes index to the link objects (#264)
 - `LINK` split chain object type (#283)
+- `BearerToken.issuer` field (#266)
 
 ### Changed
 - Split ID is deprecated, the first child part is used instead and is known to the other parts (#283)
