@@ -169,7 +169,8 @@ message Header {
     // string value of the object attribute
     string value = 2 [json_name = "value"];
   }
-  // User-defined object attributes
+  // User-defined object attributes. Attributes vary in length from object to
+  // object, so keep an eye on the entire Header limit depending on the context.
   repeated Attribute attributes = 10 [json_name = "attributes"];
 
   // Bigger objects can be split into a chain of smaller objects. Information
