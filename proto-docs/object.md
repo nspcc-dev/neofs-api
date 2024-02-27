@@ -907,9 +907,11 @@ that affect system behaviour:
   Decimal number that defines what epoch must produce
   object notification with UTF-8 object address in a
   body (`0` value produces notification right after
-  object put)
+  object put).
+  DEPRECATED: attribute ignored by servers.
 * __NEOFS__TICK_TOPIC \
-  UTF-8 string topic ID that is used for object notification
+  UTF-8 string topic ID that is used for object notification.
+  DEPRECATED: attribute ignored by servers.
 
 And some well-known attributes used by applications only:
 
