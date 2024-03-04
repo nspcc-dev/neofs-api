@@ -236,6 +236,10 @@ message BearerToken {
     }
     // Token expiration and valid time period parameters
     TokenLifetime lifetime = 3 [json_name="lifetime"];
+
+    // Token issuer's user ID in NeoFS. It must equal to the related
+    // container's owner.
+    neo.fs.v2.refs.OwnerID issuer = 4 [json_name="issuer"];
   }
   // Bearer Token body
   Body body = 1 [json_name="body"];

@@ -60,6 +60,7 @@ owner with additional information preventing token abuse.
 | eacl_table | [EACLTable](#neo.fs.v2.acl.EACLTable) |  | Table of Extended ACL rules to use instead of the ones attached to the container. If it contains `container_id` field, bearer token is only valid for this specific container. Otherwise, any container of the same owner is allowed. |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | `OwnerID` defines to whom the token was issued. It must match the request originator's `OwnerID`. If empty, any token bearer will be accepted. |
 | lifetime | [BearerToken.Body.TokenLifetime](#neo.fs.v2.acl.BearerToken.Body.TokenLifetime) |  | Token expiration and valid time period parameters |
+| issuer | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Token issuer's user ID in NeoFS. It must equal to the related container's owner. |
 
 
 <a name="neo.fs.v2.acl.BearerToken.Body.TokenLifetime"></a>
