@@ -720,7 +720,7 @@ Replicate RPC request
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | object | [Object](#neo.fs.v2.object.Object) |  | Object to be replicated. |
-| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of all other request fields serialized in Protocol Buffers v3 format in ascending order of fields. |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of `object.object_id.value` field. |
 
 
 <a name="neo.fs.v2.object.ReplicateResponse"></a>
