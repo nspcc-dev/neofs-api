@@ -717,8 +717,7 @@ message ReplicateRequest {
   // Object to be replicated.
   neo.fs.v2.object.Object object = 1;
 
-  // Signature of all other request fields serialized in Protocol Buffers v3
-  // format in ascending order of fields.
+  // Signature of `object.object_id.value` field.
   neo.fs.v2.refs.Signature signature = 2;
 }
 
