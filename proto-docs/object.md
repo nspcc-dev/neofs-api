@@ -800,6 +800,8 @@ prefix to the name. Here is the list of fields available via this prefix:
   object_id of parent
 * $Object:split.splitID \
   16 byte UUIDv4 used to identify the split object hierarchy parts
+* $Object:split.first \
+  object_id of the first part in split chain; non-acceptable for deprecated V1 split scheme
 
 There are some well-known filter aliases to match objects by certain
 properties:
