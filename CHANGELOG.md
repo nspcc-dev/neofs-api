@@ -3,24 +3,35 @@
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+### Deprecated
+
+## [2.16.0] - 2024-04-23
+
+### Added
 - Numeric operands for object search queries (#265)
 - Link object payload message (#263)
 - Children sizes index to the link objects (#264)
 - `LINK` split chain object type (#283)
 - `BearerToken.issuer` field (#266)
+- First child search filter (#295)
 
 ### Changed
 - Split ID is deprecated, the first child part is used instead and is known to the other parts (#283)
 - Object header is now limited to 16KB (#262)
 - X-headers `__NEOFS__NETMAP_EPOCH` and `__NEOFS__NETMAP_LOOKUP_DEPTH` are ignored by servers now (#282)
 - `Tombstone.expiration_epoch` field is ignored by servers now (#215)
-
-### Removed
+- Signature for Replicate request (#294)
 
 ### Deprecated
 - Object attributes `__NEOFS__TICK_EPOCH` and `__NEOFS__TICK_TOPIC` (#279)
 - X-headers `__NEOFS__NETMAP_EPOCH` and `__NEOFS__NETMAP_LOOKUP_DEPTH` (#282)
 - `Tombstone.expiration_epoch` field in favor of corresponding object attribute (#215)
+- `split_id` field in tombstones (#297)
 
 ## [2.15.0] - 2024-01-30
 
@@ -524,4 +535,5 @@ Bump major release
 [2.13.1]: https://github.com/nspcc-dev/neofs-api/compare/v2.13.0...v2.13.1
 [2.14.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.13.1...v2.14.0
 [2.15.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.14.0...v2.15.0
-[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.15.0...master
+[2.16.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.15.0...v2.16.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.16.0...master
