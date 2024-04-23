@@ -19,6 +19,7 @@ message Tombstone {
   // 16 byte UUID used to identify the split object hierarchy parts. Must be
   // unique inside a container. All objects participating in the split must
   // have the same `split_id` value.
+  // DEPRECATED. The field is ignored by servers.
   bytes split_id = 2 [json_name = "splitID"];
 
   // List of objects to be deleted.
