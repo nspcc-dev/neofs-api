@@ -23,5 +23,8 @@ message Tombstone {
   bytes split_id = 2 [json_name = "splitID"];
 
   // List of objects to be deleted.
+  // IDs should be either:
+  //  1. Root object IDs (objects that are not split OR parent objects)
+  //  2. Children IDs for unfinished objects that does not have LINK objects (garbage collecting).
   repeated neo.fs.v2.refs.ObjectID members = 3 [json_name = "members"];
 }
