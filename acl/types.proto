@@ -176,7 +176,8 @@ message EACLRecord {
     // Target subject's role class
     Role role = 1 [json_name="role"];
 
-    // List of public keys to identify target subject
+    // List of 25-byte accounts to identify target subjects.
+    // 33-byte public keys are also supported, however, they are deprecated and script hashes should be derived from them.
     repeated bytes keys = 2 [json_name="keys"];
   }
   // List of target subjects to apply ACL rule to

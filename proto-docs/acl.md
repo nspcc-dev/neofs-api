@@ -152,7 +152,7 @@ keys to match.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | role | [Role](#neo.fs.v2.acl.Role) |  | Target subject's role class |
-| keys | [bytes](#bytes) | repeated | List of public keys to identify target subject |
+| keys | [bytes](#bytes) | repeated | List of 25-byte accounts to identify target subjects. 33-byte public keys are also supported, however, they are deprecated and script hashes should be derived from them. |
 
 
 <a name="neo.fs.v2.acl.EACLTable"></a>
