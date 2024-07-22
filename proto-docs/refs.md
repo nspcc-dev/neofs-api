@@ -71,7 +71,8 @@ content-addressed.
 
 `ContainerID` is a 32 byte long
 [SHA256](https://csrc.nist.gov/publications/detail/fips/180/4/final) hash of
-stable-marshalled container message.
+stable-marshalled container message. ID consisting of all zero bytes is
+reserved for undefined value and must not be specified as a field.
 
 String presentation is a
 [base58](https://tools.ietf.org/html/draft-msporny-base58-02) encoded string.
@@ -97,7 +98,8 @@ It means `ObjectID` will change if the `header` or the `payload` changes.
 `ObjectID` is a 32 byte long
 [SHA256](https://csrc.nist.gov/publications/detail/fips/180/4/final) hash of
 the object's `header` field, which, in it's turn, contains the hash of the object's
-payload.
+payload. ID consisting of all zero bytes is reserved for undefined value and
+must not be specified as a field.
 
 String presentation is a
 [base58](https://tools.ietf.org/html/draft-msporny-base58-02) encoded string.
