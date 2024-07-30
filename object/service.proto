@@ -721,10 +721,21 @@ message ReplicateRequest {
 
   // Signature of `object.object_id.value` field.
   neo.fs.v2.refs.Signature signature = 2;
+
+  // Optional flag that requires server side to attach signature of just
+  // replicated object to ensure it has been received correctly. Signature
+  // must be calculated with a key that corresponds to an exposed to the
+  // network map public key of the object receiver.
+  bool sign_object = 3;
 }
 
 // Replicate RPC response
 message ReplicateResponse {
   // Operation execution status with one of the enumerated codes.
   neo.fs.v2.status.Status status = 1;
+
+  // Deterministic ECDSA with SHA-256 hashing (RFC 6979) signature of
+  // replicated object. Must be attached if request was made with
+  // `sign_object` flag set.
+  bytes object_signature = 2;
 }

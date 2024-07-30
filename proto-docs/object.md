@@ -721,6 +721,7 @@ Replicate RPC request
 | ----- | ---- | ----- | ----------- |
 | object | [Object](#neo.fs.v2.object.Object) |  | Object to be replicated. |
 | signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of `object.object_id.value` field. |
+| sign_object | [bool](#bool) |  | Optional flag that requires server side to attach signature of just replicated object to ensure it has been received correctly. Signature must be calculated with a key that corresponds to an exposed to the network map public key of the object receiver. |
 
 
 <a name="neo.fs.v2.object.ReplicateResponse"></a>
@@ -732,6 +733,7 @@ Replicate RPC response
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Operation execution status with one of the enumerated codes. |
+| object_signature | [bytes](#bytes) |  | Deterministic ECDSA with SHA-256 hashing (RFC 6979) signature of replicated object. Must be attached if request was made with `sign_object` flag set. |
 
 
 <a name="neo.fs.v2.object.SearchRequest"></a>
