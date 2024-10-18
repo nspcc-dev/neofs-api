@@ -605,6 +605,22 @@ There are some "well-known" attributes affecting system behaviour:
   accepted in a NeoFS network only if the global network hashing configuration
   value corresponds with that attribute's value. After container inclusion, network
   setting is ignored.
+* __NEOFS__METAINFO_CONSISTENCY \
+  Policy rule that defines the condition under which an object is considered
+  processed. Acceptable values and meanings:
+    1. "strict": SN processes objects' meta information, it is validated,
+      indexed and signed accordingly by a required minimal number of nodes
+      that are included in the container, a corresponding object inclusion
+      notification can be caught
+    2. "optimistic": the same as "strict" but a successful PUT operation
+      does not mean objects' meta information has been multi signed and
+      indexed correctly, however, SNs will try to do it asynchronously;
+      in general PUT operations are expected to be faster than in the
+      "strict" case
+    3. <other cases>: SN does not process objects' meta
+      information, it is not indexed and object presence/number of copies
+      is not proven after a successful object PUT operation; the behavior
+      is the same as it was before this attribute introduction
 
 And some well-known attributes used by applications only:
 
