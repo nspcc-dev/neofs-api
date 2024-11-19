@@ -11,7 +11,7 @@ import "session/types.proto";
 import "status/types.proto";
 
 // `ObjectService` provides API for manipulating objects. Object operations do
-// not affect the sidechain and are only served by nodes in p2p style.
+// not affect FS chain and are only served by nodes in P2P style.
 service ObjectService {
   // Receive full object structure, including Headers and payload. Response uses
   // gRPC stream. First response message carries the object with the requested address.

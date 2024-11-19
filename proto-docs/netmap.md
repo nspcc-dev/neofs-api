@@ -53,7 +53,7 @@
 
 ### Service "neo.fs.v2.netmap.NetmapService"
 `NetmapService` provides methods to work with `Network Map` and the information
-required to build it. The resulting `Network Map` is stored in sidechain
+required to build it. The resulting `Network Map` is stored in FS chain
 `Netmap` smart contract, while related information can be obtained from other
 NeoFS nodes.
 
@@ -220,7 +220,7 @@ NetworkInfo request body is empty.
 
 ### Message NetworkInfoResponse
 Response with NetworkInfo structure including current epoch and
-sidechain magic number.
+FS chain magic number.
 
 
 | Field | Type | Label | Description |
@@ -321,7 +321,7 @@ System parameters:
   Number of EigenTrust algorithm iterations to pass in the Reputation system.
   Value: little-endian integer. Default: 0.
 - **EpochDuration** \
-  NeoFS epoch duration measured in Sidechain blocks.
+  NeoFS epoch duration measured in FS chain blocks.
   Value: little-endian integer. Default: 0.
 - **HomomorphicHashingDisabled** \
   Flag of disabling the homomorphic hashing of objects' payload.
@@ -355,8 +355,8 @@ Information about NeoFS network
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | current_epoch | [uint64](#uint64) |  | Number of the current epoch in the NeoFS network |
-| magic_number | [uint64](#uint64) |  | Magic number of the sidechain of the NeoFS network |
-| ms_per_block | [int64](#int64) |  | MillisecondsPerBlock network parameter of the sidechain of the NeoFS network |
+| magic_number | [uint64](#uint64) |  | Magic number of FS chain of the NeoFS network |
+| ms_per_block | [int64](#int64) |  | MillisecondsPerBlock network parameter of FS chain of the NeoFS network |
 | network_config | [NetworkConfig](#neo.fs.v2.netmap.NetworkConfig) |  | NeoFS network configuration |
 
 

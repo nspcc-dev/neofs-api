@@ -9,7 +9,7 @@ import "accounting/types.proto";
 import "refs/types.proto";
 import "session/types.proto";
 
-// Accounting service provides methods for interaction with NeoFS sidechain via
+// Accounting service provides methods for interaction with FS chain via
 // other NeoFS nodes to get information about the account balance. Deposit and
 // Withdraw operations can't be implemented here, as they require Mainnet NeoFS
 // smart contract invocation. Transfer operations between internal NeoFS
@@ -27,7 +27,7 @@ service AccountingService {
 // BalanceRequest message
 message BalanceRequest {
   // To indicate the account for which the balance is requested, its identifier
-  // is used. It can be any existing account in NeoFS sidechain `Balance` smart
+  // is used. It can be any existing account in FS chain `Balance` smart
   // contract. If omitted, client implementation MUST set it to the request's
   // signer `OwnerID`.
   message Body {
