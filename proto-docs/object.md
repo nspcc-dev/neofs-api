@@ -72,7 +72,7 @@
 
 ### Service "neo.fs.v2.object.ObjectService"
 `ObjectService` provides API for manipulating objects. Object operations do
-not affect the sidechain and are only served by nodes in p2p style.
+not affect FS chain and are only served by nodes in P2P style.
 
 ```
 rpc Get(GetRequest) returns (stream GetResponse);

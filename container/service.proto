@@ -11,24 +11,24 @@ import "refs/types.proto";
 import "session/types.proto";
 
 // `ContainerService` provides API to interact with `Container` smart contract
-// in NeoFS sidechain via other NeoFS nodes. All of those actions can be done
-// equivalently by directly issuing transactions and RPC calls to sidechain
+// in FS chain via other NeoFS nodes. All of those actions can be done
+// equivalently by directly issuing transactions and RPC calls to FS chain
 // nodes.
 service ContainerService {
   // `Put` invokes `Container` smart contract's `Put` method and returns
-  // response immediately. After a new block is issued in sidechain, request is
-  // verified by Inner Ring nodes. After one more block in sidechain, the container
+  // response immediately. After a new block is issued in FS chain, request is
+  // verified by Inner Ring nodes. After one more block in FS chain, the container
   // is added into smart contract storage.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
-  //   request to save the container has been sent to the sidechain;
+  //   request to save the container has been sent to FS chain;
   // - Common failures (SECTION_FAILURE_COMMON).
   rpc Put(PutRequest) returns (PutResponse);
 
   // `Delete` invokes `Container` smart contract's `Delete` method and returns
-  // response immediately. After a new block is issued in sidechain, request is
-  // verified by Inner Ring nodes. After one more block in sidechain, the container
+  // response immediately. After a new block is issued in FS chain, request is
+  // verified by Inner Ring nodes. After one more block in FS chain, the container
   // is added into smart contract storage.
   // NOTE: a container deletion leads to the removal of every object in that
   // container, regardless of any restrictions on the object removal (e.g. lock/locked
@@ -36,7 +36,7 @@ service ContainerService {
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
-  //   request to remove the container has been sent to the sidechain;
+  //   request to remove the container has been sent to FS chain;
   // - Common failures (SECTION_FAILURE_COMMON).
   rpc Delete(DeleteRequest) returns (DeleteResponse);
 
@@ -59,12 +59,12 @@ service ContainerService {
   rpc List(ListRequest) returns (ListResponse);
 
   // Invokes 'SetEACL' method of 'Container` smart contract and returns response
-  // immediately. After one more block in sidechain, changes in an Extended ACL are
+  // immediately. After one more block in FS chain, changes in an Extended ACL are
   // added into smart contract storage.
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
-  //   request to save container eACL has been sent to the sidechain;
+  //   request to save container eACL has been sent to FS chain;
   // - Common failures (SECTION_FAILURE_COMMON).
   rpc SetExtendedACL(SetExtendedACLRequest) returns (SetExtendedACLResponse);
 
@@ -93,7 +93,7 @@ service ContainerService {
 // New NeoFS Container creation request
 message PutRequest {
   // Container creation request has container structure's signature as a
-  // separate field. It's not stored in sidechain, just verified on container
+  // separate field. It's not stored in FS chain, just verified on container
   // creation by `Container` smart contract. `ContainerID` is a SHA256 hash of
   // the stable-marshalled container strucutre, hence there is no need for
   // additional signature checks.
@@ -300,7 +300,7 @@ message SetExtendedACLRequest {
 message SetExtendedACLResponse {
   // `SetExtendedACLResponse` has an empty body because the operation is
   // asynchronous and the update should be reflected in `Container` smart contract's
-  // storage after next block is issued in sidechain.
+  // storage after next block is issued in FS chain.
   message Body { }
 
   // Body of set extended acl response message.

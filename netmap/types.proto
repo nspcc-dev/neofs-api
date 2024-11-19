@@ -290,7 +290,7 @@ message NetworkConfig {
   //   Number of EigenTrust algorithm iterations to pass in the Reputation system.
   //   Value: little-endian integer. Default: 0.
   // - **EpochDuration** \
-  //   NeoFS epoch duration measured in Sidechain blocks.
+  //   NeoFS epoch duration measured in FS chain blocks.
   //   Value: little-endian integer. Default: 0.
   // - **HomomorphicHashingDisabled** \
   //   Flag of disabling the homomorphic hashing of objects' payload.
@@ -323,10 +323,10 @@ message NetworkInfo {
     // Number of the current epoch in the NeoFS network
     uint64 current_epoch = 1 [json_name = "currentEpoch"];
 
-    // Magic number of the sidechain of the NeoFS network
+    // Magic number of FS chain of the NeoFS network
     uint64 magic_number = 2 [json_name = "magicNumber"];
 
-    // MillisecondsPerBlock network parameter of the sidechain of the NeoFS network
+    // MillisecondsPerBlock network parameter of FS chain of the NeoFS network
     int64 ms_per_block = 3 [json_name = "msPerBlock"];
 
     // NeoFS network configuration
