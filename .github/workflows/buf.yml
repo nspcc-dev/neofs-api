@@ -7,30 +7,30 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: wizhi/setup-buf@v1
         with:
           version: 0.20.5
       - run: buf check lint
 
   breaking:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Setup buf
         uses: wizhi/setup-buf@v1
         with:
           version: 0.20.5
       - name: Check out ref code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.base_ref }}
           path: baseref
       - run: cd baseref && buf image build -o image.bin
 
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: prclone
       - run: cd prclone && buf check breaking --against-input ../baseref/image.bin
