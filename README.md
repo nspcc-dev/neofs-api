@@ -24,6 +24,8 @@ This repository contains:
 - protocol buffers packages
 - [auto-generated docs](proto-docs) for protocol buffers
 
+To perform linting and formatting buf is required, see https://buf.build/.
+
 ## Contributing
 
 Feel free to contribute to this project after reading the [contributing

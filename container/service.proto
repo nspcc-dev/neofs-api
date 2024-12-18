@@ -2,13 +2,13 @@ syntax = "proto3";
 
 package neo.fs.v2.container;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/container/grpc;container";
-option csharp_namespace = "Neo.FileStorage.API.Container";
-
 import "acl/types.proto";
 import "container/types.proto";
 import "refs/types.proto";
 import "session/types.proto";
+
+option csharp_namespace = "Neo.FileStorage.API.Container";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/container/grpc;container";
 
 // `ContainerService` provides API to interact with `Container` smart contract
 // in FS chain via other NeoFS nodes. All of those actions can be done
@@ -301,7 +301,7 @@ message SetExtendedACLResponse {
   // `SetExtendedACLResponse` has an empty body because the operation is
   // asynchronous and the update should be reflected in `Container` smart contract's
   // storage after next block is issued in FS chain.
-  message Body { }
+  message Body {}
 
   // Body of set extended acl response message.
   Body body = 1;
@@ -404,7 +404,7 @@ message AnnounceUsedSpaceRequest {
 message AnnounceUsedSpaceResponse {
   // `AnnounceUsedSpaceResponse` has an empty body because announcements are
   // one way communication.
-  message Body { }
+  message Body {}
 
   // Body of announce used space response message.
   Body body = 1;

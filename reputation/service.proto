@@ -2,11 +2,11 @@ syntax = "proto3";
 
 package neo.fs.v2.reputation;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/reputation/grpc;reputation";
-option csharp_namespace = "Neo.FileStorage.API.Reputation";
-
 import "reputation/types.proto";
 import "session/types.proto";
+
+option csharp_namespace = "Neo.FileStorage.API.Reputation";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/reputation/grpc;reputation";
 
 // `ReputationService` provides mechanisms for exchanging trust values with
 // other NeoFS nodes. Nodes rate each other's reputation based on how good they
@@ -14,115 +14,113 @@ import "session/types.proto";
 // information is passed to the next nodes to check and aggregate unless the
 // final result is recorded.
 service ReputationService {
-    // Announce local client trust information to any node in NeoFS network.
-    //
-    // Statuses:
-    // - **OK** (0, SECTION_SUCCESS):
-    // local trust has been successfully announced;
-    // - Common failures (SECTION_FAILURE_COMMON).
-    rpc AnnounceLocalTrust (AnnounceLocalTrustRequest) returns (AnnounceLocalTrustResponse);
+  // Announce local client trust information to any node in NeoFS network.
+  //
+  // Statuses:
+  // - **OK** (0, SECTION_SUCCESS):
+  // local trust has been successfully announced;
+  // - Common failures (SECTION_FAILURE_COMMON).
+  rpc AnnounceLocalTrust(AnnounceLocalTrustRequest) returns (AnnounceLocalTrustResponse);
 
-    // Announce the intermediate result of the iterative algorithm for
-    // calculating the global reputation of the node in NeoFS network.
-    //
-    // Statuses:
-    // - **OK** (0, SECTION_SUCCESS):
-    // intermediate trust estimation has been successfully announced;
-    // - Common failures (SECTION_FAILURE_COMMON).
-    rpc AnnounceIntermediateResult (AnnounceIntermediateResultRequest) returns (AnnounceIntermediateResultResponse);
+  // Announce the intermediate result of the iterative algorithm for
+  // calculating the global reputation of the node in NeoFS network.
+  //
+  // Statuses:
+  // - **OK** (0, SECTION_SUCCESS):
+  // intermediate trust estimation has been successfully announced;
+  // - Common failures (SECTION_FAILURE_COMMON).
+  rpc AnnounceIntermediateResult(AnnounceIntermediateResultRequest) returns (AnnounceIntermediateResultResponse);
 }
 
 // Announce node's local trust information.
 message AnnounceLocalTrustRequest {
-    // Announce node's local trust information.
-    message Body {
-        // Trust assessment Epoch number
-        uint64 epoch = 1;
+  // Announce node's local trust information.
+  message Body {
+    // Trust assessment Epoch number
+    uint64 epoch = 1;
 
-        // List of normalized local trust values to other NeoFS nodes. The value
-        // is calculated according to EigenTrust++ algorithm and must be a
-        // floating point number in [0;1] range.
-        repeated Trust trusts = 2;
-    }
+    // List of normalized local trust values to other NeoFS nodes. The value
+    // is calculated according to EigenTrust++ algorithm and must be a
+    // floating point number in [0;1] range.
+    repeated Trust trusts = 2;
+  }
 
-    // Body of the request message.
-    Body body = 1;
+  // Body of the request message.
+  Body body = 1;
 
-    // Carries request meta information. Header data is used only to regulate
-    // message transport and does not affect request execution.
-    neo.fs.v2.session.RequestMetaHeader meta_header = 2;
+  // Carries request meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
-    // Carries request verification information. This header is used to
-    // authenticate the nodes of the message route and check the correctness of
-    // transmission.
-    neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
+  // Carries request verification information. This header is used to
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
 // Node's local trust information announcement response.
 message AnnounceLocalTrustResponse {
-    // Response to the node's local trust information announcement has an empty body
-    // because the trust exchange operation is asynchronous. If Trust information
-    // does not pass sanity checks, it is silently ignored.
-    message Body {
-    }
+  // Response to the node's local trust information announcement has an empty body
+  // because the trust exchange operation is asynchronous. If Trust information
+  // does not pass sanity checks, it is silently ignored.
+  message Body {}
 
-    // Body of the response message.
-    Body body = 1;
+  // Body of the response message.
+  Body body = 1;
 
-    // Carries response meta information. Header data is used only to regulate
-    // message transport and does not affect request execution.
-    neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
+  // Carries response meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 
-    // Carries response verification information. This header is used to
-    // authenticate the nodes of the message route and check the correctness of
-    // transmission.
-    neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
+  // Carries response verification information. This header is used to
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
+  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
 // Announce intermediate global trust information.
 message AnnounceIntermediateResultRequest {
-    // Announce intermediate global trust information.
-    message Body {
-        // Iteration execution Epoch number
-        uint64 epoch = 1;
+  // Announce intermediate global trust information.
+  message Body {
+    // Iteration execution Epoch number
+    uint64 epoch = 1;
 
-        // Iteration sequence number
-        uint32 iteration = 2;
+    // Iteration sequence number
+    uint32 iteration = 2;
 
-        // Current global trust value calculated at the specified iteration
-        PeerToPeerTrust trust = 3;
-    }
+    // Current global trust value calculated at the specified iteration
+    PeerToPeerTrust trust = 3;
+  }
 
-    // Body of the request message.
-    Body body = 1;
+  // Body of the request message.
+  Body body = 1;
 
-    // Carries request meta information. Header data is used only to regulate
-    // message transport and does not affect request execution.
-    neo.fs.v2.session.RequestMetaHeader meta_header = 2;
+  // Carries request meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
-    // Carries request verification information. This header is used to
-    // authenticate the nodes of the message route and check the correctness of
-    // transmission.
-    neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
+  // Carries request verification information. This header is used to
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
 // Intermediate global trust information announcement response.
 message AnnounceIntermediateResultResponse {
-    // Response to the node's intermediate global trust information announcement has
-    // an empty body because the trust exchange operation is asynchronous. If
-    // Trust information does not pass sanity checks, it is silently ignored.
-    message Body {
-    }
+  // Response to the node's intermediate global trust information announcement has
+  // an empty body because the trust exchange operation is asynchronous. If
+  // Trust information does not pass sanity checks, it is silently ignored.
+  message Body {}
 
-    // Body of the response message.
-    Body body = 1;
+  // Body of the response message.
+  Body body = 1;
 
-    // Carries response meta information. Header data is used only to regulate
-    // message transport and does not affect request execution.
-    neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
+  // Carries response meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 
-    // Carries response verification information. This header is used to
-    // authenticate the nodes of the message route and check the correctness of
-    // transmission.
-    neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
+  // Carries response verification information. This header is used to
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
+  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }

@@ -2,13 +2,13 @@ syntax = "proto3";
 
 package neo.fs.v2.object;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/object/grpc;object";
-option csharp_namespace = "Neo.FileStorage.API.Object";
-
 import "object/types.proto";
 import "refs/types.proto";
 import "session/types.proto";
 import "status/types.proto";
+
+option csharp_namespace = "Neo.FileStorage.API.Object";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/object/grpc;object";
 
 // `ObjectService` provides API for manipulating objects. Object operations do
 // not affect FS chain and are only served by nodes in P2P style.
@@ -384,7 +384,7 @@ message DeleteRequest {
   message Body {
     // Address of the object to be deleted
     neo.fs.v2.refs.Address address = 1;
- }
+  }
   // Body of delete object request message.
   Body body = 1;
 
@@ -468,7 +468,7 @@ message HeadResponse {
   message Body {
     // Requested object header, it's part or meta information about split
     // object.
-    oneof head{
+    oneof head {
       // Full object's `Header` with `ObjectID` signature
       HeaderWithSignature header = 1;
 
@@ -660,7 +660,7 @@ message GetRangeResponse {
   // chunks.
   message Body {
     // Requested object range or meta information about split object.
-    oneof range_part{
+    oneof range_part {
       // Chunked object payload's range.
       bytes chunk = 1;
 

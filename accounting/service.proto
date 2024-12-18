@@ -2,12 +2,12 @@ syntax = "proto3";
 
 package neo.fs.v2.accounting;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/accounting/grpc;accounting";
-option csharp_namespace = "Neo.FileStorage.API.Accounting";
-
 import "accounting/types.proto";
 import "refs/types.proto";
 import "session/types.proto";
+
+option csharp_namespace = "Neo.FileStorage.API.Accounting";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/accounting/grpc;accounting";
 
 // Accounting service provides methods for interaction with FS chain via
 // other NeoFS nodes to get information about the account balance. Deposit and
@@ -21,7 +21,7 @@ service AccountingService {
   // - **OK** (0, SECTION_SUCCESS):
   // balance has been successfully read;
   // - Common failures (SECTION_FAILURE_COMMON).
-  rpc Balance (BalanceRequest) returns (BalanceResponse);
+  rpc Balance(BalanceRequest) returns (BalanceResponse);
 }
 
 // BalanceRequest message

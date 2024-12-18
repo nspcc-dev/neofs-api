@@ -19,3 +19,7 @@ doc:
 			--proto_path=.:/usr/local/include \
 			--doc_out=proto-docs/ $${f}/*.proto; \
 	done
+
+.PHONY: format
+format:
+	buf format -w
