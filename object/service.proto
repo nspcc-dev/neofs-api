@@ -137,6 +137,8 @@ service ObjectService {
   // Header's filed values. Please see the corresponding NeoFS Technical
   // Specification section for more details.
   //
+  // DEPRECATED: please use SearchV2.
+  //
   // Extended headers can change `Search` behaviour:
   // * __NEOFS__NETMAP_EPOCH \
   //   Will use the requsted version of Network Map for object placement
@@ -155,6 +157,15 @@ service ObjectService {
   // - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   //   provided session token has expired.
   rpc Search(SearchRequest) returns (stream SearchResponse);
+
+  // Search for objects in a container. Similar to Search, but:
+  // * sorted
+  // * limited in amount of returned data
+  // * single message
+  // * allows for additional header fields to be returned
+  //
+  // Result is ordered by requested attributes and object ID.
+  rpc SearchV2(SearchV2Request) returns (SearchV2Response);
 
   // Get byte range of data payload. Range is set as an (offset, length) tuple.
   // Like in `Get` method, the response uses gRPC stream. Requested range can be
@@ -490,77 +501,9 @@ message SearchRequest {
 
     // Version of the Query Language used
     uint32 version = 2;
-    // Filter structure checks if the object header field or the attribute content
-    // matches a value.
-    //
-    // If no filters are set, search request will return all objects of the
-    // container, including Regular object, Tombstones and Storage Group
-    // objects. Most human users expect to get only object they can directly
-    // work with. In that case, `$Object:ROOT` filter should be used.
-    //
-    // If `match_type` field is numerical, both `value` field and object
-    // attribute MUST be base-10 integers.
-    //
-    // By default `key` field refers to the corresponding object's `Attribute`.
-    // Some Object's header fields can also be accessed by adding `$Object:`
-    // prefix to the name. Here is the list of fields available via this prefix:
-    //
-    // * $Object:version \
-    //   version
-    // * $Object:objectID \
-    //   object_id
-    // * $Object:containerID \
-    //   container_id
-    // * $Object:ownerID \
-    //   owner_id
-    // * $Object:creationEpoch \
-    //   creation_epoch
-    // * $Object:payloadLength \
-    //   payload_length
-    // * $Object:payloadHash \
-    //   payload_hash
-    // * $Object:objectType \
-    //   object_type
-    // * $Object:homomorphicHash \
-    //   homomorphic_hash
-    // * $Object:split.parent \
-    //   object_id of parent
-    // * $Object:split.splitID \
-    //   16 byte UUIDv4 used to identify the split object hierarchy parts
-    // * $Object:split.first \
-    //   object_id of the first part in split chain; non-acceptable for deprecated V1 split scheme
-    //
-    // There are some well-known filter aliases to match objects by certain
-    // properties:
-    //
-    // * $Object:ROOT \
-    //   Returns only `REGULAR` type objects that are not split or that are the top
-    //   level root objects in a split hierarchy. This includes objects not
-    //   present physically, like large objects split into smaller objects
-    //   without a separate top-level root object. Objects of other types like
-    //   StorageGroups and Tombstones will not be shown. This filter may be
-    //   useful for listing objects like `ls` command of some virtual file
-    //   system. This filter is activated if the `key` exists, disregarding the
-    //   value and matcher type.
-    // * $Object:PHY \
-    //   Returns only objects physically stored in the system. This filter is
-    //   activated if the `key` exists, disregarding the value and matcher type.
-    //
-    // Note: using filters with a key with prefix `$Object:` and match type
-    // `NOT_PRESENT `is not recommended since this is not a cross-version approach.
-    // Behavior when processing this kind of filters is undefined.
-    message Filter {
-      // Match type to use
-      MatchType match_type = 1 [json_name = "matchType"];
 
-      // Attribute or Header fields to match
-      string key = 2 [json_name = "key"];
-
-      // Value to match
-      string value = 3 [json_name = "value"];
-    }
     // List of search expressions
-    repeated Filter filters = 3;
+    repeated SearchFilter filters = 3;
   }
   // Body of search object request message.
   Body body = 1;
@@ -581,6 +524,83 @@ message SearchResponse {
   message Body {
     // List of `ObjectID`s that match the search query
     repeated neo.fs.v2.refs.ObjectID id_list = 1;
+  }
+  // Body of search object response message.
+  Body body = 1;
+
+  // Carries response meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
+
+  // Carries response verification information. This header is used to
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
+  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
+}
+
+// Object SearchV2 request
+message SearchV2Request {
+  // Object Search request body
+  message Body {
+    // Container where the search is being performed.
+    neo.fs.v2.refs.ContainerID container_id = 1;
+
+    // Version of the Query Language used.
+    uint32 version = 2;
+
+    // List of search expressions. Limited to 8. If additional attributes are
+    // requested (see attributes below) then the search expression MUST use
+    // the first requested attribute.
+    repeated SearchFilter filters = 3;
+
+    // Cursor to continue search. Can be omitted or empty for the new search.
+    string cursor = 4;
+
+    // Limits the number of responses to the specified number. Can't be more
+    // than 1000.
+    uint32 count = 5;
+
+    // List of attribute names (including special ones as defined by
+    // SearchFilter key) to include into the reply. Limited to 4, these
+    // attributes also affect result ordering (result is ordered by attributes
+    // and then by OID).
+    repeated string attributes = 6;
+  }
+  // Body of search object request message.
+  Body body = 1;
+
+  // Carries request meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
+
+  // Carries request verification information. This header is used to
+  // authenticate the nodes of the message route and check the correctness of
+  // transmission.
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
+}
+
+// SearchV2 response
+message SearchV2Response {
+  // OID with additional requested metadata.
+  message OIDWithMeta {
+    // Object ID that matches search criteria.
+    neo.fs.v2.refs.ObjectID id = 1;
+    // List of attribute data from the respective object, fields
+    // strictly follow requested ones.
+    repeated string attributes = 2;
+  }
+
+  // Main result structure.
+  message Body {
+    // List of object IDs with additional requested attributes.
+    repeated OIDWithMeta result = 1;
+
+    // Cursor that can be used for subsequent requests. For users it's an
+    // opaque string that is omitted or empty when there are no more results
+    // to list. For nodes to interoperate this is defined as the latest OID
+    // for queries without filters and primary (first) attribute value plus
+    // OID. Values are encoded in base64.
+    string cursor = 2;
   }
   // Body of search object response message.
   Body body = 1;

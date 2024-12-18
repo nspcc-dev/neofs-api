@@ -40,9 +40,13 @@
     - [ReplicateResponse](#neo.fs.v2.object.ReplicateResponse)
     - [SearchRequest](#neo.fs.v2.object.SearchRequest)
     - [SearchRequest.Body](#neo.fs.v2.object.SearchRequest.Body)
-    - [SearchRequest.Body.Filter](#neo.fs.v2.object.SearchRequest.Body.Filter)
     - [SearchResponse](#neo.fs.v2.object.SearchResponse)
     - [SearchResponse.Body](#neo.fs.v2.object.SearchResponse.Body)
+    - [SearchV2Request](#neo.fs.v2.object.SearchV2Request)
+    - [SearchV2Request.Body](#neo.fs.v2.object.SearchV2Request.Body)
+    - [SearchV2Response](#neo.fs.v2.object.SearchV2Response)
+    - [SearchV2Response.Body](#neo.fs.v2.object.SearchV2Response.Body)
+    - [SearchV2Response.OIDWithMeta](#neo.fs.v2.object.SearchV2Response.OIDWithMeta)
     
 
 - [object/types.proto](#object/types.proto)
@@ -52,6 +56,7 @@
     - [Header.Attribute](#neo.fs.v2.object.Header.Attribute)
     - [Header.Split](#neo.fs.v2.object.Header.Split)
     - [Object](#neo.fs.v2.object.Object)
+    - [SearchFilter](#neo.fs.v2.object.SearchFilter)
     - [ShortHeader](#neo.fs.v2.object.ShortHeader)
     - [SplitInfo](#neo.fs.v2.object.SplitInfo)
     
@@ -80,6 +85,7 @@ rpc Put(stream PutRequest) returns (PutResponse);
 rpc Delete(DeleteRequest) returns (DeleteResponse);
 rpc Head(HeadRequest) returns (HeadResponse);
 rpc Search(SearchRequest) returns (stream SearchResponse);
+rpc SearchV2(SearchV2Request) returns (SearchV2Response);
 rpc GetRange(GetRangeRequest) returns (stream GetRangeResponse);
 rpc GetRangeHash(GetRangeHashRequest) returns (GetRangeHashResponse);
 rpc Replicate(ReplicateRequest) returns (ReplicateResponse);
@@ -228,6 +234,8 @@ Search objects in container. Search query allows to match by Object
 Header's filed values. Please see the corresponding NeoFS Technical
 Specification section for more details.
 
+DEPRECATED: please use SearchV2.
+
 Extended headers can change `Search` behaviour:
 * __NEOFS__NETMAP_EPOCH \
   Will use the requsted version of Network Map for object placement
@@ -249,6 +257,19 @@ Statuses:
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Search | [SearchRequest](#neo.fs.v2.object.SearchRequest) | [SearchResponse](#neo.fs.v2.object.SearchResponse) |
+#### Method SearchV2
+
+Search for objects in a container. Similar to Search, but:
+* sorted
+* limited in amount of returned data
+* single message
+* allows for additional header fields to be returned
+
+Result is ordered by requested attributes and object ID.
+
+| Name | Input | Output |
+| ---- | ----- | ------ |
+| SearchV2 | [SearchV2Request](#neo.fs.v2.object.SearchV2Request) | [SearchV2Response](#neo.fs.v2.object.SearchV2Response) |
 #### Method GetRange
 
 Get byte range of data payload. Range is set as an (offset, length) tuple.
@@ -759,78 +780,7 @@ Object Search request body
 | ----- | ---- | ----- | ----------- |
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Container identifier were to search |
 | version | [uint32](#uint32) |  | Version of the Query Language used |
-| filters | [SearchRequest.Body.Filter](#neo.fs.v2.object.SearchRequest.Body.Filter) | repeated | List of search expressions |
-
-
-<a name="neo.fs.v2.object.SearchRequest.Body.Filter"></a>
-
-### Message SearchRequest.Body.Filter
-Filter structure checks if the object header field or the attribute content
-matches a value.
-
-If no filters are set, search request will return all objects of the
-container, including Regular object, Tombstones and Storage Group
-objects. Most human users expect to get only object they can directly
-work with. In that case, `$Object:ROOT` filter should be used.
-
-If `match_type` field is numerical, both `value` field and object
-attribute MUST be base-10 integers.
-
-By default `key` field refers to the corresponding object's `Attribute`.
-Some Object's header fields can also be accessed by adding `$Object:`
-prefix to the name. Here is the list of fields available via this prefix:
-
-* $Object:version \
-  version
-* $Object:objectID \
-  object_id
-* $Object:containerID \
-  container_id
-* $Object:ownerID \
-  owner_id
-* $Object:creationEpoch \
-  creation_epoch
-* $Object:payloadLength \
-  payload_length
-* $Object:payloadHash \
-  payload_hash
-* $Object:objectType \
-  object_type
-* $Object:homomorphicHash \
-  homomorphic_hash
-* $Object:split.parent \
-  object_id of parent
-* $Object:split.splitID \
-  16 byte UUIDv4 used to identify the split object hierarchy parts
-* $Object:split.first \
-  object_id of the first part in split chain; non-acceptable for deprecated V1 split scheme
-
-There are some well-known filter aliases to match objects by certain
-properties:
-
-* $Object:ROOT \
-  Returns only `REGULAR` type objects that are not split or that are the top
-  level root objects in a split hierarchy. This includes objects not
-  present physically, like large objects split into smaller objects
-  without a separate top-level root object. Objects of other types like
-  StorageGroups and Tombstones will not be shown. This filter may be
-  useful for listing objects like `ls` command of some virtual file
-  system. This filter is activated if the `key` exists, disregarding the
-  value and matcher type.
-* $Object:PHY \
-  Returns only objects physically stored in the system. This filter is
-  activated if the `key` exists, disregarding the value and matcher type.
-
-Note: using filters with a key with prefix `$Object:` and match type
-`NOT_PRESENT `is not recommended since this is not a cross-version approach.
-Behavior when processing this kind of filters is undefined.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| match_type | [MatchType](#neo.fs.v2.object.MatchType) |  | Match type to use |
-| key | [string](#string) |  | Attribute or Header fields to match |
-| value | [string](#string) |  | Value to match |
+| filters | [SearchFilter](#neo.fs.v2.object.SearchFilter) | repeated | List of search expressions |
 
 
 <a name="neo.fs.v2.object.SearchResponse"></a>
@@ -855,6 +805,72 @@ Object Search response body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | id_list | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | List of `ObjectID`s that match the search query |
+
+
+<a name="neo.fs.v2.object.SearchV2Request"></a>
+
+### Message SearchV2Request
+Object SearchV2 request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [SearchV2Request.Body](#neo.fs.v2.object.SearchV2Request.Body) |  | Body of search object request message. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="neo.fs.v2.object.SearchV2Request.Body"></a>
+
+### Message SearchV2Request.Body
+Object Search request body
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Container where the search is being performed. |
+| version | [uint32](#uint32) |  | Version of the Query Language used. |
+| filters | [SearchFilter](#neo.fs.v2.object.SearchFilter) | repeated | List of search expressions. Limited to 8. If additional attributes are requested (see attributes below) then the search expression MUST use the first requested attribute. |
+| cursor | [string](#string) |  | Cursor to continue search. Can be omitted or empty for the new search. |
+| count | [uint32](#uint32) |  | Limits the number of responses to the specified number. Can't be more than 1000. |
+| attributes | [string](#string) | repeated | List of attribute names (including special ones as defined by SearchFilter key) to include into the reply. Limited to 4, these attributes also affect result ordering (result is ordered by attributes and then by OID). |
+
+
+<a name="neo.fs.v2.object.SearchV2Response"></a>
+
+### Message SearchV2Response
+SearchV2 response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [SearchV2Response.Body](#neo.fs.v2.object.SearchV2Response.Body) |  | Body of search object response message. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+
+
+<a name="neo.fs.v2.object.SearchV2Response.Body"></a>
+
+### Message SearchV2Response.Body
+Main result structure.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [SearchV2Response.OIDWithMeta](#neo.fs.v2.object.SearchV2Response.OIDWithMeta) | repeated | List of object IDs with additional requested attributes. |
+| cursor | [string](#string) |  | Cursor that can be used for subsequent requests. For users it's an opaque string that is omitted or empty when there are no more results to list. For nodes to interoperate this is defined as the latest OID for queries without filters and primary (first) attribute value plus OID. Values are encoded in base64. |
+
+
+<a name="neo.fs.v2.object.SearchV2Response.OIDWithMeta"></a>
+
+### Message SearchV2Response.OIDWithMeta
+OID with additional requested metadata.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Object ID that matches search criteria. |
+| attributes | [string](#string) | repeated | List of attribute data from the respective object, fields strictly follow requested ones. |
 
  <!-- end messages -->
 
@@ -982,6 +998,77 @@ in the header.
 | signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signed object_id |
 | header | [Header](#neo.fs.v2.object.Header) |  | Object metadata headers |
 | payload | [bytes](#bytes) |  | Payload bytes |
+
+
+<a name="neo.fs.v2.object.SearchFilter"></a>
+
+### Message SearchFilter
+Filter structure checks if the object header field or the attribute content
+matches a value.
+
+If no filters are set, search request will return all objects of the
+container, including Regular object, Tombstones and Storage Group
+objects. Most human users expect to get only object they can directly
+work with. In that case, `$Object:ROOT` filter should be used.
+
+If `match_type` field is numerical, both `value` field and object
+attribute MUST be base-10 integers.
+
+By default `key` field refers to the corresponding object's `Attribute`.
+Some Object's header fields can also be accessed by adding `$Object:`
+prefix to the name. Here is the list of fields available via this prefix:
+
+* $Object:version \
+  version
+* $Object:objectID \
+  object_id
+* $Object:containerID \
+  container_id
+* $Object:ownerID \
+  owner_id
+* $Object:creationEpoch \
+  creation_epoch
+* $Object:payloadLength \
+  payload_length
+* $Object:payloadHash \
+  payload_hash
+* $Object:objectType \
+  object_type
+* $Object:homomorphicHash \
+  homomorphic_hash
+* $Object:split.parent \
+  object_id of parent
+* $Object:split.splitID \
+  16 byte UUIDv4 used to identify the split object hierarchy parts
+* $Object:split.first \
+  object_id of the first part in split chain; non-acceptable for deprecated V1 split scheme
+
+There are some well-known filter aliases to match objects by certain
+properties:
+
+* $Object:ROOT \
+  Returns only `REGULAR` type objects that are not split or that are the top
+  level root objects in a split hierarchy. This includes objects not
+  present physically, like large objects split into smaller objects
+  without a separate top-level root object. Objects of other types like
+  StorageGroups and Tombstones will not be shown. This filter may be
+  useful for listing objects like `ls` command of some virtual file
+  system. This filter is activated if the `key` exists, disregarding the
+  value and matcher type.
+* $Object:PHY \
+  Returns only objects physically stored in the system. This filter is
+  activated if the `key` exists, disregarding the value and matcher type.
+
+Note: using filters with a key with prefix `$Object:` and match type
+`NOT_PRESENT `is not recommended since this is not a cross-version approach.
+Behavior when processing this kind of filters is undefined.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| match_type | [MatchType](#neo.fs.v2.object.MatchType) |  | Match type to use |
+| key | [string](#string) |  | Attribute or Header fields to match |
+| value | [string](#string) |  | Value to match |
 
 
 <a name="neo.fs.v2.object.ShortHeader"></a>
