@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package neo.fs.v2.acl;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/acl/grpc;acl";
-option csharp_namespace = "Neo.FileStorage.API.Acl";
-
 import "refs/types.proto";
+
+option csharp_namespace = "Neo.FileStorage.API.Acl";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/acl/grpc;acl";
 
 // Target role of the access control rule in access control list.
 enum Role {
@@ -161,27 +161,27 @@ message EACLRecord {
     MatchType match_type = 2 [json_name = "matchType"];
 
     // Name of the Header to use
-    string key = 3 [json_name="key"];
+    string key = 3 [json_name = "key"];
 
     // Expected Header Value or pattern to match
-    string value = 4 [json_name="value"];
+    string value = 4 [json_name = "value"];
   }
 
   // List of filters to match and see if rule is applicable
-  repeated Filter filters = 3 [json_name="filters"];
+  repeated Filter filters = 3 [json_name = "filters"];
 
   // Target to apply ACL rule. Can be a subject's role class or a list of public
   // keys to match.
   message Target {
     // Target subject's role class
-    Role role = 1 [json_name="role"];
+    Role role = 1 [json_name = "role"];
 
     // List of 25-byte accounts to identify target subjects.
     // 33-byte public keys are also supported, however, they are deprecated and script hashes should be derived from them.
-    repeated bytes keys = 2 [json_name="keys"];
+    repeated bytes keys = 2 [json_name = "keys"];
   }
   // List of target subjects to apply ACL rule to
-  repeated Target targets = 4 [json_name="targets"];
+  repeated Target targets = 4 [json_name = "targets"];
 }
 
 // Extended ACL rules table. A list of ACL rules defined additionally to Basic
@@ -194,10 +194,10 @@ message EACLTable {
   neo.fs.v2.refs.Version version = 1 [json_name = "version"];
 
   // Identifier of the container that should use given access control rules
-  neo.fs.v2.refs.ContainerID container_id = 2 [json_name="containerID"];
+  neo.fs.v2.refs.ContainerID container_id = 2 [json_name = "containerID"];
 
   // List of Extended ACL rules
-  repeated EACLRecord records = 3 [json_name="records"];
+  repeated EACLRecord records = 3 [json_name = "records"];
 }
 
 // BearerToken allows to attach signed Extended ACL rules to the request in
@@ -217,34 +217,34 @@ message BearerToken {
     // container. If it contains `container_id` field, bearer token is only
     // valid for this specific container. Otherwise, any container of the same owner
     // is allowed.
-    EACLTable eacl_table = 1 [json_name="eaclTable"];
+    EACLTable eacl_table = 1 [json_name = "eaclTable"];
 
     // `OwnerID` defines to whom the token was issued. It must match the request
     // originator's `OwnerID`. If empty, any token bearer will be accepted.
-    neo.fs.v2.refs.OwnerID owner_id = 2 [json_name="ownerID"];
+    neo.fs.v2.refs.OwnerID owner_id = 2 [json_name = "ownerID"];
 
     // Lifetime parameters of the token. Field names taken from
     // [rfc7519](https://tools.ietf.org/html/rfc7519).
     message TokenLifetime {
       // Expiration Epoch
-      uint64 exp = 1 [json_name="exp"];
+      uint64 exp = 1 [json_name = "exp"];
 
       // Not valid before Epoch
-      uint64 nbf = 2 [json_name="nbf"];
+      uint64 nbf = 2 [json_name = "nbf"];
 
       // Issued at Epoch
-      uint64 iat = 3 [json_name="iat"];
+      uint64 iat = 3 [json_name = "iat"];
     }
     // Token expiration and valid time period parameters
-    TokenLifetime lifetime = 3 [json_name="lifetime"];
+    TokenLifetime lifetime = 3 [json_name = "lifetime"];
 
     // Token issuer's user ID in NeoFS. It must equal to the related
     // container's owner.
-    neo.fs.v2.refs.OwnerID issuer = 4 [json_name="issuer"];
+    neo.fs.v2.refs.OwnerID issuer = 4 [json_name = "issuer"];
   }
   // Bearer Token body
-  Body body = 1 [json_name="body"];
+  Body body = 1 [json_name = "body"];
 
   // Signature of BearerToken body
-  neo.fs.v2.refs.Signature signature = 2 [json_name="signature"];
+  neo.fs.v2.refs.Signature signature = 2 [json_name = "signature"];
 }

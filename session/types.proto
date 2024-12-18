@@ -2,12 +2,12 @@ syntax = "proto3";
 
 package neo.fs.v2.session;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/session/grpc;session";
-option csharp_namespace = "Neo.FileStorage.API.Session";
-
-import "refs/types.proto";
 import "acl/types.proto";
+import "refs/types.proto";
 import "status/types.proto";
+
+option csharp_namespace = "Neo.FileStorage.API.Session";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/session/grpc;session";
 
 // Context information for Session Tokens related to ObjectService requests
 message ObjectSessionContext {
@@ -59,30 +59,30 @@ message ObjectSessionContext {
 
 // Context information for Session Tokens related to ContainerService requests.
 message ContainerSessionContext {
-    // Container request verbs
-    enum Verb {
-        // Unknown verb
-        VERB_UNSPECIFIED = 0;
+  // Container request verbs
+  enum Verb {
+    // Unknown verb
+    VERB_UNSPECIFIED = 0;
 
-        // Refers to container.Put RPC call
-        PUT = 1;
+    // Refers to container.Put RPC call
+    PUT = 1;
 
-        // Refers to container.Delete RPC call
-        DELETE = 2;
+    // Refers to container.Delete RPC call
+    DELETE = 2;
 
-        // Refers to container.SetExtendedACL RPC call
-        SETEACL = 3;
-    }
-    // Type of request for which the token is issued
-    Verb verb = 1 [json_name = "verb"];
+    // Refers to container.SetExtendedACL RPC call
+    SETEACL = 3;
+  }
+  // Type of request for which the token is issued
+  Verb verb = 1 [json_name = "verb"];
 
-    // Spreads the action to all owner containers.
-    // If set, container_id field is ignored.
-    bool wildcard = 2 [json_name = "wildcard"];
+  // Spreads the action to all owner containers.
+  // If set, container_id field is ignored.
+  bool wildcard = 2 [json_name = "wildcard"];
 
-    // Particular container to which the action applies.
-    // Ignored if wildcard flag is set.
-    refs.ContainerID container_id = 3 [json_name = "containerID"];
+  // Particular container to which the action applies.
+  // Ignored if wildcard flag is set.
+  refs.ContainerID container_id = 3 [json_name = "containerID"];
 }
 
 // NeoFS Session Token.

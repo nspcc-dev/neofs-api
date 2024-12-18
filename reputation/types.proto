@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package neo.fs.v2.reputation;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/reputation/grpc;reputation";
-option csharp_namespace = "Neo.FileStorage.API.Reputation";
-
 import "refs/types.proto";
+
+option csharp_namespace = "Neo.FileStorage.API.Reputation";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/reputation/grpc;reputation";
 
 // NeoFS unique peer identifier is a 33 byte long compressed public key of the
 // node, the same as the one stored in the network map.
@@ -19,45 +19,45 @@ import "refs/types.proto";
 // [URL-safe](https://tools.ietf.org/html/rfc4648#section-5) base64 encoding
 // with/without paddings are accepted.
 message PeerID {
-    // Peer node's public key
-    bytes public_key = 1 [json_name = "publicKey"];
+  // Peer node's public key
+  bytes public_key = 1 [json_name = "publicKey"];
 }
 
 // Trust level to a NeoFS network peer.
 message Trust {
-    // Identifier of the trusted peer
-    PeerID peer = 1 [json_name = "peer"];
+  // Identifier of the trusted peer
+  PeerID peer = 1 [json_name = "peer"];
 
-    // Trust level in [0:1] range
-    double value = 2 [json_name = "value"];
+  // Trust level in [0:1] range
+  double value = 2 [json_name = "value"];
 }
 
 // Trust level of a peer to a peer.
 message PeerToPeerTrust {
-    // Identifier of the trusting peer
-    PeerID trusting_peer = 1 [json_name = "trustingPeer"];
+  // Identifier of the trusting peer
+  PeerID trusting_peer = 1 [json_name = "trustingPeer"];
 
-    // Trust level
-    Trust trust = 2 [json_name = "trust"];
+  // Trust level
+  Trust trust = 2 [json_name = "trust"];
 }
 
 // Global trust level to NeoFS node.
 message GlobalTrust {
-    // Message format version. Effectively, the version of API library used to create
-    // the message.
-    neo.fs.v2.refs.Version version = 1 [json_name = "version"];
-    // Message body structure.
-    message Body {
-      // Node manager ID
-      PeerID manager = 1 [json_name = "manager"];
+  // Message format version. Effectively, the version of API library used to create
+  // the message.
+  neo.fs.v2.refs.Version version = 1 [json_name = "version"];
+  // Message body structure.
+  message Body {
+    // Node manager ID
+    PeerID manager = 1 [json_name = "manager"];
 
-      // Global trust level
-      Trust trust = 2 [json_name = "trust"];
-    }
+    // Global trust level
+    Trust trust = 2 [json_name = "trust"];
+  }
 
-    // Message body
-    Body body = 2 [json_name = "body"];
+  // Message body
+  Body body = 2 [json_name = "body"];
 
-    // Signature of the binary `body` field by the manager.
-    neo.fs.v2.refs.Signature signature = 3 [json_name = "signature"];
+  // Signature of the binary `body` field by the manager.
+  neo.fs.v2.refs.Signature signature = 3 [json_name = "signature"];
 }

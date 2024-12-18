@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package neo.fs.v2.netmap;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/netmap/grpc;netmap";
-option csharp_namespace = "Neo.FileStorage.API.Netmap";
-
 import "refs/types.proto";
+
+option csharp_namespace = "Neo.FileStorage.API.Netmap";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/netmap/grpc;netmap";
 
 // Operations on filters
 enum Operation {
@@ -124,7 +124,10 @@ message PlacementPolicy {
 
   // DEPRECATED. Was used for subnetwork ID to select nodes from, currently
   // ignored.
-  refs.SubnetID subnet_id = 5 [json_name = "subnetId", deprecated = true];
+  refs.SubnetID subnet_id = 5 [
+    json_name = "subnetId",
+    deprecated = true
+  ];
 }
 
 // NeoFS node description
@@ -257,11 +260,11 @@ message NodeInfo {
 
 // Network map structure
 message Netmap {
-    // Network map revision number.
-    uint64 epoch = 1 [json_name = "epoch"];
+  // Network map revision number.
+  uint64 epoch = 1 [json_name = "epoch"];
 
-    // Nodes presented in network.
-    repeated NodeInfo nodes = 2 [json_name = "nodes"];
+  // Nodes presented in network.
+  repeated NodeInfo nodes = 2 [json_name = "nodes"];
 }
 
 // NeoFS network configuration
@@ -320,15 +323,15 @@ message NetworkConfig {
 
 // Information about NeoFS network
 message NetworkInfo {
-    // Number of the current epoch in the NeoFS network
-    uint64 current_epoch = 1 [json_name = "currentEpoch"];
+  // Number of the current epoch in the NeoFS network
+  uint64 current_epoch = 1 [json_name = "currentEpoch"];
 
-    // Magic number of FS chain of the NeoFS network
-    uint64 magic_number = 2 [json_name = "magicNumber"];
+  // Magic number of FS chain of the NeoFS network
+  uint64 magic_number = 2 [json_name = "magicNumber"];
 
-    // MillisecondsPerBlock network parameter of FS chain of the NeoFS network
-    int64 ms_per_block = 3 [json_name = "msPerBlock"];
+  // MillisecondsPerBlock network parameter of FS chain of the NeoFS network
+  int64 ms_per_block = 3 [json_name = "msPerBlock"];
 
-    // NeoFS network configuration
-    NetworkConfig network_config = 4 [json_name = "networkConfig"];
+  // NeoFS network configuration
+  NetworkConfig network_config = 4 [json_name = "networkConfig"];
 }

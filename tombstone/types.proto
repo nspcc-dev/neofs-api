@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package neo.fs.v2.tombstone;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/tombstone/grpc;tombstone";
-option csharp_namespace = "Neo.FileStorage.API.Tombstone";
-
 import "refs/types.proto";
+
+option csharp_namespace = "Neo.FileStorage.API.Tombstone";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/tombstone/grpc;tombstone";
 
 // Tombstone keeps record of deleted objects for a few epochs until they are
 // purged from the NeoFS network.
@@ -14,7 +14,10 @@ message Tombstone {
   // creator depending on the current NeoFS network settings.
   // DEPRECATED. Field ignored by servers, set corresponding object attribute
   // `__NEOFS__EXPIRATION_EPOCH` only.
-  uint64 expiration_epoch = 1 [json_name = "expirationEpoch", deprecated = true];
+  uint64 expiration_epoch = 1 [
+    json_name = "expirationEpoch",
+    deprecated = true
+  ];
 
   // 16 byte UUID used to identify the split object hierarchy parts. Must be
   // unique inside a container. All objects participating in the split must
