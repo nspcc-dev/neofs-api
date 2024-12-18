@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package neo.fs.v2.status;
 
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/status/grpc;status";
 option csharp_namespace = "Neo.FileStorage.API.Status";
+option go_package = "github.com/nspcc-dev/neofs-api-go/v2/status/grpc;status";
 
 // Declares the general format of the status returns of the NeoFS RPC protocol.
 // Status is present in all response messages. Each RPC of NeoFS protocol
@@ -33,113 +33,113 @@ option csharp_namespace = "Neo.FileStorage.API.Status";
 // should not expect) useful information in the message. Field `details`
 // should make the return more detailed.
 message Status {
-    // The status code
-    uint32 code = 1;
+  // The status code
+  uint32 code = 1;
 
-    // Developer-facing error message
-    string message = 2;
+  // Developer-facing error message
+  string message = 2;
 
-    // Return detail. It contains additional information that can be used to
-    // analyze the response. Each code defines a set of details that can be
-    // attached to a status. Client should not handle details that are not
-    // covered by the code.
-    message Detail {
-        // Detail ID. The identifier is required to determine the binary format
-        // of the detail and how to decode it.
-        uint32 id = 1;
+  // Return detail. It contains additional information that can be used to
+  // analyze the response. Each code defines a set of details that can be
+  // attached to a status. Client should not handle details that are not
+  // covered by the code.
+  message Detail {
+    // Detail ID. The identifier is required to determine the binary format
+    // of the detail and how to decode it.
+    uint32 id = 1;
 
-        // Binary status detail. Must follow the format associated with ID.
-        // The possibility of missing a value must be explicitly allowed.
-        bytes value = 2;
-    }
+    // Binary status detail. Must follow the format associated with ID.
+    // The possibility of missing a value must be explicitly allowed.
+    bytes value = 2;
+  }
 
-    // Data detailing the outcome of the operation. Must be unique by ID.
-    repeated Detail details = 3;
+  // Data detailing the outcome of the operation. Must be unique by ID.
+  repeated Detail details = 3;
 }
 
 // Section identifiers.
 enum Section {
-    // Successful return codes.
-    SECTION_SUCCESS = 0;
+  // Successful return codes.
+  SECTION_SUCCESS = 0;
 
-    // Failure codes regardless of the operation.
-    SECTION_FAILURE_COMMON = 1;
+  // Failure codes regardless of the operation.
+  SECTION_FAILURE_COMMON = 1;
 
-    // Object service-specific errors.
-    SECTION_OBJECT = 2;
+  // Object service-specific errors.
+  SECTION_OBJECT = 2;
 
-    // Container service-specific errors.
-    SECTION_CONTAINER = 3;
+  // Container service-specific errors.
+  SECTION_CONTAINER = 3;
 
-    // Session service-specific errors.
-    SECTION_SESSION = 4;
+  // Session service-specific errors.
+  SECTION_SESSION = 4;
 }
 
 // Section of NeoFS successful return codes.
 enum Success {
-    // [**0**] Default success. Not detailed.
-    // If the server cannot match successful outcome to the code, it should
-    // use this code.
-    OK = 0;
+  // [**0**] Default success. Not detailed.
+  // If the server cannot match successful outcome to the code, it should
+  // use this code.
+  OK = 0;
 }
 
 // Section of failed statuses independent of the operation.
 enum CommonFail {
-    // [**1024**] Internal server error, default failure. Not detailed.
-    // If the server cannot match failed outcome to the code, it should
-    // use this code.
-    INTERNAL = 0;
+  // [**1024**] Internal server error, default failure. Not detailed.
+  // If the server cannot match failed outcome to the code, it should
+  // use this code.
+  INTERNAL = 0;
 
-    // [**1025**] Wrong magic of the NeoFS network.
-    // Details:
-    //  - [**0**] Magic number of the served NeoFS network (big-endian 64-bit
-    //  unsigned integer).
-    WRONG_MAGIC_NUMBER = 1;
+  // [**1025**] Wrong magic of the NeoFS network.
+  // Details:
+  //  - [**0**] Magic number of the served NeoFS network (big-endian 64-bit
+  //  unsigned integer).
+  WRONG_MAGIC_NUMBER = 1;
 
-    // [**1026**] Signature verification failure.
-    SIGNATURE_VERIFICATION_FAIL = 2;
+  // [**1026**] Signature verification failure.
+  SIGNATURE_VERIFICATION_FAIL = 2;
 
-    // [**1027**] Node is under maintenance.
-    NODE_UNDER_MAINTENANCE = 3;
+  // [**1027**] Node is under maintenance.
+  NODE_UNDER_MAINTENANCE = 3;
 }
 
 // Section of statuses for object-related operations.
 enum Object {
-    // [**2048**] Access denied by ACL.
-    // Details:
-    // - [**0**] Human-readable description (UTF-8 encoded string).
-    ACCESS_DENIED = 0;
+  // [**2048**] Access denied by ACL.
+  // Details:
+  // - [**0**] Human-readable description (UTF-8 encoded string).
+  ACCESS_DENIED = 0;
 
-    // [**2049**] Object not found.
-    OBJECT_NOT_FOUND = 1;
+  // [**2049**] Object not found.
+  OBJECT_NOT_FOUND = 1;
 
-    // [**2050**] Operation rejected by the object lock.
-    LOCKED = 2;
+  // [**2050**] Operation rejected by the object lock.
+  LOCKED = 2;
 
-    // [**2051**] Locking an object with a non-REGULAR type rejected.
-    LOCK_NON_REGULAR_OBJECT = 3;
+  // [**2051**] Locking an object with a non-REGULAR type rejected.
+  LOCK_NON_REGULAR_OBJECT = 3;
 
-    // [**2052**] Object has been marked deleted.
-    OBJECT_ALREADY_REMOVED = 4;
+  // [**2052**] Object has been marked deleted.
+  OBJECT_ALREADY_REMOVED = 4;
 
-    // [**2053**] Invalid range has been requested for an object.
-    OUT_OF_RANGE = 5;
+  // [**2053**] Invalid range has been requested for an object.
+  OUT_OF_RANGE = 5;
 }
 
 // Section of statuses for container-related operations.
 enum Container {
-    // [**3072**] Container not found.
-    CONTAINER_NOT_FOUND = 0;
+  // [**3072**] Container not found.
+  CONTAINER_NOT_FOUND = 0;
 
-    // [**3073**] eACL table not found.
-    EACL_NOT_FOUND = 1;
+  // [**3073**] eACL table not found.
+  EACL_NOT_FOUND = 1;
 }
 
 // Section of statuses for session-related operations.
 enum Session {
-    // [**4096**] Token not found.
-    TOKEN_NOT_FOUND = 0;
+  // [**4096**] Token not found.
+  TOKEN_NOT_FOUND = 0;
 
-    // [**4097**] Token has expired.
-    TOKEN_EXPIRED = 1;
+  // [**4097**] Token has expired.
+  TOKEN_EXPIRED = 1;
 }
