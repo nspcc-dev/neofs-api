@@ -65,6 +65,76 @@ enum MatchType {
   NUM_LE = 8;
 }
 
+// Filter structure checks if the object header field or the attribute content
+// matches a value.
+//
+// If no filters are set, search request will return all objects of the
+// container, including Regular object, Tombstones and Storage Group
+// objects. Most human users expect to get only object they can directly
+// work with. In that case, `$Object:ROOT` filter should be used.
+//
+// If `match_type` field is numerical, both `value` field and object
+// attribute MUST be base-10 integers.
+//
+// By default `key` field refers to the corresponding object's `Attribute`.
+// Some Object's header fields can also be accessed by adding `$Object:`
+// prefix to the name. Here is the list of fields available via this prefix:
+//
+// * $Object:version \
+//   version
+// * $Object:objectID \
+//   object_id
+// * $Object:containerID \
+//   container_id
+// * $Object:ownerID \
+//   owner_id
+// * $Object:creationEpoch \
+//   creation_epoch
+// * $Object:payloadLength \
+//   payload_length
+// * $Object:payloadHash \
+//   payload_hash
+// * $Object:objectType \
+//   object_type
+// * $Object:homomorphicHash \
+//   homomorphic_hash
+// * $Object:split.parent \
+//   object_id of parent
+// * $Object:split.splitID \
+//   16 byte UUIDv4 used to identify the split object hierarchy parts
+// * $Object:split.first \
+//   object_id of the first part in split chain; non-acceptable for deprecated V1 split scheme
+//
+// There are some well-known filter aliases to match objects by certain
+// properties:
+//
+// * $Object:ROOT \
+//   Returns only `REGULAR` type objects that are not split or that are the top
+//   level root objects in a split hierarchy. This includes objects not
+//   present physically, like large objects split into smaller objects
+//   without a separate top-level root object. Objects of other types like
+//   StorageGroups and Tombstones will not be shown. This filter may be
+//   useful for listing objects like `ls` command of some virtual file
+//   system. This filter is activated if the `key` exists, disregarding the
+//   value and matcher type.
+// * $Object:PHY \
+//   Returns only objects physically stored in the system. This filter is
+//   activated if the `key` exists, disregarding the value and matcher type.
+//
+// Note: using filters with a key with prefix `$Object:` and match type
+// `NOT_PRESENT `is not recommended since this is not a cross-version approach.
+// Behavior when processing this kind of filters is undefined.
+message SearchFilter {
+  // Match type to use
+  MatchType match_type = 1 [json_name = "matchType"];
+
+  // Attribute or Header fields to match
+  string key = 2 [json_name = "key"];
+
+  // Value to match
+  string value = 3 [json_name = "value"];
+}
+
 // Short header fields
 message ShortHeader {
   // Object format version. Effectively, the version of API library used to
