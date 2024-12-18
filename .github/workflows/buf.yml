@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: wizhi/setup-buf@v1
         with:
-          version: 0.20.5
+          version: 1.47.2
       - run: buf check lint
 
   breaking:
@@ -21,7 +21,7 @@ jobs:
       - name: Setup buf
         uses: wizhi/setup-buf@v1
         with:
-          version: 0.20.5
+          version: 1.47.2
       - name: Check out ref code
         uses: actions/checkout@v2
         with:
