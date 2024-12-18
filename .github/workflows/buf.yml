@@ -10,27 +10,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: wizhi/setup-buf@v1
+      - name: Download buf
+        uses: dsaltares/fetch-gh-release-asset@1.1.2
         with:
-          version: 0.20.5
-      - run: buf check lint
+          repo: 'bufbuild/buf'
+          version: 'tags/v1.48.0'
+          file: 'buf-Linux-x86_64'
+          target: 'buf-Linux-x86_64'
+      - run: chmod 755 ./buf-Linux-x86_64
+      - run: ./buf-Linux-x86_64 lint
 
   breaking:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup buf
-        uses: wizhi/setup-buf@v1
+      - name: Download buf
+        uses: dsaltares/fetch-gh-release-asset@1.1.2
         with:
-          version: 0.20.5
+          repo: 'bufbuild/buf'
+          version: 'tags/v1.48.0'
+          file: 'buf-Linux-x86_64'
+          target: 'buf-Linux-x86_64'
+      - run: chmod 755 ./buf-Linux-x86_64
       - name: Check out ref code
         uses: actions/checkout@v4
         with:
           ref: ${{ github.base_ref }}
           path: baseref
-      - run: cd baseref && buf image build -o image.bin
+      - run: cd baseref && ../buf-Linux-x86_64 build -o image.bin
 
       - name: Check out code
         uses: actions/checkout@v4
         with:
           path: prclone
-      - run: cd prclone && buf check breaking --against-input ../baseref/image.bin
+      - run: cd prclone && ../buf-Linux-x86_64 breaking --against ../baseref/image.bin

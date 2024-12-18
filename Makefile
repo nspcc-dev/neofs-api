@@ -6,8 +6,8 @@ BRBR?=master
 
 .PHONY: lint
 lint:
-	buf check lint
-	buf check breaking --against-input '.git#branch=$(BRBR)'
+	buf lint
+	buf breaking --against '.git#branch=$(BRBR)'
 
 .PHONY: doc
 # Regenerate documentation for proto files:
