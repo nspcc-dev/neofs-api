@@ -66,7 +66,7 @@ rpc NetmapSnapshot(NetmapSnapshotRequest) returns (NetmapSnapshotResponse);
 
 #### Method LocalNodeInfo
 
-Get NodeInfo structure from the particular node directly. 
+Get NodeInfo structure from the particular node directly.
 Node information can be taken from `Netmap` smart contract. In some cases, though,
 one may want to get recent information directly or to talk to the node not yet
 present in the `Network Map` to find out what API version can be used for

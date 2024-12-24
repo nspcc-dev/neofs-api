@@ -1,6 +1,7 @@
+version: v2
 lint:
   use:
-    - DEFAULT
+    - STANDARD
     - COMMENTS
     - ENUM_FIRST_VALUE_ZERO
   except:
