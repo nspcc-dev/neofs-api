@@ -615,7 +615,9 @@ message SearchV2Response {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// Object payload range. Ranges of zero length SHOULD be considered as invalid.
+// Object payload range. Ranges of zero length SHOULD be considered as invalid
+// except for the special 0:0 request which is interpreted as "get whole
+// payload" and allows to receive payload only when its size is not known.
 message Range {
   // Offset of the range from the object payload start
   uint64 offset = 1;

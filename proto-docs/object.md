@@ -723,7 +723,9 @@ PUT Object response body
 <a name="neo.fs.v2.object.Range"></a>
 
 ### Message Range
-Object payload range. Ranges of zero length SHOULD be considered as invalid.
+Object payload range. Ranges of zero length SHOULD be considered as invalid
+except for the special 0:0 request which is interpreted as "get whole
+payload" and allows to receive payload only when its size is not known.
 
 
 | Field | Type | Label | Description |
