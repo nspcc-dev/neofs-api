@@ -26,7 +26,8 @@
 
 ### Message Tombstone
 Tombstone keeps record of deleted objects for a few epochs until they are
-purged from the NeoFS network.
+purged from the NeoFS network. It is impossible to delete a tombstone object
+via ObjectService.Delete RPC call.
 
 
 | Field | Type | Label | Description |

@@ -8,7 +8,8 @@ option csharp_namespace = "Neo.FileStorage.API.Tombstone";
 option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/tombstone";
 
 // Tombstone keeps record of deleted objects for a few epochs until they are
-// purged from the NeoFS network.
+// purged from the NeoFS network. It is impossible to delete a tombstone object
+// via ObjectService.Delete RPC call.
 message Tombstone {
   // Last NeoFS epoch number of the tombstone lifetime. It's set by the tombstone
   // creator depending on the current NeoFS network settings.

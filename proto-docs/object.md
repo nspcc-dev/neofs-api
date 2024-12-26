@@ -173,6 +173,8 @@ been deleted;
 
 Delete the object from a container. There is no immediate removal
 guarantee. Object will be marked for removal and deleted eventually.
+Notice that some types of objects (see ObjectType) can not be removed,
+currently it's Tombstone and Lock.
 
 Extended headers can change `Delete` behaviour:
 * __NEOFS__NETMAP_EPOCH \
