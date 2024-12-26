@@ -97,10 +97,10 @@ message SessionToken {
 
     // Lifetime parameters of the token. Field names taken from rfc7519.
     message TokenLifetime {
-      // Expiration Epoch
+      // Expiration epoch, the last epoch when token is valid.
       uint64 exp = 1 [json_name = "exp"];
 
-      // Not valid before Epoch
+      // Not valid before epoch, the first epoch when token is valid.
       uint64 nbf = 2 [json_name = "nbf"];
 
       // Issued at Epoch

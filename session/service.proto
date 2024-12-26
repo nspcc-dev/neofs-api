@@ -28,7 +28,7 @@ message CreateRequest {
   message Body {
     // Session initiating user's or node's key derived `OwnerID`
     neo.fs.v2.refs.OwnerID owner_id = 1;
-    // Session expiration `Epoch`
+    // Session expiration epoch, the last epoch when session is valid.
     uint64 expiration = 2;
   }
   // Body of a create session token request message.

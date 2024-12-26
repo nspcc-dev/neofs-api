@@ -926,7 +926,8 @@ There are some "well-known" attributes starting with `__NEOFS__` prefix
 that affect system behaviour:
 
 * __NEOFS__EXPIRATION_EPOCH \
-  Tells GC to delete object after that epoch
+  Tells GC to delete object after that epoch (but object is available
+  throughout the epoch specified in this attribute).
 * __NEOFS__TICK_EPOCH \
   Decimal number that defines what epoch must produce
   object notification with UTF-8 object address in a
