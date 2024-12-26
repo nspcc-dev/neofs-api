@@ -6,7 +6,7 @@ import "refs/types.proto";
 import "session/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Object";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/object/grpc;object";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/object";
 
 // Type of the object payload content. Only `REGULAR` type objects can be split,
 // hence `TOMBSTONE`, `STORAGE_GROUP` and `LOCK` payload is limited by the maximum

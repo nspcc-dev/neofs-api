@@ -8,7 +8,7 @@ import "session/types.proto";
 import "status/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Object";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/object/grpc;object";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/object";
 
 // `ObjectService` provides API for manipulating objects. Object operations do
 // not affect FS chain and are only served by nodes in P2P style.

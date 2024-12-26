@@ -5,7 +5,7 @@ package neo.fs.v2.acl;
 import "refs/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Acl";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/acl/grpc;acl";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/acl";
 
 // Target role of the access control rule in access control list.
 enum Role {

@@ -5,7 +5,7 @@ package neo.fs.v2.netmap;
 import "refs/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Netmap";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/netmap/grpc;netmap";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/netmap";
 
 // Operations on filters
 enum Operation {

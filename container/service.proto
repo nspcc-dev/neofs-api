@@ -8,7 +8,7 @@ import "refs/types.proto";
 import "session/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Container";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/container/grpc;container";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/container";
 
 // `ContainerService` provides API to interact with `Container` smart contract
 // in FS chain via other NeoFS nodes. All of those actions can be done

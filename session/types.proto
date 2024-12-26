@@ -7,7 +7,7 @@ import "refs/types.proto";
 import "status/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Session";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/session/grpc;session";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/session";
 
 // Context information for Session Tokens related to ObjectService requests
 message ObjectSessionContext {
