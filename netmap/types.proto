@@ -97,7 +97,7 @@ message Selector {
 // selector set, the root bucket containing all possible nodes will be used by
 // default.
 message Replica {
-  // How many object replicas to put
+  // How many object replicas to put. Limited to 8.
   uint32 count = 1 [json_name = "count"];
 
   // Named selector bucket to put replicas
@@ -109,11 +109,13 @@ message Replica {
 // storage policy definition languages.
 message PlacementPolicy {
   // Rules to set number of object replicas and place each one into a named
-  // bucket
+  // bucket. Limited to 256 items.
   repeated Replica replicas = 1 [json_name = "replicas"];
 
-  // Container backup factor controls how deep NeoFS will search for nodes
-  // alternatives to include into container's nodes subset
+  // Container backup factor (CBF) controls how deep NeoFS will search for
+  // alternative nodes to include into container's nodes subset. In total,
+  // the number of container nodes is Selector (used by Replica) count
+  // times CBF. This number is limited to 64 per-Replica and 512 overall.
   uint32 container_backup_factor = 2 [json_name = "containerBackupFactor"];
 
   // Set of Selectors to form the container's nodes subset
