@@ -7,7 +7,7 @@ import "refs/types.proto";
 import "status/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Session";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/session/grpc;session";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/session";
 
 // Context information for Session Tokens related to ObjectService requests
 message ObjectSessionContext {
@@ -97,10 +97,10 @@ message SessionToken {
 
     // Lifetime parameters of the token. Field names taken from rfc7519.
     message TokenLifetime {
-      // Expiration Epoch
+      // Expiration epoch, the last epoch when token is valid.
       uint64 exp = 1 [json_name = "exp"];
 
-      // Not valid before Epoch
+      // Not valid before epoch, the first epoch when token is valid.
       uint64 nbf = 2 [json_name = "nbf"];
 
       // Issued at Epoch

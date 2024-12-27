@@ -5,7 +5,7 @@ package neo.fs.v2.subnet;
 import "refs/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Subnet";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/subnet/grpc;subnet";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/subnet";
 
 // NeoFS subnetwork description
 //

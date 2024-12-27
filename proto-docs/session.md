@@ -92,7 +92,7 @@ Session creation request body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Session initiating user's or node's key derived `OwnerID` |
-| expiration | [uint64](#uint64) |  | Session expiration `Epoch` |
+| expiration | [uint64](#uint64) |  | Session expiration epoch, the last epoch when session is valid. |
 
 
 <a name="neo.fs.v2.session.CreateResponse"></a>
@@ -270,8 +270,8 @@ Lifetime parameters of the token. Field names taken from rfc7519.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| exp | [uint64](#uint64) |  | Expiration Epoch |
-| nbf | [uint64](#uint64) |  | Not valid before Epoch |
+| exp | [uint64](#uint64) |  | Expiration epoch, the last epoch when token is valid. |
+| nbf | [uint64](#uint64) |  | Not valid before epoch, the first epoch when token is valid. |
 | iat | [uint64](#uint64) |  | Issued at Epoch |
 
 

@@ -6,7 +6,7 @@ import "refs/types.proto";
 import "session/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Object";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/object/grpc;object";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/object";
 
 // Type of the object payload content. Only `REGULAR` type objects can be split,
 // hence `TOMBSTONE`, `STORAGE_GROUP` and `LOCK` payload is limited by the maximum
@@ -154,10 +154,10 @@ message ShortHeader {
   // `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown
   uint64 payload_length = 5 [json_name = "payloadLength"];
 
-  // Hash of payload bytes
+  // SHA256 hash of payload bytes.
   neo.fs.v2.refs.Checksum payload_hash = 6 [json_name = "payloadHash"];
 
-  // Homomorphic hash of the object payload
+  // Homomorphic hash of the object payload (Tillich-Zemor).
   neo.fs.v2.refs.Checksum homomorphic_hash = 7 [json_name = "homomorphicHash"];
 }
 
@@ -180,13 +180,13 @@ message Header {
   // `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown.
   uint64 payload_length = 5 [json_name = "payloadLength"];
 
-  // Hash of payload bytes
+  // SHA256 hash of payload bytes
   neo.fs.v2.refs.Checksum payload_hash = 6 [json_name = "payloadHash"];
 
   // Type of the object payload content
   ObjectType object_type = 7 [json_name = "objectType"];
 
-  // Homomorphic hash of the object payload
+  // Homomorphic hash of the object payload (Tillich-Zemor).
   neo.fs.v2.refs.Checksum homomorphic_hash = 8 [json_name = "homomorphicHash"];
 
   // Session token, if it was used during Object creation. Need it to verify
@@ -204,7 +204,8 @@ message Header {
   // that affect system behaviour:
   //
   // * __NEOFS__EXPIRATION_EPOCH \
-  //   Tells GC to delete object after that epoch
+  //   Tells GC to delete object after that epoch (but object is available
+  //   throughout the epoch specified in this attribute).
   // * __NEOFS__TICK_EPOCH \
   //   Decimal number that defines what epoch must produce
   //   object notification with UTF-8 object address in a

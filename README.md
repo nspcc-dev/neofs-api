@@ -13,8 +13,8 @@
 
 NeoFS-API repository is the basis for language-specific libraries, e.g.:
 
-- [neofs-api-go](https://github.com/nspcc-dev/neofs-api-go)
-- [neofs-api-csharp](https://github.com/nspcc-dev/neofs-api-csharp)
+- [neofs-sdk-go](https://github.com/nspcc-dev/neofs-sdk-go) (see `proto` package there for vanilla API)
+- [neofs-api-csharp](https://github.com/neo-ngd/neofs-api-csharp)
 
 Those libraries contain compiled protocol buffers definitions, wrapped with
 language-specific code. Use them to integrate applications with NeoFS.

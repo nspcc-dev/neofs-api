@@ -6,7 +6,7 @@ import "reputation/types.proto";
 import "session/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Reputation";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/reputation/grpc;reputation";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/reputation";
 
 // `ReputationService` provides mechanisms for exchanging trust values with
 // other NeoFS nodes. Nodes rate each other's reputation based on how good they

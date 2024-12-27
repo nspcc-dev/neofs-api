@@ -5,7 +5,7 @@ package neo.fs.v2.link;
 import "refs/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Link";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/link/grpc;link";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/link";
 
 // Link is a payload of helper objects that contain the full list of the split
 // chain objects' IDs. It is created only after the whole split chain is known

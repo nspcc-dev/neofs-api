@@ -5,7 +5,7 @@ package neo.fs.v2.lock;
 import "refs/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Lock";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/lock/grpc;lock";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/lock";
 
 // Lock objects protects a list of objects from being deleted. The lifetime of a
 // lock object is limited similar to regular objects in

@@ -173,6 +173,8 @@ been deleted;
 
 Delete the object from a container. There is no immediate removal
 guarantee. Object will be marked for removal and deleted eventually.
+Notice that some types of objects (see ObjectType) can not be removed,
+currently it's Tombstone and Lock.
 
 Extended headers can change `Delete` behaviour:
 * __NEOFS__NETMAP_EPOCH \
@@ -902,9 +904,9 @@ Object Header
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
 | creation_epoch | [uint64](#uint64) |  | Object creation Epoch |
 | payload_length | [uint64](#uint64) |  | Size of payload in bytes. `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown. |
-| payload_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Hash of payload bytes |
+| payload_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | SHA256 hash of payload bytes |
 | object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Type of the object payload content |
-| homomorphic_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash of the object payload |
+| homomorphic_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash of the object payload (Tillich-Zemor). |
 | session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token, if it was used during Object creation. Need it to verify integrity and authenticity out of Request scope. |
 | attributes | [Header.Attribute](#neo.fs.v2.object.Header.Attribute) | repeated | User-defined object attributes. Attributes vary in length from object to object, so keep an eye on the entire Header limit depending on the context. |
 | split | [Header.Split](#neo.fs.v2.object.Header.Split) |  | Position of the object in the split hierarchy |
@@ -924,7 +926,8 @@ There are some "well-known" attributes starting with `__NEOFS__` prefix
 that affect system behaviour:
 
 * __NEOFS__EXPIRATION_EPOCH \
-  Tells GC to delete object after that epoch
+  Tells GC to delete object after that epoch (but object is available
+  throughout the epoch specified in this attribute).
 * __NEOFS__TICK_EPOCH \
   Decimal number that defines what epoch must produce
   object notification with UTF-8 object address in a
@@ -1086,8 +1089,8 @@ Short header fields
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
 | object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Type of the object payload content |
 | payload_length | [uint64](#uint64) |  | Size of payload in bytes. `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown |
-| payload_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Hash of payload bytes |
-| homomorphic_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash of the object payload |
+| payload_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | SHA256 hash of payload bytes. |
+| homomorphic_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash of the object payload (Tillich-Zemor). |
 
 
 <a name="neo.fs.v2.object.SplitInfo"></a>

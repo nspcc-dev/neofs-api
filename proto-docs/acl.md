@@ -72,8 +72,8 @@ Lifetime parameters of the token. Field names taken from
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| exp | [uint64](#uint64) |  | Expiration Epoch |
-| nbf | [uint64](#uint64) |  | Not valid before Epoch |
+| exp | [uint64](#uint64) |  | Expiration epoch, the last epoch when token is valid. |
+| nbf | [uint64](#uint64) |  | Not valid before epoch, the first epoch when token is valid. |
 | iat | [uint64](#uint64) |  | Issued at Epoch |
 
 

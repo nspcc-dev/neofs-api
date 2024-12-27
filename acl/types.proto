@@ -5,7 +5,7 @@ package neo.fs.v2.acl;
 import "refs/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Acl";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/acl/grpc;acl";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/acl";
 
 // Target role of the access control rule in access control list.
 enum Role {
@@ -226,10 +226,10 @@ message BearerToken {
     // Lifetime parameters of the token. Field names taken from
     // [rfc7519](https://tools.ietf.org/html/rfc7519).
     message TokenLifetime {
-      // Expiration Epoch
+      // Expiration epoch, the last epoch when token is valid.
       uint64 exp = 1 [json_name = "exp"];
 
-      // Not valid before Epoch
+      // Not valid before epoch, the first epoch when token is valid.
       uint64 nbf = 2 [json_name = "nbf"];
 
       // Issued at Epoch

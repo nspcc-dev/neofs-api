@@ -6,7 +6,7 @@ import "refs/types.proto";
 import "session/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Session";
-option go_package = "github.com/nspcc-dev/neofs-api-go/v2/session/grpc;session";
+option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/session";
 
 // `SessionService` allows to establish a temporary trust relationship between
 // two peer nodes and generate a `SessionToken` as the proof of trust to be
@@ -28,7 +28,7 @@ message CreateRequest {
   message Body {
     // Session initiating user's or node's key derived `OwnerID`
     neo.fs.v2.refs.OwnerID owner_id = 1;
-    // Session expiration `Epoch`
+    // Session expiration epoch, the last epoch when session is valid.
     uint64 expiration = 2;
   }
   // Body of a create session token request message.
