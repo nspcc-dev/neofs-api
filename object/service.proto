@@ -563,7 +563,7 @@ message SearchV2Request {
     uint32 count = 5;
 
     // List of attribute names (including special ones as defined by
-    // SearchFilter key) to include into the reply. Limited to 4, these
+    // SearchFilter key) to include into the reply. Limited to 8, these
     // attributes also affect result ordering (result is ordered by attributes
     // and then by OID).
     repeated string attributes = 6;
