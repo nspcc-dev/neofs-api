@@ -82,10 +82,6 @@ enum MatchType {
 //
 // * $Object:version \
 //   version
-// * $Object:objectID \
-//   object_id
-// * $Object:containerID \
-//   container_id
 // * $Object:ownerID \
 //   owner_id
 // * $Object:creationEpoch \
@@ -120,6 +116,13 @@ enum MatchType {
 // * $Object:PHY \
 //   Returns only objects physically stored in the system. This filter is
 //   activated if the `key` exists, disregarding the value and matcher type.
+//
+// Following filters are deprecated:
+//
+// * $Object:objectID \
+//   object_id
+// * $Object:containerID \
+//   container_id
 //
 // Note: using filters with a key with prefix `$Object:` and match type
 // `NOT_PRESENT `is not recommended since this is not a cross-version approach.
