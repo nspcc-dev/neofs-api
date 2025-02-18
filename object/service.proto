@@ -551,8 +551,9 @@ message SearchV2Request {
     uint32 version = 2;
 
     // List of search expressions. Limited to 8. If additional attributes are
-    // requested (see attributes below) then the search expression MUST use
-    // the first requested attribute.
+    // requested (see attributes below) then the first filter's key MUST be
+    // the first requested attribute. '$Object:containerID' and
+    // '$Object:objectID' filters are prohibited.
     repeated SearchFilter filters = 3;
 
     // Cursor to continue search. Can be omitted or empty for the new search.
@@ -565,7 +566,9 @@ message SearchV2Request {
     // List of attribute names (including special ones as defined by
     // SearchFilter key) to include into the reply. Limited to 8, these
     // attributes also affect result ordering (result is ordered by attributes
-    // and then by OID).
+    // and then by OID). If additional attributes are requested, then the first
+    // filter's key (see filters above) MUST be the first requested attribute.
+    // '$Object:containerID' and '$Object:objectID' attributes are prohibited.
     repeated string attributes = 6;
   }
   // Body of search object request message.
