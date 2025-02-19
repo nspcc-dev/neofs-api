@@ -267,7 +267,7 @@ Search for objects in a container. Similar to Search, but:
 * single message
 * allows for additional header fields to be returned
 
-Result is ordered by requested attributes and object ID.
+Result is ordered by the 1st requested attribute (if any) and object ID.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -837,7 +837,7 @@ Object Search request body
 | filters | [SearchFilter](#neo.fs.v2.object.SearchFilter) | repeated | List of search expressions. Limited to 8. If additional attributes are requested (see attributes below) then the first filter's key MUST be the first requested attribute. '$Object:containerID' and '$Object:objectID' filters are prohibited. |
 | cursor | [string](#string) |  | Cursor to continue search. Can be omitted or empty for the new search. |
 | count | [uint32](#uint32) |  | Limits the number of responses to the specified number. Can't be more than 1000. |
-| attributes | [string](#string) | repeated | List of attribute names (including special ones as defined by SearchFilter key) to include into the reply. Limited to 8, these attributes also affect result ordering (result is ordered by attributes and then by OID). If additional attributes are requested, then the first filter's key (see filters above) MUST be the first requested attribute. '$Object:containerID' and '$Object:objectID' attributes are prohibited. |
+| attributes | [string](#string) | repeated | List of attribute names (including special ones as defined by SearchFilter key) to include into the reply. Limited to 8, these attributes also affect result ordering (result is ordered by the 1st one and then by OID). If additional attributes are requested, then the first filter's key (see filters above) MUST be the first requested attribute. '$Object:containerID' and '$Object:objectID' attributes are prohibited. |
 
 
 <a name="neo.fs.v2.object.SearchV2Response"></a>

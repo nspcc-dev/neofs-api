@@ -166,7 +166,7 @@ service ObjectService {
   // * single message
   // * allows for additional header fields to be returned
   //
-  // Result is ordered by requested attributes and object ID.
+  // Result is ordered by the 1st requested attribute (if any) and object ID.
   rpc SearchV2(SearchV2Request) returns (SearchV2Response);
 
   // Get byte range of data payload. Range is set as an (offset, length) tuple.
@@ -565,7 +565,7 @@ message SearchV2Request {
 
     // List of attribute names (including special ones as defined by
     // SearchFilter key) to include into the reply. Limited to 8, these
-    // attributes also affect result ordering (result is ordered by attributes
+    // attributes also affect result ordering (result is ordered by the 1st one
     // and then by OID). If additional attributes are requested, then the first
     // filter's key (see filters above) MUST be the first requested attribute.
     // '$Object:containerID' and '$Object:objectID' attributes are prohibited.
