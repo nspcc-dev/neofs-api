@@ -342,7 +342,7 @@ System parameters:
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [bytes](#bytes) |  | Parameter key. UTF-8 encoded string |
+| key | [bytes](#bytes) |  | Parameter key. UTF-8 encoded string (with no zero bytes). |
 | value | [bytes](#bytes) |  | Parameter value |
 
 
@@ -370,7 +370,7 @@ NeoFS node description
 | ----- | ---- | ----- | ----------- |
 | public_key | [bytes](#bytes) |  | Public key of the NeoFS node in a binary format |
 | addresses | [string](#string) | repeated | Ways to connect to a node |
-| attributes | [NodeInfo.Attribute](#neo.fs.v2.netmap.NodeInfo.Attribute) | repeated | Carries list of the NeoFS node attributes in a key-value form. Key name must be a node-unique valid UTF-8 string. Value can't be empty. NodeInfo structures with duplicated attribute names or attributes with empty values will be considered invalid. |
+| attributes | [NodeInfo.Attribute](#neo.fs.v2.netmap.NodeInfo.Attribute) | repeated | Carries list of the NeoFS node attributes in a key-value form. Key name must be a node-unique valid UTF-8 string (without zero bytes). Value can't be empty. NodeInfo structures with duplicated attribute names or attributes with empty values will be considered invalid. |
 | state | [NodeInfo.State](#neo.fs.v2.netmap.NodeInfo.State) |  | Carries state of the NeoFS node |
 
 
@@ -380,7 +380,7 @@ NeoFS node description
 Administrator-defined Attributes of the NeoFS Storage Node.
 
 `Attribute` is a Key-Value metadata pair. Key name must be a valid UTF-8
-string. Value can't be empty.
+string (without zero bytes that are forbidden). Value can't be empty.
 
 Attributes can be constructed into a chain of attributes: any attribute can
 have a parent attribute and a child attribute (except the first and the last

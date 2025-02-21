@@ -143,7 +143,7 @@ message NodeInfo {
   // Administrator-defined Attributes of the NeoFS Storage Node.
   //
   // `Attribute` is a Key-Value metadata pair. Key name must be a valid UTF-8
-  // string. Value can't be empty.
+  // string (without zero bytes that are forbidden). Value can't be empty.
   //
   // Attributes can be constructed into a chain of attributes: any attribute can
   // have a parent attribute and a child attribute (except the first and the last
@@ -236,9 +236,9 @@ message NodeInfo {
     repeated string parents = 3 [json_name = "parents"];
   }
   // Carries list of the NeoFS node attributes in a key-value form. Key name
-  // must be a node-unique valid UTF-8 string. Value can't be empty. NodeInfo
-  // structures with duplicated attribute names or attributes with empty values
-  // will be considered invalid.
+  // must be a node-unique valid UTF-8 string (without zero bytes). Value can't
+  // be empty. NodeInfo structures with duplicated attribute names or
+  // attributes with empty values will be considered invalid.
   repeated Attribute attributes = 3 [json_name = "attributes"];
 
   // Represents the enumeration of various states of the NeoFS node.
@@ -313,7 +313,7 @@ message NetworkConfig {
   //   Fee paid for withdrawal of funds paid by the account owner.
   //   Value: little-endian integer. Default: 0.
   message Parameter {
-    // Parameter key. UTF-8 encoded string
+    // Parameter key. UTF-8 encoded string (with no zero bytes).
     bytes key = 1 [json_name = "key"];
 
     // Parameter value
