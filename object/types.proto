@@ -201,7 +201,8 @@ message Header {
   //
   // Key name must be an object-unique valid UTF-8 string. Value can't be empty.
   // Objects with duplicated attribute names or attributes with empty values
-  // will be considered invalid.
+  // will be considered invalid. Keys and values can't contain zero bytes as
+  // well.
   //
   // There are some "well-known" attributes starting with `__NEOFS__` prefix
   // that affect system behaviour:

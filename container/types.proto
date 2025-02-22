@@ -33,7 +33,8 @@ message Container {
   //
   // Key name must be a container-unique valid UTF-8 string. Value can't be
   // empty. Containers with duplicated attribute names or attributes with empty
-  // values will be considered invalid.
+  // values will be considered invalid. Zero byte is also forbidden in UTF-8
+  // strings.
   //
   // There are some "well-known" attributes affecting system behaviour:
   //
