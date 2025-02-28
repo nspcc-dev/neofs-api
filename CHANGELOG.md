@@ -10,6 +10,20 @@
 
 ### Deprecated
 
+## [2.17.0] - 2025-02-28
+
+### Added
+- Address-based targets in EACL rules (#301)
+- Signatures to replication API (#302)
+- Meta consistency attributes for containers (#309)
+- SearchV2 API (#314, #320, #321)
+
+### Changed
+- Object and container IDs consisting of all zeroes are officialy invalid now (#303)
+- 0:0 range requests are now valid and should return whole object payload (#315)
+- Container policy REP and CBF have limits now (#307)
+- Zero byte is forbidden in attributes (#323)
+
 ## [2.16.0] - 2024-04-23
 
 ### Added
@@ -536,4 +550,5 @@ Bump major release
 [2.14.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.13.1...v2.14.0
 [2.15.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.14.0...v2.15.0
 [2.16.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.15.0...v2.16.0
-[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.16.0...master
+[2.17.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.16.0...v2.17.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.17.0...master
