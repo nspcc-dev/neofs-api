@@ -329,9 +329,7 @@ message PutRequest {
       // Object signature if available
       neo.fs.v2.refs.Signature signature = 2;
 
-      // Object's Header. The maximum length is 16KB. The only exclusion are
-      // replication requests, i.e. requests sent by container nodes with
-      // 'meta_header.ttl=1': for such cases the limit is 4MB.
+      // Object's Header. The maximum length is 16KB.
       Header header = 3;
 
       // Number of the object copies to store within the RPC call. By default

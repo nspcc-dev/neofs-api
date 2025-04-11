@@ -7,6 +7,7 @@
 ### Changed
 
 ### Removed
+- Header limit exception (4 MB instead of 16 KB) for replication RPCs (#293)
 
 ### Deprecated
 

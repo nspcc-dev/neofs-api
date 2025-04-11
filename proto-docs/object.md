@@ -694,7 +694,7 @@ are not set, they will be calculated by a peer node.
 | ----- | ---- | ----- | ----------- |
 | object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | ObjectID if available. |
 | signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Object signature if available |
-| header | [Header](#neo.fs.v2.object.Header) |  | Object's Header. The maximum length is 16KB. The only exclusion are replication requests, i.e. requests sent by container nodes with 'meta_header.ttl=1': for such cases the limit is 4MB. |
+| header | [Header](#neo.fs.v2.object.Header) |  | Object's Header. The maximum length is 16KB. |
 | copies_number | [uint32](#uint32) |  | Number of the object copies to store within the RPC call. By default object is processed according to the container's placement policy. |
 
 
