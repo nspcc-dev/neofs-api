@@ -105,9 +105,10 @@ message Version {
 
 // Signature of something in NeoFS.
 message Signature {
-  // Public key used for signing
+  // Public key used for signing. For N3 `scheme`, the field represents a
+  // verification script.
   bytes key = 1 [json_name = "key"];
-  // Signature
+  // Signature. For N3 `scheme`, the field represents an invocation script.
   bytes sign = 2 [json_name = "signature"];
   // Scheme contains digital signature scheme identifier
   SignatureScheme scheme = 3 [json_name = "scheme"];
@@ -124,13 +125,18 @@ enum SignatureScheme {
   // Deterministic ECDSA with SHA-256 hashing using WalletConnect API.
   // Here the algorithm is the same, but the message format differs.
   ECDSA_RFC6979_SHA256_WALLET_CONNECT = 2;
+
+  // Neo N3 witness.
+  N3 = 3;
 }
 
 // RFC 6979 signature.
 message SignatureRFC6979 {
-  // Public key used for signing
+  // Public key used for signing. For N3 auth scheme, the field represents a
+  // verification script.
   bytes key = 1 [json_name = "key"];
-  // Deterministic ECDSA with SHA-256 hashing
+  // Deterministic ECDSA with SHA-256 hashing. For N3 auth scheme, the field
+  // represents an invocation script.
   bytes sign = 2 [json_name = "signature"];
 }
 
