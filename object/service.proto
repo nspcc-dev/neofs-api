@@ -568,6 +568,8 @@ message SearchV2Request {
     // and then by OID). If additional attributes are requested, then the first
     // filter's key (see filters above) MUST be the first requested attribute.
     // '$Object:containerID' and '$Object:objectID' attributes are prohibited.
+    // If meta_header.ttl = 1 and the first filter is not STRING_EQUAL,
+    // values of the first filtered attribute are requested  automatically.
     repeated string attributes = 6;
   }
   // Body of search object request message.
@@ -590,7 +592,9 @@ message SearchV2Response {
     // Object ID that matches search criteria.
     neo.fs.v2.refs.ObjectID id = 1;
     // List of attribute data from the respective object, fields
-    // strictly follow requested ones.
+    // strictly follow requested ones. The only exception are attribute-less
+    // requests with TTL = 1 and the first non-STRING_EQUAL filter: this field
+    // carry value of the first filtered attribute.
     repeated string attributes = 2;
   }
 

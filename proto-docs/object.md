@@ -837,7 +837,7 @@ Object Search request body
 | filters | [SearchFilter](#neo.fs.v2.object.SearchFilter) | repeated | List of search expressions. Limited to 8. If additional attributes are requested (see attributes below) then the first filter's key MUST be the first requested attribute. '$Object:containerID' and '$Object:objectID' filters are prohibited. Numeric filters' values MUST be in range [-MaxUint256, MaxUint256]. |
 | cursor | [string](#string) |  | Cursor to continue search. Can be omitted or empty for the new search. |
 | count | [uint32](#uint32) |  | Limits the number of responses to the specified number. Can't be more than 1000. |
-| attributes | [string](#string) | repeated | List of attribute names (including special ones as defined by SearchFilter key) to include into the reply. Limited to 8, these attributes also affect result ordering (result is ordered by the 1st one and then by OID). If additional attributes are requested, then the first filter's key (see filters above) MUST be the first requested attribute. '$Object:containerID' and '$Object:objectID' attributes are prohibited. |
+| attributes | [string](#string) | repeated | List of attribute names (including special ones as defined by SearchFilter key) to include into the reply. Limited to 8, these attributes also affect result ordering (result is ordered by the 1st one and then by OID). If additional attributes are requested, then the first filter's key (see filters above) MUST be the first requested attribute. '$Object:containerID' and '$Object:objectID' attributes are prohibited. If meta_header.ttl = 1 and the first filter is not STRING_EQUAL, values of the first filtered attribute are requested automatically. |
 
 
 <a name="neo.fs.v2.object.SearchV2Response"></a>
@@ -874,7 +874,7 @@ OID with additional requested metadata.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Object ID that matches search criteria. |
-| attributes | [string](#string) | repeated | List of attribute data from the respective object, fields strictly follow requested ones. |
+| attributes | [string](#string) | repeated | List of attribute data from the respective object, fields strictly follow requested ones. The only exception are attribute-less requests with TTL = 1 and the first non-STRING_EQUAL filter: this field carry value of the first filtered attribute. |
 
  <!-- end messages -->
 
