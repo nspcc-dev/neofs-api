@@ -277,43 +277,12 @@ message GetRequest {
 
 // GET object response
 message GetResponse {
-  // GET Object Response body
-  message Body {
-    // Initial part of the `Object` structure stream. Technically it's a
-    // set of all `Object` structure's fields except `payload`.
-    message Init {
-      // Object's unique identifier.
-      neo.fs.v2.refs.ObjectID object_id = 1;
+  neo.fs.v2.status.Status status = 1;
+  Header header = 2;
+  neo.fs.v2.refs.Signature signature = 3;
+  bytes payload_chunk = 4;
 
-      // Signed `ObjectID`
-      neo.fs.v2.refs.Signature signature = 2;
-
-      // Object metadata headers
-      Header header = 3;
-    }
-    // Single message in the response stream.
-    oneof object_part {
-      // Initial part of the object stream
-      Init init = 1;
-
-      // Chunked object payload
-      bytes chunk = 2;
-
-      // Meta information of split hierarchy for object assembly.
-      SplitInfo split_info = 3;
-    }
-  }
-  // Body of get object response message.
-  Body body = 1;
-
-  // Carries response meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
-  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
-
-  // Carries response verification information. This header is used to
-  // authenticate the nodes of the message route and check the correctness of
-  // transmission.
-  neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
+  SplitInfo split_info = 99;
 }
 
 // PUT object request
