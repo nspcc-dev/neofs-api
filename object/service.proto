@@ -313,6 +313,8 @@ message GetResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: Verify header and payload checksums instead. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.17.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
@@ -489,6 +491,8 @@ message HeadResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: Verify header and payload checksums instead. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.17.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
