@@ -558,7 +558,7 @@ GET object response
 | ----- | ---- | ----- | ----------- |
 | body | [GetResponse.Body](#neo.fs.v2.object.GetResponse.Body) |  | Body of get object response message. |
 | meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: Verify header and payload checksums instead. Servers MUST attach it for requests with `meta_header.version` <= 2.17. |
 
 
 <a name="neo.fs.v2.object.GetResponse.Body"></a>
@@ -624,7 +624,7 @@ Object HEAD response
 | ----- | ---- | ----- | ----------- |
 | body | [HeadResponse.Body](#neo.fs.v2.object.HeadResponse.Body) |  | Body of head object response message. |
 | meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: Verify header and payload checksums instead. Servers MUST attach it for requests with `meta_header.version` <= 2.17. |
 
 
 <a name="neo.fs.v2.object.HeadResponse.Body"></a>

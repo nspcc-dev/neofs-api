@@ -10,6 +10,7 @@
 - Header limit exception (4 MB instead of 16 KB) for replication RPCs (#293)
 
 ### Deprecated
+- `verify_header` field in `object.GetResponse` and `object.HeadResponse` messages (#334)
 
 ## [2.17.0] - 2025-02-28
 
