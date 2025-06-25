@@ -139,6 +139,9 @@ message SearchFilter {
 }
 
 // Short header fields
+//
+// DEPRECATED. It is not supported in practice and should not be used. Use full
+// Header instead.
 message ShortHeader {
   // Object format version. Effectively, the version of API library used to
   // create particular object.

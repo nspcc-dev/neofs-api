@@ -610,7 +610,9 @@ Object HEAD request body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the object with the requested Header |
-| main_only | [bool](#bool) |  | Return only minimal header subset |
+| main_only | [bool](#bool) |  | Return only minimal header subset.
+
+DEPRECATED. This field is ignored. |
 | raw | [bool](#bool) |  | If `raw` flag is set, request will work only with objects that are physically stored on the peer node |
 
 
@@ -636,7 +638,9 @@ Object HEAD response body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | header | [HeaderWithSignature](#neo.fs.v2.object.HeaderWithSignature) |  | Full object's `Header` with `ObjectID` signature |
-| short_header | [ShortHeader](#neo.fs.v2.object.ShortHeader) |  | Short object header |
+| short_header | [ShortHeader](#neo.fs.v2.object.ShortHeader) |  | Short object header.
+
+DEPRECATED. Use HeaderWithSignature instead. |
 | split_info | [SplitInfo](#neo.fs.v2.object.SplitInfo) |  | Meta information of split hierarchy. |
 
 
@@ -1084,6 +1088,9 @@ Behavior when processing this kind of filters is undefined.
 
 ### Message ShortHeader
 Short header fields
+
+DEPRECATED. It is not supported in practice and should not be used. Use full
+Header instead.
 
 
 | Field | Type | Label | Description |

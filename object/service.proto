@@ -429,7 +429,9 @@ message HeadRequest {
     // Address of the object with the requested Header
     neo.fs.v2.refs.Address address = 1;
 
-    // Return only minimal header subset
+    // Return only minimal header subset.
+    //
+    // DEPRECATED. This field is ignored.
     bool main_only = 2;
 
     // If `raw` flag is set, request will work only with objects that are
@@ -474,7 +476,9 @@ message HeadResponse {
       // Full object's `Header` with `ObjectID` signature
       HeaderWithSignature header = 1;
 
-      // Short object header
+      // Short object header.
+      //
+      // DEPRECATED. Use HeaderWithSignature instead.
       ShortHeader short_header = 2;
 
       // Meta information of split hierarchy.
