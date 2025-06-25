@@ -100,6 +100,8 @@ enum MatchType {
 //   16 byte UUIDv4 used to identify the split object hierarchy parts
 // * $Object:split.first \
 //   object_id of the first part in split chain; non-acceptable for deprecated V1 split scheme
+// * $Object:target \
+//   target (object ID) for system objects
 //
 // There are some well-known filter aliases to match objects by certain
 // properties:
@@ -285,6 +287,12 @@ message Header {
   }
   // Position of the object in the split hierarchy
   Split split = 11 [json_name = "split"];
+
+  // Target object for typed system objects only, ignored otherwise:
+  //
+  // * Deleted object for TOMBSTONE
+  // * Locked object for LOCK
+  refs.ObjectID target = 12 [json_name = "target"];
 }
 
 // Object structure. Object is immutable and content-addressed. It means
