@@ -25,6 +25,9 @@
 <a name="neo.fs.v2.lock.Lock"></a>
 
 ### Message Lock
+DEPRECATED: lock objects 1-to-1 with Object.header.target field in a LOCK-typed
+object with no payload.
+
 Lock objects protects a list of objects from being deleted. The lifetime of a
 lock object is limited similar to regular objects in
 `__NEOFS__EXPIRATION_EPOCH` attribute. Lock object MUST have expiration epoch.

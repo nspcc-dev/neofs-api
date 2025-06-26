@@ -914,6 +914,9 @@ Object Header
 | session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token, if it was used during Object creation. Need it to verify integrity and authenticity out of Request scope. |
 | attributes | [Header.Attribute](#neo.fs.v2.object.Header.Attribute) | repeated | User-defined object attributes. Attributes vary in length from object to object, so keep an eye on the entire Header limit depending on the context. |
 | split | [Header.Split](#neo.fs.v2.object.Header.Split) |  | Position of the object in the split hierarchy |
+| target | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Target object for typed system objects only, ignored otherwise:
+
+* Deleted object for TOMBSTONE * Locked object for LOCK |
 
 
 <a name="neo.fs.v2.object.Header.Attribute"></a>
@@ -1048,6 +1051,8 @@ prefix to the name. Here is the list of fields available via this prefix:
   16 byte UUIDv4 used to identify the split object hierarchy parts
 * $Object:split.first \
   object_id of the first part in split chain; non-acceptable for deprecated V1 split scheme
+* $Object:target \
+  target (object ID) for system objects
 
 There are some well-known filter aliases to match objects by certain
 properties:
