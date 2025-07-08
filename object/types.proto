@@ -25,7 +25,7 @@ enum ObjectType {
   // Used internally to identify deleted objects
   TOMBSTONE = 1;
 
-  // StorageGroup information
+  // StorageGroup information. DEPRECATED: no longer used for audit since 2.18.
   STORAGE_GROUP = 2;
 
   // Object lock

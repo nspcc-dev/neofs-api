@@ -1166,7 +1166,7 @@ String presentation of object type is the same as definition:
 | ---- | ------ | ----------- |
 | REGULAR | 0 | Just a normal object |
 | TOMBSTONE | 1 | Used internally to identify deleted objects |
-| STORAGE_GROUP | 2 | StorageGroup information |
+| STORAGE_GROUP | 2 | StorageGroup information. DEPRECATED: no longer used for audit since 2.18. |
 | LOCK | 3 | Object lock |
 | LINK | 4 | Object that stores child object IDs for the split objects. |
 

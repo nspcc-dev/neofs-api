@@ -17,6 +17,7 @@ option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/storagegroup";
 // will be ignored by InnerRing nodes during Data Audit cycles and will be
 // deleted by Storage Nodes.
 //
+// DEPRECATED: storage groups are no longer used for audit since 2.18.
 message StorageGroup {
   // Total size of the payloads of objects in the storage group
   uint64 validation_data_size = 1 [json_name = "validationDataSize"];
