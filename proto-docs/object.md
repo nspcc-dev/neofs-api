@@ -933,6 +933,12 @@ that affect system behaviour:
 * __NEOFS__EXPIRATION_EPOCH \
   Tells GC to delete object after that epoch (but object is available
   throughout the epoch specified in this attribute).
+* __NEOFS__ASSOCIATE \
+  Associated object. For TOMBSTONE, LOCK object types it defines object
+  to delete and to lock accordingly. For objects of 2.18+ API version, it
+  is the only way to delete/lock objects. It MUST be a single stringified
+  (according to [refs.ObjectID] message) object ID with no leading or
+  trailing spaces.
 * __NEOFS__TICK_EPOCH \
   Decimal number that defines what epoch must produce
   object notification with UTF-8 object address in a
