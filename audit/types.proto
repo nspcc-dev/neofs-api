@@ -9,6 +9,8 @@ option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/audit";
 
 // DataAuditResult keeps record of conducted Data Audits. The detailed report is
 // generated separately.
+//
+// DEPRECATED: This audit mechanism is no longer supported (2.18+).
 message DataAuditResult {
   // Data Audit Result format version. Effectively, the version of API library
   // used to report DataAuditResult structure.
