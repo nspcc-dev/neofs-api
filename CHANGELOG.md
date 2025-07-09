@@ -7,10 +7,28 @@
 ### Changed
 
 ### Removed
+
+### Deprecated
+
+## [2.18.0] - 2025-07-09
+
+### Added
+- Support for N3 signature scheme (#324)
+- "Associate" attribute for objects (#337)
+
+### Changed
+- Adjusted SearchV2 description for filtered attribute-less requests (#330)
+- `EpochDuration` is counted in seconds in netmap now (#331)
+
+### Removed
 - Header limit exception (4 MB instead of 16 KB) for replication RPCs (#293)
 
 ### Deprecated
+- `ExternalAddr` node attribute (#327)
 - `verify_header` field in `object.GetResponse` and `object.HeadResponse` messages (#334)
+- `ShortHeader` (#336)
+- Lock and tombstone payloads (#337)
+- Audit and storage groups (#339)
 
 ## [2.17.0] - 2025-02-28
 
@@ -553,4 +571,5 @@ Bump major release
 [2.15.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.14.0...v2.15.0
 [2.16.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.15.0...v2.16.0
 [2.17.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.16.0...v2.17.0
-[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.17.0...master
+[2.18.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.17.0...v2.18.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.18.0...master
