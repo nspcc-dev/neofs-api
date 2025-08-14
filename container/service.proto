@@ -87,6 +87,9 @@ service ContainerService {
   // - **OK** (0, SECTION_SUCCESS): \
   //   estimation of used space has been successfully announced;
   // - Common failures (SECTION_FAILURE_COMMON).
+  //
+  // DEPRECATED: every storage node must send storage load directly to `container`
+  // contract.
   rpc AnnounceUsedSpace(AnnounceUsedSpaceRequest) returns (AnnounceUsedSpaceResponse);
 }
 
@@ -366,6 +369,9 @@ message GetExtendedACLResponse {
 }
 
 // Announce container used space
+//
+// DEPRECATED: every storage node must send storage load directly to `container`
+// contract.
 message AnnounceUsedSpaceRequest {
   // Container used space announcement body.
   message Body {
@@ -401,6 +407,9 @@ message AnnounceUsedSpaceRequest {
 }
 
 // Announce container used space
+//
+// DEPRECATED: every storage node must send storage load directly to `container`
+// contract.
 message AnnounceUsedSpaceResponse {
   // `AnnounceUsedSpaceResponse` has an empty body because announcements are
   // one way communication.

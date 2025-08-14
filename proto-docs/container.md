@@ -176,6 +176,9 @@ Statuses:
   estimation of used space has been successfully announced;
 - Common failures (SECTION_FAILURE_COMMON).
 
+DEPRECATED: every storage node must send storage load directly to `container`
+contract.
+
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | AnnounceUsedSpace | [AnnounceUsedSpaceRequest](#neo.fs.v2.container.AnnounceUsedSpaceRequest) | [AnnounceUsedSpaceResponse](#neo.fs.v2.container.AnnounceUsedSpaceResponse) |
@@ -186,6 +189,9 @@ Statuses:
 
 ### Message AnnounceUsedSpaceRequest
 Announce container used space
+
+DEPRECATED: every storage node must send storage load directly to `container`
+contract.
 
 
 | Field | Type | Label | Description |
@@ -223,6 +229,9 @@ Announcement contains used space information for a single container.
 
 ### Message AnnounceUsedSpaceResponse
 Announce container used space
+
+DEPRECATED: every storage node must send storage load directly to `container`
+contract.
 
 
 | Field | Type | Label | Description |

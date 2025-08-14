@@ -9,6 +9,7 @@
 ### Removed
 
 ### Deprecated
+- Storage load estimations P2P API (#341)
 
 ## [2.18.0] - 2025-07-09
 
