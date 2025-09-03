@@ -118,6 +118,7 @@ Section of statuses for object-related operations.
 | LOCK_NON_REGULAR_OBJECT | 3 | [**2051**] Locking an object with a non-REGULAR type rejected. |
 | OBJECT_ALREADY_REMOVED | 4 | [**2052**] Object has been marked deleted. |
 | OUT_OF_RANGE | 5 | [**2053**] Invalid range has been requested for an object. |
+| QUOTA_EXCEEDED | 6 | [**2054**] Quota was exceeded; no further PUTs will be allowed within current settings. |
 
 
 

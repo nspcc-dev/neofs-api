@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- QUOTA_EXCEEDED status code to SECTION_OBJECT (#343)
 
 ### Changed
 
