@@ -124,6 +124,10 @@ enum Object {
 
   // [**2053**] Invalid range has been requested for an object.
   OUT_OF_RANGE = 5;
+
+  // [**2054**] Quota was exceeded; no further PUTs will be allowed within
+  // current settings.
+  QUOTA_EXCEEDED = 6;
 }
 
 // Section of statuses for container-related operations.

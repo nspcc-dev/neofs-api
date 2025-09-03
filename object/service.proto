@@ -73,6 +73,8 @@ service ObjectService {
   // - **LOCK_NON_REGULAR_OBJECT** (2051, SECTION_OBJECT): \
   //   placement of an object of type LOCK that includes at least one object of
   //   type other than REGULAR is prohibited;
+  // - **QUOTA_EXCEEDED** (2054, SECTION_OBJECT): \
+  //   size quota set by user was exceeded;
   // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   //   object storage container not found;
   // - **TOKEN_NOT_FOUND** (4096, SECTION_SESSION): \
