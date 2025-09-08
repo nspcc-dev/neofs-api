@@ -33,6 +33,7 @@
     - [NodeInfo](#neo.fs.v2.netmap.NodeInfo)
     - [NodeInfo.Attribute](#neo.fs.v2.netmap.NodeInfo.Attribute)
     - [PlacementPolicy](#neo.fs.v2.netmap.PlacementPolicy)
+    - [PlacementPolicy.ECRule](#neo.fs.v2.netmap.PlacementPolicy.ECRule)
     - [Replica](#neo.fs.v2.netmap.Replica)
     - [Selector](#neo.fs.v2.netmap.Selector)
     
@@ -486,6 +487,53 @@ storage policy definition languages.
 | selectors | [Selector](#neo.fs.v2.netmap.Selector) | repeated | Set of Selectors to form the container's nodes subset |
 | filters | [Filter](#neo.fs.v2.netmap.Filter) | repeated | List of named filters to reference in selectors |
 | subnet_id | [neo.fs.v2.refs.SubnetID](#neo.fs.v2.refs.SubnetID) |  | DEPRECATED. Was used for subnetwork ID to select nodes from, currently ignored. |
+| ec_rules | [PlacementPolicy.ECRule](#neo.fs.v2.netmap.PlacementPolicy.ECRule) | repeated | Erasure coding rules. Limited to 4 items. |
+
+
+<a name="neo.fs.v2.netmap.PlacementPolicy.ECRule"></a>
+
+### Message PlacementPolicy.ECRule
+Erasure coding rule for container objects.
+
+For each original object, the payload is split into `data_part_num` data
+and `parity_part_num` parity parts. Each part is the same size. Data parts
+contain the original payload. If its length is not divisible by
+`data_part_num`, the last part is aligned with zero bytes. Both
+`data_part_num` and `parity_part_num` MUST NOT be zero or exceed 64,
+including in total.
+
+For each payload part, a part object is created. Original object's ID,
+signature and header is written in `header.split.parent`,
+`header.split.parent_signature` and `header.split.parent_header` fields
+correspondingly. Part index is written in the `__NEOFS__EC_PART_IDX`
+attribute as base-10 integer. Rule index in `PlacementPolicy.ec_rules`
+list is written in the `__NEOFS__EC_RULE_IDX` attribute as base-10
+integer.
+
+Each part object is stored in the container in one copy. Storage nodes are
+selected from the network map similar to `PlacementPolicy.replicas` rules.
+Optional `selector` acts the same way. The object for the `i`-th part is
+placed in the `i`-th node. If it is unavailable, the backup nodes with
+indexes `m * n + i` (`n = data_part_num + parity_part_num`,
+`m = 1, ..., CBF-1`). If all nodes for the `i`-th part
+are unavailable, nodes for the `i+1`-th (0 for the last) part are tried,
+and so on.
+
+Once part objects are stored in the container, the original object remains
+available if at least `data_part_num` of any part objects are available.
+In other words, unavailability (including complete loss) of any of
+`parity_part_num` part objects does not violate availability of the
+original one.
+
+Objects of TOMBSTONE and LOCK types are not encoded and stored as they are
+because they have no payload.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| data_part_num | [uint32](#uint32) |  | Number of data parts |
+| parity_part_num | [uint32](#uint32) |  | Number of parity parts |
+| selector | [string](#string) |  | Name of the linked selector |
 
 
 <a name="neo.fs.v2.netmap.Replica"></a>
