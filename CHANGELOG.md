@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- EC rules to container storage policy (#345)
 
 ### Changed
 
