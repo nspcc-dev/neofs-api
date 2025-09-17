@@ -4,6 +4,8 @@
 
 ### Added
 - QUOTA_EXCEEDED status code to SECTION_OBJECT (#343)
+- EC rules to container storage policy (#345)
+- GET query for EC part object (#345)
 
 ### Changed
 

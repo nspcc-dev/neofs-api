@@ -528,7 +528,14 @@ chunks.
 <a name="neo.fs.v2.object.GetRequest"></a>
 
 ### Message GetRequest
-GET object request
+GET object request.
+
+The query for an EC part of the parent object is specified as follows:
+ - `body.address` is an address of the parent;
+ - `meta_header.x_headers` includes `__NEOFS__EC_RULE_IDX` and
+   `__NEOFS__EC_PART_IDX` by object attribute format.  Rule index MUST NOT
+   exceed container's `PlacementPolicy.ec_rules` list. Part index MUST NOT
+   exceed total part number in the indexed rule.
 
 
 | Field | Type | Label | Description |
@@ -950,6 +957,12 @@ that affect system behaviour:
 * __NEOFS__TICK_TOPIC \
   UTF-8 string topic ID that is used for object notification.
   DEPRECATED: attribute ignored by servers.
+* __NEOFS__EC_RULE_IDX \
+  Index of EC rule in container's `PlacementPolicy.ec_rules` according to
+  which the part was created. Base-10 integer.
+* __NEOFS__EC_PART_IDX \
+  Index in the EC parts into which the parent object is divided according
+  to `__NEOFS__EC_RULE_IDX` EC rule. Base-10 integer.
 
 And some well-known attributes used by applications only:
 
@@ -990,7 +1003,7 @@ must be within the same container.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Identifier of the origin object. Known only to the minor child. |
+| parent | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Identifier of the origin object |
 | previous | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Identifier of the left split neighbor |
 | parent_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | `signature` field of the parent object. Used to reconstruct parent. |
 | parent_header | [Header](#neo.fs.v2.object.Header) |  | `header` field of the parent object. Used to reconstruct parent. |
