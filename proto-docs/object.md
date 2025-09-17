@@ -483,7 +483,17 @@ Get hash of object's payload part response body.
 <a name="neo.fs.v2.object.GetRangeRequest"></a>
 
 ### Message GetRangeRequest
-Request part of object's payload
+Request part of object's payload.
+
+The query for a parent object's EC part locally stored on the server is
+specified as follows:
+ - `body.address` is an address of the parent;
+ - `meta_header.x_headers` includes `__NEOFS__EC_RULE_IDX` and
+   `__NEOFS__EC_PART_IDX` by object attribute format. Rule index MUST NOT
+   exceed container's `PlacementPolicy.ec_rules` list. Part index MUST NOT
+   exceed total part number in the indexed rule.
+In this case, if `body.address` refers to TOMBSTONE or LOCK object (which
+cannot have EC parts), the query applies to it.
 
 
 | Field | Type | Label | Description |
@@ -537,7 +547,17 @@ chunks.
 <a name="neo.fs.v2.object.GetRequest"></a>
 
 ### Message GetRequest
-GET object request
+GET object request.
+
+The query for a parent object's EC part locally stored on the server is
+specified as follows:
+ - `body.address` is an address of the parent;
+ - `meta_header.x_headers` includes `__NEOFS__EC_RULE_IDX` and
+   `__NEOFS__EC_PART_IDX` by object attribute format. Rule index MUST NOT
+   exceed container's `PlacementPolicy.ec_rules` list. Part index MUST NOT
+   exceed total part number in the indexed rule.
+In this case, if `body.address` refers to TOMBSTONE or LOCK object (which
+cannot have EC parts), the query applies to it.
 
 
 | Field | Type | Label | Description |
