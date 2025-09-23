@@ -101,6 +101,10 @@ enum CommonFail {
 
   // [**1027**] Node is under maintenance.
   NODE_UNDER_MAINTENANCE = 3;
+
+  // [**1028**] Malformed, syntactically or semantically incorrect request,
+  // client-side error.
+  BAD_REQUEST = 4;
 }
 
 // Section of statuses for object-related operations.

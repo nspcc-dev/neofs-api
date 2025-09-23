@@ -90,6 +90,7 @@ Section of failed statuses independent of the operation.
 | WRONG_MAGIC_NUMBER | 1 | [**1025**] Wrong magic of the NeoFS network. Details: - [**0**] Magic number of the served NeoFS network (big-endian 64-bit unsigned integer). |
 | SIGNATURE_VERIFICATION_FAIL | 2 | [**1026**] Signature verification failure. |
 | NODE_UNDER_MAINTENANCE | 3 | [**1027**] Node is under maintenance. |
+| BAD_REQUEST | 4 | [**1028**] Malformed, syntactically or semantically incorrect request, client-side error. |
 
 
 
