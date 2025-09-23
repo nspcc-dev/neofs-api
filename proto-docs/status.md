@@ -91,6 +91,7 @@ Section of failed statuses independent of the operation.
 | SIGNATURE_VERIFICATION_FAIL | 2 | [**1026**] Signature verification failure. |
 | NODE_UNDER_MAINTENANCE | 3 | [**1027**] Node is under maintenance. |
 | BAD_REQUEST | 4 | [**1028**] Malformed, syntactically or semantically incorrect request, client-side error. |
+| BUSY | 5 | [**1029**] Some node resources are exhausted and request can't be processed. This is likely to be a transient state and request can be retried in future. |
 
 
 
