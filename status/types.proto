@@ -81,6 +81,12 @@ enum Success {
   // If the server cannot match successful outcome to the code, it should
   // use this code.
   OK = 0;
+
+  // [**1**] Incomplete success, only a part of the request done which may
+  // or may not be sufficient for the client. Examples are object PUT making
+  // 2 out of 3 required replicas or distributed SEARCH getting result from
+  // 4 out of 5 nodes.
+  INCOMPLETE = 1;
 }
 
 // Section of failed statuses independent of the operation.
