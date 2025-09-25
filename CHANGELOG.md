@@ -3,11 +3,20 @@
 ## [Unreleased]
 
 ### Added
-- QUOTA_EXCEEDED status code to SECTION_OBJECT (#343)
 
 ### Changed
 
 ### Removed
+
+### Deprecated
+
+## [2.19.0] - 2025-09-25
+
+### Added
+- QUOTA_EXCEEDED status code to SECTION_OBJECT (#343)
+- BAD_REQUEST status code to CommonFail section (#346)
+- INCOMPLETE status code to Success section (#346)
+- BUSY status code to CommonFail section (#346)
 
 ### Deprecated
 - Storage load estimations P2P API (#341)
@@ -574,4 +583,5 @@ Bump major release
 [2.16.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.15.0...v2.16.0
 [2.17.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.16.0...v2.17.0
 [2.18.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.17.0...v2.18.0
-[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.18.0...master
+[2.19.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.18.0...v2.19.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.19.0...master
