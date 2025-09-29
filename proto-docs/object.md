@@ -149,6 +149,9 @@ Please refer to detailed `XHeader` description.
 Statuses:
 - **OK** (0, SECTION_SUCCESS): \
   object has been successfully saved in the container;
+- **INCOMPLETE** (1, SECTION_SUCCESS): \
+  object was put to some nodes, but the number of replicas is not sufficient
+  to satisfy placement policy;
 - Common failures (SECTION_FAILURE_COMMON);
 - **ACCESS_DENIED** (2048, SECTION_OBJECT): \
   write access to the container is denied;
@@ -188,6 +191,9 @@ Please refer to detailed `XHeader` description.
 Statuses:
 - **OK** (0, SECTION_SUCCESS): \
   object has been successfully marked to be removed from the container;
+- **INCOMPLETE** (1, SECTION_SUCCESS): \
+  some nodes have accepted the deletion mark, but some may still store
+  the object;
 - Common failures (SECTION_FAILURE_COMMON);
 - **ACCESS_DENIED** (2048, SECTION_OBJECT): \
   delete access to the object is denied;
@@ -250,6 +256,9 @@ Please refer to detailed `XHeader` description.
 Statuses:
 - **OK** (0, SECTION_SUCCESS): \
   objects have been successfully selected;
+- **INCOMPLETE** (1, SECTION_SUCCESS): \
+  some nodes were unable to process the request, so the result may
+  not contain all data;
 - Common failures (SECTION_FAILURE_COMMON);
 - **ACCESS_DENIED** (2048, SECTION_OBJECT): \
   access to operation SEARCH of the object is denied;
