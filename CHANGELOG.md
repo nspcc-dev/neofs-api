@@ -3,6 +3,8 @@
 ## [Unreleased]
 
 ### Added
+- EC rules to container storage policy (#345)
+- GET/RANGE query for EC part object (#345)
 
 ### Changed
 
