@@ -650,7 +650,17 @@ DEPRECATED. This field is ignored. |
 <a name="neo.fs.v2.object.HeadResponse"></a>
 
 ### Message HeadResponse
-Object HEAD response
+Object HEAD response.
+
+The query for a parent object's EC part locally stored on the server is
+specified as follows:
+ - `body.address` is an address of the parent;
+ - `meta_header.x_headers` includes `__NEOFS__EC_RULE_IDX` and
+   `__NEOFS__EC_PART_IDX` by object attribute format. Rule index MUST NOT
+   exceed container's `PlacementPolicy.ec_rules` list. Part index MUST NOT
+   exceed total part number in the indexed rule.
+In this case, if `body.address` refers to TOMBSTONE or LOCK object (which
+cannot have EC parts), the query applies to it.
 
 
 | Field | Type | Label | Description |
