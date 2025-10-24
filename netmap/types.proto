@@ -138,7 +138,8 @@ message PlacementPolicy {
   // contain the original payload. If its length is not divisible by
   // `data_part_num`, the last part is aligned with zero bytes. Both
   // `data_part_num` and `parity_part_num` MUST NOT be zero or exceed 64,
-  // including in total.
+  // including in total. Hashes from all parts are written in the
+  // `__NEOFS__EC_PART_HASHES` attribute of the original object's header.
   //
   // For each payload part, a part object is created. Original object's ID,
   // signature and header is written in `header.split.parent`,

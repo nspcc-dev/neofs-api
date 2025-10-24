@@ -995,6 +995,10 @@ that affect system behaviour:
 * __NEOFS__EC_PART_IDX \
   Index in the EC parts into which the parent object is divided according
   to `__NEOFS__EC_RULE_IDX` EC rule. Base-10 integer.
+* __NEOFS__EC_PART_HASHES \
+  Ordered list of payload hashes of EC parts into which this object is
+  divided. Hash function is SHA-256. Items are comma-separated, each item
+  is hex-encoded.
 
 And some well-known attributes used by applications only:
 
