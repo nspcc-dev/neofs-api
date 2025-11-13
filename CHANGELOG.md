@@ -3,14 +3,22 @@
 ## [Unreleased]
 
 ### Added
-- EC rules to container storage policy (#345)
-- GET/RANGE/HEAD query for EC part object (#345, #349)
 
 ### Changed
 
 ### Removed
 
 ### Deprecated
+
+## [2.20.0] - 2025-11-13
+
+This release adds EC support to the API. Notice that it's still
+an experimental feature and details can change in subsequent releases.
+
+### Added
+- EC rules to container storage policy (#345)
+- GET/RANGE/HEAD query for EC part object (#345, #349)
+- Additional system attribute for EC part hashes (#351)
 
 ## [2.19.0] - 2025-09-25
 
@@ -586,4 +594,5 @@ Bump major release
 [2.17.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.16.0...v2.17.0
 [2.18.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.17.0...v2.18.0
 [2.19.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.18.0...v2.19.0
-[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.19.0...master
+[2.20.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.19.0...v2.20.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.20.0...master
