@@ -638,7 +638,24 @@ And some well-known attributes used by applications only:
   Human-friendly name
 * Timestamp \
   User-defined local time of container creation in Unix Timestamp format
+* CORS \
+  It is used to configure your container to allow cross-origin requests (CORS). The rules are represented as a JSON
+  array of objects with the following fields:
+    1. "AllowedMethods": In this element, you specify allowed HTTP methods: GET, PUT, POST, DELETE, HEAD.
+    2. "AllowedOrigins": In this element, you specify the origins that you want to allow cross-domain requests from,
+       for example, http://www.example.com. The origin string can contain only one "*" wildcard character,
+       such as http://*.example.com. You can optionally specify "*" as the origin to enable all the origins to send
+       cross-origin requests. You can also specify https to enable only secure origins.
+    3. "AllowedHeaders": The element specifies which headers are allowed in a preflight request through the
+       "Access-Control-Request-Headers" request header. Each AllowedHeaders string in your configuration can contain
+       at most one "*" wildcard character. For example, x-app-*.
+    4. "ExposeHeaders": Each ExposeHeader element identifies a header in the response that you want customers
+       to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).
+    5. "MaxAgeSeconds": The element specifies the time in seconds that your browser can cache the response for a
+       preflight request as identified by the resource, the HTTP method, and the origin.
 
+  The schema is based on Amazon S3 CORS (https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html)
+  configuration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
