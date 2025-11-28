@@ -105,7 +105,9 @@ object would be also removed).
 Statuses:
 - **OK** (0, SECTION_SUCCESS): \
   request to remove the container has been sent to FS chain;
-- Common failures (SECTION_FAILURE_COMMON).
+- Common failures (SECTION_FAILURE_COMMON);
+- **CONTAINER_LOCKED** (3074, SECTION_CONTAINER): \
+  deleting a locked container is prohibited.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |

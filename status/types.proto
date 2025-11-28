@@ -152,6 +152,9 @@ enum Container {
 
   // [**3073**] eACL table not found.
   EACL_NOT_FOUND = 1;
+
+  // [**3074**] Operation rejected by the container lock.
+  CONTAINER_LOCKED = 2;
 }
 
 // Section of statuses for session-related operations.
