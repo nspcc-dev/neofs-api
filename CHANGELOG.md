@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- Well-known CORS container attribute (#355)
 
 ### Changed
 
