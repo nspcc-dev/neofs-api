@@ -4,6 +4,8 @@
 
 ### Added
 - Well-known CORS container attribute (#355)
+- Container `__NEOFS__LOCK_UNTIL` attribute (#357)
+- `CONTAINER_LOCKED` status (#357)
 
 ### Changed
 

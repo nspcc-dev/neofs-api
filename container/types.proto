@@ -69,6 +69,8 @@ message Container {
   //       information, it is not indexed and object presence/number of copies
   //       is not proven after a successful object PUT operation; the behavior
   //       is the same as it was before this attribute introduction
+  // * __NEOFS__LOCK_UNTIL \
+  //   Timestamp until which the container cannot be deleted in Unix Timestamp format
   //
   // And some well-known attributes used by applications only:
   //

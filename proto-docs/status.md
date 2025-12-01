@@ -104,6 +104,7 @@ Section of statuses for container-related operations.
 | ---- | ------ | ----------- |
 | CONTAINER_NOT_FOUND | 0 | [**3072**] Container not found. |
 | EACL_NOT_FOUND | 1 | [**3073**] eACL table not found. |
+| CONTAINER_LOCKED | 2 | [**3074**] Operation rejected by the container lock. |
 
 
 
