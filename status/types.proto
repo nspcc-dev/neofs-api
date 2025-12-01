@@ -155,6 +155,9 @@ enum Container {
 
   // [**3074**] Operation rejected by the container lock.
   CONTAINER_LOCKED = 2;
+
+  // [**3075**] Async container operation timed out.
+  CONTAINER_AWAIT_TIMEOUT = 3;
 }
 
 // Section of statuses for session-related operations.

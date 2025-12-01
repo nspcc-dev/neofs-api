@@ -79,25 +79,27 @@ rpc AnnounceUsedSpace(AnnounceUsedSpaceRequest) returns (AnnounceUsedSpaceRespon
 
 #### Method Put
 
-`Put` invokes `Container` smart contract's `Put` method and returns
-response immediately. After a new block is issued in FS chain, request is
-verified by Inner Ring nodes. After one more block in FS chain, the container
-is added into smart contract storage.
+Sends transaction calling contract method to create container, and waits
+for the transaction to be executed. Deadline is determined by the
+transport protocol (e.g. `grpc-timeout` header). If the deadline is not
+set, server waits 15s after submitting the transaction.
 
 Statuses:
 - **OK** (0, SECTION_SUCCESS): \
   request to save the container has been sent to FS chain;
-- Common failures (SECTION_FAILURE_COMMON).
+- Common failures (SECTION_FAILURE_COMMON);
+- **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
+  transaction was sent but not executed within the deadline.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Put | [PutRequest](#neo.fs.v2.container.PutRequest) | [PutResponse](#neo.fs.v2.container.PutResponse) |
 #### Method Delete
 
-`Delete` invokes `Container` smart contract's `Delete` method and returns
-response immediately. After a new block is issued in FS chain, request is
-verified by Inner Ring nodes. After one more block in FS chain, the container
-is added into smart contract storage.
+Sends transaction calling contract method to delete container, and waits
+for the transaction to be executed. Deadline is determined by the
+transport protocol (e.g. `grpc-timeout` header). If the deadline is not
+set, server waits 15s after submitting the transaction.
 NOTE: a container deletion leads to the removal of every object in that
 container, regardless of any restrictions on the object removal (e.g. lock/locked
 object would be also removed).
@@ -107,7 +109,9 @@ Statuses:
   request to remove the container has been sent to FS chain;
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_LOCKED** (3074, SECTION_CONTAINER): \
-  deleting a locked container is prohibited.
+  deleting a locked container is prohibited;
+- **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
+  transaction was sent but not executed within the deadline.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -140,14 +144,17 @@ Statuses:
 | List | [ListRequest](#neo.fs.v2.container.ListRequest) | [ListResponse](#neo.fs.v2.container.ListResponse) |
 #### Method SetExtendedACL
 
-Invokes 'SetEACL' method of 'Container` smart contract and returns response
-immediately. After one more block in FS chain, changes in an Extended ACL are
-added into smart contract storage.
+Sends transaction calling contract method to set container's extended ACL,
+and waits for the transaction to be executed. Deadline is determined by
+the transport protocol (e.g. `grpc-timeout` header). If the deadline is
+not set, server waits 15s after submitting the transaction.
 
 Statuses:
 - **OK** (0, SECTION_SUCCESS): \
   request to save container eACL has been sent to FS chain;
-- Common failures (SECTION_FAILURE_COMMON).
+- Common failures (SECTION_FAILURE_COMMON);
+- **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
+  transaction was sent but not executed within the deadline.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
