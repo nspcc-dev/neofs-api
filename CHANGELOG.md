@@ -6,8 +6,10 @@
 - Well-known CORS container attribute (#355)
 - Container `__NEOFS__LOCK_UNTIL` attribute (#357)
 - `CONTAINER_LOCKED` status (#357)
+- `CONTAINER_AWAIT_TIMEOUT` status (#358)
 
 ### Changed
+- `ContainerService`'s `Put`, `Delete` and `SetExtendedACL` RPC are async/await now (#358)
 
 ### Removed
 
