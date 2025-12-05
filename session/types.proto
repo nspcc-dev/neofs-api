@@ -9,6 +9,48 @@ import "status/types.proto";
 option csharp_namespace = "Neo.FileStorage.API.Session";
 option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/session";
 
+// Verb represents all possible operations in NeoFS that can be authorized
+// via session tokens or delegation chains. This enum covers both object and
+// container service operations.
+enum Verb {
+  // Unknown verb
+  VERB_UNSPECIFIED = 0;
+
+  // Object operations
+
+  // Refers to object.Put RPC call
+  OBJECT_PUT = 1;
+
+  // Refers to object.Get RPC call
+  OBJECT_GET = 2;
+
+  // Refers to object.Head RPC call
+  OBJECT_HEAD = 3;
+
+  // Refers to object.Search RPC call
+  OBJECT_SEARCH = 4;
+
+  // Refers to object.Delete RPC call
+  OBJECT_DELETE = 5;
+
+  // Refers to object.GetRange RPC call
+  OBJECT_RANGE = 6;
+
+  // Refers to object.GetRangeHash RPC call
+  OBJECT_RANGEHASH = 7;
+
+  // Container operations
+
+  // Refers to container.Put RPC call
+  CONTAINER_PUT = 8;
+
+  // Refers to container.Delete RPC call
+  CONTAINER_DELETE = 9;
+
+  // Refers to container.SetExtendedACL RPC call
+  CONTAINER_SETEACL = 10;
+}
+
 // Context information for Session Tokens related to ObjectService requests
 message ObjectSessionContext {
   // Object request verbs
@@ -175,6 +217,10 @@ message RequestMetaHeader {
   // Session token within which the request is sent
   SessionToken session_token = 5 [json_name = "sessionToken"];
 
+  // Session token v2 with delegation chain support.
+  // Requests are invalid if both session_token and session_token_v2 are set.
+  SessionTokenV2 session_token_v2 = 9 [json_name = "sessionTokenV2"];
+
   // `BearerToken` with eACL overrides for the request
   neo.fs.v2.acl.BearerToken bearer_token = 6 [json_name = "bearerToken"];
 
@@ -231,4 +277,99 @@ message ResponseVerificationHeader {
 
   // Chain of previous hops signatures
   ResponseVerificationHeader origin = 4 [json_name = "origin"];
+}
+
+// Session Token v2
+
+// Target account for SessionTokenV2.
+// It can be either direct (OwnerID) or indirect (NNS domain).
+message Target {
+  // Account identifier.
+  oneof identifier {
+    // Direct account reference via OwnerID (hash of verification script).
+    neo.fs.v2.refs.OwnerID owner_id = 1 [json_name = "ownerID"];
+
+    // Indirect account reference via NeoFS Name Service.
+    // NNS name is a domain name that resolves to an OwnerID through the
+    // NeoFS Name Service. The name must be a valid DNS-like domain name
+    // (e.g., "example.neofs") that is registered in the NNS contract on
+    // the Neo blockchain. The NNS record should contain a string record with
+    // the corresponding OwnerID value in NEP-18 address format.
+    string nns_name = 2 [json_name = "nnsName"];
+  }
+}
+
+// Lifetime parameters of the token v2. Field names taken from rfc7519.
+message TokenLifetime {
+  // Expiration, the last valid Unix timestamp.
+  uint64 exp = 1 [json_name = "exp"];
+
+  // Not valid before, the first valid Unix timestamp.
+  uint64 nbf = 2 [json_name = "nbf"];
+
+  // Issued at, the Unix timestamp when the token was issued.
+  uint64 iat = 3 [json_name = "iat"];
+}
+
+// SessionContextV2 carries unified context for both ObjectService and ContainerService requests.
+message SessionContextV2 {
+  // Container where operation is allowed.
+  // For container operations, this is the container being operated on.
+  // For object operations, this is the container holding the objects.
+  neo.fs.v2.refs.ContainerID container = 1 [json_name = "container"];
+
+  // Specific objects where operation is allowed.
+  // Only relevant for object operations.
+  // Empty list means all objects in the container.
+  // Maximum number of objects: 1000.
+  repeated neo.fs.v2.refs.ObjectID objects = 2 [json_name = "objects"];
+
+  // Operations authorized for this context.
+  // Maximum number of verbs: 10.
+  repeated Verb verbs = 3 [json_name = "verbs"];
+}
+
+// SessionTokenV2 represents NeoFS Session Token with delegation support.
+message SessionTokenV2 {
+  // Session Token body.
+  message Body {
+    // Token version.
+    uint32 version = 1 [json_name = "version"];
+
+    // Random nonce to prevent collisions.
+    uint32 nonce = 2 [json_name = "nonce"];
+
+    // Account that issued this token (who signed it).
+    Target issuer = 3 [json_name = "issuer"];
+
+    // Accounts authorized by this token (who can use it).
+    // Maximum number of subjects: 8.
+    repeated Target subjects = 4 [json_name = "subjects"];
+
+    // Lifetime of this token.
+    TokenLifetime lifetime = 5 [json_name = "lifetime"];
+
+    // Unified session contexts for both object and container operations.
+    // Multiple contexts allow authorization for different combinations.
+    // Maximum number of contexts: 16.
+    repeated SessionContextV2 contexts = 6 [json_name = "contexts"];
+
+    // final is a flag indicating whether further delegation is allowed.
+    // If set to true, subjects of this token cannot delegate their rights further.
+    bool final = 7 [json_name = "final"];
+  }
+
+  // Session token body.
+  Body body = 1 [json_name = "body"];
+
+  // Signature of the body by the issuer.
+  neo.fs.v2.refs.Signature signature = 2 [json_name = "signature"];
+
+  // Origin token that was delegated to create this token.
+  // This creates a chain of trust through token embedding.
+  // When B receives a token from A and wants to delegate
+  // to C, B creates a new SessionTokenV2 and embeds A's token here.
+  // Delegation cannot be wider than the previous token's lifetime and contexts.
+  // Maximum chain depth: 4.
+  SessionTokenV2 origin = 3 [json_name = "origin"];
 }
