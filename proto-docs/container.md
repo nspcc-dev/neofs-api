@@ -86,7 +86,7 @@ set, server waits 15s after submitting the transaction.
 
 Statuses:
 - **OK** (0, SECTION_SUCCESS): \
-  request to save the container has been sent to FS chain;
+  container successfully created;;
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   transaction was sent but not executed within the deadline.
@@ -106,7 +106,7 @@ object would be also removed).
 
 Statuses:
 - **OK** (0, SECTION_SUCCESS): \
-  request to remove the container has been sent to FS chain;
+  container successfully removed;
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_LOCKED** (3074, SECTION_CONTAINER): \
   deleting a locked container is prohibited;
@@ -151,7 +151,7 @@ not set, server waits 15s after submitting the transaction.
 
 Statuses:
 - **OK** (0, SECTION_SUCCESS): \
-  request to save container eACL has been sent to FS chain;
+  container eACL successfully set;
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   transaction was sent but not executed within the deadline.
