@@ -49,6 +49,12 @@ enum Verb {
 
   // Refers to container.SetExtendedACL RPC call
   CONTAINER_SETEACL = 10;
+
+  // Refers to container.SetAttribute RPC call
+  CONTAINER_SETATTRIBUTE = 11;
+
+  // Refers to container.RemoveAttribute RPC call
+  CONTAINER_REMOVEATTRIBUTE = 12;
 }
 
 // Context information for Session Tokens related to ObjectService requests
@@ -114,6 +120,12 @@ message ContainerSessionContext {
 
     // Refers to container.SetExtendedACL RPC call
     SETEACL = 3;
+
+    // Refers to container.SetAttribute RPC call
+    SETATTRIBUTE = 4;
+
+    // Refers to container.RemoveAttribute RPC call
+    REMOVEATTRIBUTE = 5;
   }
   // Type of request for which the token is issued
   Verb verb = 1 [json_name = "verb"];
@@ -325,7 +337,7 @@ message SessionContextV2 {
   repeated neo.fs.v2.refs.ObjectID objects = 2 [json_name = "objects"];
 
   // Operations authorized for this context.
-  // Maximum number of verbs: 10.
+  // Maximum number of verbs: 12.
   repeated Verb verbs = 3 [json_name = "verbs"];
 }
 

@@ -250,7 +250,7 @@ SessionContextV2 carries unified context for both ObjectService and ContainerSer
 | ----- | ---- | ----- | ----------- |
 | container | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Container where operation is allowed. For container operations, this is the container being operated on. For object operations, this is the container holding the objects. |
 | objects | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | Specific objects where operation is allowed. Only relevant for object operations. Empty list means all objects in the container. Maximum number of objects: 1000. |
-| verbs | [Verb](#neo.fs.v2.session.Verb) | repeated | Operations authorized for this context. Maximum number of verbs: 10. |
+| verbs | [Verb](#neo.fs.v2.session.Verb) | repeated | Operations authorized for this context. Maximum number of verbs: 12. |
 
 
 <a name="neo.fs.v2.session.SessionToken"></a>
@@ -393,6 +393,8 @@ Container request verbs
 | PUT | 1 | Refers to container.Put RPC call |
 | DELETE | 2 | Refers to container.Delete RPC call |
 | SETEACL | 3 | Refers to container.SetExtendedACL RPC call |
+| SETATTRIBUTE | 4 | Refers to container.SetAttribute RPC call |
+| REMOVEATTRIBUTE | 5 | Refers to container.RemoveAttribute RPC call |
 
 
 
@@ -434,6 +436,8 @@ container service operations.
 | CONTAINER_PUT | 8 | Refers to container.Put RPC call |
 | CONTAINER_DELETE | 9 | Refers to container.Delete RPC call |
 | CONTAINER_SETEACL | 10 | Refers to container.SetExtendedACL RPC call |
+| CONTAINER_SETATTRIBUTE | 11 | Refers to container.SetAttribute RPC call |
+| CONTAINER_REMOVEATTRIBUTE | 12 | Refers to container.RemoveAttribute RPC call |
 
 
  <!-- end enums -->
