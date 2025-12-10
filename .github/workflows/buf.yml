@@ -7,7 +7,7 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@v4
       - name: Download buf
@@ -21,7 +21,7 @@ jobs:
       - run: ./buf-Linux-x86_64 lint
 
   breaking:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - name: Download buf
         uses: dsaltares/fetch-gh-release-asset@1.1.2
