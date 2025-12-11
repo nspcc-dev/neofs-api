@@ -7,6 +7,8 @@
 - Container `__NEOFS__LOCK_UNTIL` attribute (#357)
 - `CONTAINER_LOCKED` status (#357)
 - `CONTAINER_AWAIT_TIMEOUT` status (#358)
+- `SetAttribute` and `RemoveAttribute` RPC to `ContainerService` (#362)
+- `SETATTRIBUTE` and `REMOVEATTRIBUTE` verbs for container sessions V1 (#362)
 
 ### Changed
 - `ContainerService`'s `Put`, `Delete` and `SetExtendedACL` RPC are async/await now (#358)

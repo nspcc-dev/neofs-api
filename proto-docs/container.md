@@ -33,6 +33,16 @@
     - [PutRequest.Body](#neo.fs.v2.container.PutRequest.Body)
     - [PutResponse](#neo.fs.v2.container.PutResponse)
     - [PutResponse.Body](#neo.fs.v2.container.PutResponse.Body)
+    - [RemoveAttributeRequest](#neo.fs.v2.container.RemoveAttributeRequest)
+    - [RemoveAttributeRequest.Body](#neo.fs.v2.container.RemoveAttributeRequest.Body)
+    - [RemoveAttributeRequest.Body.Parameters](#neo.fs.v2.container.RemoveAttributeRequest.Body.Parameters)
+    - [RemoveAttributeResponse](#neo.fs.v2.container.RemoveAttributeResponse)
+    - [RemoveAttributeResponse.Body](#neo.fs.v2.container.RemoveAttributeResponse.Body)
+    - [SetAttributeRequest](#neo.fs.v2.container.SetAttributeRequest)
+    - [SetAttributeRequest.Body](#neo.fs.v2.container.SetAttributeRequest.Body)
+    - [SetAttributeRequest.Body.Parameters](#neo.fs.v2.container.SetAttributeRequest.Body.Parameters)
+    - [SetAttributeResponse](#neo.fs.v2.container.SetAttributeResponse)
+    - [SetAttributeResponse.Body](#neo.fs.v2.container.SetAttributeResponse.Body)
     - [SetExtendedACLRequest](#neo.fs.v2.container.SetExtendedACLRequest)
     - [SetExtendedACLRequest.Body](#neo.fs.v2.container.SetExtendedACLRequest.Body)
     - [SetExtendedACLResponse](#neo.fs.v2.container.SetExtendedACLResponse)
@@ -74,6 +84,8 @@ rpc List(ListRequest) returns (ListResponse);
 rpc SetExtendedACL(SetExtendedACLRequest) returns (SetExtendedACLResponse);
 rpc GetExtendedACL(GetExtendedACLRequest) returns (GetExtendedACLResponse);
 rpc AnnounceUsedSpace(AnnounceUsedSpaceRequest) returns (AnnounceUsedSpaceResponse);
+rpc SetAttribute(SetAttributeRequest) returns (SetAttributeResponse);
+rpc RemoveAttribute(RemoveAttributeRequest) returns (RemoveAttributeResponse);
 
 ```
 
@@ -86,7 +98,7 @@ set, server waits 15s after submitting the transaction.
 
 Statuses:
 - **OK** (0, SECTION_SUCCESS): \
-  request to save the container has been sent to FS chain;
+  container successfully created;;
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   transaction was sent but not executed within the deadline.
@@ -106,7 +118,7 @@ object would be also removed).
 
 Statuses:
 - **OK** (0, SECTION_SUCCESS): \
-  request to remove the container has been sent to FS chain;
+  container successfully removed;
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_LOCKED** (3074, SECTION_CONTAINER): \
   deleting a locked container is prohibited;
@@ -151,7 +163,7 @@ not set, server waits 15s after submitting the transaction.
 
 Statuses:
 - **OK** (0, SECTION_SUCCESS): \
-  request to save container eACL has been sent to FS chain;
+  container eACL successfully set;
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   transaction was sent but not executed within the deadline.
@@ -191,6 +203,40 @@ contract.
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | AnnounceUsedSpace | [AnnounceUsedSpaceRequest](#neo.fs.v2.container.AnnounceUsedSpaceRequest) | [AnnounceUsedSpaceResponse](#neo.fs.v2.container.AnnounceUsedSpaceResponse) |
+#### Method SetAttribute
+
+Sends transaction calling contract method to set container attribute, and
+waits for the transaction to be executed. Deadline is determined by the
+transport protocol (e.g. `grpc-timeout` header). If the deadline is not
+set, server waits 15s after submitting the transaction.
+
+Statuses:
+- **OK** (0, SECTION_SUCCESS): \
+  attribute successfully set;
+- Common failures (SECTION_FAILURE_COMMON);
+- **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
+  transaction was sent but not executed within the deadline.
+
+| Name | Input | Output |
+| ---- | ----- | ------ |
+| SetAttribute | [SetAttributeRequest](#neo.fs.v2.container.SetAttributeRequest) | [SetAttributeResponse](#neo.fs.v2.container.SetAttributeResponse) |
+#### Method RemoveAttribute
+
+Sends transaction calling contract method to remove container attribute,
+and waits for the transaction to be executed. Deadline is determined by
+the transport protocol (e.g. `grpc-timeout` header). If the deadline is
+not set, server waits 15s after submitting the transaction.
+
+Statuses:
+- **OK** (0, SECTION_SUCCESS): \
+  attribute successfully removed;
+- Common failures (SECTION_FAILURE_COMMON);
+- **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
+  transaction was sent but not executed within the deadline.
+
+| Name | Input | Output |
+| ---- | ----- | ------ |
+| RemoveAttribute | [RemoveAttributeRequest](#neo.fs.v2.container.RemoveAttributeRequest) | [RemoveAttributeResponse](#neo.fs.v2.container.RemoveAttributeResponse) |
  <!-- end services -->
 
 
@@ -512,6 +558,150 @@ returned here to make sure everything has been done as expected.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Unique identifier of the newly created container |
+
+
+<a name="neo.fs.v2.container.RemoveAttributeRequest"></a>
+
+### Message RemoveAttributeRequest
+Attribute removal request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [RemoveAttributeRequest.Body](#neo.fs.v2.container.RemoveAttributeRequest.Body) |  | Request payload. |
+| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled `body` field. |
+
+
+<a name="neo.fs.v2.container.RemoveAttributeRequest.Body"></a>
+
+### Message RemoveAttributeRequest.Body
+Request payload message.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parameters | [RemoveAttributeRequest.Body.Parameters](#neo.fs.v2.container.RemoveAttributeRequest.Body.Parameters) |  | Op parameters. |
+| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | N3 witness of stable-marshalled `parameters` field. The signature must authenticate either container owner or one of subjects in the `session_token` field if any. Signature according to `ECDSA_RFC6979_SHA256` scheme is also supported. |
+| session_token | [neo.fs.v2.session.SessionTokenV2](#neo.fs.v2.session.SessionTokenV2) |  | Optional session token. The token must be issued by the container owner. The token must have at least one subject authenticated by `signature` field. The token must have at least one context with this container and `CONTAINER_REMOVEATTRIBUTE` verb. |
+| session_token_v1 | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Optional session token (V1). It must not be set together with `session_token` field that is highly recommended to be used instead. Requirements are the same for both. |
+
+
+<a name="neo.fs.v2.container.RemoveAttributeRequest.Body.Parameters"></a>
+
+### Message RemoveAttributeRequest.Body.Parameters
+Op parameters message.
+
+If container does not have the `attribute`, nothing is done and status
+`OK` is returned.
+
+`attribute` must be one of:
+ - `CORS`;
+ - `__NEOFS__LOCK_UNTIL`.
+
+Attribute-specific requirements:
+ - `__NEOFS__LOCK_UNTIL`: current timestamp must have already passed if any
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container to remove attribute from. |
+| attribute | [string](#string) |  | Attribute to be removed. |
+
+
+<a name="neo.fs.v2.container.RemoveAttributeResponse"></a>
+
+### Message RemoveAttributeResponse
+Attribute removal response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [RemoveAttributeResponse.Body](#neo.fs.v2.container.RemoveAttributeResponse.Body) |  | Request result. |
+| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled `body` field. |
+
+
+<a name="neo.fs.v2.container.RemoveAttributeResponse.Body"></a>
+
+### Message RemoveAttributeResponse.Body
+Request result message.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Operation execution status. |
+
+
+<a name="neo.fs.v2.container.SetAttributeRequest"></a>
+
+### Message SetAttributeRequest
+Attribute setting request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [SetAttributeRequest.Body](#neo.fs.v2.container.SetAttributeRequest.Body) |  | Request payload. |
+| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled `body` field. |
+
+
+<a name="neo.fs.v2.container.SetAttributeRequest.Body"></a>
+
+### Message SetAttributeRequest.Body
+Request payload message.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parameters | [SetAttributeRequest.Body.Parameters](#neo.fs.v2.container.SetAttributeRequest.Body.Parameters) |  | Op parameters. |
+| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | N3 witness of stable-marshalled `parameters` field. The signature must authenticate either container owner or one of subjects in the `session_token` field if any. Signature according to `ECDSA_RFC6979_SHA256` scheme is also supported. |
+| session_token | [neo.fs.v2.session.SessionTokenV2](#neo.fs.v2.session.SessionTokenV2) |  | Optional session token. The token must be issued by the container owner. The token must have at least one subject authenticated by `signature` field. The token must have at least one context with this container and `CONTAINER_SETATTRIBUTE` verb. |
+| session_token_v1 | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Optional session token (V1). It must not be set together with `session_token` field that is highly recommended to be used instead. Requirements are the same for both. |
+
+
+<a name="neo.fs.v2.container.SetAttributeRequest.Body.Parameters"></a>
+
+### Message SetAttributeRequest.Body.Parameters
+Op parameters message.
+
+If container does not have the `attribute`, it is added. Otherwise, its
+value is swapped.
+
+`attribute` must be one of:
+ - `CORS`;
+ - `__NEOFS__LOCK_UNTIL`.
+
+In general, requirements for `value` are the same as for container
+creation. Attribute-specific requirements:
+ - `__NEOFS__LOCK_UNTIL`: new timestamp must be after the current one if any
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container to set attribute for. |
+| attribute | [string](#string) |  | Attribute to be set. |
+| value | [string](#string) |  | New attribute value. |
+
+
+<a name="neo.fs.v2.container.SetAttributeResponse"></a>
+
+### Message SetAttributeResponse
+Attribute setting response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [SetAttributeResponse.Body](#neo.fs.v2.container.SetAttributeResponse.Body) |  | Request result. |
+| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled `body` field. |
+
+
+<a name="neo.fs.v2.container.SetAttributeResponse.Body"></a>
+
+### Message SetAttributeResponse.Body
+Request result message.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Operation execution status. |
 
 
 <a name="neo.fs.v2.container.SetExtendedACLRequest"></a>

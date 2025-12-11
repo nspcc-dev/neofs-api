@@ -6,6 +6,7 @@ import "acl/types.proto";
 import "container/types.proto";
 import "refs/types.proto";
 import "session/types.proto";
+import "status/types.proto";
 
 option csharp_namespace = "Neo.FileStorage.API.Container";
 option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/container";
@@ -22,7 +23,7 @@ service ContainerService {
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
-  //   request to save the container has been sent to FS chain;
+  //   container successfully created;;
   // - Common failures (SECTION_FAILURE_COMMON);
   // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   //   transaction was sent but not executed within the deadline.
@@ -38,7 +39,7 @@ service ContainerService {
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
-  //   request to remove the container has been sent to FS chain;
+  //   container successfully removed;
   // - Common failures (SECTION_FAILURE_COMMON);
   // - **CONTAINER_LOCKED** (3074, SECTION_CONTAINER): \
   //   deleting a locked container is prohibited;
@@ -71,7 +72,7 @@ service ContainerService {
   //
   // Statuses:
   // - **OK** (0, SECTION_SUCCESS): \
-  //   request to save container eACL has been sent to FS chain;
+  //   container eACL successfully set;
   // - Common failures (SECTION_FAILURE_COMMON);
   // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   //   transaction was sent but not executed within the deadline.
@@ -100,6 +101,32 @@ service ContainerService {
   // DEPRECATED: every storage node must send storage load directly to `container`
   // contract.
   rpc AnnounceUsedSpace(AnnounceUsedSpaceRequest) returns (AnnounceUsedSpaceResponse);
+
+  // Sends transaction calling contract method to set container attribute, and
+  // waits for the transaction to be executed. Deadline is determined by the
+  // transport protocol (e.g. `grpc-timeout` header). If the deadline is not
+  // set, server waits 15s after submitting the transaction.
+  //
+  // Statuses:
+  // - **OK** (0, SECTION_SUCCESS): \
+  //   attribute successfully set;
+  // - Common failures (SECTION_FAILURE_COMMON);
+  // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
+  //   transaction was sent but not executed within the deadline.
+  rpc SetAttribute(SetAttributeRequest) returns (SetAttributeResponse);
+
+  // Sends transaction calling contract method to remove container attribute,
+  // and waits for the transaction to be executed. Deadline is determined by
+  // the transport protocol (e.g. `grpc-timeout` header). If the deadline is
+  // not set, server waits 15s after submitting the transaction.
+  //
+  // Statuses:
+  // - **OK** (0, SECTION_SUCCESS): \
+  //   attribute successfully removed;
+  // - Common failures (SECTION_FAILURE_COMMON);
+  // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
+  //   transaction was sent but not executed within the deadline.
+  rpc RemoveAttribute(RemoveAttributeRequest) returns (RemoveAttributeResponse);
 }
 
 // New NeoFS Container creation request
@@ -435,4 +462,140 @@ message AnnounceUsedSpaceResponse {
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
+}
+
+// Attribute setting request
+message SetAttributeRequest {
+  // Request payload message.
+  message Body {
+    // Op parameters message.
+    //
+    // If container does not have the `attribute`, it is added. Otherwise, its
+    // value is swapped.
+    //
+    // `attribute` must be one of:
+    //  - `CORS`;
+    //  - `__NEOFS__LOCK_UNTIL`.
+    //
+    // In general, requirements for `value` are the same as for container
+    // creation. Attribute-specific requirements:
+    //  - `__NEOFS__LOCK_UNTIL`: new timestamp must be after the current one if any
+    message Parameters {
+      // Identifier of the container to set attribute for.
+      neo.fs.v2.refs.ContainerID container_id = 1;
+
+      // Attribute to be set.
+      string attribute = 2;
+
+      // New attribute value.
+      string value = 3;
+    }
+
+    // Op parameters.
+    Parameters parameters = 1;
+
+    // N3 witness of stable-marshalled `parameters` field. The
+    // signature must authenticate either container owner or one of subjects in
+    // the `session_token` field if any. Signature according to
+    // `ECDSA_RFC6979_SHA256` scheme is also supported.
+    neo.fs.v2.refs.SignatureRFC6979 signature = 2;
+
+    // Optional session token. The token must be issued by the container owner.
+    // The token must have at least one subject authenticated by `signature`
+    // field. The token must have at least one context with this container and
+    // `CONTAINER_SETATTRIBUTE` verb.
+    neo.fs.v2.session.SessionTokenV2 session_token = 3;
+
+    // Optional session token (V1). It must not be set together with
+    // `session_token` field that is highly recommended to be used instead.
+    // Requirements are the same for both.
+    neo.fs.v2.session.SessionToken session_token_v1 = 4;
+  }
+
+  // Request payload.
+  Body body = 1;
+
+  // Signature of stable-marshalled `body` field.
+  neo.fs.v2.refs.Signature body_signature = 2;
+}
+
+// Attribute setting response
+message SetAttributeResponse {
+  // Request result message.
+  message Body {
+    // Operation execution status.
+    neo.fs.v2.status.Status status = 1;
+  }
+
+  // Request result.
+  Body body = 1;
+
+  // Signature of stable-marshalled `body` field.
+  neo.fs.v2.refs.Signature body_signature = 2;
+}
+
+// Attribute removal request
+message RemoveAttributeRequest {
+  // Request payload message.
+  message Body {
+    // Op parameters message.
+    //
+    // If container does not have the `attribute`, nothing is done and status
+    // `OK` is returned.
+    //
+    // `attribute` must be one of:
+    //  - `CORS`;
+    //  - `__NEOFS__LOCK_UNTIL`.
+    //
+    // Attribute-specific requirements:
+    //  - `__NEOFS__LOCK_UNTIL`: current timestamp must have already passed if any
+    message Parameters {
+      // Identifier of the container to remove attribute from.
+      neo.fs.v2.refs.ContainerID container_id = 1;
+
+      // Attribute to be removed.
+      string attribute = 2;
+    }
+
+    // Op parameters.
+    Parameters parameters = 1;
+
+    // N3 witness of stable-marshalled `parameters` field. The
+    // signature must authenticate either container owner or one of subjects in
+    // the `session_token` field if any. Signature according to
+    // `ECDSA_RFC6979_SHA256` scheme is also supported.
+    neo.fs.v2.refs.SignatureRFC6979 signature = 2;
+
+    // Optional session token. The token must be issued by the container owner.
+    // The token must have at least one subject authenticated by `signature`
+    // field. The token must have at least one context with this container and
+    // `CONTAINER_REMOVEATTRIBUTE` verb.
+    neo.fs.v2.session.SessionTokenV2 session_token = 3;
+
+    // Optional session token (V1). It must not be set together with
+    // `session_token` field that is highly recommended to be used instead.
+    // Requirements are the same for both.
+    neo.fs.v2.session.SessionToken session_token_v1 = 4;
+  }
+
+  // Request payload.
+  Body body = 1;
+
+  // Signature of stable-marshalled `body` field.
+  neo.fs.v2.refs.Signature body_signature = 2;
+}
+
+// Attribute removal response
+message RemoveAttributeResponse {
+  // Request result message.
+  message Body {
+    // Operation execution status.
+    neo.fs.v2.status.Status status = 1;
+  }
+
+  // Request result.
+  Body body = 1;
+
+  // Signature of stable-marshalled `body` field.
+  neo.fs.v2.refs.Signature body_signature = 2;
 }
