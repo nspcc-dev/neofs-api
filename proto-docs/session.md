@@ -317,7 +317,7 @@ Session Token body.
 | ----- | ---- | ----- | ----------- |
 | version | [uint32](#uint32) |  | Token version. |
 | nonce | [uint32](#uint32) |  | Random nonce to prevent collisions. |
-| issuer | [Target](#neo.fs.v2.session.Target) |  | Account that issued this token (who signed it). |
+| issuer | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Account that issued this token (who signed it). |
 | subjects | [Target](#neo.fs.v2.session.Target) | repeated | Accounts authorized by this token (who can use it). Maximum number of subjects: 8. |
 | lifetime | [TokenLifetime](#neo.fs.v2.session.TokenLifetime) |  | Lifetime of this token. |
 | contexts | [SessionContextV2](#neo.fs.v2.session.SessionContextV2) | repeated | Unified session contexts for both object and container operations. Multiple contexts allow authorization for different combinations. Maximum number of contexts: 16. |

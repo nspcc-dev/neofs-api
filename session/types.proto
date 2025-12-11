@@ -352,7 +352,7 @@ message SessionTokenV2 {
     uint32 nonce = 2 [json_name = "nonce"];
 
     // Account that issued this token (who signed it).
-    Target issuer = 3 [json_name = "issuer"];
+    neo.fs.v2.refs.OwnerID issuer = 3 [json_name = "issuer"];
 
     // Accounts authorized by this token (who can use it).
     // Maximum number of subjects: 8.
