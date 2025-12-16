@@ -328,6 +328,8 @@ message SessionContextV2 {
   // Container where operation is allowed.
   // For container operations, this is the container being operated on.
   // For object operations, this is the container holding the objects.
+  // Empty container ID means wildcard (applies to all containers).
+  // Objects list is ignored for wildcard contexts.
   neo.fs.v2.refs.ContainerID container = 1 [json_name = "container"];
 
   // Specific objects where operation is allowed.
@@ -337,6 +339,8 @@ message SessionContextV2 {
   repeated neo.fs.v2.refs.ObjectID objects = 2 [json_name = "objects"];
 
   // Operations authorized for this context.
+  // Must contain at least one verb (empty list is invalid).
+  // Verbs must be sorted in ascending order.
   // Maximum number of verbs: 12.
   repeated Verb verbs = 3 [json_name = "verbs"];
 }
@@ -363,7 +367,22 @@ message SessionTokenV2 {
 
     // Unified session contexts for both object and container operations.
     // Multiple contexts allow authorization for different combinations.
-    // Maximum number of contexts: 16.
+    //
+    // Validation rules:
+    // 1. Only one wildcard context (empty container ID) is allowed per token.
+    //    Wildcard context must come first if present.
+    // 2. Contexts must be sorted in ascending order by ContainerID.
+    // 3. Duplicate containers are not allowed (each container can appear only once).
+    // 4. Each context must have at least one verb (enforced by SessionContextV2).
+    // 5. Verbs within each context must be sorted in ascending order (enforced by SessionContextV2).
+    // 6. Maximum number of contexts: 16.
+    //
+    // Delegation rules (when origin token is present):
+    // 1. New contexts (containers) can only be added if origin token has a wildcard context.
+    // 2. All rights must be narrowed during delegation:
+    //    - Verbs must be a subset of origin's verbs for the same container
+    //    - Objects (if specified) must be a subset of origin's objects
+    //    - Cannot add new verbs not present in origin for the same container
     repeated SessionContextV2 contexts = 6 [json_name = "contexts"];
 
     // final is a flag indicating whether further delegation is allowed.
@@ -381,7 +400,11 @@ message SessionTokenV2 {
   // This creates a chain of trust through token embedding.
   // When B receives a token from A and wants to delegate
   // to C, B creates a new SessionTokenV2 and embeds A's token here.
-  // Delegation cannot be wider than the previous token's lifetime and contexts.
-  // Maximum chain depth: 4.
+  //
+  // Delegation validation rules:
+  // 1. Lifetime must be within origin's lifetime (exp >= origin.exp, nbf <= origin.nbf).
+  // 2. Contexts must be narrowed (see contexts field validation rules).
+  // 3. If origin.final is true, delegation is forbidden.
+  // 4. Maximum chain depth: 4 tokens.
   SessionTokenV2 origin = 3 [json_name = "origin"];
 }
