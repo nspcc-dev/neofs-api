@@ -197,6 +197,7 @@ message Header {
 
   // Session token, if it was used during Object creation. Need it to verify
   // integrity and authenticity out of Request scope.
+  // Only one of `session_token` or `session_token_v2` can be set.
   neo.fs.v2.session.SessionToken session_token = 9 [json_name = "sessionToken"];
 
   // `Attribute` is a user-defined Key-Value metadata pair attached to an
@@ -305,6 +306,11 @@ message Header {
   }
   // Position of the object in the split hierarchy
   Split split = 11 [json_name = "split"];
+
+  // Session token V2, if it was used during Object creation. Need it to verify
+  // integrity and authenticity out of Request scope.
+  // Only one of `session_token` or `session_token_v2` can be set.
+  neo.fs.v2.session.SessionTokenV2 session_token_v2 = 12 [json_name = "sessionTokenV2"];
 }
 
 // Object structure. Object is immutable and content-addressed. It means
