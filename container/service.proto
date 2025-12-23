@@ -473,6 +473,9 @@ message SetAttributeRequest {
     // If container does not have the `attribute`, it is added. Otherwise, its
     // value is swapped.
     //
+    // `valid_until` is required request expiration time in Unix Timestamp
+    // format.
+    //
     // `attribute` must be one of:
     //  - `CORS`;
     //  - `__NEOFS__LOCK_UNTIL`.
@@ -489,6 +492,9 @@ message SetAttributeRequest {
 
       // New attribute value.
       string value = 3;
+
+      // Request expiration time.
+      uint64 valid_until = 4;
     }
 
     // Op parameters.
@@ -543,6 +549,9 @@ message RemoveAttributeRequest {
     // If container does not have the `attribute`, nothing is done and status
     // `OK` is returned.
     //
+    // `valid_until` is required request expiration time in Unix Timestamp
+    // format.
+    //
     // `attribute` must be one of:
     //  - `CORS`;
     //  - `__NEOFS__LOCK_UNTIL`.
@@ -555,6 +564,9 @@ message RemoveAttributeRequest {
 
       // Attribute to be removed.
       string attribute = 2;
+
+      // Request expiration time.
+      uint64 valid_until = 3;
     }
 
     // Op parameters.

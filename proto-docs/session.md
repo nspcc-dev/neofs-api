@@ -248,9 +248,9 @@ SessionContextV2 carries unified context for both ObjectService and ContainerSer
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Container where operation is allowed. For container operations, this is the container being operated on. For object operations, this is the container holding the objects. |
+| container | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Container where operation is allowed. For container operations, this is the container being operated on. For object operations, this is the container holding the objects. Empty container ID means wildcard (applies to all containers). Objects list is ignored for wildcard contexts. |
 | objects | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) | repeated | Specific objects where operation is allowed. Only relevant for object operations. Empty list means all objects in the container. Maximum number of objects: 1000. |
-| verbs | [Verb](#neo.fs.v2.session.Verb) | repeated | Operations authorized for this context. Maximum number of verbs: 12. |
+| verbs | [Verb](#neo.fs.v2.session.Verb) | repeated | Operations authorized for this context. Must contain at least one verb (empty list is invalid). Verbs must be sorted in ascending order. Maximum number of verbs: 12. |
 
 
 <a name="neo.fs.v2.session.SessionToken"></a>
@@ -304,7 +304,9 @@ SessionTokenV2 represents NeoFS Session Token with delegation support.
 | ----- | ---- | ----- | ----------- |
 | body | [SessionTokenV2.Body](#neo.fs.v2.session.SessionTokenV2.Body) |  | Session token body. |
 | signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of the body by the issuer. |
-| origin | [SessionTokenV2](#neo.fs.v2.session.SessionTokenV2) |  | Origin token that was delegated to create this token. This creates a chain of trust through token embedding. When B receives a token from A and wants to delegate to C, B creates a new SessionTokenV2 and embeds A's token here. Delegation cannot be wider than the previous token's lifetime and contexts. Maximum chain depth: 4. |
+| origin | [SessionTokenV2](#neo.fs.v2.session.SessionTokenV2) |  | Origin token that was delegated to create this token. This creates a chain of trust through token embedding. When B receives a token from A and wants to delegate to C, B creates a new SessionTokenV2 and embeds A's token here.
+
+Delegation validation rules: 1. Lifetime must be within origin's lifetime (exp >= origin.exp, nbf <= origin.nbf). 2. Contexts must be narrowed (see contexts field validation rules). 3. If origin.final is true, delegation is forbidden. 4. Maximum chain depth: 4 tokens. |
 
 
 <a name="neo.fs.v2.session.SessionTokenV2.Body"></a>
@@ -320,7 +322,11 @@ Session Token body.
 | issuer | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Account that issued this token (who signed it). |
 | subjects | [Target](#neo.fs.v2.session.Target) | repeated | Accounts authorized by this token (who can use it). Maximum number of subjects: 8. |
 | lifetime | [TokenLifetime](#neo.fs.v2.session.TokenLifetime) |  | Lifetime of this token. |
-| contexts | [SessionContextV2](#neo.fs.v2.session.SessionContextV2) | repeated | Unified session contexts for both object and container operations. Multiple contexts allow authorization for different combinations. Maximum number of contexts: 16. |
+| contexts | [SessionContextV2](#neo.fs.v2.session.SessionContextV2) | repeated | Unified session contexts for both object and container operations. Multiple contexts allow authorization for different combinations.
+
+Validation rules: 1. Only one wildcard context (empty container ID) is allowed per token. Wildcard context must come first if present. 2. Contexts must be sorted in ascending order by ContainerID. 3. Duplicate containers are not allowed (each container can appear only once). 4. Each context must have at least one verb (enforced by SessionContextV2). 5. Verbs within each context must be sorted in ascending order (enforced by SessionContextV2). 6. Maximum number of contexts: 16.
+
+Delegation rules (when origin token is present): 1. New contexts (containers) can only be added if origin token has a wildcard context. 2. All rights must be narrowed during delegation: - Verbs must be a subset of origin's verbs for the same container - Objects (if specified) must be a subset of origin's objects - Cannot add new verbs not present in origin for the same container |
 | final | [bool](#bool) |  | final is a flag indicating whether further delegation is allowed. If set to true, subjects of this token cannot delegate their rights further. |
 
 
