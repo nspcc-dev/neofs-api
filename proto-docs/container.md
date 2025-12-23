@@ -594,6 +594,9 @@ Op parameters message.
 If container does not have the `attribute`, nothing is done and status
 `OK` is returned.
 
+`valid_until` is required request expiration time in Unix Timestamp
+format.
+
 `attribute` must be one of:
  - `CORS`;
  - `__NEOFS__LOCK_UNTIL`.
@@ -606,6 +609,7 @@ Attribute-specific requirements:
 | ----- | ---- | ----- | ----------- |
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container to remove attribute from. |
 | attribute | [string](#string) |  | Attribute to be removed. |
+| valid_until | [uint64](#uint64) |  | Request expiration time. |
 
 
 <a name="neo.fs.v2.container.RemoveAttributeResponse"></a>
@@ -665,6 +669,9 @@ Op parameters message.
 If container does not have the `attribute`, it is added. Otherwise, its
 value is swapped.
 
+`valid_until` is required request expiration time in Unix Timestamp
+format.
+
 `attribute` must be one of:
  - `CORS`;
  - `__NEOFS__LOCK_UNTIL`.
@@ -679,6 +686,7 @@ creation. Attribute-specific requirements:
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container to set attribute for. |
 | attribute | [string](#string) |  | Attribute to be set. |
 | value | [string](#string) |  | New attribute value. |
+| valid_until | [uint64](#uint64) |  | Request expiration time. |
 
 
 <a name="neo.fs.v2.container.SetAttributeResponse"></a>
