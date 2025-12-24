@@ -136,12 +136,37 @@ message PutRequest {
   // creation by `Container` smart contract. `ContainerID` is a SHA256 hash of
   // the stable-marshalled container strucutre, hence there is no need for
   // additional signature checks.
+  //
+  // Optional `eacl` field allows to set extended access rules for the
+  // container. It must be either set or unset along with `eacl_signature`.
+  // `eacl_session_token` or `eacl_session_token_v1` must be set along with
+  // `eacl` only.
   message Body {
     // Container structure to register in NeoFS
     container.Container container = 1;
 
     // Signature of a stable-marshalled container according to RFC-6979.
     neo.fs.v2.refs.SignatureRFC6979 signature = 2;
+
+    // Extended ACL for the container.
+    neo.fs.v2.acl.EACLTable eacl = 3;
+
+    // N3 witness of stable-marshalled `eacl` field. The witness must
+    // authenticate either container owner or one of subjects in
+    // the `eacl_session_token` field if any. Signature according to
+    // `ECDSA_RFC6979_SHA256` scheme is also supported.
+    neo.fs.v2.refs.SignatureRFC6979 eacl_signature = 4;
+
+    // Optional eACL session token. The token must be issued by the container
+    // owner. The token must have at least one subject authenticated
+    // by `eacl_signature` field. The token must have at least one context
+    // with this container and `CONTAINER_SETEACL` verb.
+    neo.fs.v2.session.SessionTokenV2 eacl_session_token = 5;
+
+    // Optional eACL session token (V1). It must not be set together with
+    // `eacl_session_token` field that is highly recommended to be used
+    // instead. Requirements are the same for both.
+    neo.fs.v2.session.SessionToken eacl_session_token_v1 = 6;
   }
   // Body of container put request message.
   Body body = 1;
