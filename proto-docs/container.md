@@ -98,7 +98,7 @@ set, server waits 15s after submitting the transaction.
 
 Statuses:
 - **OK** (0, SECTION_SUCCESS): \
-  container successfully created;;
+  container successfully created;
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   transaction was sent but not executed within the deadline.
