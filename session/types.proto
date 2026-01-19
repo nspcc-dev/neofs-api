@@ -329,20 +329,13 @@ message SessionContextV2 {
   // For container operations, this is the container being operated on.
   // For object operations, this is the container holding the objects.
   // Empty container ID means wildcard (applies to all containers).
-  // Objects list is ignored for wildcard contexts.
   neo.fs.v2.refs.ContainerID container = 1 [json_name = "container"];
-
-  // Specific objects where operation is allowed.
-  // Only relevant for object operations.
-  // Empty list means all objects in the container.
-  // Maximum number of objects: 1000.
-  repeated neo.fs.v2.refs.ObjectID objects = 2 [json_name = "objects"];
 
   // Operations authorized for this context.
   // Must contain at least one verb (empty list is invalid).
   // Verbs must be sorted in ascending order.
   // Maximum number of verbs: 12.
-  repeated Verb verbs = 3 [json_name = "verbs"];
+  repeated Verb verbs = 2 [json_name = "verbs"];
 }
 
 // SessionTokenV2 represents NeoFS Session Token with delegation support.
@@ -381,7 +374,6 @@ message SessionTokenV2 {
     // 1. New contexts (containers) can only be added if origin token has a wildcard context.
     // 2. All rights must be narrowed during delegation:
     //    - Verbs must be a subset of origin's verbs for the same container
-    //    - Objects (if specified) must be a subset of origin's objects
     //    - Cannot add new verbs not present in origin for the same container
     repeated SessionContextV2 contexts = 6 [json_name = "contexts"];
 
