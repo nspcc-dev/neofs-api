@@ -478,11 +478,17 @@ message SetAttributeRequest {
     //
     // `attribute` must be one of:
     //  - `CORS`;
+    //  - `S3_TAGS`;
+    //  - `S3_SETTINGS`;
+    //  - `S3_NOTIFICATIONS`;
     //  - `__NEOFS__LOCK_UNTIL`.
     //
     // In general, requirements for `value` are the same as for container
     // creation. Attribute-specific requirements:
     //  - `__NEOFS__LOCK_UNTIL`: new timestamp must be after the current one if any
+    //  - `S3_TAGS`: must be a valid JSON object
+    //  - `S3_SETTINGS`: must be a valid JSON object
+    //  - `S3_NOTIFICATIONS`: must be a valid JSON object
     message Parameters {
       // Identifier of the container to set attribute for.
       neo.fs.v2.refs.ContainerID container_id = 1;
@@ -554,6 +560,9 @@ message RemoveAttributeRequest {
     //
     // `attribute` must be one of:
     //  - `CORS`;
+    //  - `S3_TAGS`;
+    //  - `S3_SETTINGS`;
+    //  - `S3_NOTIFICATIONS`;
     //  - `__NEOFS__LOCK_UNTIL`.
     //
     // Attribute-specific requirements:
