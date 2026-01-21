@@ -599,6 +599,9 @@ format.
 
 `attribute` must be one of:
  - `CORS`;
+ - `S3_TAGS`;
+ - `S3_SETTINGS`;
+ - `S3_NOTIFICATIONS`;
  - `__NEOFS__LOCK_UNTIL`.
 
 Attribute-specific requirements:
@@ -674,11 +677,17 @@ format.
 
 `attribute` must be one of:
  - `CORS`;
+ - `S3_TAGS`;
+ - `S3_SETTINGS`;
+ - `S3_NOTIFICATIONS`;
  - `__NEOFS__LOCK_UNTIL`.
 
 In general, requirements for `value` are the same as for container
 creation. Attribute-specific requirements:
  - `__NEOFS__LOCK_UNTIL`: new timestamp must be after the current one if any
+ - `S3_TAGS`: must be a valid JSON object
+ - `S3_SETTINGS`: must be a valid JSON object
+ - `S3_NOTIFICATIONS`: must be a valid JSON object
 
 
 | Field | Type | Label | Description |
@@ -865,6 +874,15 @@ And some well-known attributes used by applications only:
     
     The CORS schema is based on Amazon S3 CORS (https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html)
     configuration.
+* S3_TAGS \
+  It is used to store S3 gate-specific container tags. The value is controlled by the gate itself.
+  Despite it, the value must be valid JSON object.
+* S3_SETTINGS \
+  It is used to store S3 gate-specific container settings. The value is controlled by the gate itself.
+  Despite it, the value must be valid JSON object.
+* S3_NOTIFICATIONS \
+  It is used to store S3 gate-specific container notification settings. The value is controlled by the gate itself.
+  Despite it, the value must be valid JSON object.
 
 
 | Field | Type | Label | Description |
