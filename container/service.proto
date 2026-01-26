@@ -533,17 +533,8 @@ message SetAttributeRequest {
 
 // Attribute setting response
 message SetAttributeResponse {
-  // Request result message.
-  message Body {
-    // Operation execution status.
-    neo.fs.v2.status.Status status = 1;
-  }
-
-  // Request result.
-  Body body = 1;
-
-  // Signature of stable-marshalled `body` field.
-  neo.fs.v2.refs.Signature body_signature = 2;
+  // Operation execution status.
+  neo.fs.v2.status.Status status = 1;
 }
 
 // Attribute removal request
@@ -608,15 +599,6 @@ message RemoveAttributeRequest {
 
 // Attribute removal response
 message RemoveAttributeResponse {
-  // Request result message.
-  message Body {
-    // Operation execution status.
-    neo.fs.v2.status.Status status = 1;
-  }
-
-  // Request result.
-  Body body = 1;
-
-  // Signature of stable-marshalled `body` field.
-  neo.fs.v2.refs.Signature body_signature = 2;
+  // Operation execution status.
+  neo.fs.v2.status.Status status = 1;
 }

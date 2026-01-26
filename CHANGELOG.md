@@ -7,7 +7,7 @@
 - Container `__NEOFS__LOCK_UNTIL` attribute (#357)
 - `CONTAINER_LOCKED` status (#357)
 - `CONTAINER_AWAIT_TIMEOUT` status (#358)
-- `SetAttribute` and `RemoveAttribute` RPC to `ContainerService` (#362)
+- `SetAttribute` and `RemoveAttribute` RPC to `ContainerService` (#362, #375)
 - `SETATTRIBUTE` and `REMOVEATTRIBUTE` verbs for container sessions V1 (#362)
 - Container `S3_TAGS`, `S3_SETTINGS`, `S3_NOTIFICATIONS` attributes (#371)
 

@@ -37,12 +37,10 @@
     - [RemoveAttributeRequest.Body](#neo.fs.v2.container.RemoveAttributeRequest.Body)
     - [RemoveAttributeRequest.Body.Parameters](#neo.fs.v2.container.RemoveAttributeRequest.Body.Parameters)
     - [RemoveAttributeResponse](#neo.fs.v2.container.RemoveAttributeResponse)
-    - [RemoveAttributeResponse.Body](#neo.fs.v2.container.RemoveAttributeResponse.Body)
     - [SetAttributeRequest](#neo.fs.v2.container.SetAttributeRequest)
     - [SetAttributeRequest.Body](#neo.fs.v2.container.SetAttributeRequest.Body)
     - [SetAttributeRequest.Body.Parameters](#neo.fs.v2.container.SetAttributeRequest.Body.Parameters)
     - [SetAttributeResponse](#neo.fs.v2.container.SetAttributeResponse)
-    - [SetAttributeResponse.Body](#neo.fs.v2.container.SetAttributeResponse.Body)
     - [SetExtendedACLRequest](#neo.fs.v2.container.SetExtendedACLRequest)
     - [SetExtendedACLRequest.Body](#neo.fs.v2.container.SetExtendedACLRequest.Body)
     - [SetExtendedACLResponse](#neo.fs.v2.container.SetExtendedACLResponse)
@@ -623,18 +621,6 @@ Attribute removal response
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body | [RemoveAttributeResponse.Body](#neo.fs.v2.container.RemoveAttributeResponse.Body) |  | Request result. |
-| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled `body` field. |
-
-
-<a name="neo.fs.v2.container.RemoveAttributeResponse.Body"></a>
-
-### Message RemoveAttributeResponse.Body
-Request result message.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
 | status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Operation execution status. |
 
 
@@ -702,18 +688,6 @@ creation. Attribute-specific requirements:
 
 ### Message SetAttributeResponse
 Attribute setting response
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| body | [SetAttributeResponse.Body](#neo.fs.v2.container.SetAttributeResponse.Body) |  | Request result. |
-| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled `body` field. |
-
-
-<a name="neo.fs.v2.container.SetAttributeResponse.Body"></a>
-
-### Message SetAttributeResponse.Body
-Request result message.
 
 
 | Field | Type | Label | Description |
