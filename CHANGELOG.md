@@ -9,6 +9,7 @@
 ### Removed
 
 ### Deprecated
+- Response verification header (#374)
 
 ## [2.21.0] - 2026-02-03
 

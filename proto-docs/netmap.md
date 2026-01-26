@@ -138,7 +138,7 @@ Local Node Info, including API Version in use
 | ----- | ---- | ----- | ----------- |
 | body | [LocalNodeInfoResponse.Body](#neo.fs.v2.netmap.LocalNodeInfoResponse.Body) |  | Body of the balance response message. |
 | meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect response execution. |
-| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: the field is no longer used for verifications. Servers MUST attach it for requests with `meta_header.version` <= 2.21. |
 
 
 <a name="neo.fs.v2.netmap.LocalNodeInfoResponse.Body"></a>
@@ -183,7 +183,7 @@ Response with current netmap snapshot
 | ----- | ---- | ----- | ----------- |
 | body | [NetmapSnapshotResponse.Body](#neo.fs.v2.netmap.NetmapSnapshotResponse.Body) |  | Body of get netmap snapshot response message. |
 | meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect response execution. |
-| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: the field is no longer used for verifications. Servers MUST attach it for requests with `meta_header.version` <= 2.21. |
 
 
 <a name="neo.fs.v2.netmap.NetmapSnapshotResponse.Body"></a>
@@ -228,7 +228,7 @@ FS chain magic number.
 | ----- | ---- | ----- | ----------- |
 | body | [NetworkInfoResponse.Body](#neo.fs.v2.netmap.NetworkInfoResponse.Body) |  | Body of the NetworkInfo response message. |
 | meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect response execution. |
-| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: the field is no longer used for verifications. Servers MUST attach it for requests with `meta_header.version` <= 2.21. |
 
 
 <a name="neo.fs.v2.netmap.NetworkInfoResponse.Body"></a>

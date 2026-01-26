@@ -110,7 +110,7 @@ Information about the opened session.
 | ----- | ---- | ----- | ----------- |
 | body | [CreateResponse.Body](#neo.fs.v2.session.CreateResponse.Body) |  | Body of create session token response message. |
 | meta_header | [ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: the field is no longer used for verifications. Servers MUST attach it for requests with `meta_header.version` <= 2.21. |
 
 
 <a name="neo.fs.v2.session.CreateResponse.Body"></a>
@@ -230,6 +230,8 @@ Information about the response
 
 ### Message ResponseVerificationHeader
 Verification info for the response signed by all intermediate nodes
+
+DEPRECATED: was eliminated from the protocol starting from version `v2.22`.
 
 
 | Field | Type | Label | Description |
