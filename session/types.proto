@@ -279,6 +279,8 @@ message RequestVerificationHeader {
 }
 
 // Verification info for the response signed by all intermediate nodes
+//
+// DEPRECATED: was eliminated from the protocol starting from version `v2.22`.
 message ResponseVerificationHeader {
   // Response Body signature. Should be generated once by an answering node.
   neo.fs.v2.refs.Signature body_signature = 1 [json_name = "bodySignature"];
