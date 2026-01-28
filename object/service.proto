@@ -312,17 +312,18 @@ message GetResponse {
       // Object metadata headers
       Header header = 3;
     }
-    // Single message in the response stream.
-    oneof object_part {
-      // Initial part of the object stream
-      Init init = 1;
 
-      // Chunked object payload
-      bytes chunk = 2;
+    // Initial part of the object stream. Mutually exclusive with `split_info`
+    // and, for requests with `meta_header.version` <= 2.17, with `chunk`.
+    Init init = 1;
 
-      // Meta information of split hierarchy for object assembly.
-      SplitInfo split_info = 3;
-    }
+    // Chunked object payload. Mutually exclusive with `split_info` and, for
+    // requests with `meta_header.version` <= 2.17, `init`.
+    bytes chunk = 2;
+
+    // Meta information of split hierarchy for object assembly. Mutually
+    // exclusive with `init` and `chunk`.
+    SplitInfo split_info = 3;
   }
   // Body of get object response message.
   Body body = 1;

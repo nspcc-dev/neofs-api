@@ -600,9 +600,9 @@ GET Object Response body
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| init | [GetResponse.Body.Init](#neo.fs.v2.object.GetResponse.Body.Init) |  | Initial part of the object stream |
-| chunk | [bytes](#bytes) |  | Chunked object payload |
-| split_info | [SplitInfo](#neo.fs.v2.object.SplitInfo) |  | Meta information of split hierarchy for object assembly. |
+| init | [GetResponse.Body.Init](#neo.fs.v2.object.GetResponse.Body.Init) |  | Initial part of the object stream. Mutually exclusive with `split_info` and, for requests with `meta_header.version` <= 2.17, with `chunk`. |
+| chunk | [bytes](#bytes) |  | Chunked object payload. Mutually exclusive with `split_info` and, for requests with `meta_header.version` <= 2.17, `init`. |
+| split_info | [SplitInfo](#neo.fs.v2.object.SplitInfo) |  | Meta information of split hierarchy for object assembly. Mutually exclusive with `init` and `chunk`. |
 
 
 <a name="neo.fs.v2.object.GetResponse.Body.Init"></a>
