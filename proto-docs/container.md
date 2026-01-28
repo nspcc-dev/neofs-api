@@ -780,8 +780,7 @@ of stable-marshalled container message.
 
 ### Message Container.Attribute
 `Attribute` is a user-defined Key-Value metadata pair attached to the
-container. Container attributes are immutable. They are set at the moment of
-container creation and can never be added or updated.
+container.
 
 Key name must be a container-unique valid UTF-8 string. Value can't be
 empty. Containers with duplicated attribute names or attributes with empty

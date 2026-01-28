@@ -66,13 +66,13 @@ Depending on checksum algorithm type, the string presentation may vary:
 <a name="neo.fs.v2.refs.ContainerID"></a>
 
 ### Message ContainerID
-NeoFS container identifier. Container structures are immutable and
-content-addressed.
+NeoFS container identifier.
 
 `ContainerID` is a 32 byte long
 [SHA256](https://csrc.nist.gov/publications/detail/fips/180/4/final) hash of
-stable-marshalled container message. ID consisting of all zero bytes is
-reserved for undefined value and must not be specified as a field.
+stable-marshalled container message used for creation. ID consisting of all
+zero bytes is reserved for undefined value and must not be specified as a
+field.
 
 String presentation is a
 [base58](https://tools.ietf.org/html/draft-msporny-base58-02) encoded string.
