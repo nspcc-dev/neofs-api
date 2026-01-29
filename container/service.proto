@@ -176,6 +176,8 @@ message PutResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: the field is no longer used for verifications. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.21.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
@@ -220,6 +222,8 @@ message DeleteResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: the field is no longer used for verifications. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.21.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
@@ -267,6 +271,8 @@ message GetResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: the field is no longer used for verifications. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.21.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
@@ -308,6 +314,8 @@ message ListResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: the field is no longer used for verifications. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.21.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
@@ -352,6 +360,8 @@ message SetExtendedACLResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: the field is no longer used for verifications. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.21.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
@@ -401,6 +411,8 @@ message GetExtendedACLResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: the field is no longer used for verifications. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.21.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
@@ -461,6 +473,8 @@ message AnnounceUsedSpaceResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: the field is no longer used for verifications. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.21.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
