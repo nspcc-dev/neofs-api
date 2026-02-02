@@ -317,7 +317,7 @@ Session Token body.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | version | [uint32](#uint32) |  | Token version. |
-| nonce | [uint32](#uint32) |  | Random nonce to prevent collisions. |
+| appdata | [bytes](#bytes) |  | Application-specific data that can be used to store additional context. This field is optional and can contain any application-defined data. Maximum size: 1024 bytes. |
 | issuer | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Account that issued this token (who signed it). |
 | subjects | [Target](#neo.fs.v2.session.Target) | repeated | Accounts authorized by this token (who can use it). Maximum number of subjects: 8. |
 | lifetime | [TokenLifetime](#neo.fs.v2.session.TokenLifetime) |  | Lifetime of this token. |
