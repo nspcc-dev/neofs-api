@@ -345,8 +345,10 @@ message SessionTokenV2 {
     // Token version.
     uint32 version = 1 [json_name = "version"];
 
-    // Random nonce to prevent collisions.
-    uint32 nonce = 2 [json_name = "nonce"];
+    // Application-specific data that can be used to store additional context.
+    // This field is optional and can contain any application-defined data.
+    // Maximum size: 1024 bytes.
+    bytes appdata = 2 [json_name = "appdata"];
 
     // Account that issued this token (who signed it).
     neo.fs.v2.refs.OwnerID issuer = 3 [json_name = "issuer"];
