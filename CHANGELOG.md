@@ -3,20 +3,27 @@
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+### Deprecated
+
+## [2.21.0] - 2026-02-03
+
+### Added
 - Well-known CORS container attribute (#355)
 - Container `__NEOFS__LOCK_UNTIL` attribute (#357)
 - `CONTAINER_LOCKED` status (#357)
 - `CONTAINER_AWAIT_TIMEOUT` status (#358)
-- `SetAttribute` and `RemoveAttribute` RPC to `ContainerService` (#362, #375)
+- Session token v2 (#350, #363, #364, #365, #372, #378)
+- `SetAttribute` and `RemoveAttribute` RPC to `ContainerService` (#362, #367, #375)
 - `SETATTRIBUTE` and `REMOVEATTRIBUTE` verbs for container sessions V1 (#362)
 - Container `S3_TAGS`, `S3_SETTINGS`, `S3_NOTIFICATIONS` attributes (#371)
 
 ### Changed
 - `ContainerService`'s `Put`, `Delete` and `SetExtendedACL` RPC are async/await now (#358)
-
-### Removed
-
-### Deprecated
 
 ## [2.20.0] - 2025-11-13
 
@@ -603,4 +610,5 @@ Bump major release
 [2.18.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.17.0...v2.18.0
 [2.19.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.18.0...v2.19.0
 [2.20.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.19.0...v2.20.0
-[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.20.0...master
+[2.21.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.20.0...v2.21.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.21.0...master
