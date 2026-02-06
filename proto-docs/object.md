@@ -414,7 +414,7 @@ removal in distributed system.
 | ----- | ---- | ----- | ----------- |
 | body | [DeleteResponse.Body](#neo.fs.v2.object.DeleteResponse.Body) |  | Body of delete object response message. |
 | meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: the field is no longer used for verifications. Servers MUST attach it for requests with `meta_header.version` <= 2.21. |
 
 
 <a name="neo.fs.v2.object.DeleteResponse.Body"></a>
@@ -465,7 +465,7 @@ Get hash of object's payload part
 | ----- | ---- | ----- | ----------- |
 | body | [GetRangeHashResponse.Body](#neo.fs.v2.object.GetRangeHashResponse.Body) |  | Body of get range hash object response message. |
 | meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: the field is no longer used for verifications. Servers MUST attach it for requests with `meta_header.version` <= 2.21. |
 
 
 <a name="neo.fs.v2.object.GetRangeHashResponse.Body"></a>
@@ -526,7 +526,7 @@ Get part of object's payload
 | ----- | ---- | ----- | ----------- |
 | body | [GetRangeResponse.Body](#neo.fs.v2.object.GetRangeResponse.Body) |  | Body of get range object response message. |
 | meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: the field is no longer used for verifications. Servers MUST attach it for requests with `meta_header.version` <= 2.21. |
 
 
 <a name="neo.fs.v2.object.GetRangeResponse.Body"></a>
@@ -753,7 +753,7 @@ PUT Object response
 | ----- | ---- | ----- | ----------- |
 | body | [PutResponse.Body](#neo.fs.v2.object.PutResponse.Body) |  | Body of put object response message. |
 | meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: the field is no longer used for verifications. Servers MUST attach it for requests with `meta_header.version` <= 2.21. |
 
 
 <a name="neo.fs.v2.object.PutResponse.Body"></a>
@@ -842,7 +842,7 @@ Search response
 | ----- | ---- | ----- | ----------- |
 | body | [SearchResponse.Body](#neo.fs.v2.object.SearchResponse.Body) |  | Body of search object response message. |
 | meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: the field is no longer used for verifications. Servers MUST attach it for requests with `meta_header.version` <= 2.21. |
 
 
 <a name="neo.fs.v2.object.SearchResponse.Body"></a>
@@ -895,7 +895,7 @@ SearchV2 response
 | ----- | ---- | ----- | ----------- |
 | body | [SearchV2Response.Body](#neo.fs.v2.object.SearchV2Response.Body) |  | Body of search object response message. |
 | meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
-| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.ResponseVerificationHeader](#neo.fs.v2.session.ResponseVerificationHeader) |  | Carries response verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: the field is no longer used for verifications. Servers MUST attach it for requests with `meta_header.version` <= 2.21. |
 
 
 <a name="neo.fs.v2.object.SearchV2Response.Body"></a>

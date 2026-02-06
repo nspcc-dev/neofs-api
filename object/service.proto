@@ -398,6 +398,8 @@ message PutResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: the field is no longer used for verifications. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.21.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
@@ -440,6 +442,8 @@ message DeleteResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: the field is no longer used for verifications. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.21.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
@@ -574,6 +578,8 @@ message SearchResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: the field is no longer used for verifications. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.21.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
@@ -659,6 +665,8 @@ message SearchV2Response {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: the field is no longer used for verifications. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.21.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
@@ -738,6 +746,8 @@ message GetRangeResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: the field is no longer used for verifications. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.21.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
@@ -790,6 +800,8 @@ message GetRangeHashResponse {
   // Carries response verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: the field is no longer used for verifications. Servers MUST
+  // attach it for requests with `meta_header.version` <= 2.21.
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
