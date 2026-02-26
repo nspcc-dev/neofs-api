@@ -34,6 +34,7 @@
     - [NodeInfo.Attribute](#neo.fs.v2.netmap.NodeInfo.Attribute)
     - [PlacementPolicy](#neo.fs.v2.netmap.PlacementPolicy)
     - [PlacementPolicy.ECRule](#neo.fs.v2.netmap.PlacementPolicy.ECRule)
+    - [PlacementPolicy.Initial](#neo.fs.v2.netmap.PlacementPolicy.Initial)
     - [Replica](#neo.fs.v2.netmap.Replica)
     - [Selector](#neo.fs.v2.netmap.Selector)
     
@@ -488,6 +489,7 @@ storage policy definition languages.
 | filters | [Filter](#neo.fs.v2.netmap.Filter) | repeated | List of named filters to reference in selectors |
 | subnet_id | [neo.fs.v2.refs.SubnetID](#neo.fs.v2.refs.SubnetID) |  | DEPRECATED. Was used for subnetwork ID to select nodes from, currently ignored. |
 | ec_rules | [PlacementPolicy.ECRule](#neo.fs.v2.netmap.PlacementPolicy.ECRule) | repeated | Erasure coding rules. Limited to 4 items. |
+| initial | [PlacementPolicy.Initial](#neo.fs.v2.netmap.PlacementPolicy.Initial) |  | Initial placement rules. |
 
 
 <a name="neo.fs.v2.netmap.PlacementPolicy.ECRule"></a>
@@ -535,6 +537,40 @@ because they have no payload.
 | data_part_num | [uint32](#uint32) |  | Number of data parts |
 | parity_part_num | [uint32](#uint32) |  | Number of parity parts |
 | selector | [string](#string) |  | Name of the linked selector |
+
+
+<a name="neo.fs.v2.netmap.PlacementPolicy.Initial"></a>
+
+### Message PlacementPolicy.Initial
+Rules applied during initial data placement.
+
+`replica_limits` allows to override `Replica.count` and EC partitions. If
+set, `replica_limits` must have a length equal to the sum of `replicas`
+(`RN`) and `ec_rules` length. Each of first `RN` elements of
+`replica_limits` must be less than or equal to corresponding
+`Replica.count`. The remaining elements must be either 0 (corresponding
+EC rule is skipped) or 1 (done). At least one `replica_limits` element
+must be non-zero.
+
+`max_replicas` allows to limit total number of replicas and EC partitions
+for successful operation. If set, `max_replicas` must not overflow total
+replica limit (`replica_limits` or main ones).
+
+`prefer_local` allows to tell server to try to store `MaxReplicas`
+replicas in locations that include this server. `prefer_local` must be set
+along with `max_replicas` only.
+
+Either `replica_limits` or `max_replicas` must be specified.
+
+Initial policy must not repeat the main one. In particular, policy with
+`replica_limits` equal to main ones only is invalid.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| replica_limits | [uint32](#uint32) | repeated | Limits on the number of replicas and EC partitions |
+| max_replicas | [uint32](#uint32) |  | Maximum total number of replicas |
+| prefer_local | [bool](#bool) |  | Flag to prefer local placement over regular one |
 
 
 <a name="neo.fs.v2.netmap.Replica"></a>

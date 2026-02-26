@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- Support for initial placement policy of containers (#381)
 
 ### Changed
 

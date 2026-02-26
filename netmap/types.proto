@@ -178,6 +178,41 @@ message PlacementPolicy {
   }
   // Erasure coding rules. Limited to 4 items.
   repeated ECRule ec_rules = 6 [json_name = "ecRules"];
+
+  // Rules applied during initial data placement.
+  //
+  // `replica_limits` allows to override `Replica.count` and EC partitions. If
+  // set, `replica_limits` must have a length equal to the sum of `replicas`
+  // (`RN`) and `ec_rules` length. Each of first `RN` elements of
+  // `replica_limits` must be less than or equal to corresponding
+  // `Replica.count`. The remaining elements must be either 0 (corresponding
+  // EC rule is skipped) or 1 (done). At least one `replica_limits` element
+  // must be non-zero.
+  //
+  // `max_replicas` allows to limit total number of replicas and EC partitions
+  // for successful operation. If set, `max_replicas` must not overflow total
+  // replica limit (`replica_limits` or main ones).
+  //
+  // `prefer_local` allows to tell server to try to store `MaxReplicas`
+  // replicas in locations that include this server. `prefer_local` must be set
+  // along with `max_replicas` only.
+  //
+  // Either `replica_limits` or `max_replicas` must be specified.
+  //
+  // Initial policy must not repeat the main one. In particular, policy with
+  // `replica_limits` equal to main ones only is invalid.
+  message Initial {
+    // Limits on the number of replicas and EC partitions
+    repeated uint32 replica_limits = 1 [json_name = "replicaLimits"];
+
+    // Maximum total number of replicas
+    uint32 max_replicas = 2 [json_name = "maxReplicas"];
+
+    // Flag to prefer local placement over regular one
+    bool prefer_local = 3 [json_name = "preferLocal"];
+  }
+  // Initial placement rules.
+  Initial initial = 7 [json_name = "initial"];
 }
 
 // NeoFS node description
