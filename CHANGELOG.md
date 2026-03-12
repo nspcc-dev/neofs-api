@@ -11,6 +11,7 @@
 
 ### Deprecated
 - Response verification header (#374)
+- `copies_number` field of `object.PutRequest.Body.Init` message (#382)
 
 ## [2.21.0] - 2026-02-03
 
