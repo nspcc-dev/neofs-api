@@ -357,6 +357,8 @@ message PutRequest {
 
       // Number of the object copies to store within the RPC call. By default
       // object is processed according to the container's placement policy.
+      // DEPRECATED: use `PlacementPolicy.Initial.max_replicas` instead.
+      // Servers ignore this field.
       uint32 copies_number = 4;
     }
     // Single message in the request stream.
