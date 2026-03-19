@@ -106,9 +106,10 @@ message Version {
 // Signature of something in NeoFS.
 message Signature {
   // Public key used for signing. For N3 `scheme`, the field represents a
-  // verification script.
+  // verification script. The maximum allowed length is 1024 bytes.
   bytes key = 1 [json_name = "key"];
-  // Signature. For N3 `scheme`, the field represents an invocation script.
+  // Signature. For N3 `scheme`, the field represents an invocation script. The
+  // maximum allowed length is 1024 bytes.
   bytes sign = 2 [json_name = "signature"];
   // Scheme contains digital signature scheme identifier
   SignatureScheme scheme = 3 [json_name = "scheme"];
@@ -133,10 +134,10 @@ enum SignatureScheme {
 // RFC 6979 signature.
 message SignatureRFC6979 {
   // Public key used for signing. For N3 auth scheme, the field represents a
-  // verification script.
+  // verification script. The maximum allowed length is 1024 bytes.
   bytes key = 1 [json_name = "key"];
   // Deterministic ECDSA with SHA-256 hashing. For N3 auth scheme, the field
-  // represents an invocation script.
+  // represents an invocation script. The maximum allowed length is 1024 bytes.
   bytes sign = 2 [json_name = "signature"];
 }
 

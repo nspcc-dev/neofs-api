@@ -6,6 +6,7 @@
 - Support for initial placement policy of containers (#381)
 
 ### Changed
+- `key` and `sign` fields of `refs.Signature(RFC6979)` message now have a sane length limit (#384)
 
 ### Removed
 
