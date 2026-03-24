@@ -208,7 +208,7 @@ Checksum algorithm type.
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | CHECKSUM_TYPE_UNSPECIFIED | 0 | Unknown. Not used |
-| TZ | 1 | Tillich-Zemor homomorphic hash function |
+| TZ | 1 | Tillich-Zemor homomorphic hash function DEPRECATED starting from 2.23 API version. |
 | SHA256 | 2 | SHA-256 |
 
 

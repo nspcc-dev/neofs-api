@@ -951,7 +951,7 @@ Object Header
 | payload_length | [uint64](#uint64) |  | Size of payload in bytes. `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown. |
 | payload_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | SHA256 hash of payload bytes |
 | object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Type of the object payload content |
-| homomorphic_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash of the object payload (Tillich-Zemor). |
+| homomorphic_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash of the object payload (Tillich-Zemor). DEPRECATED. Objects of 2.23+ version must have it empty. |
 | session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token, if it was used during Object creation. Need it to verify integrity and authenticity out of Request scope. Only one of `session_token` or `session_token_v2` can be set. |
 | attributes | [Header.Attribute](#neo.fs.v2.object.Header.Attribute) | repeated | User-defined object attributes. Attributes vary in length from object to object, so keep an eye on the entire Header limit depending on the context. |
 | split | [Header.Split](#neo.fs.v2.object.Header.Split) |  | Position of the object in the split hierarchy |
@@ -1098,8 +1098,6 @@ prefix to the name. Here is the list of fields available via this prefix:
   payload_hash
 * $Object:objectType \
   object_type
-* $Object:homomorphicHash \
-  homomorphic_hash
 * $Object:split.parent \
   object_id of parent
 * $Object:split.splitID \
