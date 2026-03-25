@@ -3,12 +3,20 @@
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+### Deprecated
+
+## [2.22.0] - 2026-03-25
+
+### Added
 - Support for initial placement policy of containers (#381)
 
 ### Changed
 - `key` and `sign` fields of `refs.Signature(RFC6979)` message now have a sane length limit (#384)
-
-### Removed
 
 ### Deprecated
 - Response verification header (#374)
@@ -615,4 +623,5 @@ Bump major release
 [2.19.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.18.0...v2.19.0
 [2.20.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.19.0...v2.20.0
 [2.21.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.20.0...v2.21.0
-[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.21.0...master
+[2.22.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.21.0...v2.22.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.22.0...master
