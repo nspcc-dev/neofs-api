@@ -92,8 +92,6 @@ enum MatchType {
 //   payload_hash
 // * $Object:objectType \
 //   object_type
-// * $Object:homomorphicHash \
-//   homomorphic_hash
 // * $Object:split.parent \
 //   object_id of parent
 // * $Object:split.splitID \
@@ -193,6 +191,7 @@ message Header {
   ObjectType object_type = 7 [json_name = "objectType"];
 
   // Homomorphic hash of the object payload (Tillich-Zemor).
+  // DEPRECATED. Objects of 2.23+ version must have it empty.
   neo.fs.v2.refs.Checksum homomorphic_hash = 8 [json_name = "homomorphicHash"];
 
   // Session token, if it was used during Object creation. Need it to verify

@@ -147,6 +147,7 @@ enum ChecksumType {
   CHECKSUM_TYPE_UNSPECIFIED = 0;
 
   // Tillich-Zemor homomorphic hash function
+  // DEPRECATED starting from 2.23 API version.
   TZ = 1;
 
   // SHA-256
