@@ -439,7 +439,7 @@ container service operations.
 | OBJECT_SEARCH | 4 | Refers to object.Search RPC call |
 | OBJECT_DELETE | 5 | Refers to object.Delete RPC call |
 | OBJECT_RANGE | 6 | Refers to object.GetRange RPC call |
-| OBJECT_RANGEHASH | 7 | Refers to object.GetRangeHash RPC call |
+| OBJECT_RANGEHASH | 7 | Refers to object.GetRangeHash RPC call. DEPRECATED: should not be used. |
 | CONTAINER_PUT | 8 | Refers to container.Put RPC call |
 | CONTAINER_DELETE | 9 | Refers to container.Delete RPC call |
 | CONTAINER_SETEACL | 10 | Refers to container.SetExtendedACL RPC call |

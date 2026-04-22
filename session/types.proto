@@ -36,7 +36,7 @@ enum Verb {
   // Refers to object.GetRange RPC call
   OBJECT_RANGE = 6;
 
-  // Refers to object.GetRangeHash RPC call
+  // Refers to object.GetRangeHash RPC call. DEPRECATED: should not be used.
   OBJECT_RANGEHASH = 7;
 
   // Container operations

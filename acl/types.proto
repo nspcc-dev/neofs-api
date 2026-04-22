@@ -74,7 +74,7 @@ enum Operation {
   // GetRange
   GETRANGE = 6;
 
-  // GetRangeHash
+  // GetRangeHash. DEPRECATED: should not be used.
   GETRANGEHASH = 7;
 }
 
