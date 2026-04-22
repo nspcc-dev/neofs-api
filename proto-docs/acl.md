@@ -233,7 +233,7 @@ request.
 | PUT | 3 | Put |
 | DELETE | 4 | Delete |
 | SEARCH | 5 | Search |
-| GETRANGE | 6 | GetRange |
+| GETRANGE | 6 | GetRange. DEPRECATED: use parameterized Get instead. |
 | GETRANGEHASH | 7 | GetRangeHash. DEPRECATED: should not be used. |
 
 

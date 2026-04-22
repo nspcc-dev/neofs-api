@@ -185,6 +185,8 @@ service ObjectService {
   // restored by concatenation of all received payload chunks keeping the receiving
   // order.
   //
+  // DEPRECATED: use `Get` with `range` (and `payload_only` if needed) parameter.
+  //
   // Extended headers can change `GetRange` behaviour:
   // * __NEOFS__NETMAP_EPOCH \
   //   Will use the requsted version of Network Map for object placement
@@ -284,6 +286,13 @@ message GetRequest {
     // If `raw` flag is set, request will work only with objects that are
     // physically stored on the peer node
     bool raw = 2;
+
+    // Requested payload range (whole payload if not specified).
+    Range range = 3;
+
+    // If set, makes Get return payload only, completely omitting Init response
+    // message with header data.
+    bool payload_only = 4;
   }
   // Body of get object request message.
   Body body = 1;
