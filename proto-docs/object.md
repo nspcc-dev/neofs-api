@@ -290,6 +290,8 @@ Like in `Get` method, the response uses gRPC stream. Requested range can be
 restored by concatenation of all received payload chunks keeping the receiving
 order.
 
+DEPRECATED: use `Get` with `range` (and `payload_only` if needed) parameter.
+
 Extended headers can change `GetRange` behaviour:
 * __NEOFS__NETMAP_EPOCH \
   Will use the requsted version of Network Map for object placement
@@ -326,6 +328,8 @@ Returns homomorphic or regular hash of object's payload range after
 applying XOR operation with the provided `salt`. Ranges are set of (offset,
 length) tuples. Hashes order in response corresponds to the ranges order in
 the request. Note that hash is calculated for XORed data.
+
+DEPRECATED: no valid use cases.
 
 Extended headers can change `GetRangeHash` behaviour:
 * __NEOFS__NETMAP_EPOCH \
@@ -577,6 +581,8 @@ GET Object request body
 | ----- | ---- | ----- | ----------- |
 | address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the requested object |
 | raw | [bool](#bool) |  | If `raw` flag is set, request will work only with objects that are physically stored on the peer node |
+| range | [Range](#neo.fs.v2.object.Range) |  | Requested payload range (whole payload if not specified). |
+| payload_only | [bool](#bool) |  | If set, makes Get return payload only, completely omitting Init response message with header data. |
 
 
 <a name="neo.fs.v2.object.GetResponse"></a>

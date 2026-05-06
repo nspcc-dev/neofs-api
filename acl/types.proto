@@ -71,10 +71,10 @@ enum Operation {
   // Search
   SEARCH = 5;
 
-  // GetRange
+  // GetRange. DEPRECATED: use parameterized Get instead.
   GETRANGE = 6;
 
-  // GetRangeHash
+  // GetRangeHash. DEPRECATED: should not be used.
   GETRANGEHASH = 7;
 }
 

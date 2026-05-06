@@ -33,10 +33,10 @@ enum Verb {
   // Refers to object.Delete RPC call
   OBJECT_DELETE = 5;
 
-  // Refers to object.GetRange RPC call
+  // Refers to object.GetRange RPC call. DEPRECATED: use parameterized Get instead.
   OBJECT_RANGE = 6;
 
-  // Refers to object.GetRangeHash RPC call
+  // Refers to object.GetRangeHash RPC call. DEPRECATED: should not be used.
   OBJECT_RANGEHASH = 7;
 
   // Container operations
