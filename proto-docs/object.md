@@ -556,10 +556,22 @@ GET object request.
 The query for a parent object's EC part locally stored on the server is
 specified as follows:
  - `body.address` is an address of the parent;
- - `meta_header.x_headers` includes `__NEOFS__EC_RULE_IDX` and
-   `__NEOFS__EC_PART_IDX` by object attribute format. Rule index MUST NOT
-   exceed container's `PlacementPolicy.ec_rules` list. Part index MUST NOT
-   exceed total part number in the indexed rule.
+ - `meta_header.x_headers` includes `__NEOFS__EC_RULE_IDX` by object
+   attribute format. Rule index MUST NOT exceed container's
+   `PlacementPolicy.ec_rules` list.
+   If `__NEOFS__EC_PART_IDX` is also included in X-headers, node returns
+   corresponding part. Part index MUST NOT exceed total part number in the
+   indexed rule. If index is unspecified:
+   - if there is a single part in storage node: it is returned;
+   - if there is more than a single part: the appropriate part for the
+     current storage node (according to the actual Network map) is returned;
+     if storage node does not have the appropriate part, the lowest index
+     part it has is returned;
+   - if `body.payload_only` is set to `true`, response's
+     `meta_header.x_headers` MUST include `__NEOFS__EC_PART_IDX` in the same
+     form to identify returned object part;
+   - if `body.range` is specified, error is returned, meaning any ranged GET
+     MUST have `__NEOFS__EC_PART_IDX` set.
 In this case, if `body.address` refers to TOMBSTONE or LOCK object (which
 cannot have EC parts), the query applies to it.
 
