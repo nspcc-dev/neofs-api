@@ -10,6 +10,11 @@
 
 ### Deprecated
 
+## [2.24.0] - 2026-06-23
+
+### Added
+- EACL parameter to container creation call (#369)
+
 ## [2.23.0] - 2026-05-19
 
 ### Added
@@ -635,4 +640,5 @@ Bump major release
 [2.21.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.20.0...v2.21.0
 [2.22.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.21.0...v2.22.0
 [2.23.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.22.0...v2.23.0
-[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.23.0...master
+[2.24.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.23.0...v2.24.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.24.0...master
