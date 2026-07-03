@@ -9,7 +9,7 @@ jobs:
   lint:
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Download buf
         uses: dsaltares/fetch-gh-release-asset@1.1.2
         with:
@@ -32,14 +32,14 @@ jobs:
           target: 'buf-Linux-x86_64'
       - run: chmod 755 ./buf-Linux-x86_64
       - name: Check out ref code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.base_ref }}
           path: baseref
       - run: cd baseref && ../buf-Linux-x86_64 build -o image.bin
 
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           path: prclone
       - run: cd prclone && ../buf-Linux-x86_64 breaking --against ../baseref/image.bin
