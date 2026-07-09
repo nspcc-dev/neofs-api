@@ -12,6 +12,7 @@
     - [DeleteRequest.Body](#neo.fs.v2.object.DeleteRequest.Body)
     - [DeleteResponse](#neo.fs.v2.object.DeleteResponse)
     - [DeleteResponse.Body](#neo.fs.v2.object.DeleteResponse.Body)
+    - [ExtendedRange](#neo.fs.v2.object.ExtendedRange)
     - [GetRangeHashRequest](#neo.fs.v2.object.GetRangeHashRequest)
     - [GetRangeHashRequest.Body](#neo.fs.v2.object.GetRangeHashRequest.Body)
     - [GetRangeHashResponse](#neo.fs.v2.object.GetRangeHashResponse)
@@ -432,6 +433,18 @@ Object DELETE Response has an empty body.
 | tombstone | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the tombstone created for the deleted object |
 
 
+<a name="neo.fs.v2.object.ExtendedRange"></a>
+
+### Message ExtendedRange
+Extended object payload range.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| first_pos | [uint64](#uint64) | optional | Offset of the first byte from the object payload start. If omitted, the range is defined by `last_pos` as the number of bytes from the payload end. |
+| last_pos | [uint64](#uint64) | optional | Offset of the last byte from the object payload start. If omitted, the range starts at `first_pos` and extends to the end of the payload. |
+
+
 <a name="neo.fs.v2.object.GetRangeHashRequest"></a>
 
 ### Message GetRangeHashRequest
@@ -595,6 +608,7 @@ GET Object request body
 | raw | [bool](#bool) |  | If `raw` flag is set, request will work only with objects that are physically stored on the peer node |
 | range | [Range](#neo.fs.v2.object.Range) |  | Requested payload range (whole payload if not specified). |
 | payload_only | [bool](#bool) |  | If set, makes Get return payload only, completely omitting Init response message with header data. |
+| extended_range | [ExtendedRange](#neo.fs.v2.object.ExtendedRange) |  | Requested extended payload range. MUST NOT be set together with `range`. |
 
 
 <a name="neo.fs.v2.object.GetResponse"></a>
