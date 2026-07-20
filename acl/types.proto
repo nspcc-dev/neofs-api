@@ -182,6 +182,10 @@ message EACLRecord {
   }
   // List of target subjects to apply ACL rule to
   repeated Target targets = 4 [json_name = "targets"];
+
+  // Optional auxiliary data associated with the rule. The comment does not
+  // affect permission evaluation and must be valid UTF-8 without zero bytes.
+  string comment = 5 [json_name = "comment"];
 }
 
 // Extended ACL rules table. A list of ACL rules defined additionally to Basic
