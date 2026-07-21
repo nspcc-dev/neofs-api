@@ -161,8 +161,9 @@ keys to match.
 ### Message EACLTable
 Extended ACL rules table. A list of ACL rules defined additionally to Basic
 ACL. Extended ACL rules can be attached to a container and can be updated
-or may be defined in `BearerToken` structure. Please see the corresponding
-NeoFS Technical Specification section for detailed description.
+or may be defined in `BearerToken` structure. Serialized table can't exceed
+64K in size. Please see the corresponding NeoFS Technical Specification
+section for detailed description.
 
 
 | Field | Type | Label | Description |
