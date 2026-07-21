@@ -89,6 +89,7 @@ Describes a single eACL rule.
 | action | [Action](#neo.fs.v2.acl.Action) |  | Rule execution result. Either allows or denies access if filters match. |
 | filters | [EACLRecord.Filter](#neo.fs.v2.acl.EACLRecord.Filter) | repeated | List of filters to match and see if rule is applicable |
 | targets | [EACLRecord.Target](#neo.fs.v2.acl.EACLRecord.Target) | repeated | List of target subjects to apply ACL rule to |
+| comment | [string](#string) |  | Optional auxiliary data associated with the rule. The comment does not affect permission evaluation and must be valid UTF-8 without zero bytes. |
 
 
 <a name="neo.fs.v2.acl.EACLRecord.Filter"></a>
