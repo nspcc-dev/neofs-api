@@ -179,8 +179,7 @@ Carries objects involved in the object session.
 <a name="neo.fs.v2.session.RequestMetaHeader"></a>
 
 ### Message RequestMetaHeader
-Meta information attached to the request. When forwarded between peers,
-request meta headers are folded in matryoshka style.
+Meta information attached to the request (common things for all requests).
 
 
 | Field | Type | Label | Description |
@@ -192,7 +191,9 @@ request meta headers are folded in matryoshka style.
 | session_token | [SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token within which the request is sent |
 | session_token_v2 | [SessionTokenV2](#neo.fs.v2.session.SessionTokenV2) |  | Session token v2 with delegation chain support. Requests are invalid if both session_token and session_token_v2 are set. |
 | bearer_token | [neo.fs.v2.acl.BearerToken](#neo.fs.v2.acl.BearerToken) |  | `BearerToken` with eACL overrides for the request |
-| origin | [RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | `RequestMetaHeader` of the origin request |
+| origin | [RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | `RequestMetaHeader` of the origin request.
+
+DEPRECATED: Ignored since API v2.25, all requests are original. |
 | magic_number | [uint64](#uint64) |  | NeoFS network magic. Must match the value for the network that the server belongs to. |
 
 
@@ -206,8 +207,12 @@ Verification info for the request signed by all intermediate nodes.
 | ----- | ---- | ----- | ----------- |
 | body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request Body signature. Should be generated once by the request initiator. |
 | meta_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request Meta signature is added and signed by each intermediate node |
-| origin_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of previous hops |
-| origin | [RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Chain of previous hops signatures |
+| origin_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of previous hops.
+
+DEPRECATED: Unused and unchecked since API v2.25, no origin structure to check. |
+| origin | [RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Chain of previous hops signatures.
+
+DEPRECATED: Unused and unchecked since API v2.25, no origin structure to check. |
 
 
 <a name="neo.fs.v2.session.ResponseMetaHeader"></a>
@@ -222,7 +227,9 @@ Information about the response
 | epoch | [uint64](#uint64) |  | Peer's local epoch number |
 | ttl | [uint32](#uint32) |  | Maximum number of intermediate nodes in the request route |
 | x_headers | [XHeader](#neo.fs.v2.session.XHeader) | repeated | Response X-Headers |
-| origin | [ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | `ResponseMetaHeader` of the origin request |
+| origin | [ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | `ResponseMetaHeader` of the origin request.
+
+DEPRECATED: Unused for a long time, ignored since API v2.25. |
 | status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Status return |
 
 

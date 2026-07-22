@@ -211,8 +211,7 @@ message XHeader {
   string value = 2 [json_name = "value"];
 }
 
-// Meta information attached to the request. When forwarded between peers,
-// request meta headers are folded in matryoshka style.
+// Meta information attached to the request (common things for all requests).
 message RequestMetaHeader {
   // Peer's API version used
   neo.fs.v2.refs.Version version = 1 [json_name = "version"];
@@ -236,7 +235,9 @@ message RequestMetaHeader {
   // `BearerToken` with eACL overrides for the request
   neo.fs.v2.acl.BearerToken bearer_token = 6 [json_name = "bearerToken"];
 
-  // `RequestMetaHeader` of the origin request
+  // `RequestMetaHeader` of the origin request.
+  //
+  // DEPRECATED: Ignored since API v2.25, all requests are original.
   RequestMetaHeader origin = 7 [json_name = "origin"];
 
   // NeoFS network magic. Must match the value for the network
@@ -258,7 +259,9 @@ message ResponseMetaHeader {
   // Response X-Headers
   repeated XHeader x_headers = 4 [json_name = "xHeaders"];
 
-  // `ResponseMetaHeader` of the origin request
+  // `ResponseMetaHeader` of the origin request.
+  //
+  // DEPRECATED: Unused for a long time, ignored since API v2.25.
   ResponseMetaHeader origin = 5 [json_name = "origin"];
 
   // Status return
@@ -271,10 +274,15 @@ message RequestVerificationHeader {
   neo.fs.v2.refs.Signature body_signature = 1 [json_name = "bodySignature"];
   // Request Meta signature is added and signed by each intermediate node
   neo.fs.v2.refs.Signature meta_signature = 2 [json_name = "metaSignature"];
-  // Signature of previous hops
+
+  // Signature of previous hops.
+  //
+  // DEPRECATED: Unused and unchecked since API v2.25, no origin structure to check.
   neo.fs.v2.refs.Signature origin_signature = 3 [json_name = "originSignature"];
 
-  // Chain of previous hops signatures
+  // Chain of previous hops signatures.
+  //
+  // DEPRECATED: Unused and unchecked since API v2.25, no origin structure to check.
   RequestVerificationHeader origin = 4 [json_name = "origin"];
 }
 
