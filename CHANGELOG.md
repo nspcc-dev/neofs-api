@@ -10,6 +10,21 @@
 
 ### Deprecated
 
+## [2.25.0] - 2026-07-30
+
+### Added
+- HTTP-alike extended payload range specifications for GET (#399)
+- Comment field to EACL records (#401)
+
+### Changed
+- __NEOFS__EC_PART_IDX is optional for EC GET requests now (#393)
+- EACL size limitation is documented now (#403)
+- More accurate ResponseMetaHeader specification (#404)
+
+### Deprecated
+- Origin meta headers and signatures (#402)
+- TTL field in ResponseMetaHeader (#404)
+
 ## [2.24.0] - 2026-06-23
 
 ### Added
@@ -641,4 +656,5 @@ Bump major release
 [2.22.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.21.0...v2.22.0
 [2.23.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.22.0...v2.23.0
 [2.24.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.23.0...v2.24.0
-[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.24.0...master
+[2.25.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.24.0...v2.25.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.25.0...master
