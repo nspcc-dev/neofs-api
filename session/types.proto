@@ -245,18 +245,26 @@ message RequestMetaHeader {
   uint64 magic_number = 8 [json_name = "magicNumber"];
 }
 
-// Information about the response
+// Information about the response. For stream RPCs, non-status information
+// can be attached only to stream's first response message and must be
+// omitted for the subsequent ones. Error statuses are allowed to be
+// transmitted in any message to terminate the stream.
 message ResponseMetaHeader {
-  // Peer's API version used
+  // Server's API version used. Must be attached only if server's version is
+  // lower than client's one, optional otherwise.
   neo.fs.v2.refs.Version version = 1 [json_name = "version"];
 
-  // Peer's local epoch number
+  // Peer's local epoch number. Optional.
   uint64 epoch = 2 [json_name = "epoch"];
 
-  // Maximum number of intermediate nodes in the request route
+  // Maximum number of intermediate nodes in the request route.
+  //
+  // DEPRECATED: ignored since API v2.25.
   uint32 ttl = 3 [json_name = "ttl"];
 
-  // Response X-Headers
+  // Response X-Headers. Optional in general, but for certain requests it can
+  // be required for correct result processing, read method's description for
+  // information.
   repeated XHeader x_headers = 4 [json_name = "xHeaders"];
 
   // `ResponseMetaHeader` of the origin request.
@@ -264,7 +272,8 @@ message ResponseMetaHeader {
   // DEPRECATED: Unused for a long time, ignored since API v2.25.
   ResponseMetaHeader origin = 5 [json_name = "origin"];
 
-  // Status return
+  // Status return. May be omitted for success request executions (equals to
+  // `0` OK status, and only to it), must be attached otherwise.
   neo.fs.v2.status.Status status = 6 [json_name = "status"];
 }
 

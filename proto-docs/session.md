@@ -218,19 +218,24 @@ DEPRECATED: Unused and unchecked since API v2.25, no origin structure to check. 
 <a name="neo.fs.v2.session.ResponseMetaHeader"></a>
 
 ### Message ResponseMetaHeader
-Information about the response
+Information about the response. For stream RPCs, non-status information
+can be attached only to stream's first response message and must be
+omitted for the subsequent ones. Error statuses are allowed to be
+transmitted in any message to terminate the stream.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Peer's API version used |
-| epoch | [uint64](#uint64) |  | Peer's local epoch number |
-| ttl | [uint32](#uint32) |  | Maximum number of intermediate nodes in the request route |
-| x_headers | [XHeader](#neo.fs.v2.session.XHeader) | repeated | Response X-Headers |
+| version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Server's API version used. Must be attached only if server's version is lower than client's one, optional otherwise. |
+| epoch | [uint64](#uint64) |  | Peer's local epoch number. Optional. |
+| ttl | [uint32](#uint32) |  | Maximum number of intermediate nodes in the request route.
+
+DEPRECATED: ignored since API v2.25. |
+| x_headers | [XHeader](#neo.fs.v2.session.XHeader) | repeated | Response X-Headers. Optional in general, but for certain requests it can be required for correct result processing, read method's description for information. |
 | origin | [ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | `ResponseMetaHeader` of the origin request.
 
 DEPRECATED: Unused for a long time, ignored since API v2.25. |
-| status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Status return |
+| status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Status return. May be omitted for success request executions (equals to `0` OK status, and only to it), must be attached otherwise. |
 
 
 <a name="neo.fs.v2.session.ResponseVerificationHeader"></a>
