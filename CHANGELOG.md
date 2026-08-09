@@ -5,6 +5,7 @@
 ### Added
 
 ### Changed
+- Object PUT chunk requests must no longer have meta headers (#408)
 
 ### Removed
 
