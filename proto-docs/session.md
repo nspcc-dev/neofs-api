@@ -205,14 +205,19 @@ Verification info for the request signed by all intermediate nodes.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request Body signature. Should be generated once by the request initiator. |
-| meta_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request Meta signature is added and signed by each intermediate node |
+| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request Body signature. Should be generated once by the request initiator.
+
+DEPRECATED: unused and unchecked since API v2.26, use `request_signature` as a verification instead. |
+| meta_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request Meta signature is added and signed by each intermediate node.
+
+DEPRECATED: unused and unchecked since API v2.26, use `request_signature` as a verification instead. |
 | origin_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of previous hops.
 
 DEPRECATED: Unused and unchecked since API v2.25, no origin structure to check. |
 | origin | [RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Chain of previous hops signatures.
 
 DEPRECATED: Unused and unchecked since API v2.25, no origin structure to check. |
+| request_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request signature. It is a signature of every request field (except the verification header itself) marshalled and concatenated, e.g. request's body and request's meta header. |
 
 
 <a name="neo.fs.v2.session.ResponseMetaHeader"></a>
