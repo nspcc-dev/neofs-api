@@ -280,8 +280,14 @@ message ResponseMetaHeader {
 // Verification info for the request signed by all intermediate nodes.
 message RequestVerificationHeader {
   // Request Body signature. Should be generated once by the request initiator.
+  //
+  // DEPRECATED: unused and unchecked since API v2.26, use `request_signature`
+  // as a verification instead.
   neo.fs.v2.refs.Signature body_signature = 1 [json_name = "bodySignature"];
-  // Request Meta signature is added and signed by each intermediate node
+  // Request Meta signature is added and signed by each intermediate node.
+  //
+  // DEPRECATED: unused and unchecked since API v2.26, use `request_signature`
+  // as a verification instead.
   neo.fs.v2.refs.Signature meta_signature = 2 [json_name = "metaSignature"];
 
   // Signature of previous hops.
@@ -293,6 +299,11 @@ message RequestVerificationHeader {
   //
   // DEPRECATED: Unused and unchecked since API v2.25, no origin structure to check.
   RequestVerificationHeader origin = 4 [json_name = "origin"];
+
+  // Request signature. It is a signature of every request field (except
+  // the verification header itself) marshalled and concatenated, e.g.
+  // request's body and request's meta header.
+  neo.fs.v2.refs.Signature request_signature = 5 [json_name = "requestSignature"];
 }
 
 // Verification info for the response signed by all intermediate nodes
