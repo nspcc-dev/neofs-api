@@ -370,7 +370,7 @@ NeoFS node description
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| public_key | [bytes](#bytes) |  | Public key of the NeoFS node in a binary format |
+| public_key | [bytes](#bytes) |  | Public key of the NeoFS node in a binary format (compressed 33-byte curve 256r1 ECDSA). |
 | addresses | [string](#string) | repeated | Ways to connect to a node |
 | attributes | [NodeInfo.Attribute](#neo.fs.v2.netmap.NodeInfo.Attribute) | repeated | Carries list of the NeoFS node attributes in a key-value form. Key name must be a node-unique valid UTF-8 string (without zero bytes). Value can't be empty. NodeInfo structures with duplicated attribute names or attributes with empty values will be considered invalid. |
 | state | [NodeInfo.State](#neo.fs.v2.netmap.NodeInfo.State) |  | Carries state of the NeoFS node |

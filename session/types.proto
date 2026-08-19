@@ -163,7 +163,7 @@ message SessionToken {
     // Lifetime of the session
     TokenLifetime lifetime = 3 [json_name = "lifetime"];
 
-    // Public key used in session
+    // Public key used in session (binary compressed 33-byte 256r1 ECDSA)
     bytes session_key = 4 [json_name = "sessionKey"];
 
     // Session Context information
