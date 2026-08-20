@@ -134,6 +134,11 @@ filter by object header fields or user attributes. From the well-known list
 only `$Object:objectID` and `$Object:containerID` will be available, as
 it's possible to take that information from the requested address.
 
+Some filters can be inapplicable for PUT operations that operate with
+unsealed objects. When object is created by storage node its ID in unknown
+and its hashes or length may also be unknown at the time request is checked
+against EACL.
+
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
