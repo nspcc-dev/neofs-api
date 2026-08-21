@@ -149,7 +149,7 @@ Signature of something in NeoFS.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [bytes](#bytes) |  | Public key used for signing. For N3 `scheme`, the field represents a verification script. The maximum allowed length is 1024 bytes. |
+| key | [bytes](#bytes) |  | Public key used for signing. Content depends on `scheme`, for ECDSA schemes it's 33-byte compressed 256r1 ECDSA key, for N3 scheme it's a NeoVM verification script. The maximum allowed length is 1024 bytes. |
 | sign | [bytes](#bytes) |  | Signature. For N3 `scheme`, the field represents an invocation script. The maximum allowed length is 1024 bytes. |
 | scheme | [SignatureScheme](#neo.fs.v2.refs.SignatureScheme) |  | Scheme contains digital signature scheme identifier |
 
@@ -162,7 +162,7 @@ RFC 6979 signature.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [bytes](#bytes) |  | Public key used for signing. For N3 auth scheme, the field represents a verification script. The maximum allowed length is 1024 bytes. |
+| key | [bytes](#bytes) |  | Public key used for signing. See Signature for details. |
 | sign | [bytes](#bytes) |  | Deterministic ECDSA with SHA-256 hashing. For N3 auth scheme, the field represents an invocation script. The maximum allowed length is 1024 bytes. |
 
 

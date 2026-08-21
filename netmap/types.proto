@@ -217,7 +217,8 @@ message PlacementPolicy {
 
 // NeoFS node description
 message NodeInfo {
-  // Public key of the NeoFS node in a binary format
+  // Public key of the NeoFS node in a binary format (compressed 33-byte
+  // curve 256r1 ECDSA).
   bytes public_key = 1 [json_name = "publicKey"];
 
   // Ways to connect to a node

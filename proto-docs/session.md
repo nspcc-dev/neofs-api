@@ -294,7 +294,7 @@ Session Token body
 | id | [bytes](#bytes) |  | Token identifier is a valid UUIDv4 in binary form |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Identifier of the session initiator |
 | lifetime | [SessionToken.Body.TokenLifetime](#neo.fs.v2.session.SessionToken.Body.TokenLifetime) |  | Lifetime of the session |
-| session_key | [bytes](#bytes) |  | Public key used in session |
+| session_key | [bytes](#bytes) |  | Public key used in session (binary compressed 33-byte 256r1 ECDSA) |
 | object | [ObjectSessionContext](#neo.fs.v2.session.ObjectSessionContext) |  | ObjectService session context |
 | container | [ContainerSessionContext](#neo.fs.v2.session.ContainerSessionContext) |  | ContainerService session context |
 
