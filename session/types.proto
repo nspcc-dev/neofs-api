@@ -300,9 +300,9 @@ message RequestVerificationHeader {
   // DEPRECATED: Unused and unchecked since API v2.25, no origin structure to check.
   RequestVerificationHeader origin = 4 [json_name = "origin"];
 
-  // Request signature. It is a signature of every request field (except
-  // the verification header itself) marshalled and concatenated, e.g.
-  // request's body and request's meta header.
+  // Request signature. It is a signature of the whole request marshaled, except
+  // for the verification header itself (the verification header field must be
+  // omitted completely, attaching no bytes to the signed data).
   neo.fs.v2.refs.Signature request_signature = 5 [json_name = "requestSignature"];
 }
 
