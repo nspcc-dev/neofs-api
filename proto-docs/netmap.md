@@ -281,8 +281,9 @@ Network map structure
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| epoch | [uint64](#uint64) |  | Network map revision number. |
+| epoch | [uint64](#uint64) |  | Network map revision number. DEPRECATED: Network maps are versioned since API v2.27. |
 | nodes | [NodeInfo](#neo.fs.v2.netmap.NodeInfo) | repeated | Nodes presented in network. |
+| version | [uint64](#uint64) |  | Network map version number. |
 
 
 <a name="neo.fs.v2.netmap.NetworkConfig"></a>
@@ -360,6 +361,7 @@ Information about NeoFS network
 | magic_number | [uint64](#uint64) |  | Magic number of FS chain of the NeoFS network |
 | ms_per_block | [int64](#int64) |  | MillisecondsPerBlock network parameter of FS chain of the NeoFS network |
 | network_config | [NetworkConfig](#neo.fs.v2.netmap.NetworkConfig) |  | NeoFS network configuration |
+| netmap_version | [uint64](#uint64) |  | Network map version number. |
 
 
 <a name="neo.fs.v2.netmap.NodeInfo"></a>

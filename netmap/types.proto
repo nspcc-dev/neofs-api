@@ -337,10 +337,14 @@ message NodeInfo {
 // Network map structure
 message Netmap {
   // Network map revision number.
+  // DEPRECATED: Network maps are versioned since API v2.27.
   uint64 epoch = 1 [json_name = "epoch"];
 
   // Nodes presented in network.
   repeated NodeInfo nodes = 2 [json_name = "nodes"];
+
+  // Network map version number.
+  uint64 version = 3 [json_name = "version"];
 }
 
 // NeoFS network configuration
@@ -410,4 +414,7 @@ message NetworkInfo {
 
   // NeoFS network configuration
   NetworkConfig network_config = 4 [json_name = "networkConfig"];
+
+  // Network map version number.
+  uint64 netmap_version = 5 [json_name = "netmapVersion"];
 }
