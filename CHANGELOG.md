@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- Payload chunk field to `object.PutRequest.Init` message (#333)
 
 ### Changed
 

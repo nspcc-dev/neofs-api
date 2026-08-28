@@ -641,7 +641,7 @@ GET Object Response body
 
 ### Message GetResponse.Body.Init
 Initial part of the `Object` structure stream. Technically it's a
-set of all `Object` structure's fields except `payload`.
+set of all `Object` structure's fields except `payload` is partial.
 
 
 | Field | Type | Label | Description |
@@ -649,6 +649,7 @@ set of all `Object` structure's fields except `payload`.
 | object_id | [neo.fs.v2.refs.ObjectID](#neo.fs.v2.refs.ObjectID) |  | Object's unique identifier. |
 | signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signed `ObjectID` |
 | header | [Header](#neo.fs.v2.object.Header) |  | Object metadata headers |
+| chunk | [bytes](#bytes) |  | Payload prefix. MUST NOT be set if request API version is < `v2.26`. |
 
 
 <a name="neo.fs.v2.object.HeadRequest"></a>

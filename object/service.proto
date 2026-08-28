@@ -327,7 +327,7 @@ message GetResponse {
   // GET Object Response body
   message Body {
     // Initial part of the `Object` structure stream. Technically it's a
-    // set of all `Object` structure's fields except `payload`.
+    // set of all `Object` structure's fields except `payload` is partial.
     message Init {
       // Object's unique identifier.
       neo.fs.v2.refs.ObjectID object_id = 1;
@@ -337,6 +337,9 @@ message GetResponse {
 
       // Object metadata headers
       Header header = 3;
+
+      // Payload prefix. MUST NOT be set if request API version is < `v2.26`.
+      bytes chunk = 4;
     }
     // Single message in the response stream.
     oneof object_part {
