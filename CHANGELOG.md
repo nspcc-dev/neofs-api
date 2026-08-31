@@ -10,6 +10,14 @@
 
 ### Deprecated
 
+## [2.26.0] - 2026-08-31
+
+### Added
+- Single-signature request verification (#409, #414)
+
+### Changed
+- Improved documetation in various parts (#412, #410, #411)
+
 ## [2.25.0] - 2026-07-30
 
 ### Added
@@ -657,4 +665,5 @@ Bump major release
 [2.23.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.22.0...v2.23.0
 [2.24.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.23.0...v2.24.0
 [2.25.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.24.0...v2.25.0
-[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.25.0...master
+[2.26.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.25.0...v2.26.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.26.0...master
