@@ -264,6 +264,9 @@ service ObjectService {
   // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   //   the container to which the replicated object is associated was not found.
   rpc Replicate(ReplicateRequest) returns (ReplicateResponse);
+
+  // TODO: docs.
+  rpc ReplicateV2(stream ReplicateRequest) returns (ReplicateResponse);
 }
 
 // GET object request.
