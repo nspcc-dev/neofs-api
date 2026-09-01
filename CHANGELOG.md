@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- Streaming object replication op (#418)
 
 ### Changed
 

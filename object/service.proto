@@ -264,6 +264,31 @@ service ObjectService {
   // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   //   the container to which the replicated object is associated was not found.
   rpc Replicate(ReplicateRequest) returns (ReplicateResponse);
+
+  // Save replica of the object on the NeoFS storage node. Both client and
+  // server must be authenticated NeoFS storage nodes matching storage policy
+  // of the container referenced by the replicated object. Thus, this operation
+  // is purely system: regular users should not pay attention to it but use
+  // Put.
+  //
+  // First message is required and MUST contain `init` field only. `object_id`,
+  // `signature`, `header` and `node_signature` fields are required for it.
+  // Following messages must contain `payload_chunk` field only.
+  //
+  // Server may interrupt the stream with `OK` status if object already exists
+  // on it.
+  //
+  // Statuses:
+  // - **OK** (0, SECTION_SUCCESS): \
+  //   the object has been successfully replicated;
+  // - **INTERNAL_SERVER_ERROR** (1024, SECTION_FAILURE_COMMON): \
+  //   internal server error described in the text message;
+  // - **ACCESS_DENIED** (2048, SECTION_OBJECT): \
+  //   the client does not authenticate any NeoFS storage node matching storage
+  //   policy of the container referenced by the replicated object
+  // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
+  //   the container to which the replicated object is associated was not found.
+  rpc ReplicateV2(stream ReplicateV2Request) returns (ReplicateV2Response);
 }
 
 // GET object request.
@@ -870,5 +895,43 @@ message ReplicateResponse {
   // Deterministic ECDSA with SHA-256 hashing (RFC 6979) signature of
   // replicated object. Must be attached if request was made with
   // `sign_object` flag set.
+  bytes object_signature = 2;
+}
+
+// ReplicateV2 RPC request
+message ReplicateV2Request {
+  // Stream initialization data.
+  message Init {
+    // Object to be replicated without payload.
+    neo.fs.v2.object.Object object = 1;
+
+    // Signature of `object.object_id.value` field.
+    neo.fs.v2.refs.Signature signature = 2;
+
+    // Optional flag that requires server side to attach signature of just
+    // replicated object to ensure it has been received correctly. Signature
+    // must be calculated with a key that corresponds to an exposed to the
+    // network map public key of the object receiver.
+    bool sign_object = 3;
+  }
+
+  // Single message in the request stream.
+  oneof stream_part {
+    // Initial stream part.
+    Init init = 1;
+
+    // Payload chunk of the replicated object.
+    bytes payload_chunk = 2;
+  }
+}
+
+// ReplicateV2 RPC response
+message ReplicateV2Response {
+  // Operation execution status with one of the enumerated codes.
+  neo.fs.v2.status.Status status = 1;
+
+  // Deterministic ECDSA with SHA-256 hashing (RFC 6979) signature of
+  // replicated object. Must be attached if request was made with
+  // `init.sign_object` flag set.
   bytes object_signature = 2;
 }

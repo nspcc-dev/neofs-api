@@ -39,6 +39,9 @@
     - [Range](#neo.fs.v2.object.Range)
     - [ReplicateRequest](#neo.fs.v2.object.ReplicateRequest)
     - [ReplicateResponse](#neo.fs.v2.object.ReplicateResponse)
+    - [ReplicateV2Request](#neo.fs.v2.object.ReplicateV2Request)
+    - [ReplicateV2Request.Init](#neo.fs.v2.object.ReplicateV2Request.Init)
+    - [ReplicateV2Response](#neo.fs.v2.object.ReplicateV2Response)
     - [SearchRequest](#neo.fs.v2.object.SearchRequest)
     - [SearchRequest.Body](#neo.fs.v2.object.SearchRequest.Body)
     - [SearchResponse](#neo.fs.v2.object.SearchResponse)
@@ -90,6 +93,7 @@ rpc SearchV2(SearchV2Request) returns (SearchV2Response);
 rpc GetRange(GetRangeRequest) returns (stream GetRangeResponse);
 rpc GetRangeHash(GetRangeHashRequest) returns (GetRangeHashResponse);
 rpc Replicate(ReplicateRequest) returns (ReplicateResponse);
+rpc ReplicateV2(stream ReplicateV2Request) returns (ReplicateV2Response);
 
 ```
 
@@ -381,6 +385,35 @@ Statuses:
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | Replicate | [ReplicateRequest](#neo.fs.v2.object.ReplicateRequest) | [ReplicateResponse](#neo.fs.v2.object.ReplicateResponse) |
+#### Method ReplicateV2
+
+Save replica of the object on the NeoFS storage node. Both client and
+server must be authenticated NeoFS storage nodes matching storage policy
+of the container referenced by the replicated object. Thus, this operation
+is purely system: regular users should not pay attention to it but use
+Put.
+
+First message is required and MUST contain `init` field only. `object_id`,
+`signature`, `header` and `node_signature` fields are required for it.
+Following messages must contain `payload_chunk` field only.
+
+Server may interrupt the stream with `OK` status if object already exists
+on it.
+
+Statuses:
+- **OK** (0, SECTION_SUCCESS): \
+  the object has been successfully replicated;
+- **INTERNAL_SERVER_ERROR** (1024, SECTION_FAILURE_COMMON): \
+  internal server error described in the text message;
+- **ACCESS_DENIED** (2048, SECTION_OBJECT): \
+  the client does not authenticate any NeoFS storage node matching storage
+  policy of the container referenced by the replicated object
+- **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
+  the container to which the replicated object is associated was not found.
+
+| Name | Input | Output |
+| ---- | ----- | ------ |
+| ReplicateV2 | [ReplicateV2Request](#neo.fs.v2.object.ReplicateV2Request) | [ReplicateV2Response](#neo.fs.v2.object.ReplicateV2Response) |
  <!-- end services -->
 
 
@@ -836,6 +869,43 @@ Replicate RPC response
 | ----- | ---- | ----- | ----------- |
 | status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Operation execution status with one of the enumerated codes. |
 | object_signature | [bytes](#bytes) |  | Deterministic ECDSA with SHA-256 hashing (RFC 6979) signature of replicated object. Must be attached if request was made with `sign_object` flag set. |
+
+
+<a name="neo.fs.v2.object.ReplicateV2Request"></a>
+
+### Message ReplicateV2Request
+ReplicateV2 RPC request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| init | [ReplicateV2Request.Init](#neo.fs.v2.object.ReplicateV2Request.Init) |  | Initial stream part. |
+| payload_chunk | [bytes](#bytes) |  | Payload chunk of the replicated object. |
+
+
+<a name="neo.fs.v2.object.ReplicateV2Request.Init"></a>
+
+### Message ReplicateV2Request.Init
+Stream initialization data.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| object | [Object](#neo.fs.v2.object.Object) |  | Object to be replicated without payload. |
+| signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of `object.object_id.value` field. |
+| sign_object | [bool](#bool) |  | Optional flag that requires server side to attach signature of just replicated object to ensure it has been received correctly. Signature must be calculated with a key that corresponds to an exposed to the network map public key of the object receiver. |
+
+
+<a name="neo.fs.v2.object.ReplicateV2Response"></a>
+
+### Message ReplicateV2Response
+ReplicateV2 RPC response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Operation execution status with one of the enumerated codes. |
+| object_signature | [bytes](#bytes) |  | Deterministic ECDSA with SHA-256 hashing (RFC 6979) signature of replicated object. Must be attached if request was made with `init.sign_object` flag set. |
 
 
 <a name="neo.fs.v2.object.SearchRequest"></a>
