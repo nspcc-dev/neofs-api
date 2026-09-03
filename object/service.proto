@@ -404,6 +404,7 @@ message PutRequest {
 
   // Carries request meta information. Header data is used only to regulate
   // message transport and does not affect request execution.
+  // Starting from version 2.26, the field MUST NOT be present in chunk messages.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
