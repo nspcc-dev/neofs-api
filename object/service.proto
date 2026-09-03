@@ -264,6 +264,9 @@ service ObjectService {
   // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   //   the container to which the replicated object is associated was not found.
   rpc Replicate(ReplicateRequest) returns (ReplicateResponse);
+
+  // TODO: docs.
+  rpc ReplicateV2(stream ReplicateV2Request) returns (ReplicateResponse);
 }
 
 // GET object request.
@@ -871,4 +874,22 @@ message ReplicateResponse {
   // replicated object. Must be attached if request was made with
   // `sign_object` flag set.
   bytes object_signature = 2;
+}
+
+// TODO: docs.
+message ReplicateV2Request {
+  // TODO: or just ReplicateRequest?
+  message Init {
+    neo.fs.v2.refs.ObjectID object_id = 1;
+    neo.fs.v2.refs.Signature signature = 2;
+    Header header = 3;
+    bytes payload_chunk = 4; // TODO:  needed?
+    neo.fs.v2.refs.Signature node_id_signature = 5;
+    bool sign_object = 6;
+  }
+
+  oneof stream_part {
+    Init init = 1;
+    bytes payload_chunk = 2;
+  }
 }
