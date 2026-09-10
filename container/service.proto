@@ -78,6 +78,9 @@ service ContainerService {
   // - Common failures (SECTION_FAILURE_COMMON);
   // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   //   transaction was sent but not executed within the deadline.
+  // - **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  //   if requester attached container version he knows and it is lower than
+  //   the server's one.
   rpc SetExtendedACL(SetExtendedACLRequest) returns (SetExtendedACLResponse);
 
   // Returns Extended ACL table and signature from `Container` smart contract
@@ -91,6 +94,9 @@ service ContainerService {
   //   container not found;
   // - **EACL_NOT_FOUND** (3073, SECTION_CONTAINER): \
   //   eACL table not found.
+  // - **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  //   if requester attached container version he knows and it is lower than
+  //   the server's one.
   rpc GetExtendedACL(GetExtendedACLRequest) returns (GetExtendedACLResponse);
 
   // Announces the space values used by the container for P2P synchronization.
@@ -115,6 +121,9 @@ service ContainerService {
   // - Common failures (SECTION_FAILURE_COMMON);
   // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   //   transaction was sent but not executed within the deadline.
+  // - **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  //   if requester attached container version he knows and it is lower than
+  //   the server's one.
   rpc SetAttribute(SetAttributeRequest) returns (SetAttributeResponse);
 
   // Sends transaction calling contract method to remove container attribute,
@@ -128,6 +137,9 @@ service ContainerService {
   // - Common failures (SECTION_FAILURE_COMMON);
   // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   //   transaction was sent but not executed within the deadline.
+  // - **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  //   if requester attached container version he knows and it is lower than
+  //   the server's one.
   rpc RemoveAttribute(RemoveAttributeRequest) returns (RemoveAttributeResponse);
 }
 
@@ -336,7 +348,8 @@ message ListResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// Set Extended ACL
+// Set Extended ACL.
+// Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 message SetExtendedACLRequest {
   // Set Extended ACL request body does not have separate `ContainerID`
   // reference. It will be taken from `EACLTable.container_id` field.
@@ -382,7 +395,8 @@ message SetExtendedACLResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// Get Extended ACL
+// Get Extended ACL.
+// Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 message GetExtendedACLRequest {
   // Get Extended ACL request body
   message Body {
@@ -495,7 +509,8 @@ message AnnounceUsedSpaceResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// Attribute setting request
+// Attribute setting request.
+// Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 message SetAttributeRequest {
   // Request payload message.
   message Body {
@@ -568,7 +583,8 @@ message SetAttributeResponse {
   neo.fs.v2.status.Status status = 1;
 }
 
-// Attribute removal request
+// Attribute removal request.
+// Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 message RemoveAttributeRequest {
   // Request payload message.
   message Body {

@@ -158,6 +158,11 @@ enum Container {
 
   // [**3075**] Async container operation timed out.
   CONTAINER_AWAIT_TIMEOUT = 3;
+
+  // [**3076**] Requested operation with container is outdated: container
+  // has been changed. Can be returned only if requester provides the latest
+  // container version, see requests documentation.
+  OUTDATED_CONTAINER = 4;
 }
 
 // Section of statuses for session-related operations.

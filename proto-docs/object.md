@@ -131,6 +131,9 @@ Statuses:
   object container not found;
 - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   provided session token has expired.
+- **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  if requester attached container version he knows and it is lower than
+  the server's one.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -170,6 +173,9 @@ Statuses:
   size quota set by user was exceeded;
 - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   object storage container not found;
+- **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  if requester attached container version he knows and it is lower than
+  the server's one.
 - **TOKEN_NOT_FOUND** (4096, SECTION_SESSION): \
   (for trusted object preparation) session private key does not exist or has
 been deleted;
@@ -206,6 +212,9 @@ Statuses:
   deleting a locked object is prohibited;
 - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   object container not found;
+- **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  if requester attached container version he knows and it is lower than
+  the server's one.
 - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   provided session token has expired.
 
@@ -237,6 +246,9 @@ Statuses:
   the requested object has been marked as deleted;
 - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   object container not found;
+- **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  if requester attached container version he knows and it is lower than
+  the server's one.
 - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   provided session token has expired.
 
@@ -269,6 +281,9 @@ Statuses:
   access to operation SEARCH of the object is denied;
 - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   search container not found;
+- **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  if requester attached container version he knows and it is lower than
+  the server's one.
 - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   provided session token has expired.
 
@@ -420,7 +435,8 @@ Statuses:
 <a name="neo.fs.v2.object.DeleteRequest"></a>
 
 ### Message DeleteRequest
-Object DELETE request
+Object DELETE request.
+Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 
 
 | Field | Type | Label | Description |
@@ -620,6 +636,7 @@ specified as follows:
      MUST have `__NEOFS__EC_PART_IDX` set.
 In this case, if `body.address` refers to TOMBSTONE or LOCK object (which
 cannot have EC parts), the query applies to it.
+Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 
 
 | Field | Type | Label | Description |
@@ -687,7 +704,8 @@ set of all `Object` structure's fields except `payload`.
 <a name="neo.fs.v2.object.HeadRequest"></a>
 
 ### Message HeadRequest
-Object HEAD request
+Object HEAD request.
+Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 
 
 | Field | Type | Label | Description |
@@ -771,7 +789,8 @@ following steps:
 <a name="neo.fs.v2.object.PutRequest"></a>
 
 ### Message PutRequest
-PUT object request
+PUT object request.
+Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 
 
 | Field | Type | Label | Description |
@@ -961,7 +980,8 @@ Object Search response body
 <a name="neo.fs.v2.object.SearchV2Request"></a>
 
 ### Message SearchV2Request
-Object SearchV2 request
+Object SearchV2 request.
+Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 
 
 | Field | Type | Label | Description |
