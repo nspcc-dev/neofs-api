@@ -106,6 +106,7 @@ Section of statuses for container-related operations.
 | EACL_NOT_FOUND | 1 | [**3073**] eACL table not found. |
 | CONTAINER_LOCKED | 2 | [**3074**] Operation rejected by the container lock. |
 | CONTAINER_AWAIT_TIMEOUT | 3 | [**3075**] Async container operation timed out. |
+| OUTDATED_CONTAINER | 4 | [**3076**] Requested operation with container is outdated: container has been changed. Can be returned only if requester provides the latest container version, see requests documentation. |
 
 
 

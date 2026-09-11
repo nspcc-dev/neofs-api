@@ -116,4 +116,17 @@ message Container {
 
   // Placement policy for the object inside the container
   neo.fs.v2.netmap.PlacementPolicy placement_policy = 6 [json_name = "placementPolicy"];
+
+  // Container version. It increments every time container's properties are
+  // changed by the owner (or the owner itself is changed).
+  //
+  // Do not confuse it with API version: this field describes how many times
+  // container has been changed since its creation, while API version describes
+  // proto message format.
+  //
+  // It must only be set by storage nodes and must not be filled on the client
+  // side. The initial version after a successful container creation call is 1.
+  //
+  // Versioned containers are available starting from API v2.27.0.
+  uint64 container_version = 7 [json_name = "containerVersion"];
 }

@@ -167,6 +167,9 @@ Statuses:
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   transaction was sent but not executed within the deadline.
+- **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  if requester attached container version he knows and it is lower than
+  the server's one.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -184,6 +187,9 @@ Statuses:
   container not found;
 - **EACL_NOT_FOUND** (3073, SECTION_CONTAINER): \
   eACL table not found.
+- **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  if requester attached container version he knows and it is lower than
+  the server's one.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -216,6 +222,9 @@ Statuses:
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   transaction was sent but not executed within the deadline.
+- **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  if requester attached container version he knows and it is lower than
+  the server's one.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -233,6 +242,9 @@ Statuses:
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   transaction was sent but not executed within the deadline.
+- **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  if requester attached container version he knows and it is lower than
+  the server's one.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -356,7 +368,8 @@ and done via consensus in Inner Ring nodes.
 <a name="neo.fs.v2.container.GetExtendedACLRequest"></a>
 
 ### Message GetExtendedACLRequest
-Get Extended ACL
+Get Extended ACL.
+Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 
 
 | Field | Type | Label | Description |
@@ -571,7 +584,8 @@ returned here to make sure everything has been done as expected.
 <a name="neo.fs.v2.container.RemoveAttributeRequest"></a>
 
 ### Message RemoveAttributeRequest
-Attribute removal request
+Attribute removal request.
+Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 
 
 | Field | Type | Label | Description |
@@ -637,7 +651,8 @@ Attribute removal response
 <a name="neo.fs.v2.container.SetAttributeRequest"></a>
 
 ### Message SetAttributeRequest
-Attribute setting request
+Attribute setting request.
+Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 
 
 | Field | Type | Label | Description |
@@ -708,7 +723,8 @@ Attribute setting response
 <a name="neo.fs.v2.container.SetExtendedACLRequest"></a>
 
 ### Message SetExtendedACLRequest
-Set Extended ACL
+Set Extended ACL.
+Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 
 
 | Field | Type | Label | Description |
@@ -784,6 +800,13 @@ of stable-marshalled container message.
 | basic_acl | [uint32](#uint32) |  | `BasicACL` contains access control rules for the owner, system and others groups, as well as permission bits for `BearerToken` and `Extended ACL` |
 | attributes | [Container.Attribute](#neo.fs.v2.container.Container.Attribute) | repeated | Attributes represent immutable container's meta data |
 | placement_policy | [neo.fs.v2.netmap.PlacementPolicy](#neo.fs.v2.netmap.PlacementPolicy) |  | Placement policy for the object inside the container |
+| container_version | [uint64](#uint64) |  | Container version. It increments every time container's properties are changed by the owner (or the owner itself is changed).
+
+Do not confuse it with API version: this field describes how many times container has been changed since its creation, while API version describes proto message format.
+
+It must only be set by storage nodes and must not be filled on the client side. The initial version after a successful container creation call is 1.
+
+Versioned containers are available starting from API v2.27.0. |
 
 
 <a name="neo.fs.v2.container.Container.Attribute"></a>

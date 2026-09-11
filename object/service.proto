@@ -45,6 +45,9 @@ service ObjectService {
   //   object container not found;
   // - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   //   provided session token has expired.
+  // - **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  //   if requester attached container version he knows and it is lower than
+  //   the server's one.
   rpc Get(GetRequest) returns (stream GetResponse);
 
   // Put the object into container. Request uses gRPC stream. First message
@@ -80,6 +83,9 @@ service ObjectService {
   //   size quota set by user was exceeded;
   // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   //   object storage container not found;
+  // - **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  //   if requester attached container version he knows and it is lower than
+  //   the server's one.
   // - **TOKEN_NOT_FOUND** (4096, SECTION_SESSION): \
   //   (for trusted object preparation) session private key does not exist or has
   // been deleted;
@@ -112,6 +118,9 @@ service ObjectService {
   //   deleting a locked object is prohibited;
   // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   //   object container not found;
+  // - **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  //   if requester attached container version he knows and it is lower than
+  //   the server's one.
   // - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   //   provided session token has expired.
   rpc Delete(DeleteRequest) returns (DeleteResponse);
@@ -139,6 +148,9 @@ service ObjectService {
   //   the requested object has been marked as deleted;
   // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   //   object container not found;
+  // - **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  //   if requester attached container version he knows and it is lower than
+  //   the server's one.
   // - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   //   provided session token has expired.
   rpc Head(HeadRequest) returns (HeadResponse);
@@ -167,6 +179,9 @@ service ObjectService {
   //   access to operation SEARCH of the object is denied;
   // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   //   search container not found;
+  // - **OUTDATED_CONTAINER** (3076, SECTION_CONTAINER): \
+  //   if requester attached container version he knows and it is lower than
+  //   the server's one.
   // - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   //   provided session token has expired.
   rpc Search(SearchRequest) returns (stream SearchResponse);
@@ -314,6 +329,7 @@ service ObjectService {
 //      MUST have `__NEOFS__EC_PART_IDX` set.
 // In this case, if `body.address` refers to TOMBSTONE or LOCK object (which
 // cannot have EC parts), the query applies to it.
+// Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 message GetRequest {
   // GET Object request body
   message Body {
@@ -393,7 +409,8 @@ message GetResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// PUT object request
+// PUT object request.
+// Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 message PutRequest {
   // PUT request body
   message Body {
@@ -459,7 +476,8 @@ message PutResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// Object DELETE request
+// Object DELETE request.
+// Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 message DeleteRequest {
   // Object DELETE request body
   message Body {
@@ -503,7 +521,8 @@ message DeleteResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// Object HEAD request
+// Object HEAD request.
+// Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 message HeadRequest {
   // Object HEAD request body
   message Body {
@@ -639,7 +658,8 @@ message SearchResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// Object SearchV2 request
+// Object SearchV2 request.
+// Behaviour can be augmented with __NEOFS__CONTAINER_VERSION x-header.
 message SearchV2Request {
   // Object Search request body
   message Body {
