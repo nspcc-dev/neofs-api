@@ -6,6 +6,7 @@
 - Streaming object replication op (#418)
 
 ### Changed
+- Object PUT chunk requests must no longer have meta headers (#408)
 
 ### Removed
 
