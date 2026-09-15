@@ -78,6 +78,9 @@ service ContainerService {
   // - Common failures (SECTION_FAILURE_COMMON);
   // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   //   transaction was sent but not executed within the deadline.
+  // - **CONTAINER_REVISION_MISMATCH** (3076, SECTION_CONTAINER): \
+  //   if requester attached container revision he knows and it does not match
+  //   the server's one.
   rpc SetExtendedACL(SetExtendedACLRequest) returns (SetExtendedACLResponse);
 
   // Returns Extended ACL table and signature from `Container` smart contract
@@ -115,6 +118,9 @@ service ContainerService {
   // - Common failures (SECTION_FAILURE_COMMON);
   // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   //   transaction was sent but not executed within the deadline.
+  // - **CONTAINER_REVISION_MISMATCH** (3076, SECTION_CONTAINER): \
+  //   if requester attached container revision he knows and it does not match
+  //   the server's one.
   rpc SetAttribute(SetAttributeRequest) returns (SetAttributeResponse);
 
   // Sends transaction calling contract method to remove container attribute,
@@ -128,6 +134,9 @@ service ContainerService {
   // - Common failures (SECTION_FAILURE_COMMON);
   // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   //   transaction was sent but not executed within the deadline.
+  // - **CONTAINER_REVISION_MISMATCH** (3076, SECTION_CONTAINER): \
+  //   if requester attached container revision he knows and it does not match
+  //   the server's one.
   rpc RemoveAttribute(RemoveAttributeRequest) returns (RemoveAttributeResponse);
 }
 
@@ -336,7 +345,8 @@ message ListResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// Set Extended ACL
+// Set Extended ACL.
+// Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 message SetExtendedACLRequest {
   // Set Extended ACL request body does not have separate `ContainerID`
   // reference. It will be taken from `EACLTable.container_id` field.
@@ -495,7 +505,8 @@ message AnnounceUsedSpaceResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// Attribute setting request
+// Attribute setting request.
+// Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 message SetAttributeRequest {
   // Request payload message.
   message Body {
@@ -568,7 +579,8 @@ message SetAttributeResponse {
   neo.fs.v2.status.Status status = 1;
 }
 
-// Attribute removal request
+// Attribute removal request.
+// Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 message RemoveAttributeRequest {
   // Request payload message.
   message Body {

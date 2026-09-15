@@ -396,6 +396,14 @@ affect system behaviour:
   how many past epochs the node can look up through. The `value` is string
   encoded `uint64` in decimal presentation. If set to '0' or not set, only the
   current epoch will be used. DEPRECATED: header ignored by servers.
+* __NEOFS__CONTAINER_REVISION \
+  Starting from API v2.27.0 and for a limited set of requests only, requester
+  can attach container revision to extended headers to ensure container state
+  is up to date. If server's known revision does not match the requested one,
+  it must return **CONTAINER_REVISION_MISMATCH** (3076) response status with
+  no payload.
+  Value format: a positive base-10 integer counter with no leading zeros.
+  Check request's description to see if this header is supported.
 
 
 | Field | Type | Label | Description |

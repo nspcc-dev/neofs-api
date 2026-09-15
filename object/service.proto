@@ -80,6 +80,9 @@ service ObjectService {
   //   size quota set by user was exceeded;
   // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   //   object storage container not found;
+  // - **CONTAINER_REVISION_MISMATCH** (3076, SECTION_CONTAINER): \
+  //   if requester attached container revision he knows and it does not match
+  //   the server's one.
   // - **TOKEN_NOT_FOUND** (4096, SECTION_SESSION): \
   //   (for trusted object preparation) session private key does not exist or has
   // been deleted;
@@ -112,6 +115,9 @@ service ObjectService {
   //   deleting a locked object is prohibited;
   // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   //   object container not found;
+  // - **CONTAINER_REVISION_MISMATCH** (3076, SECTION_CONTAINER): \
+  //   if requester attached container revision he knows and it does not match
+  //   the server's one.
   // - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   //   provided session token has expired.
   rpc Delete(DeleteRequest) returns (DeleteResponse);
@@ -167,6 +173,9 @@ service ObjectService {
   //   access to operation SEARCH of the object is denied;
   // - **CONTAINER_NOT_FOUND** (3072, SECTION_CONTAINER): \
   //   search container not found;
+  // - **CONTAINER_REVISION_MISMATCH** (3076, SECTION_CONTAINER): \
+  //   if requester attached container revision he knows and it does not match
+  //   the server's one.
   // - **TOKEN_EXPIRED** (4097, SECTION_SESSION): \
   //   provided session token has expired.
   rpc Search(SearchRequest) returns (stream SearchResponse);
@@ -393,7 +402,8 @@ message GetResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// PUT object request
+// PUT object request.
+// Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 message PutRequest {
   // PUT request body
   message Body {
@@ -459,7 +469,8 @@ message PutResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// Object DELETE request
+// Object DELETE request.
+// Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 message DeleteRequest {
   // Object DELETE request body
   message Body {
@@ -639,7 +650,8 @@ message SearchResponse {
   neo.fs.v2.session.ResponseVerificationHeader verify_header = 3;
 }
 
-// Object SearchV2 request
+// Object SearchV2 request.
+// Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 message SearchV2Request {
   // Object Search request body
   message Body {
