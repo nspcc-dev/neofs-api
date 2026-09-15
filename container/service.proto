@@ -282,9 +282,11 @@ message GetResponse {
     Container container = 1;
 
     // Signature of a stable-marshalled container according to RFC-6979.
+    // DEPRECATED: nodes can omit this field, clients shouldn't check for it.
     neo.fs.v2.refs.SignatureRFC6979 signature = 2;
 
     // Session token if the container has been created within the session
+    // DEPRECATED: nodes can omit this field, clients shouldn't check for it.
     neo.fs.v2.session.SessionToken session_token = 3;
   }
   // Body of container get response message.
@@ -423,9 +425,11 @@ message GetExtendedACLResponse {
     neo.fs.v2.acl.EACLTable eacl = 1;
 
     // Signature of stable-marshalled Extended ACL according to RFC-6979.
+    // DEPRECATED: nodes can omit this field, clients shouldn't check for it.
     neo.fs.v2.refs.SignatureRFC6979 signature = 2;
 
     // Session token if Extended ACL was set within a session
+    // DEPRECATED: nodes can omit this field, clients shouldn't check for it.
     neo.fs.v2.session.SessionToken session_token = 3;
   }
   // Body of get extended acl response message.
