@@ -410,8 +410,8 @@ the time of container creation.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL requested, if available |
-| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. |
-| session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token if Extended ACL was set within a session |
+| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | Signature of stable-marshalled Extended ACL according to RFC-6979. DEPRECATED: nodes can omit this field, clients shouldn't check for it. |
+| session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token if Extended ACL was set within a session DEPRECATED: nodes can omit this field, clients shouldn't check for it. |
 
 
 <a name="neo.fs.v2.container.GetRequest"></a>
@@ -461,8 +461,8 @@ has been already verified upon container creation.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container | [Container](#neo.fs.v2.container.Container) |  | Requested container structure |
-| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | Signature of a stable-marshalled container according to RFC-6979. |
-| session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token if the container has been created within the session |
+| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | Signature of a stable-marshalled container according to RFC-6979. DEPRECATED: nodes can omit this field, clients shouldn't check for it. |
+| session_token | [neo.fs.v2.session.SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token if the container has been created within the session DEPRECATED: nodes can omit this field, clients shouldn't check for it. |
 
 
 <a name="neo.fs.v2.container.ListRequest"></a>
