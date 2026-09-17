@@ -92,7 +92,7 @@ Announce intermediate global trust information.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [AnnounceIntermediateResultRequest.Body](#neo.fs.v2.reputation.AnnounceIntermediateResultRequest.Body) |  | Body of the request message. |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
@@ -140,7 +140,7 @@ Announce node's local trust information.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [AnnounceLocalTrustRequest.Body](#neo.fs.v2.reputation.AnnounceLocalTrustRequest.Body) |  | Body of the request message. |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 

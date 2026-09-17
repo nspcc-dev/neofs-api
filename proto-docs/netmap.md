@@ -118,7 +118,7 @@ Get NodeInfo structure directly from a particular node
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [LocalNodeInfoRequest.Body](#neo.fs.v2.netmap.LocalNodeInfoRequest.Body) |  | Body of the LocalNodeInfo request message |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
@@ -163,7 +163,7 @@ Get netmap snapshot request
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [NetmapSnapshotRequest.Body](#neo.fs.v2.netmap.NetmapSnapshotRequest.Body) |  | Body of get netmap snapshot request message. |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
@@ -207,7 +207,7 @@ Get NetworkInfo structure with the network view from a particular node.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [NetworkInfoRequest.Body](#neo.fs.v2.netmap.NetworkInfoRequest.Body) |  | Body of the NetworkInfo request message |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 

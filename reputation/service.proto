@@ -48,8 +48,7 @@ message AnnounceLocalTrustRequest {
   // Body of the request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -97,8 +96,7 @@ message AnnounceIntermediateResultRequest {
   // Body of the request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to

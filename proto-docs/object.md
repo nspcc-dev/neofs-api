@@ -436,7 +436,7 @@ Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [DeleteRequest.Body](#neo.fs.v2.object.DeleteRequest.Body) |  | Body of delete object request message. |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
@@ -497,7 +497,7 @@ Get hash of object's payload part
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [GetRangeHashRequest.Body](#neo.fs.v2.object.GetRangeHashRequest.Body) |  | Body of get range hash object request message. |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
@@ -559,7 +559,7 @@ cannot have EC parts), the query applies to it.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [GetRangeRequest.Body](#neo.fs.v2.object.GetRangeRequest.Body) |  | Body of get range object request message. |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
@@ -635,7 +635,7 @@ cannot have EC parts), the query applies to it.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [GetRequest.Body](#neo.fs.v2.object.GetRequest.Body) |  | Body of get object request message. |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
@@ -703,7 +703,7 @@ Object HEAD request
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [HeadRequest.Body](#neo.fs.v2.object.HeadRequest.Body) |  | Body of head object request message. |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
@@ -788,7 +788,7 @@ Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [PutRequest.Body](#neo.fs.v2.object.PutRequest.Body) |  | Body of put object request message. |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
@@ -928,7 +928,7 @@ Object Search request
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [SearchRequest.Body](#neo.fs.v2.object.SearchRequest.Body) |  | Body of search object request message. |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
@@ -979,7 +979,7 @@ Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [SearchV2Request.Body](#neo.fs.v2.object.SearchV2Request.Body) |  | Body of search object request message. |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
