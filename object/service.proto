@@ -346,8 +346,7 @@ message GetRequest {
   // Body of get object request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -437,8 +436,7 @@ message PutRequest {
   // Body of put object request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -480,8 +478,7 @@ message DeleteRequest {
   // Body of delete object request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -533,8 +530,7 @@ message HeadRequest {
   // Body of head object request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -618,8 +614,7 @@ message SearchRequest {
   // Body of search object request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -688,8 +683,7 @@ message SearchV2Request {
   // Body of search object request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -788,8 +782,7 @@ message GetRangeRequest {
   // Body of get range object request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -849,8 +842,7 @@ message GetRangeHashRequest {
   // Body of get range hash object request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to

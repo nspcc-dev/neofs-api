@@ -172,8 +172,7 @@ message PutRequest {
   // Body of container put request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -222,8 +221,7 @@ message DeleteRequest {
   // Body of container delete request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -263,8 +261,7 @@ message GetRequest {
   // Body of container get request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -312,8 +309,7 @@ message ListRequest {
   // Body of list containers request message
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -360,8 +356,7 @@ message SetExtendedACLRequest {
   // Body of set extended acl request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -403,8 +398,7 @@ message GetExtendedACLRequest {
   // Body of get extended acl request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to
@@ -471,8 +465,7 @@ message AnnounceUsedSpaceRequest {
   // Body of announce used space request message.
   Body body = 1;
 
-  // Carries request meta information. Header data is used only to regulate
-  // message transport and does not affect request execution.
+  // Carries request meta information.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to

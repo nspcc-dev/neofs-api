@@ -84,7 +84,7 @@ Information necessary for opening a session.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [CreateRequest.Body](#neo.fs.v2.session.CreateRequest.Body) |  | Body of a create session token request message. |
-| meta_header | [RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. Header data is used only to regulate message transport and does not affect request execution. |
+| meta_header | [RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
