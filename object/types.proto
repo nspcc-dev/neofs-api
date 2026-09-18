@@ -115,6 +115,10 @@ enum MatchType {
 //   Returns only objects physically stored in the system. This filter is
 //   activated if the `key` exists, disregarding the value and matcher type.
 //
+// The following object attributes are not indexed and are forbidden for filters:
+//
+// * __NEOFS__NONCE
+//
 // Following filters are deprecated:
 //
 // * $Object:objectID \
@@ -219,6 +223,11 @@ message Header {
   //   is the only way to delete/lock objects. It MUST be a single stringified
   //   (according to [refs.ObjectID] message) object ID with no leading or
   //   trailing spaces.
+  // * __NEOFS__NONCE \
+  //   Can contain any data and is used to prevent OID collisions for otherwise
+  //   identical objects (same headers, same payload). Usually it contains 8
+  //   base64-encoded bytes of randomness. This attribute can not be used in
+  //   SEARCH requests since it's not indexed by nodes.
   // * __NEOFS__TICK_EPOCH \
   //   Decimal number that defines what epoch must produce
   //   object notification with UTF-8 object address in a

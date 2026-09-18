@@ -658,8 +658,8 @@ message SearchV2Request {
 
     // List of search expressions. Limited to 8. If additional attributes are
     // requested (see attributes below) then the first filter's key MUST be
-    // the first requested attribute. '$Object:containerID' and
-    // '$Object:objectID' filters are prohibited. Numeric filters' values MUST
+    // the first requested attribute. '$Object:containerID', '$Object:objectID'
+    // and '__NEOFS__NONCE' filters are prohibited. Numeric filters' values MUST
     // be in range [-MaxUint256, MaxUint256].
     repeated SearchFilter filters = 3;
 
@@ -675,7 +675,8 @@ message SearchV2Request {
     // attributes also affect result ordering (result is ordered by the 1st one
     // and then by OID). If additional attributes are requested, then the first
     // filter's key (see filters above) MUST be the first requested attribute.
-    // '$Object:containerID' and '$Object:objectID' attributes are prohibited.
+    // '$Object:containerID', '$Object:objectID' and '__NEOFS__NONCE' attributes
+    // are prohibited.
     // If meta_header.ttl = 1 and the first filter is not STRING_EQUAL,
     // values of the first filtered attribute are requested  automatically.
     repeated string attributes = 6;

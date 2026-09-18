@@ -993,10 +993,10 @@ Object Search request body
 | ----- | ---- | ----- | ----------- |
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Container where the search is being performed. |
 | version | [uint32](#uint32) |  | Version of the Query Language used. |
-| filters | [SearchFilter](#neo.fs.v2.object.SearchFilter) | repeated | List of search expressions. Limited to 8. If additional attributes are requested (see attributes below) then the first filter's key MUST be the first requested attribute. '$Object:containerID' and '$Object:objectID' filters are prohibited. Numeric filters' values MUST be in range [-MaxUint256, MaxUint256]. |
+| filters | [SearchFilter](#neo.fs.v2.object.SearchFilter) | repeated | List of search expressions. Limited to 8. If additional attributes are requested (see attributes below) then the first filter's key MUST be the first requested attribute. '$Object:containerID', '$Object:objectID' and '__NEOFS__NONCE' filters are prohibited. Numeric filters' values MUST be in range [-MaxUint256, MaxUint256]. |
 | cursor | [string](#string) |  | Cursor to continue search. Can be omitted or empty for the new search. |
 | count | [uint32](#uint32) |  | Limits the number of responses to the specified number. Can't be more than 1000. |
-| attributes | [string](#string) | repeated | List of attribute names (including special ones as defined by SearchFilter key) to include into the reply. Limited to 8, these attributes also affect result ordering (result is ordered by the 1st one and then by OID). If additional attributes are requested, then the first filter's key (see filters above) MUST be the first requested attribute. '$Object:containerID' and '$Object:objectID' attributes are prohibited. If meta_header.ttl = 1 and the first filter is not STRING_EQUAL, values of the first filtered attribute are requested automatically. |
+| attributes | [string](#string) | repeated | List of attribute names (including special ones as defined by SearchFilter key) to include into the reply. Limited to 8, these attributes also affect result ordering (result is ordered by the 1st one and then by OID). If additional attributes are requested, then the first filter's key (see filters above) MUST be the first requested attribute. '$Object:containerID', '$Object:objectID' and '__NEOFS__NONCE' attributes are prohibited. If meta_header.ttl = 1 and the first filter is not STRING_EQUAL, values of the first filtered attribute are requested automatically. |
 
 
 <a name="neo.fs.v2.object.SearchV2Response"></a>
@@ -1095,6 +1095,11 @@ that affect system behaviour:
   is the only way to delete/lock objects. It MUST be a single stringified
   (according to [refs.ObjectID] message) object ID with no leading or
   trailing spaces.
+* __NEOFS__NONCE \
+  Can contain any data and is used to prevent OID collisions for otherwise
+  identical objects (same headers, same payload). Usually it contains 8
+  base64-encoded bytes of randomness. This attribute can not be used in
+  SEARCH requests since it's not indexed by nodes.
 * __NEOFS__TICK_EPOCH \
   Decimal number that defines what epoch must produce
   object notification with UTF-8 object address in a
@@ -1234,6 +1239,10 @@ properties:
 * $Object:PHY \
   Returns only objects physically stored in the system. This filter is
   activated if the `key` exists, disregarding the value and matcher type.
+
+The following filters are not indexed and are forbidden:
+
+* __NEOFS__NONCE
 
 Following filters are deprecated:
 
