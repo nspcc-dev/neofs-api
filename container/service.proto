@@ -118,9 +118,6 @@ service ContainerService {
   // - Common failures (SECTION_FAILURE_COMMON);
   // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   //   transaction was sent but not executed within the deadline.
-  // - **CONTAINER_REVISION_MISMATCH** (3076, SECTION_CONTAINER): \
-  //   if requester attached container revision he knows and it does not match
-  //   the server's one.
   rpc SetAttribute(SetAttributeRequest) returns (SetAttributeResponse);
 
   // Sends transaction calling contract method to remove container attribute,
@@ -134,9 +131,6 @@ service ContainerService {
   // - Common failures (SECTION_FAILURE_COMMON);
   // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   //   transaction was sent but not executed within the deadline.
-  // - **CONTAINER_REVISION_MISMATCH** (3076, SECTION_CONTAINER): \
-  //   if requester attached container revision he knows and it does not match
-  //   the server's one.
   rpc RemoveAttribute(RemoveAttributeRequest) returns (RemoveAttributeResponse);
 }
 
@@ -344,7 +338,6 @@ message ListResponse {
 }
 
 // Set Extended ACL.
-// Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 message SetExtendedACLRequest {
   // Set Extended ACL request body does not have separate `ContainerID`
   // reference. It will be taken from `EACLTable.container_id` field.
@@ -354,6 +347,12 @@ message SetExtendedACLRequest {
 
     // Signature of stable-marshalled Extended ACL table according to RFC-6979.
     neo.fs.v2.refs.SignatureRFC6979 signature = 2;
+
+    // Starting from API v2.27.0, requester must attach container revision to
+    // ensure container state is up to date. If server's known revision does
+    // not match the requested one, it must return
+    // **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload.
+    uint64 container_revision = 3;
   }
   // Body of set extended acl request message.
   Body body = 1;

@@ -430,7 +430,6 @@ Statuses:
 
 ### Message DeleteRequest
 Object DELETE request.
-Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 
 
 | Field | Type | Label | Description |
@@ -438,6 +437,7 @@ Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 | body | [DeleteRequest.Body](#neo.fs.v2.object.DeleteRequest.Body) |  | Body of delete object request message. |
 | meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| container_revision | [uint64](#uint64) |  | Starting from API v2.27.0, requester may attach container revision to ensure container state is up to date. If server's known revision does not match the requested one, it must return **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload. |
 
 
 <a name="neo.fs.v2.object.DeleteRequest.Body"></a>
@@ -782,7 +782,6 @@ following steps:
 
 ### Message PutRequest
 PUT object request.
-Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 
 
 | Field | Type | Label | Description |
@@ -817,6 +816,7 @@ are not set, they will be calculated by a peer node.
 | signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Object signature if available |
 | header | [Header](#neo.fs.v2.object.Header) |  | Object's Header. The maximum length is 16KB. |
 | copies_number | [uint32](#uint32) |  | Number of the object copies to store within the RPC call. By default object is processed according to the container's placement policy. DEPRECATED: use `PlacementPolicy.Initial.max_replicas` instead. Servers ignore this field. |
+| container_revision | [uint64](#uint64) |  | Starting from API v2.27.0, requester may attach container revision to ensure container state is up to date. If server's known revision does not match the requested one, it must return **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload. |
 
 
 <a name="neo.fs.v2.object.PutResponse"></a>
@@ -973,7 +973,6 @@ Object Search response body
 
 ### Message SearchV2Request
 Object SearchV2 request.
-Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 
 
 | Field | Type | Label | Description |
@@ -997,6 +996,7 @@ Object Search request body
 | cursor | [string](#string) |  | Cursor to continue search. Can be omitted or empty for the new search. |
 | count | [uint32](#uint32) |  | Limits the number of responses to the specified number. Can't be more than 1000. |
 | attributes | [string](#string) | repeated | List of attribute names (including special ones as defined by SearchFilter key) to include into the reply. Limited to 8, these attributes also affect result ordering (result is ordered by the 1st one and then by OID). If additional attributes are requested, then the first filter's key (see filters above) MUST be the first requested attribute. '$Object:containerID', '$Object:objectID' and '__NEOFS__NONCE' attributes are prohibited. If meta_header.ttl = 1 and the first filter is not STRING_EQUAL, values of the first filtered attribute are requested automatically. |
+| container_revision | [uint64](#uint64) |  | Starting from API v2.27.0, requester may attach container revision to ensure container state is up to date. If server's known revision does not match the requested one, it must return **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload. |
 
 
 <a name="neo.fs.v2.object.SearchV2Response"></a>
@@ -1240,7 +1240,7 @@ properties:
   Returns only objects physically stored in the system. This filter is
   activated if the `key` exists, disregarding the value and matcher type.
 
-The following filters are not indexed and are forbidden:
+The following object attributes are not indexed and are forbidden for filters:
 
 * __NEOFS__NONCE
 

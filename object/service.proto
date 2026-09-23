@@ -402,7 +402,6 @@ message GetResponse {
 }
 
 // PUT object request.
-// Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 message PutRequest {
   // PUT request body
   message Body {
@@ -423,6 +422,12 @@ message PutRequest {
       // DEPRECATED: use `PlacementPolicy.Initial.max_replicas` instead.
       // Servers ignore this field.
       uint32 copies_number = 4;
+
+      // Starting from API v2.27.0, requester may attach container revision to
+      // ensure container state is up to date. If server's known revision does
+      // not match the requested one, it must return
+      // **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload.
+      uint64 container_revision = 5;
     }
     // Single message in the request stream.
     oneof object_part {
@@ -468,7 +473,6 @@ message PutResponse {
 }
 
 // Object DELETE request.
-// Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 message DeleteRequest {
   // Object DELETE request body
   message Body {
@@ -485,6 +489,12 @@ message DeleteRequest {
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
   neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
+
+  // Starting from API v2.27.0, requester may attach container revision to
+  // ensure container state is up to date. If server's known revision does
+  // not match the requested one, it must return
+  // **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload.
+  uint64 container_revision = 4;
 }
 
 // DeleteResponse body is empty because we cannot guarantee permanent object
@@ -646,7 +656,6 @@ message SearchResponse {
 }
 
 // Object SearchV2 request.
-// Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 message SearchV2Request {
   // Object Search request body
   message Body {
@@ -680,6 +689,12 @@ message SearchV2Request {
     // If meta_header.ttl = 1 and the first filter is not STRING_EQUAL,
     // values of the first filtered attribute are requested  automatically.
     repeated string attributes = 6;
+
+    // Starting from API v2.27.0, requester may attach container revision to
+    // ensure container state is up to date. If server's known revision does
+    // not match the requested one, it must return
+    // **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload.
+    uint64 container_revision = 7;
   }
   // Body of search object request message.
   Body body = 1;
