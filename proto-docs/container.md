@@ -37,10 +37,12 @@
     - [RemoveAttributeRequest.Body](#neo.fs.v2.container.RemoveAttributeRequest.Body)
     - [RemoveAttributeRequest.Body.Parameters](#neo.fs.v2.container.RemoveAttributeRequest.Body.Parameters)
     - [RemoveAttributeResponse](#neo.fs.v2.container.RemoveAttributeResponse)
+    - [RemoveAttributeResponse.Body](#neo.fs.v2.container.RemoveAttributeResponse.Body)
     - [SetAttributeRequest](#neo.fs.v2.container.SetAttributeRequest)
     - [SetAttributeRequest.Body](#neo.fs.v2.container.SetAttributeRequest.Body)
     - [SetAttributeRequest.Body.Parameters](#neo.fs.v2.container.SetAttributeRequest.Body.Parameters)
     - [SetAttributeResponse](#neo.fs.v2.container.SetAttributeResponse)
+    - [SetAttributeResponse.Body](#neo.fs.v2.container.SetAttributeResponse.Body)
     - [SetExtendedACLRequest](#neo.fs.v2.container.SetExtendedACLRequest)
     - [SetExtendedACLRequest.Body](#neo.fs.v2.container.SetExtendedACLRequest.Body)
     - [SetExtendedACLResponse](#neo.fs.v2.container.SetExtendedACLResponse)
@@ -581,7 +583,9 @@ Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [RemoveAttributeRequest.Body](#neo.fs.v2.container.RemoveAttributeRequest.Body) |  | Request payload. |
-| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled `body` field. |
+| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled `body` field. DEPRECATED: use more common request meta information approach: metadata and verification headers below. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate nodes and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.RemoveAttributeRequest.Body"></a>
@@ -635,7 +639,17 @@ Attribute removal response
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Operation execution status. |
+| status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Operation execution status. DEPRECATED: use more common response meta information approach: metadata header below. Servers must attach status to this field for clients with API version <2.27.0. |
+| body | [RemoveAttributeResponse.Body](#neo.fs.v2.container.RemoveAttributeResponse.Body) |  | Body of remove attribute response message. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+
+
+<a name="neo.fs.v2.container.RemoveAttributeResponse.Body"></a>
+
+### Message RemoveAttributeResponse.Body
+`RemoveAttributeResponse` has an empty body. Operation status is attached to
+the meta header.
+
 
 
 <a name="neo.fs.v2.container.SetAttributeRequest"></a>
@@ -648,7 +662,9 @@ Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [SetAttributeRequest.Body](#neo.fs.v2.container.SetAttributeRequest.Body) |  | Request payload. |
-| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled `body` field. |
+| body_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of stable-marshalled `body` field. DEPRECATED: use more common request meta information approach: metadata and verification headers below. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate nodes and check the correctness of transmission. |
 
 
 <a name="neo.fs.v2.container.SetAttributeRequest.Body"></a>
@@ -707,7 +723,17 @@ Attribute setting response
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Operation execution status. |
+| status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Operation execution status. DEPRECATED: use more common response meta information approach: metadata header below. Servers must attach status to this field for clients with API version <2.27.0. |
+| body | [SetAttributeResponse.Body](#neo.fs.v2.container.SetAttributeResponse.Body) |  | Body of set attribute response message. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+
+
+<a name="neo.fs.v2.container.SetAttributeResponse.Body"></a>
+
+### Message SetAttributeResponse.Body
+`SetAttributeResponse` has an empty body. Operation status is attached to
+the meta header.
+
 
 
 <a name="neo.fs.v2.container.SetExtendedACLRequest"></a>

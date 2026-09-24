@@ -566,13 +566,36 @@ message SetAttributeRequest {
   Body body = 1;
 
   // Signature of stable-marshalled `body` field.
+  // DEPRECATED: use more common request meta information approach:
+  // metadata and verification headers below.
   neo.fs.v2.refs.Signature body_signature = 2;
+
+  // Carries request meta information.
+  neo.fs.v2.session.RequestMetaHeader meta_header = 3;
+
+  // Carries request verification information. This header is used to
+  // authenticate nodes and check the correctness of transmission.
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 4;
 }
 
 // Attribute setting response
 message SetAttributeResponse {
   // Operation execution status.
+  // DEPRECATED: use more common response meta information approach:
+  // metadata header below. Servers must attach status to this field
+  // for clients with API version <2.27.0.
   neo.fs.v2.status.Status status = 1;
+
+  // `SetAttributeResponse` has an empty body. Operation status is attached to
+  // the meta header.
+  message Body {}
+
+  // Body of set attribute response message.
+  Body body = 2;
+
+  // Carries response meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 3;
 }
 
 // Attribute removal request.
@@ -633,11 +656,34 @@ message RemoveAttributeRequest {
   Body body = 1;
 
   // Signature of stable-marshalled `body` field.
+  // DEPRECATED: use more common request meta information approach:
+  // metadata and verification headers below.
   neo.fs.v2.refs.Signature body_signature = 2;
+
+  // Carries request meta information.
+  neo.fs.v2.session.RequestMetaHeader meta_header = 3;
+
+  // Carries request verification information. This header is used to
+  // authenticate nodes and check the correctness of transmission.
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 4;
 }
 
 // Attribute removal response
 message RemoveAttributeResponse {
   // Operation execution status.
+  // DEPRECATED: use more common response meta information approach:
+  // metadata header below. Servers must attach status to this field
+  // for clients with API version <2.27.0.
   neo.fs.v2.status.Status status = 1;
+
+  // `RemoveAttributeResponse` has an empty body. Operation status is attached to
+  // the meta header.
+  message Body {}
+
+  // Body of remove attribute response message.
+  Body body = 2;
+
+  // Carries response meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 3;
 }
