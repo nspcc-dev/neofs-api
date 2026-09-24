@@ -219,9 +219,6 @@ Statuses:
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   transaction was sent but not executed within the deadline.
-- **CONTAINER_REVISION_MISMATCH** (3076, SECTION_CONTAINER): \
-  if requester attached container revision he knows and it does not match
-  the server's one.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -239,9 +236,6 @@ Statuses:
 - Common failures (SECTION_FAILURE_COMMON);
 - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   transaction was sent but not executed within the deadline.
-- **CONTAINER_REVISION_MISMATCH** (3076, SECTION_CONTAINER): \
-  if requester attached container revision he knows and it does not match
-  the server's one.
 
 | Name | Input | Output |
 | ---- | ----- | ------ |
@@ -720,7 +714,6 @@ Attribute setting response
 
 ### Message SetExtendedACLRequest
 Set Extended ACL.
-Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 
 
 | Field | Type | Label | Description |
@@ -741,6 +734,7 @@ reference. It will be taken from `EACLTable.container_id` field.
 | ----- | ---- | ----- | ----------- |
 | eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL table to set for the container |
 | signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | Signature of stable-marshalled Extended ACL table according to RFC-6979. |
+| container_revision | [uint64](#uint64) |  | Starting from API v2.27.0, requester must attach container revision to ensure container state is up to date. If server's known revision does not match the requested one, it must return **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload. |
 
 
 <a name="neo.fs.v2.container.SetExtendedACLResponse"></a>
@@ -800,7 +794,7 @@ of stable-marshalled container message.
 
 Do not confuse it with API version: this field describes how many times container has been changed since its creation, while API version describes proto message format.
 
-It must only be set by storage nodes and must not be filled on the client side. The initial revision after a successful container creation call is 0.
+It must only be set by storage nodes and must not be filled on the client side. The initial revision after a successful container creation call is 1.
 
 Versioned containers are available starting from API v2.27.0. |
 

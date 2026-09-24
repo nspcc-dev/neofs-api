@@ -4,6 +4,7 @@
 
 ### Added
 - Streaming object replication op (#418)
+- Container revisions counter (#380)
 
 ### Changed
 

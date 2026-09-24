@@ -125,7 +125,7 @@ message Container {
   // proto message format.
   //
   // It must only be set by storage nodes and must not be filled on the client
-  // side. The initial revision after a successful container creation call is 0.
+  // side. The initial revision after a successful container creation call is 1.
   //
   // Versioned containers are available starting from API v2.27.0.
   uint64 revision = 7 [json_name = "revision"];
