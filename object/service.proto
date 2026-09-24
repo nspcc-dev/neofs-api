@@ -478,6 +478,12 @@ message DeleteRequest {
   message Body {
     // Address of the object to be deleted
     neo.fs.v2.refs.Address address = 1;
+
+    // Starting from API v2.27.0, requester may attach container revision to
+    // ensure container state is up to date. If server's known revision does
+    // not match the requested one, it must return
+    // **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload.
+    uint64 container_revision = 2;
   }
   // Body of delete object request message.
   Body body = 1;
@@ -489,12 +495,6 @@ message DeleteRequest {
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
   neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
-
-  // Starting from API v2.27.0, requester may attach container revision to
-  // ensure container state is up to date. If server's known revision does
-  // not match the requested one, it must return
-  // **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload.
-  uint64 container_revision = 4;
 }
 
 // DeleteResponse body is empty because we cannot guarantee permanent object

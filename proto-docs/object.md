@@ -437,7 +437,6 @@ Object DELETE request.
 | body | [DeleteRequest.Body](#neo.fs.v2.object.DeleteRequest.Body) |  | Body of delete object request message. |
 | meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
-| container_revision | [uint64](#uint64) |  | Starting from API v2.27.0, requester may attach container revision to ensure container state is up to date. If server's known revision does not match the requested one, it must return **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload. |
 
 
 <a name="neo.fs.v2.object.DeleteRequest.Body"></a>
@@ -449,6 +448,7 @@ Object DELETE request body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | address | [neo.fs.v2.refs.Address](#neo.fs.v2.refs.Address) |  | Address of the object to be deleted |
+| container_revision | [uint64](#uint64) |  | Starting from API v2.27.0, requester may attach container revision to ensure container state is up to date. If server's known revision does not match the requested one, it must return **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload. |
 
 
 <a name="neo.fs.v2.object.DeleteResponse"></a>
