@@ -3,14 +3,26 @@
 ## [Unreleased]
 
 ### Added
-- Streaming object replication op (#418)
-- Container revisions counter (#380)
 
 ### Changed
 
 ### Removed
 
 ### Deprecated
+
+## [2.27.0] - 2026-09-29
+
+### Added
+- Network map versioning (#415)
+- Streaming object replication (#418)
+- Container revisions counter (#380)
+- __NEOFS__NONCE object attribute (#426)
+
+### Changed
+- Improved meta header documentation (#424)
+
+### Deprecated
+- Signature and token fields in container getters (#423)
 
 ## [2.26.0] - 2026-08-31
 
@@ -668,4 +680,5 @@ Bump major release
 [2.24.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.23.0...v2.24.0
 [2.25.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.24.0...v2.25.0
 [2.26.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.25.0...v2.26.0
-[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.26.0...master
+[2.27.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.26.0...v2.27.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.27.0...master
