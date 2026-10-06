@@ -1070,6 +1070,7 @@ Object Header
 | attributes | [Header.Attribute](#neo.fs.v2.object.Header.Attribute) | repeated | User-defined object attributes. Attributes vary in length from object to object, so keep an eye on the entire Header limit depending on the context. |
 | split | [Header.Split](#neo.fs.v2.object.Header.Split) |  | Position of the object in the split hierarchy |
 | session_token_v2 | [neo.fs.v2.session.SessionTokenV2](#neo.fs.v2.session.SessionTokenV2) |  | Session token V2, if it was used during Object creation. Need it to verify integrity and authenticity out of Request scope. Only one of `session_token` or `session_token_v2` can be set. |
+| expiration_time | [uint64](#uint64) | optional | Unix timestamp in seconds after which the object expires and can be deleted by GC. The object is expired when the current Unix timestamp in seconds is strictly greater than this value. Sub-second precision is not supported. If absent, the deprecated `__NEOFS__EXPIRATION_EPOCH` attribute determines expiration. If neither is present, the object never expires. This field and the expiration epoch attribute MUST NOT both be set. LOCK and TOMBSTONE objects MUST have exactly one of this field or the expiration epoch attribute set. |
 
 
 <a name="neo.fs.v2.object.Header.Attribute"></a>
@@ -1089,6 +1090,8 @@ that affect system behaviour:
 * __NEOFS__EXPIRATION_EPOCH \
   Tells GC to delete object after that epoch (but object is available
   throughout the epoch specified in this attribute).
+  MUST NOT be set together with the expiration_time header field.
+  DEPRECATED: use the expiration time field in the object header instead.
 * __NEOFS__ASSOCIATE \
   Associated object. For TOMBSTONE, LOCK object types it defines object
   to delete and to lock accordingly. For objects of 2.18+ API version, it
