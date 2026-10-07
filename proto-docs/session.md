@@ -195,6 +195,7 @@ Meta information attached to the request (common things for all requests).
 
 DEPRECATED: Ignored since API v2.25, all requests are original. |
 | magic_number | [uint64](#uint64) |  | NeoFS network magic. Must match the value for the network that the server belongs to. |
+| valid_until_time | [uint64](#uint64) |  | The time at which this request ceases to be valid. This value is an absolute point in time, expressed as a UTC Unix timestamp in seconds. The request is considered valid while `now < valid_until_time`; at or after this time it is expired and must not be accepted. Any request must fill this field since API v2.28. |
 
 
 <a name="neo.fs.v2.session.RequestVerificationHeader"></a>
