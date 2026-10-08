@@ -17,8 +17,9 @@ option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/tombstone";
 message Tombstone {
   // Last NeoFS epoch number of the tombstone lifetime. It's set by the tombstone
   // creator depending on the current NeoFS network settings.
-  // DEPRECATED. Field ignored by servers, set corresponding object attribute
-  // `__NEOFS__EXPIRATION_EPOCH` only.
+  // DEPRECATED. Field ignored by servers, set the expiration time field in the
+  // object header instead.
+  // The deprecated `__NEOFS__EXPIRATION_EPOCH` attribute is still supported.
   uint64 expiration_epoch = 1 [
     json_name = "expirationEpoch",
     deprecated = true
