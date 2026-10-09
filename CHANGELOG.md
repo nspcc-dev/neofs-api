@@ -5,6 +5,7 @@
 ### Added
 
 ### Changed
+- Part index is required in header-less EC GET requests (#439)
 
 ### Removed
 

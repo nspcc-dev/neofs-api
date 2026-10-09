@@ -310,17 +310,13 @@ service ObjectService {
 //    `PlacementPolicy.ec_rules` list.
 //    If `__NEOFS__EC_PART_IDX` is also included in X-headers, node returns
 //    corresponding part. Part index MUST NOT exceed total part number in the
-//    indexed rule. If index is unspecified:
+//    indexed rule. Part index is required for requests with `body.range` or
+//    `body.payload_only` fields. If index is unspecified:
 //    - if there is a single part in storage node: it is returned;
 //    - if there is more than a single part: the appropriate part for the
 //      current storage node (according to the actual Network map) is returned;
 //      if storage node does not have the appropriate part, the lowest index
-//      part it has is returned;
-//    - if `body.payload_only` is set to `true`, response's
-//      `meta_header.x_headers` MUST include `__NEOFS__EC_PART_IDX` in the same
-//      form to identify returned object part;
-//    - if `body.range` is specified, error is returned, meaning any ranged GET
-//      MUST have `__NEOFS__EC_PART_IDX` set.
+//      part it has is returned.
 // In this case, if `body.address` refers to TOMBSTONE or LOCK object (which
 // cannot have EC parts), the query applies to it.
 message GetRequest {
