@@ -92,6 +92,7 @@ Section of failed statuses independent of the operation.
 | NODE_UNDER_MAINTENANCE | 3 | [**1027**] Node is under maintenance. |
 | BAD_REQUEST | 4 | [**1028**] Malformed, syntactically or semantically incorrect request, client-side error. |
 | BUSY | 5 | [**1029**] Some node resources are exhausted and request can't be processed. This is likely to be a transient state and request can be retried in future. |
+| REQUEST_EXPIRED | 6 | [**1030**] Request valid time period has passed. |
 
 
 
