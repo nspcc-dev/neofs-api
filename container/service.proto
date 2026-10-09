@@ -502,7 +502,6 @@ message AnnounceUsedSpaceResponse {
 }
 
 // Attribute setting request.
-// Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 message SetAttributeRequest {
   // Request payload message.
   message Body {
@@ -576,7 +575,6 @@ message SetAttributeResponse {
 }
 
 // Attribute removal request.
-// Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 message RemoveAttributeRequest {
   // Request payload message.
   message Body {

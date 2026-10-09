@@ -377,3 +377,12 @@ message SplitInfo {
   // parts except the first one. Identifies the split and allows to differ them.
   neo.fs.v2.refs.ObjectID first_part = 4;
 }
+
+// Unique ID of part obtained by erasure coding (EC) the object.
+message ECPartID {
+  // Index of EC rule in the container placement policy.
+  uint32 rule_index = 1;
+
+  // Index of the part in the object EC partition.
+  uint32 part_index = 2;
+}

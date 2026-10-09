@@ -187,7 +187,7 @@ Meta information attached to the request (common things for all requests).
 | version | [neo.fs.v2.refs.Version](#neo.fs.v2.refs.Version) |  | Peer's API version used |
 | epoch | [uint64](#uint64) |  | Peer's local epoch number. Set to 0 if unknown. |
 | ttl | [uint32](#uint32) |  | Maximum number of intermediate nodes in the request route |
-| x_headers | [XHeader](#neo.fs.v2.session.XHeader) | repeated | Request X-Headers |
+| x_headers | [XHeader](#neo.fs.v2.session.XHeader) | repeated | Request X-Headers. DEPRECATED: field MUST NOT be set with `version` starting from v2.28. |
 | session_token | [SessionToken](#neo.fs.v2.session.SessionToken) |  | Session token within which the request is sent |
 | session_token_v2 | [SessionTokenV2](#neo.fs.v2.session.SessionTokenV2) |  | Session token v2 with delegation chain support. Requests are invalid if both session_token and session_token_v2 are set. |
 | bearer_token | [neo.fs.v2.acl.BearerToken](#neo.fs.v2.acl.BearerToken) |  | `BearerToken` with eACL overrides for the request |
@@ -237,7 +237,7 @@ transmitted in any message to terminate the stream.
 | ttl | [uint32](#uint32) |  | Maximum number of intermediate nodes in the request route.
 
 DEPRECATED: ignored since API v2.25. |
-| x_headers | [XHeader](#neo.fs.v2.session.XHeader) | repeated | Response X-Headers. Optional in general, but for certain requests it can be required for correct result processing, read method's description for information. |
+| x_headers | [XHeader](#neo.fs.v2.session.XHeader) | repeated | Response X-Headers. Optional in general, but for certain requests it can be required for correct result processing, read method's description for information. DEPRECATED: field MUST NOT be set with `version` starting from v2.28. |
 | origin | [ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | `ResponseMetaHeader` of the origin request.
 
 DEPRECATED: Unused for a long time, ignored since API v2.25. |
