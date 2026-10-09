@@ -237,7 +237,7 @@ transmitted in any message to terminate the stream.
 | ttl | [uint32](#uint32) |  | Maximum number of intermediate nodes in the request route.
 
 DEPRECATED: ignored since API v2.25. |
-| x_headers | [XHeader](#neo.fs.v2.session.XHeader) | repeated | Response X-Headers. Optional in general, but for certain requests it can be required for correct result processing, read method's description for information. |
+| x_headers | [XHeader](#neo.fs.v2.session.XHeader) | repeated | Response X-Headers. Optional in general, but for certain requests it can be required for correct result processing, read method's description for information. DEPRECATED: field MUST NOT be set with `version` starting from v2.28. |
 | origin | [ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | `ResponseMetaHeader` of the origin request.
 
 DEPRECATED: Unused for a long time, ignored since API v2.25. |

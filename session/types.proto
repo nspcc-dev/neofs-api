@@ -273,6 +273,7 @@ message ResponseMetaHeader {
   // Response X-Headers. Optional in general, but for certain requests it can
   // be required for correct result processing, read method's description for
   // information.
+  // DEPRECATED: field MUST NOT be set with `version` starting from v2.28.
   repeated XHeader x_headers = 4 [json_name = "xHeaders"];
 
   // `ResponseMetaHeader` of the origin request.
