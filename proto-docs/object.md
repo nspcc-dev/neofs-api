@@ -56,6 +56,7 @@
 - [object/types.proto](#object/types.proto)
 
   - Messages
+    - [ECPartID](#neo.fs.v2.object.ECPartID)
     - [Header](#neo.fs.v2.object.Header)
     - [Header.Attribute](#neo.fs.v2.object.Header.Attribute)
     - [Header.Split](#neo.fs.v2.object.Header.Split)
@@ -612,10 +613,9 @@ GET object request.
 The query for a parent object's EC part locally stored on the server is
 specified as follows:
  - `body.address` is an address of the parent;
- - `meta_header.x_headers` includes `__NEOFS__EC_RULE_IDX` by object
-   attribute format. Rule index MUST NOT exceed container's
-   `PlacementPolicy.ec_rules` list.
-   If `__NEOFS__EC_PART_IDX` is also included in X-headers, node returns
+ - `body.ec_part_id` is set with required `rule_index` field which MUST NOT
+   exceed container's `PlacementPolicy.ec_rules` list.
+   If `body.ec_part_id.part_index` is also specified, node returns
    corresponding part. Part index MUST NOT exceed total part number in the
    indexed rule. Part index is required for requests with `body.range` or
    `body.payload_only` fields. If index is unspecified:
@@ -626,6 +626,9 @@ specified as follows:
      part it has is returned.
 In this case, if `body.address` refers to TOMBSTONE or LOCK object (which
 cannot have EC parts), the query applies to it.
+Servers MUST handle requests with `meta_header.version` <= v2.27 and
+`meta_header.x_headers` containing `__NEOFS__EC_RULE_IDX` and/or
+`__NEOFS__EC_PART_IDX` keys with base-10 integer values exactly the same.
 
 
 | Field | Type | Label | Description |
@@ -648,6 +651,7 @@ GET Object request body
 | range | [Range](#neo.fs.v2.object.Range) |  | Requested payload range (whole payload if not specified). |
 | payload_only | [bool](#bool) |  | If set, makes Get return payload only, completely omitting Init response message with header data. |
 | extended_range | [ExtendedRange](#neo.fs.v2.object.ExtendedRange) |  | Requested extended payload range. MUST NOT be set together with `range`. |
+| ec_part_id | [ECPartID](#neo.fs.v2.object.ECPartID) |  | EC part ID. |
 
 
 <a name="neo.fs.v2.object.GetResponse"></a>
@@ -695,6 +699,8 @@ set of all `Object` structure's fields except `payload`.
 ### Message HeadRequest
 Object HEAD request
 
+Behavior with `body.ec_part_id` field is the same as in `GetRequest`.
+
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
@@ -716,6 +722,7 @@ Object HEAD request body
 
 DEPRECATED. This field is ignored. |
 | raw | [bool](#bool) |  | If `raw` flag is set, request will work only with objects that are physically stored on the peer node |
+| ec_part_id | [ECPartID](#neo.fs.v2.object.ECPartID) |  | EC part ID. |
 
 
 <a name="neo.fs.v2.object.HeadResponse"></a>
@@ -1044,6 +1051,18 @@ OID with additional requested metadata.
 
 
  <!-- end services -->
+
+
+<a name="neo.fs.v2.object.ECPartID"></a>
+
+### Message ECPartID
+Unique ID of part obtained by erasure coding (EC) the object.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| rule_index | [uint32](#uint32) |  | Index of EC rule in the container placement policy. |
+| part_index | [uint32](#uint32) |  | Index of the part in the object EC partition. |
 
 
 <a name="neo.fs.v2.object.Header"></a>

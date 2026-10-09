@@ -305,10 +305,9 @@ service ObjectService {
 // The query for a parent object's EC part locally stored on the server is
 // specified as follows:
 //  - `body.address` is an address of the parent;
-//  - `meta_header.x_headers` includes `__NEOFS__EC_RULE_IDX` by object
-//    attribute format. Rule index MUST NOT exceed container's
-//    `PlacementPolicy.ec_rules` list.
-//    If `__NEOFS__EC_PART_IDX` is also included in X-headers, node returns
+//  - `body.ec_part_id` is set with required `rule_index` field which MUST NOT
+//    exceed container's `PlacementPolicy.ec_rules` list.
+//    If `body.ec_part_id.part_index` is also specified, node returns
 //    corresponding part. Part index MUST NOT exceed total part number in the
 //    indexed rule. Part index is required for requests with `body.range` or
 //    `body.payload_only` fields. If index is unspecified:
@@ -319,6 +318,9 @@ service ObjectService {
 //      part it has is returned.
 // In this case, if `body.address` refers to TOMBSTONE or LOCK object (which
 // cannot have EC parts), the query applies to it.
+// Servers MUST handle requests with `meta_header.version` <= v2.27 and
+// `meta_header.x_headers` containing `__NEOFS__EC_RULE_IDX` and/or
+// `__NEOFS__EC_PART_IDX` keys with base-10 integer values exactly the same.
 message GetRequest {
   // GET Object request body
   message Body {
@@ -338,6 +340,9 @@ message GetRequest {
 
     // Requested extended payload range. MUST NOT be set together with `range`.
     ExtendedRange extended_range = 5;
+
+    // EC part ID.
+    ECPartID ec_part_id = 6;
   }
   // Body of get object request message.
   Body body = 1;
@@ -518,6 +523,8 @@ message DeleteResponse {
 }
 
 // Object HEAD request
+//
+// Behavior with `body.ec_part_id` field is the same as in `GetRequest`.
 message HeadRequest {
   // Object HEAD request body
   message Body {
@@ -532,6 +539,9 @@ message HeadRequest {
     // If `raw` flag is set, request will work only with objects that are
     // physically stored on the peer node
     bool raw = 3;
+
+    // EC part ID.
+    ECPartID ec_part_id = 4;
   }
   // Body of head object request message.
   Body body = 1;
