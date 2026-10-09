@@ -575,7 +575,6 @@ returned here to make sure everything has been done as expected.
 
 ### Message RemoveAttributeRequest
 Attribute removal request.
-Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 
 
 | Field | Type | Label | Description |
@@ -642,7 +641,6 @@ Attribute removal response
 
 ### Message SetAttributeRequest
 Attribute setting request.
-Behaviour can be augmented with __NEOFS__CONTAINER_REVISION x-header.
 
 
 | Field | Type | Label | Description |
