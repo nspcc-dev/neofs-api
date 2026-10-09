@@ -7,6 +7,7 @@
 
 ### Changed
 - Part index is required in header-less EC GET requests (#439)
+- `x_headers` field of `session.RequestMetaHeader` message is deprecated now (#439)
 
 ### Removed
 

@@ -222,7 +222,8 @@ message RequestMetaHeader {
   // Maximum number of intermediate nodes in the request route
   uint32 ttl = 3 [json_name = "ttl"];
 
-  // Request X-Headers
+  // Request X-Headers.
+  // DEPRECATED: field MUST NOT be set with `version` starting from v2.28.
   repeated XHeader x_headers = 4 [json_name = "xHeaders"];
 
   // Session token within which the request is sent
