@@ -699,7 +699,8 @@ set of all `Object` structure's fields except `payload`.
 ### Message HeadRequest
 Object HEAD request
 
-Behavior with `body.ec_part_id` field is the same as in `GetRequest`.
+Behavior with `body.ec_part_id` field is the same as in `GetRequest`, except
+that `body.ec_part_id.part_index` field is required.
 
 
 | Field | Type | Label | Description |
