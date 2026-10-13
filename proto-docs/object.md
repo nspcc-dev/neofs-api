@@ -1062,7 +1062,7 @@ Unique ID of part obtained by erasure coding (EC) the object.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | rule_index | [uint32](#uint32) |  | Index of EC rule in the container placement policy. |
-| part_index | [uint32](#uint32) |  | Index of the part in the object EC partition. |
+| part_index | [uint32](#uint32) | optional | Index of the part in the object EC partition. Omitted value depends on the context. |
 
 
 <a name="neo.fs.v2.object.Header"></a>
