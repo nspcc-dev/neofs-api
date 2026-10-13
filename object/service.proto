@@ -524,7 +524,8 @@ message DeleteResponse {
 
 // Object HEAD request
 //
-// Behavior with `body.ec_part_id` field is the same as in `GetRequest`.
+// Behavior with `body.ec_part_id` field is the same as in `GetRequest`, except
+// that `body.ec_part_id.part_index` field is required.
 message HeadRequest {
   // Object HEAD request body
   message Body {
