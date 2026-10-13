@@ -3,7 +3,7 @@
 ## [Unreleased]
 
 ### Added
-- `ec_part_id` field to GET and HEAD requests (#439)
+- `ec_part_id` field to GET and HEAD requests (#439, #441)
 - Request valid time to request meta header and `REQUEST_EXPIRED` status code (#434, #440)
 
 ### Changed

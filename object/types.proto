@@ -383,6 +383,7 @@ message ECPartID {
   // Index of EC rule in the container placement policy.
   uint32 rule_index = 1;
 
-  // Index of the part in the object EC partition.
-  uint32 part_index = 2;
+  // Index of the part in the object EC partition. Omitted value depends on the
+  // context.
+  optional uint32 part_index = 2;
 }
