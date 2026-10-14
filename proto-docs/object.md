@@ -1230,6 +1230,8 @@ prefix to the name. Here is the list of fields available via this prefix:
   owner_id
 * $Object:creationEpoch \
   creation_epoch
+* $Object:expirationTime \
+  expiration_time as a base-10 Unix timestamp in seconds
 * $Object:payloadLength \
   payload_length
 * $Object:payloadHash \
