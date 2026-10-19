@@ -9,6 +9,7 @@
 ### Changed
 - Part index is required in header-less EC GET requests (#439)
 - `x_headers` field of `session.RequestMetaHeader` and `session.ResponseMetaHeader` messages is deprecated now (#439)
+- Unset/zero length of raw objects is equivalent to unknown (#444)
 
 ### Removed
 

@@ -187,7 +187,8 @@ message Header {
   uint64 creation_epoch = 4 [json_name = "creationEpoch"];
 
   // Size of payload in bytes.
-  // `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown.
+  // For not yet signed objects, missing, zero and 0xFFFFFFFFFFFFFFFF values
+  // mean `payload_length` is unknown.
   uint64 payload_length = 5 [json_name = "payloadLength"];
 
   // SHA256 hash of payload bytes
