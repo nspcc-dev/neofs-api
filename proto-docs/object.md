@@ -1078,7 +1078,7 @@ Object Header
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Object's container |
 | owner_id | [neo.fs.v2.refs.OwnerID](#neo.fs.v2.refs.OwnerID) |  | Object's owner |
 | creation_epoch | [uint64](#uint64) |  | Object creation Epoch |
-| payload_length | [uint64](#uint64) |  | Size of payload in bytes. `0xFFFFFFFFFFFFFFFF` means `payload_length` is unknown. |
+| payload_length | [uint64](#uint64) |  | Size of payload in bytes. For not yet signed objects, missing, zero and 0xFFFFFFFFFFFFFFFF values mean `payload_length` is unknown. |
 | payload_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | SHA256 hash of payload bytes |
 | object_type | [ObjectType](#neo.fs.v2.object.ObjectType) |  | Type of the object payload content |
 | homomorphic_hash | [neo.fs.v2.refs.Checksum](#neo.fs.v2.refs.Checksum) |  | Homomorphic hash of the object payload (Tillich-Zemor). DEPRECATED. Objects of 2.23+ version must have it empty. |
