@@ -3,17 +3,27 @@
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+### Deprecated
+
+## [2.28.0] - 2026-10-22
+
+### Added
 - `ec_part_id` field to GET and HEAD requests (#439, #441, #442)
 - Request valid time to request meta header and `REQUEST_EXPIRED` status code (#434, #440)
+- Expiration time field for objects (#435, #443)
 
 ### Changed
 - Part index is required in header-less EC GET requests (#439)
 - `x_headers` field of `session.RequestMetaHeader` and `session.ResponseMetaHeader` messages is deprecated now (#439)
 - Unset/zero length of raw objects is equivalent to unknown (#444)
 
-### Removed
-
 ### Deprecated
+- __NEOFS__EXPIRATION_EPOCH object attribute (#435)
 
 ## [2.27.0] - 2026-09-29
 
@@ -686,4 +696,5 @@ Bump major release
 [2.25.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.24.0...v2.25.0
 [2.26.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.25.0...v2.26.0
 [2.27.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.26.0...v2.27.0
-[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.27.0...master
+[2.28.0]: https://github.com/nspcc-dev/neofs-api/compare/v2.27.0...v2.28.0
+[Unreleased]: https://github.com/nspcc-dev/neofs-api/compare/v2.28.0...master
