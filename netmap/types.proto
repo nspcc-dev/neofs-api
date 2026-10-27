@@ -367,8 +367,7 @@ message NetworkConfig {
   //   Value: little-endian integer. Default: 0.
   // - **EigenTrustAlpha** \
   //   Alpha parameter of EigenTrust algorithm used in the Reputation system.
-  //   Value: decimal floating-point number in UTF-8 string representation.
-  //   Default: 0.
+  //   Value: binary64 IEEE 754 integer. Default: 0.
   // - **EigenTrustIterations** \
   //   Number of EigenTrust algorithm iterations to pass in the Reputation system.
   //   Value: little-endian integer. Default: 0.
