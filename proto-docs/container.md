@@ -37,10 +37,18 @@
     - [RemoveAttributeRequest.Body](#neo.fs.v2.container.RemoveAttributeRequest.Body)
     - [RemoveAttributeRequest.Body.Parameters](#neo.fs.v2.container.RemoveAttributeRequest.Body.Parameters)
     - [RemoveAttributeResponse](#neo.fs.v2.container.RemoveAttributeResponse)
+    - [RemoveAttributeV2Request](#neo.fs.v2.container.RemoveAttributeV2Request)
+    - [RemoveAttributeV2Request.Body](#neo.fs.v2.container.RemoveAttributeV2Request.Body)
+    - [RemoveAttributeV2Response](#neo.fs.v2.container.RemoveAttributeV2Response)
+    - [RemoveAttributeV2Response.Body](#neo.fs.v2.container.RemoveAttributeV2Response.Body)
     - [SetAttributeRequest](#neo.fs.v2.container.SetAttributeRequest)
     - [SetAttributeRequest.Body](#neo.fs.v2.container.SetAttributeRequest.Body)
     - [SetAttributeRequest.Body.Parameters](#neo.fs.v2.container.SetAttributeRequest.Body.Parameters)
     - [SetAttributeResponse](#neo.fs.v2.container.SetAttributeResponse)
+    - [SetAttributeV2Request](#neo.fs.v2.container.SetAttributeV2Request)
+    - [SetAttributeV2Request.Body](#neo.fs.v2.container.SetAttributeV2Request.Body)
+    - [SetAttributeV2Response](#neo.fs.v2.container.SetAttributeV2Response)
+    - [SetAttributeV2Response.Body](#neo.fs.v2.container.SetAttributeV2Response.Body)
     - [SetExtendedACLRequest](#neo.fs.v2.container.SetExtendedACLRequest)
     - [SetExtendedACLRequest.Body](#neo.fs.v2.container.SetExtendedACLRequest.Body)
     - [SetExtendedACLResponse](#neo.fs.v2.container.SetExtendedACLResponse)
@@ -83,7 +91,9 @@ rpc SetExtendedACL(SetExtendedACLRequest) returns (SetExtendedACLResponse);
 rpc GetExtendedACL(GetExtendedACLRequest) returns (GetExtendedACLResponse);
 rpc AnnounceUsedSpace(AnnounceUsedSpaceRequest) returns (AnnounceUsedSpaceResponse);
 rpc SetAttribute(SetAttributeRequest) returns (SetAttributeResponse);
+rpc SetAttributeV2(SetAttributeV2Request) returns (SetAttributeV2Response);
 rpc RemoveAttribute(RemoveAttributeRequest) returns (RemoveAttributeResponse);
+rpc RemoveAttributeV2(RemoveAttributeV2Request) returns (RemoveAttributeV2Response);
 
 ```
 
@@ -220,9 +230,19 @@ Statuses:
 - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   transaction was sent but not executed within the deadline.
 
+DEPRECATED: since v2.29, SetAttributeV2 should be used.
+
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | SetAttribute | [SetAttributeRequest](#neo.fs.v2.container.SetAttributeRequest) | [SetAttributeResponse](#neo.fs.v2.container.SetAttributeResponse) |
+#### Method SetAttributeV2
+
+V2 version of SetAttribute following generic request/response structures
+within NeoFS.
+
+| Name | Input | Output |
+| ---- | ----- | ------ |
+| SetAttributeV2 | [SetAttributeV2Request](#neo.fs.v2.container.SetAttributeV2Request) | [SetAttributeV2Response](#neo.fs.v2.container.SetAttributeV2Response) |
 #### Method RemoveAttribute
 
 Sends transaction calling contract method to remove container attribute,
@@ -237,9 +257,19 @@ Statuses:
 - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   transaction was sent but not executed within the deadline.
 
+DEPRECATED: since v2.29, RemoveAttributeV2 should be used.
+
 | Name | Input | Output |
 | ---- | ----- | ------ |
 | RemoveAttribute | [RemoveAttributeRequest](#neo.fs.v2.container.RemoveAttributeRequest) | [RemoveAttributeResponse](#neo.fs.v2.container.RemoveAttributeResponse) |
+#### Method RemoveAttributeV2
+
+V2 version of RemoveAttribute following generic request/response structures
+within NeoFS.
+
+| Name | Input | Output |
+| ---- | ----- | ------ |
+| RemoveAttributeV2 | [RemoveAttributeV2Request](#neo.fs.v2.container.RemoveAttributeV2Request) | [RemoveAttributeV2Response](#neo.fs.v2.container.RemoveAttributeV2Response) |
  <!-- end services -->
 
 
@@ -637,6 +667,53 @@ Attribute removal response
 | status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Operation execution status. |
 
 
+<a name="neo.fs.v2.container.RemoveAttributeV2Request"></a>
+
+### Message RemoveAttributeV2Request
+Attribute removal request V2. Since v2.29, it represents the same V1 requests
+but follows generic NeoFS request structure.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [RemoveAttributeV2Request.Body](#neo.fs.v2.container.RemoveAttributeV2Request.Body) |  | Request payload. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate nodes and check the correctness of transmission. |
+
+
+<a name="neo.fs.v2.container.RemoveAttributeV2Request.Body"></a>
+
+### Message RemoveAttributeV2Request.Body
+Request payload message.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container to remove attribute from. |
+| attribute | [string](#string) |  | Attribute to be removed. If container does not have the `attribute`, nothing is done and status `OK` is returned. It must be one of: - `CORS`; - `S3_TAGS`; - `S3_SETTINGS`; - `S3_NOTIFICATIONS`; - `__NEOFS__LOCK_UNTIL`. |
+
+
+<a name="neo.fs.v2.container.RemoveAttributeV2Response"></a>
+
+### Message RemoveAttributeV2Response
+Attribute removal response V2. Since v2.29, it represents the same V1 responses
+but follows generic NeoFS response structure.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [RemoveAttributeV2Response.Body](#neo.fs.v2.container.RemoveAttributeV2Response.Body) |  | Body of remove attribute response message. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+
+
+<a name="neo.fs.v2.container.RemoveAttributeV2Response.Body"></a>
+
+### Message RemoveAttributeV2Response.Body
+`RemoveAttributeV2Response` has an empty body. Operation status is attached to
+the meta header.
+
+
+
 <a name="neo.fs.v2.container.SetAttributeRequest"></a>
 
 ### Message SetAttributeRequest
@@ -706,6 +783,54 @@ Attribute setting response
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | status | [neo.fs.v2.status.Status](#neo.fs.v2.status.Status) |  | Operation execution status. |
+
+
+<a name="neo.fs.v2.container.SetAttributeV2Request"></a>
+
+### Message SetAttributeV2Request
+Attribute setting request V2. Since v2.29, it represents the same V1 requests
+but follows generic NeoFS request structure.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [SetAttributeV2Request.Body](#neo.fs.v2.container.SetAttributeV2Request.Body) |  | Request payload. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate nodes and check the correctness of transmission. |
+
+
+<a name="neo.fs.v2.container.SetAttributeV2Request.Body"></a>
+
+### Message SetAttributeV2Request.Body
+Request payload message.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container to set attribute for. |
+| attribute | [string](#string) |  | Attribute to be set. If container does not have the `attribute`, it is added. Otherwise, its value is swapped. It must be one of: - `CORS`; - `S3_TAGS`; - `S3_SETTINGS`; - `S3_NOTIFICATIONS`; - `__NEOFS__LOCK_UNTIL`. |
+| value | [string](#string) |  | New attribute value. In general, requirements for `value` are the same as for container creation. Attribute-specific requirements: - `__NEOFS__LOCK_UNTIL`: new timestamp must be after the current one if any - `S3_TAGS`: must be a valid JSON object - `S3_SETTINGS`: must be a valid JSON object - `S3_NOTIFICATIONS`: must be a valid JSON object |
+
+
+<a name="neo.fs.v2.container.SetAttributeV2Response"></a>
+
+### Message SetAttributeV2Response
+Attribute setting response V2. Since v2.29, it represents the same V1 responses
+but follows generic NeoFS response structure.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| body | [SetAttributeV2Response.Body](#neo.fs.v2.container.SetAttributeV2Response.Body) |  | Body of set attribute response message. |
+| meta_header | [neo.fs.v2.session.ResponseMetaHeader](#neo.fs.v2.session.ResponseMetaHeader) |  | Carries response meta information. Header data is used only to regulate message transport and does not affect request execution. |
+
+
+<a name="neo.fs.v2.container.SetAttributeV2Response.Body"></a>
+
+### Message SetAttributeV2Response.Body
+`SetAttributeV2Response` has an empty body. Operation status is attached to
+the meta header.
+
 
 
 <a name="neo.fs.v2.container.SetExtendedACLRequest"></a>
