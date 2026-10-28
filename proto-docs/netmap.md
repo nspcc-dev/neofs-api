@@ -511,13 +511,17 @@ placed in the `i`-th node. If it is unavailable, the backup nodes with
 indexes `m * n + i` (`n = data_part_num + parity_part_num`,
 `m = 1, ..., CBF-1`). If all nodes for the `i`-th part
 are unavailable, nodes for the `i+1`-th (0 for the last) part are tried,
-and so on.
+and so on. An applied EC rule attempts to store all part objects. For PUT
+to succeed, at least `min_part_num` distinct part objects must be stored
+on distinct nodes. This does not change the total number of parts or the
+target placement. If `min_part_num` is zero, all parts must be stored for
+PUT to succeed.
 
 Once part objects are stored in the container, the original object remains
 available if at least `data_part_num` of any part objects are available.
-In other words, unavailability (including complete loss) of any of
+In other words, unavailability (including complete loss) of up to
 `parity_part_num` part objects does not violate availability of the
-original one.
+original one. Parts not stored during PUT count towards this limit.
 
 Objects of TOMBSTONE and LOCK types are not encoded and stored as they are
 because they have no payload.
@@ -528,6 +532,7 @@ because they have no payload.
 | data_part_num | [uint32](#uint32) |  | Number of data parts |
 | parity_part_num | [uint32](#uint32) |  | Number of parity parts |
 | selector | [string](#string) |  | Name of the linked selector |
+| min_part_num | [uint32](#uint32) |  | Minimum number of parts to store for a successful PUT. Zero requires all parts; otherwise, MUST be between `data_part_num` and the sum of `data_part_num` and `parity_part_num`, inclusive. |
 
 
 <a name="neo.fs.v2.netmap.PlacementPolicy.Initial"></a>
@@ -540,8 +545,8 @@ set, `replica_limits` must have a length equal to the sum of `replicas`
 (`RN`) and `ec_rules` length. Each of first `RN` elements of
 `replica_limits` must be less than or equal to corresponding
 `Replica.count`. The remaining elements must be either 0 (corresponding
-EC rule is skipped) or 1 (done). At least one `replica_limits` element
-must be non-zero.
+EC rule is skipped) or 1 (applied according to its `min_part_num`). At
+least one `replica_limits` element must be non-zero.
 
 `max_replicas` allows to limit total number of replicas and EC partitions
 for successful operation. If set, `max_replicas` must not overflow total
