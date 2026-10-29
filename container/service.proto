@@ -118,7 +118,13 @@ service ContainerService {
   // - Common failures (SECTION_FAILURE_COMMON);
   // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   //   transaction was sent but not executed within the deadline.
+  //
+  // DEPRECATED: since v2.29, SetAttributeV2 should be used.
   rpc SetAttribute(SetAttributeRequest) returns (SetAttributeResponse);
+
+  // V2 version of SetAttribute following generic request/response structures
+  // within NeoFS.
+  rpc SetAttributeV2(SetAttributeV2Request) returns (SetAttributeV2Response);
 
   // Sends transaction calling contract method to remove container attribute,
   // and waits for the transaction to be executed. Deadline is determined by
@@ -131,7 +137,13 @@ service ContainerService {
   // - Common failures (SECTION_FAILURE_COMMON);
   // - **CONTAINER_AWAIT_TIMEOUT** (3075, SECTION_CONTAINER): \
   //   transaction was sent but not executed within the deadline.
+  //
+  // DEPRECATED: since v2.29, RemoveAttributeV2 should be used.
   rpc RemoveAttribute(RemoveAttributeRequest) returns (RemoveAttributeResponse);
+
+  // V2 version of RemoveAttribute following generic request/response structures
+  // within NeoFS.
+  rpc RemoveAttributeV2(RemoveAttributeV2Request) returns (RemoveAttributeV2Response);
 }
 
 // New NeoFS Container creation request
@@ -568,10 +580,62 @@ message SetAttributeRequest {
   neo.fs.v2.refs.Signature body_signature = 2;
 }
 
+// Attribute setting request V2. Since v2.29, it represents the same V1 requests
+// but follows generic NeoFS request structure.
+message SetAttributeV2Request {
+  // Request payload message.
+  message Body {
+    // Identifier of the container to set attribute for.
+    neo.fs.v2.refs.ContainerID container_id = 1;
+
+    // Attribute to be set. If container does not have the `attribute`,
+    // it is added. Otherwise, its value is swapped. It must be one of:
+    //  - `CORS`;
+    //  - `S3_TAGS`;
+    //  - `S3_SETTINGS`;
+    //  - `S3_NOTIFICATIONS`;
+    //  - `__NEOFS__LOCK_UNTIL`.
+    string attribute = 2;
+
+    // New attribute value. In general, requirements for `value` are the same
+    // as for container creation. Attribute-specific requirements:
+    //  - `__NEOFS__LOCK_UNTIL`: new timestamp must be after the current one if any
+    //  - `S3_TAGS`: must be a valid JSON object
+    //  - `S3_SETTINGS`: must be a valid JSON object
+    //  - `S3_NOTIFICATIONS`: must be a valid JSON object
+    string value = 3;
+  }
+
+  // Request payload.
+  Body body = 1;
+
+  // Carries request meta information.
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
+
+  // Carries request verification information. This header is used to
+  // authenticate nodes and check the correctness of transmission.
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
+}
+
 // Attribute setting response
 message SetAttributeResponse {
   // Operation execution status.
   neo.fs.v2.status.Status status = 1;
+}
+
+// Attribute setting response V2. Since v2.29, it represents the same V1 responses
+// but follows generic NeoFS response structure.
+message SetAttributeV2Response {
+  // `SetAttributeV2Response` has an empty body. Operation status is attached to
+  // the meta header.
+  message Body {}
+
+  // Body of set attribute response message.
+  Body body = 1;
+
+  // Carries response meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 }
 
 // Attribute removal request.
@@ -634,8 +698,53 @@ message RemoveAttributeRequest {
   neo.fs.v2.refs.Signature body_signature = 2;
 }
 
+// Attribute removal request V2. Since v2.29, it represents the same V1 requests
+// but follows generic NeoFS request structure.
+message RemoveAttributeV2Request {
+  // Request payload message.
+  message Body {
+    // Identifier of the container to remove attribute from.
+    neo.fs.v2.refs.ContainerID container_id = 1;
+
+    // Attribute to be removed. If container does not have the `attribute`,
+    // nothing is done and status `OK` is returned. It must be one of:
+    //  - `CORS`;
+    //  - `S3_TAGS`;
+    //  - `S3_SETTINGS`;
+    //  - `S3_NOTIFICATIONS`;
+    //  - `__NEOFS__LOCK_UNTIL`.
+    string attribute = 2;
+  }
+
+  // Request payload.
+  Body body = 1;
+
+  // Carries request meta information.
+  neo.fs.v2.session.RequestMetaHeader meta_header = 2;
+
+  // Carries request verification information. This header is used to
+  // authenticate nodes and check the correctness of transmission.
+  neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
+}
+
 // Attribute removal response
 message RemoveAttributeResponse {
   // Operation execution status.
   neo.fs.v2.status.Status status = 1;
+}
+
+
+// Attribute removal response V2. Since v2.29, it represents the same V1 responses
+// but follows generic NeoFS response structure.
+message RemoveAttributeV2Response {
+  // `RemoveAttributeV2Response` has an empty body. Operation status is attached to
+  // the meta header.
+  message Body {}
+
+  // Body of remove attribute response message.
+  Body body = 1;
+
+  // Carries response meta information. Header data is used only to regulate
+  // message transport and does not affect request execution.
+  neo.fs.v2.session.ResponseMetaHeader meta_header = 2;
 }
