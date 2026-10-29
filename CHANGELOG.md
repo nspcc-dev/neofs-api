@@ -5,6 +5,7 @@
 ### Added
 
 ### Changed
+- EigenTrustAlpha definition in network info now follows real wire format (#447)
 
 ### Removed
 
