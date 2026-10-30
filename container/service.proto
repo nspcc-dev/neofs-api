@@ -604,6 +604,12 @@ message SetAttributeV2Request {
     //  - `S3_SETTINGS`: must be a valid JSON object
     //  - `S3_NOTIFICATIONS`: must be a valid JSON object
     string value = 3;
+
+    // Expected container revision at operation time. If server's known
+    // revision does not match the requested one, it must return
+    // **CONTAINER_REVISION_MISMATCH** (3076) response status with no
+    // payload.
+    uint64 container_revision = 4;
   }
 
   // Request payload.
@@ -714,6 +720,12 @@ message RemoveAttributeV2Request {
     //  - `S3_NOTIFICATIONS`;
     //  - `__NEOFS__LOCK_UNTIL`.
     string attribute = 2;
+
+    // Expected container revision at operation time. If server's known
+    // revision does not match the requested one, it must return
+    // **CONTAINER_REVISION_MISMATCH** (3076) response status with no
+    // payload.
+    uint64 container_revision = 3;
   }
 
   // Request payload.
