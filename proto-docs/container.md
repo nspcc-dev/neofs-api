@@ -904,6 +904,8 @@ be stored only within containers. They define placement rule, attributes and
 access control information. An ID of a container is a 32 byte long SHA256 hash
 of stable-marshalled container message.
 
+`placement_policy.container_backup_factor` field defaults to 3.
+
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
