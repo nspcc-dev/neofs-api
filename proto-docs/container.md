@@ -912,6 +912,9 @@ the maximum and not less than the **minimum**, which is one of:
  - sum of `data_part_num` and `parity_part_num` fields in corresponding
    `placement_policy.ec_rules` element.
 
+If selector's `count` field is omitted or zero, the maximum is taken as the
+number of all nodes matching selector's `filter` field if any.
+
 This is the recommended approach, but it only works when
 `placement_policy.container_backup_factor` (CBF) is `4294967295`. Otherwise,
 the maximum number of nodes is determined by the product of selector's
