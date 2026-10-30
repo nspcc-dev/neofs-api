@@ -691,6 +691,7 @@ Request payload message.
 | ----- | ---- | ----- | ----------- |
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container to remove attribute from. |
 | attribute | [string](#string) |  | Attribute to be removed. If container does not have the `attribute`, nothing is done and status `OK` is returned. It must be one of: - `CORS`; - `S3_TAGS`; - `S3_SETTINGS`; - `S3_NOTIFICATIONS`; - `__NEOFS__LOCK_UNTIL`. |
+| container_revision | [uint64](#uint64) |  | Expected container revision at operation time. If server's known revision does not match the requested one, it must return **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload. |
 
 
 <a name="neo.fs.v2.container.RemoveAttributeV2Response"></a>
@@ -810,6 +811,7 @@ Request payload message.
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container to set attribute for. |
 | attribute | [string](#string) |  | Attribute to be set. If container does not have the `attribute`, it is added. Otherwise, its value is swapped. It must be one of: - `CORS`; - `S3_TAGS`; - `S3_SETTINGS`; - `S3_NOTIFICATIONS`; - `__NEOFS__LOCK_UNTIL`. |
 | value | [string](#string) |  | New attribute value. In general, requirements for `value` are the same as for container creation. Attribute-specific requirements: - `__NEOFS__LOCK_UNTIL`: new timestamp must be after the current one if any - `S3_TAGS`: must be a valid JSON object - `S3_SETTINGS`: must be a valid JSON object - `S3_NOTIFICATIONS`: must be a valid JSON object |
+| container_revision | [uint64](#uint64) |  | Expected container revision at operation time. If server's known revision does not match the requested one, it must return **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload. |
 
 
 <a name="neo.fs.v2.container.SetAttributeV2Response"></a>
