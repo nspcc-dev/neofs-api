@@ -353,15 +353,14 @@ Container removal request
 <a name="neo.fs.v2.container.DeleteRequest.Body"></a>
 
 ### Message DeleteRequest.Body
-Container removal request body has signed `ContainerID` as a proof of
-the container owner's intent. The signature will be verified by `Container`
-smart contract, so signing algorithm must be supported by NeoVM.
+Delete request must be signed by either container owner or one of
+the subjects in session token V2 (if any).
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container_id | [neo.fs.v2.refs.ContainerID](#neo.fs.v2.refs.ContainerID) |  | Identifier of the container to delete from NeoFS |
-| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | `ContainerID` signed with the container owner's key according to RFC-6979. |
+| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | `ContainerID` signed with the container owner's key according to RFC-6979. DEPRECATED: it should be omitted since API 2.29, the whole request signature is used instead. |
 
 
 <a name="neo.fs.v2.container.DeleteResponse"></a>
@@ -553,11 +552,8 @@ New NeoFS Container creation request
 <a name="neo.fs.v2.container.PutRequest.Body"></a>
 
 ### Message PutRequest.Body
-Container creation request has container structure's signature as a
-separate field. It's not stored in FS chain, just verified on container
-creation by `Container` smart contract. `ContainerID` is a SHA256 hash of
-the stable-marshalled container strucutre, hence there is no need for
-additional signature checks.
+Put request must be signed by either container owner or one of
+the subjects in session token V2 (if any).
 
 Optional `eacl` field allows to set extended access rules for the
 container. It must be either set or unset along with `eacl_signature`.
@@ -569,9 +565,9 @@ CONTAINER_PUT and CONTAINER_SETEACL operations.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | container | [Container](#neo.fs.v2.container.Container) |  | Container structure to register in NeoFS |
-| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | Signature of a stable-marshalled container according to RFC-6979. |
+| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | Signature of a stable-marshalled container according to RFC-6979. DEPRECATED: it should be omitted since API 2.29, the whole request signature is used instead. |
 | eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL for the container. |
-| eacl_signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | N3 witness of stable-marshalled `eacl` field. The witness must authenticate either container owner or one of subjects in the `eacl_session_token` field if any. Signature according to `ECDSA_RFC6979_SHA256` scheme is also supported. |
+| eacl_signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | N3 witness of stable-marshalled `eacl` field. The witness must authenticate either container owner or one of subjects in the `eacl_session_token` field if any. Signature according to `ECDSA_RFC6979_SHA256` scheme is also supported. DEPRECATED: it should be omitted since API 2.29, the whole request signature is used instead. |
 
 
 <a name="neo.fs.v2.container.PutResponse"></a>
@@ -851,14 +847,14 @@ Set Extended ACL.
 <a name="neo.fs.v2.container.SetExtendedACLRequest.Body"></a>
 
 ### Message SetExtendedACLRequest.Body
-Set Extended ACL request body does not have separate `ContainerID`
-reference. It will be taken from `EACLTable.container_id` field.
+Set EACL request must be signed by either container owner or one of
+the subjects in session token V2 (if any).
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | eacl | [neo.fs.v2.acl.EACLTable](#neo.fs.v2.acl.EACLTable) |  | Extended ACL table to set for the container |
-| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | Signature of stable-marshalled Extended ACL table according to RFC-6979. |
+| signature | [neo.fs.v2.refs.SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979) |  | Signature of stable-marshalled Extended ACL table according to RFC-6979. DEPRECATED: it should be omitted since API 2.29, the whole request signature is used instead. |
 | container_revision | [uint64](#uint64) |  | Starting from API v2.27.0, requester must attach container revision to ensure container state is up to date. If server's known revision does not match the requested one, it must return **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload. |
 
 
