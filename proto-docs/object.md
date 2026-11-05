@@ -33,6 +33,7 @@
     - [HeaderWithSignature](#neo.fs.v2.object.HeaderWithSignature)
     - [PutRequest](#neo.fs.v2.object.PutRequest)
     - [PutRequest.Body](#neo.fs.v2.object.PutRequest.Body)
+    - [PutRequest.Body.Chunk](#neo.fs.v2.object.PutRequest.Body.Chunk)
     - [PutRequest.Body.Init](#neo.fs.v2.object.PutRequest.Body.Init)
     - [PutResponse](#neo.fs.v2.object.PutResponse)
     - [PutResponse.Body](#neo.fs.v2.object.PutResponse.Body)
@@ -804,7 +805,32 @@ PUT request body
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | init | [PutRequest.Body.Init](#neo.fs.v2.object.PutRequest.Body.Init) |  | Initial part of the object stream |
-| chunk | [bytes](#bytes) |  | Chunked object payload |
+| chunk | [bytes](#bytes) |  | Chunked object payload. Deprecated: use Chunk message below since API 2.29 instead. |
+| payload_chunk | [PutRequest.Body.Chunk](#neo.fs.v2.object.PutRequest.Body.Chunk) |  | Chunked object payload for API 2.29 requests. |
+
+
+<a name="neo.fs.v2.object.PutRequest.Body.Chunk"></a>
+
+### Message PutRequest.Body.Chunk
+Chunk of the object payload transmitted in the Put request stream.
+
+Chunks MUST be sent in strictly ascending order of `sequence_number`,
+starting from 0 for each object upload and increasing by exactly 1. Each
+Chunk is bound to a specific upload via `stream_id` which prevents replay
+attacks.
+
+The server MUST reject a Chunk if any of the following holds:
+  - `sequence_number` is not exactly one greater than the last accepted
+    Chunk in the same stream;
+  - `stream_id` does not match the object announced in the preceding
+    Init.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sequence_number | [uint64](#uint64) |  | Chunk messages ordering (within the stream), must start from zero, (N+1)th chunk message MUST always have N sequence_number. |
+| stream_id | [bytes](#bytes) |  | Unique context for every object stream, it must be the same for every object put stream and must equal `Init.stream_id` sent as the first message in every put stream. |
+| payload | [bytes](#bytes) |  | Object payload part. |
 
 
 <a name="neo.fs.v2.object.PutRequest.Body.Init"></a>
@@ -821,6 +847,7 @@ are not set, they will be calculated by a peer node.
 | header | [Header](#neo.fs.v2.object.Header) |  | Object's Header. The maximum length is 16KB. |
 | copies_number | [uint32](#uint32) |  | Number of the object copies to store within the RPC call. By default object is processed according to the container's placement policy. DEPRECATED: use `PlacementPolicy.Initial.max_replicas` instead. Servers ignore this field. |
 | container_revision | [uint64](#uint64) |  | Starting from API v2.27.0, requester may attach container revision to ensure container state is up to date. If server's known revision does not match the requested one, it must return **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload. |
+| stream_id | [bytes](#bytes) |  | Unique context for every object stream, must be the same for every further Chunk message. Must be non-empty and must not be longer than 32 bytes. Required since API v2.29. |
 
 
 <a name="neo.fs.v2.object.PutResponse"></a>
