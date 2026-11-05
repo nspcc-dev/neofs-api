@@ -429,14 +429,48 @@ message PutRequest {
       // not match the requested one, it must return
       // **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload.
       uint64 container_revision = 5;
+
+      // Unique context for every object stream, must be the same for every
+      // further Chunk message. Must be non-empty and must not be longer than
+      // 32 bytes. Required since API v2.29.
+      bytes stream_id = 6;
+    }
+    // Chunk of the object payload transmitted in the Put request stream.
+    //
+    // Chunks MUST be sent in strictly ascending order of `sequence_number`,
+    // starting from 0 for each object upload and increasing by exactly 1. Each
+    // Chunk is bound to a specific upload via `stream_id` which prevents replay
+    // attacks.
+    //
+    // The server MUST reject a Chunk if any of the following holds:
+    //   - `sequence_number` is not exactly one greater than the last accepted
+    //     Chunk in the same stream;
+    //   - `stream_id` does not match the object announced in the preceding
+    //     Init.
+    message Chunk {
+      // Chunk messages ordering (within the stream), must start from zero,
+      // (N+1)th chunk message MUST always have N sequence_number.
+      uint64 sequence_number = 1;
+
+      // Unique context for every object stream, it must be the same for every
+      // object put stream and must equal `Init.stream_id` sent as the first
+      // message in every put stream.
+      bytes stream_id = 2;
+
+      // Object payload part.
+      bytes payload = 3;
     }
     // Single message in the request stream.
     oneof object_part {
       // Initial part of the object stream
       Init init = 1;
 
-      // Chunked object payload
+      // Chunked object payload.
+      // Deprecated: use Chunk message below since API 2.29 instead.
       bytes chunk = 2;
+
+      // Chunked object payload for API 2.29 requests.
+      Chunk payload_chunk = 3;
     }
   }
   // Body of put object request message.
