@@ -466,7 +466,7 @@ message PutRequest {
 
       // Chunked object payload.
       // Deprecated: use Chunk message below since API 2.29 instead.
-      bytes chunk = 2;
+      bytes chunk = 2 [deprecated = true];
 
       // Chunked object payload for API 2.29 requests.
       ChunkData payload_chunk = 3;
