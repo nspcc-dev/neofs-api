@@ -446,7 +446,7 @@ message PutRequest {
     //     Chunk in the same stream;
     //   - `stream_id` does not match the object announced in the preceding
     //     Init.
-    message Chunk {
+    message ChunkData {
       // Chunk messages ordering (within the stream), must start from zero,
       // (N+1)th chunk message MUST always have N sequence_number.
       uint64 sequence_number = 1;
@@ -469,7 +469,7 @@ message PutRequest {
       bytes chunk = 2;
 
       // Chunked object payload for API 2.29 requests.
-      Chunk payload_chunk = 3;
+      ChunkData payload_chunk = 3;
     }
   }
   // Body of put object request message.
