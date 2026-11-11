@@ -33,7 +33,7 @@
     - [HeaderWithSignature](#neo.fs.v2.object.HeaderWithSignature)
     - [PutRequest](#neo.fs.v2.object.PutRequest)
     - [PutRequest.Body](#neo.fs.v2.object.PutRequest.Body)
-    - [PutRequest.Body.Chunk](#neo.fs.v2.object.PutRequest.Body.Chunk)
+    - [PutRequest.Body.ChunkData](#neo.fs.v2.object.PutRequest.Body.ChunkData)
     - [PutRequest.Body.Init](#neo.fs.v2.object.PutRequest.Body.Init)
     - [PutResponse](#neo.fs.v2.object.PutResponse)
     - [PutResponse.Body](#neo.fs.v2.object.PutResponse.Body)
@@ -806,12 +806,12 @@ PUT request body
 | ----- | ---- | ----- | ----------- |
 | init | [PutRequest.Body.Init](#neo.fs.v2.object.PutRequest.Body.Init) |  | Initial part of the object stream |
 | chunk | [bytes](#bytes) |  | Chunked object payload. Deprecated: use Chunk message below since API 2.29 instead. |
-| payload_chunk | [PutRequest.Body.Chunk](#neo.fs.v2.object.PutRequest.Body.Chunk) |  | Chunked object payload for API 2.29 requests. |
+| payload_chunk | [PutRequest.Body.ChunkData](#neo.fs.v2.object.PutRequest.Body.ChunkData) |  | Chunked object payload for API 2.29 requests. |
 
 
-<a name="neo.fs.v2.object.PutRequest.Body.Chunk"></a>
+<a name="neo.fs.v2.object.PutRequest.Body.ChunkData"></a>
 
-### Message PutRequest.Body.Chunk
+### Message PutRequest.Body.ChunkData
 Chunk of the object payload transmitted in the Put request stream.
 
 Chunks MUST be sent in strictly ascending order of `sequence_number`,
