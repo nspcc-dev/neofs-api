@@ -421,6 +421,14 @@ message SessionTokenV2 {
     // final is a flag indicating whether further delegation is allowed.
     // If set to true, subjects of this token cannot delegate their rights further.
     bool final = 7 [json_name = "final"];
+
+    // SHA-256 hash of the complete origin token (including its body, signature
+    // and nested origin), encoded in Protocol Buffers V3 format with fields in
+    // ascending order by field number recursively.
+    // Binds the signed body to the delegation chain.
+    // For version >= 1 with an origin, must contain exactly 32 bytes and match
+    // the hash of that origin. Must be empty otherwise.
+    bytes origin_hash = 8 [json_name = "origin_hash"];
   }
 
   // Session token body.

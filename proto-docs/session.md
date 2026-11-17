@@ -347,6 +347,7 @@ Validation rules: 1. Only one wildcard context (empty container ID) is allowed p
 
 Delegation rules (when origin token is present): 1. New contexts (containers) can only be added if origin token has a wildcard context. 2. All rights must be narrowed during delegation: - Verbs must be a subset of origin's verbs for the same container - Cannot add new verbs not present in origin for the same container |
 | final | [bool](#bool) |  | final is a flag indicating whether further delegation is allowed. If set to true, subjects of this token cannot delegate their rights further. |
+| origin_hash | [bytes](#bytes) |  | SHA-256 hash of the complete origin token (including its body, signature and nested origin), encoded in Protocol Buffers V3 format with fields in ascending order by field number recursively. Binds the signed body to the delegation chain. For version >= 1 with an origin, must contain exactly 32 bytes and match the hash of that origin. Must be empty otherwise. |
 
 
 <a name="neo.fs.v2.session.Target"></a>
