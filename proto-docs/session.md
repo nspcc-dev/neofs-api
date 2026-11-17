@@ -218,7 +218,9 @@ DEPRECATED: Unused and unchecked since API v2.25, no origin structure to check. 
 | origin | [RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Chain of previous hops signatures.
 
 DEPRECATED: Unused and unchecked since API v2.25, no origin structure to check. |
-| request_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request signature. It is a signature of the whole request marshaled, except for the verification header itself (the verification header field must be omitted completely, attaching no bytes to the signed data). |
+| request_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request signature. It is a signature of the whole request marshaled, except for the verification header itself (the verification header field must be omitted completely, attaching no bytes to the signed data).
+
+Starting from NeoFS API version 2.29, the signature MUST be calculated over the stable marshaled neo.fs.v2.refs.RequestSignData message with correctly filled fields for the network, the API method and the request it is attached to. See RequestSignData's description for more details. |
 
 
 <a name="neo.fs.v2.session.ResponseMetaHeader"></a>

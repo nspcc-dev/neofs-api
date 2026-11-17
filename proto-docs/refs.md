@@ -11,6 +11,7 @@
     - [ContainerID](#neo.fs.v2.refs.ContainerID)
     - [ObjectID](#neo.fs.v2.refs.ObjectID)
     - [OwnerID](#neo.fs.v2.refs.OwnerID)
+    - [RequestSignData](#neo.fs.v2.refs.RequestSignData)
     - [Signature](#neo.fs.v2.refs.Signature)
     - [SignatureRFC6979](#neo.fs.v2.refs.SignatureRFC6979)
     - [SubnetID](#neo.fs.v2.refs.SubnetID)
@@ -139,6 +140,28 @@ with/without paddings are accepted.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | value | [bytes](#bytes) |  | Identifier of the container owner in a binary format |
+
+
+<a name="neo.fs.v2.refs.RequestSignData"></a>
+
+### Message RequestSignData
+RequestSignData contains the data to be signed for a NeoFS API request.
+
+Starting from NeoFS API version 2.29, request signatures MUST be calculated
+over the stable marshaled representation of this message.
+
+The stable-marshaling format of the `request_hash` field MUST be deterministic
+and MUST be encoded in Protocol Buffers V3 format with fields in ascending
+order by field number recursively. Fields are cryptographically bound to
+the request and prevent a signature from being reused across NeoFS networks
+or API methods.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| magic_number | [uint64](#uint64) |  | NeoFS network magic number. It identifies the NeoFS network for which the signature is valid. Servers must compare these fields to their own magic numbers. |
+| method | [string](#string) |  | Full canonical gRPC method name of the called RPC as defined by this API, i.e. "/<package>.<Service>/<Method>", e.g. "/neo.fs.v2.object.ObjectService/Put". Case-sensitive. |
+| request_hash | [bytes](#bytes) |  | SHA256 hash of stable-marshaled representation of the request message with the `verify_header` field omitted completely (attaching no bytes), i.e. the same data that was signed before API v2.29. For streaming RPCs, each stream message is signed separately. |
 
 
 <a name="neo.fs.v2.refs.Signature"></a>

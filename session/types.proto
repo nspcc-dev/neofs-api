@@ -312,6 +312,11 @@ message RequestVerificationHeader {
   // Request signature. It is a signature of the whole request marshaled, except
   // for the verification header itself (the verification header field must be
   // omitted completely, attaching no bytes to the signed data).
+  //
+  // Starting from NeoFS API version 2.29, the signature MUST be calculated
+  // over the stable marshaled neo.fs.v2.refs.RequestSignData message with
+  // correctly filled fields for the network, the API method and the request
+  // it is attached to. See RequestSignData's description for more details.
   neo.fs.v2.refs.Signature request_signature = 5 [json_name = "requestSignature"];
 }
 

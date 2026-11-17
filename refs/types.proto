@@ -116,6 +116,34 @@ message Signature {
   SignatureScheme scheme = 3 [json_name = "scheme"];
 }
 
+// RequestSignData contains the data to be signed for a NeoFS API request.
+//
+// Starting from NeoFS API version 2.29, request signatures MUST be calculated
+// over the stable marshaled representation of this message.
+//
+// The stable-marshaling format of the `request_hash` field MUST be deterministic
+// and MUST be encoded in Protocol Buffers V3 format with fields in ascending
+// order by field number recursively. Fields are cryptographically bound to
+// the request and prevent a signature from being reused across NeoFS networks
+// or API methods.
+message RequestSignData {
+  // NeoFS network magic number. It identifies the NeoFS network for which
+  // the signature is valid. Servers must compare these fields to their own
+  // magic numbers.
+  uint64 magic_number = 1 [json_name = "magicNumber"];
+
+  // Full canonical gRPC method name of the called RPC as defined by this API,
+  // i.e. "/<package>.<Service>/<Method>", e.g.
+  // "/neo.fs.v2.object.ObjectService/Put". Case-sensitive.
+  string method = 2 [json_name = "method"];
+
+  // SHA256 hash of stable-marshaled representation of the request message with
+  // the `verify_header` field omitted completely (attaching no bytes), i.e. the
+  // same data that was signed before API v2.29. For streaming RPCs, each
+  // stream message is signed separately.
+  bytes request_hash = 3 [json_name = "requestHash"];
+}
+
 // Signature scheme describes digital signing scheme used for (key, signature) pair.
 enum SignatureScheme {
   // ECDSA with SHA-512 hashing (FIPS 186-3)
