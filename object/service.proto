@@ -475,8 +475,8 @@ message PutRequest {
   // Body of put object request message.
   Body body = 1;
 
-  // Carries request meta information.
-  // It must not be present in messages with `PutRequest.Chunk` payload.
+  // Carries request meta information. It must be omitted in messages with
+  // object_part of `PutRequest.ChunkData` payload type.
   neo.fs.v2.session.RequestMetaHeader meta_header = 2;
 
   // Carries request verification information. This header is used to

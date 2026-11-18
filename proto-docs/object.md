@@ -792,7 +792,7 @@ PUT object request.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | body | [PutRequest.Body](#neo.fs.v2.object.PutRequest.Body) |  | Body of put object request message. |
-| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. It must not be present in messages with `PutRequest.Chunk` payload. |
+| meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. It must be omitted in messages with object_part of `PutRequest.ChunkData` payload type. |
 | verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
 
 
