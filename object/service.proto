@@ -431,7 +431,7 @@ message PutRequest {
       uint64 container_revision = 5;
 
       // Unique context for every object stream, must be the same for every
-      // further Chunk message. Required since API v2.29.
+      // further Chunk message. It MUST NOT be zero. Required since API v2.29.
       uint64 stream_id = 6;
     }
     // Chunk of the object payload transmitted in the Put request stream.
