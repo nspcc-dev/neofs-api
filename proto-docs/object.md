@@ -847,7 +847,7 @@ are not set, they will be calculated by a peer node.
 | header | [Header](#neo.fs.v2.object.Header) |  | Object's Header. The maximum length is 16KB. |
 | copies_number | [uint32](#uint32) |  | Number of the object copies to store within the RPC call. By default object is processed according to the container's placement policy. DEPRECATED: use `PlacementPolicy.Initial.max_replicas` instead. Servers ignore this field. |
 | container_revision | [uint64](#uint64) |  | Starting from API v2.27.0, requester may attach container revision to ensure container state is up to date. If server's known revision does not match the requested one, it must return **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload. |
-| stream_id | [uint64](#uint64) |  | Unique context for every object stream, must be the same for every further Chunk message. Required since API v2.29. |
+| stream_id | [uint64](#uint64) |  | Unique context for every object stream, must be the same for every further Chunk message. It MUST NOT be zero. Required since API v2.29. |
 
 
 <a name="neo.fs.v2.object.PutResponse"></a>
