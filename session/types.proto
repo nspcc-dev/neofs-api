@@ -243,7 +243,9 @@ message RequestMetaHeader {
 
   // NeoFS network magic. Must match the value for the network
   // that the server belongs to.
-  uint64 magic_number = 8 [json_name = "magicNumber"];
+  //
+  // DEPRECATED: should be omitted since API v2.29.
+  uint64 magic_number = 8 [json_name = "magicNumber", deprecated = true];
 
   // The time at which this request ceases to be valid. This value is
   // an absolute point in time, expressed as a UTC Unix timestamp in seconds.
