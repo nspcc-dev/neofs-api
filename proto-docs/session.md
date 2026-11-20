@@ -194,7 +194,9 @@ Meta information attached to the request (common things for all requests).
 | origin | [RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | `RequestMetaHeader` of the origin request.
 
 DEPRECATED: Ignored since API v2.25, all requests are original. |
-| magic_number | [uint64](#uint64) |  | NeoFS network magic. Must match the value for the network that the server belongs to. |
+| magic_number | [uint64](#uint64) |  | NeoFS network magic. Must match the value for the network that the server belongs to.
+
+DEPRECATED: should be omitted since API v2.29. |
 | valid_until_time | [uint64](#uint64) |  | The time at which this request ceases to be valid. This value is an absolute point in time, expressed as a UTC Unix timestamp in seconds. The request is considered valid while `now < valid_until_time`; at or after this time it is expired and must not be accepted. Any request must fill this field since API v2.28. |
 
 
@@ -218,7 +220,9 @@ DEPRECATED: Unused and unchecked since API v2.25, no origin structure to check. 
 | origin | [RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Chain of previous hops signatures.
 
 DEPRECATED: Unused and unchecked since API v2.25, no origin structure to check. |
-| request_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request signature. It is a signature of the whole request marshaled, except for the verification header itself (the verification header field must be omitted completely, attaching no bytes to the signed data). |
+| request_signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Request signature. It is a signature of the whole request marshaled, except for the verification header itself (the verification header field must be omitted completely, attaching no bytes to the signed data).
+
+Starting from NeoFS API version 2.29, the signature MUST be calculated over the stable marshaled neo.fs.v2.refs.RequestSignData message with correctly filled fields for the network, the API method and the request it is attached to. See RequestSignData's description for more details. |
 
 
 <a name="neo.fs.v2.session.ResponseMetaHeader"></a>
