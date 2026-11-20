@@ -896,7 +896,7 @@ Replicate RPC request
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| object | [Object](#neo.fs.v2.object.Object) |  | Object to be replicated. |
+| object | [Object](#neo.fs.v2.object.Object) |  | Object to be replicated. Notice that this is a sealed object, so it can have API version different from current minimal one for the network. |
 | signature | [neo.fs.v2.refs.Signature](#neo.fs.v2.refs.Signature) |  | Signature of `object.object_id.value` field. |
 | sign_object | [bool](#bool) |  | Optional flag that requires server side to attach signature of just replicated object to ensure it has been received correctly. Signature must be calculated with a key that corresponds to an exposed to the network map public key of the object receiver. |
 
