@@ -12,6 +12,24 @@ option go_package = "github.com/nspcc-dev/neofs-sdk-go/proto/container";
 // be stored only within containers. They define placement rule, attributes and
 // access control information. An ID of a container is a 32 byte long SHA256 hash
 // of stable-marshalled container message.
+//
+// `count` field in each `placement_policy.selectors` element specifies
+// **maximum** number of nodes for corresponding policy rule. As many nodes as
+// possible are selected from the network map for the rule, but not more than
+// the maximum and not less than the **minimum**, which is one of:
+//  - `count` field in corresponding `placement_policy.replicas` element;
+//  - sum of `data_part_num` and `parity_part_num` fields in corresponding
+//    `placement_policy.ec_rules` element.
+//
+// If selector's `count` field is omitted or zero, the maximum is taken as the
+// number of all nodes matching selector's `filter` field if any.
+//
+// This is the recommended approach, but it only works when
+// `placement_policy.container_backup_factor` (CBF) is `4294967295`. Otherwise,
+// the maximum number of nodes is determined by the product of selector's
+// `count` and CBF.
+//
+// `placement_policy.container_backup_factor` field defaults to 3.
 message Container {
   // Container format version. Effectively, the version of API library used to
   // create the container.
