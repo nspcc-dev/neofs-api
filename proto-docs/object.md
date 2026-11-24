@@ -1026,7 +1026,7 @@ Object Search request body
 | filters | [SearchFilter](#neo.fs.v2.object.SearchFilter) | repeated | List of search expressions. Limited to 8. If additional attributes are requested (see attributes below) then the first filter's key MUST be the first requested attribute. '$Object:containerID', '$Object:objectID' and '__NEOFS__NONCE' filters are prohibited. Numeric filters' values MUST be in range [-MaxUint256, MaxUint256]. |
 | cursor | [string](#string) |  | Cursor to continue search. Can be omitted or empty for the new search. |
 | count | [uint32](#uint32) |  | Limits the number of responses to the specified number. Can't be more than 1000. |
-| attributes | [string](#string) | repeated | List of attribute names (including special ones as defined by SearchFilter key) to include into the reply. Limited to 8, these attributes also affect result ordering (result is ordered by the 1st one and then by OID). If additional attributes are requested, then the first filter's key (see filters above) MUST be the first requested attribute. '$Object:containerID', '$Object:objectID' and '__NEOFS__NONCE' attributes are prohibited. If meta_header.ttl = 1 and the first filter is not STRING_EQUAL, values of the first filtered attribute are requested automatically. |
+| attributes | [string](#string) | repeated | List of attribute names (including special ones as defined by SearchFilter key) to include into the reply. Limited to 8, these attributes also affect result ordering (result is ordered by the 1st one and then by OID). If additional attributes are requested, then the first filter's key (see filters above) MUST be the first requested attribute. '$Object:containerID', '$Object:objectID' and '__NEOFS__NONCE' attributes are prohibited. Keys starting with `$Object:` resolve only to the system properties defined in `SearchFilter`; user-defined attributes with this prefix are not indexed and cannot be returned. If meta_header.ttl = 1 and the first filter is not STRING_EQUAL, values of the first filtered attribute are requested automatically. |
 | container_revision | [uint64](#uint64) |  | Starting from API v2.27.0, requester may attach container revision to ensure container state is up to date. If server's known revision does not match the requested one, it must return **CONTAINER_REVISION_MISMATCH** (3076) response status with no payload. |
 
 
@@ -1126,6 +1126,10 @@ Key name must be an object-unique valid UTF-8 string. Value can't be empty.
 Objects with duplicated attribute names or attributes with empty values
 will be considered invalid. Keys and values can't contain zero bytes as
 well.
+
+The `$Object:` key prefix is reserved for accessing object header fields in
+SEARCH and EACL. User-defined attributes with keys starting with `$Object:`
+are not indexed for SEARCH and are ignored by EACL.
 
 There are some "well-known" attributes starting with `__NEOFS__` prefix
 that affect system behaviour:
@@ -1248,8 +1252,9 @@ If `match_type` field is numerical, both `value` field and object
 attribute MUST be base-10 integers.
 
 By default `key` field refers to the corresponding object's `Attribute`.
-Some Object's header fields can also be accessed by adding `$Object:`
-prefix to the name. Here is the list of fields available via this prefix:
+Keys with the `$Object:` prefix refer exclusively to object header fields
+and well-known properties, never to user-defined `Attribute`s. Here is the
+list of fields available via this prefix:
 
 * $Object:version \
   version
@@ -1291,6 +1296,9 @@ properties:
 The following object attributes are not indexed and are forbidden for filters:
 
 * __NEOFS__NONCE
+
+User-defined attributes with keys starting with `$Object:` are not indexed
+and never match search filters.
 
 Following filters are deprecated:
 

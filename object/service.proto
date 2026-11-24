@@ -726,7 +726,9 @@ message SearchV2Request {
     // and then by OID). If additional attributes are requested, then the first
     // filter's key (see filters above) MUST be the first requested attribute.
     // '$Object:containerID', '$Object:objectID' and '__NEOFS__NONCE' attributes
-    // are prohibited.
+    // are prohibited. Keys starting with `$Object:` resolve only to the system
+    // properties defined in `SearchFilter`; user-defined attributes with this
+    // prefix are not indexed and cannot be returned.
     // If meta_header.ttl = 1 and the first filter is not STRING_EQUAL,
     // values of the first filtered attribute are requested  automatically.
     repeated string attributes = 6;
