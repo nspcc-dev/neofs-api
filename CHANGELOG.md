@@ -6,6 +6,7 @@
 
 ### Changed
 - EigenTrustAlpha definition in network info now follows real wire format (#447)
+- `$Object:`-prefixed user attributes are explicitly unindexed for SEARCH and ignored by EACL (#461)
 
 ### Removed
 

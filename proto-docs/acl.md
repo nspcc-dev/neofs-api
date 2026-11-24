@@ -102,9 +102,11 @@ The `value` field must be empty if `match_type` is an unary operator
 the `value` field must be a base-10 integer.
 
 By default `key` field refers to the corresponding object's `Attribute`.
-Some Object's header fields can also be accessed by adding `$Object:`
-prefix to the name. For such attributes, field 'match_type' must not be
-'NOT_PRESENT'. Here is the list of fields available via this prefix:
+For `OBJECT` header type, keys with the `$Object:` prefix refer exclusively
+to object header fields, and user-defined attributes with this prefix are
+ignored during EACL evaluation. For such header fields, field 'match_type'
+must not be 'NOT_PRESENT'. Here is the list of fields available via this
+prefix:
 
 * $Object:version \
   version

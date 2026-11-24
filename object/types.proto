@@ -77,8 +77,9 @@ enum MatchType {
 // attribute MUST be base-10 integers.
 //
 // By default `key` field refers to the corresponding object's `Attribute`.
-// Some Object's header fields can also be accessed by adding `$Object:`
-// prefix to the name. Here is the list of fields available via this prefix:
+// Keys with the `$Object:` prefix refer exclusively to object header fields
+// and well-known properties, never to user-defined `Attribute`s. Here is the
+// list of fields available via this prefix:
 //
 // * $Object:version \
 //   version
@@ -120,6 +121,9 @@ enum MatchType {
 // The following object attributes are not indexed and are forbidden for filters:
 //
 // * __NEOFS__NONCE
+//
+// User-defined attributes with keys starting with `$Object:` are not indexed
+// and never match search filters.
 //
 // Following filters are deprecated:
 //
@@ -213,6 +217,10 @@ message Header {
   // Objects with duplicated attribute names or attributes with empty values
   // will be considered invalid. Keys and values can't contain zero bytes as
   // well.
+  //
+  // The `$Object:` key prefix is reserved for accessing object header fields in
+  // SEARCH and EACL. User-defined attributes with keys starting with `$Object:`
+  // are not indexed for SEARCH and are ignored by EACL.
   //
   // There are some "well-known" attributes starting with `__NEOFS__` prefix
   // that affect system behaviour:
