@@ -119,7 +119,7 @@ Get NodeInfo structure directly from a particular node
 | ----- | ---- | ----- | ----------- |
 | body | [LocalNodeInfoRequest.Body](#neo.fs.v2.netmap.LocalNodeInfoRequest.Body) |  | Body of the LocalNodeInfo request message |
 | meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
-| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: ignored since API v2.29. Clients SHOULD omit this field and servers MUST ignore it for requests with `meta_header.version` >= 2.29. Required for requests with `meta_header.version` <= 2.28. |
 
 
 <a name="neo.fs.v2.netmap.LocalNodeInfoRequest.Body"></a>
@@ -164,7 +164,7 @@ Get netmap snapshot request
 | ----- | ---- | ----- | ----------- |
 | body | [NetmapSnapshotRequest.Body](#neo.fs.v2.netmap.NetmapSnapshotRequest.Body) |  | Body of get netmap snapshot request message. |
 | meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
-| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: ignored since API v2.29. Clients SHOULD omit this field and servers MUST ignore it for requests with `meta_header.version` >= 2.29. Required for requests with `meta_header.version` <= 2.28. |
 
 
 <a name="neo.fs.v2.netmap.NetmapSnapshotRequest.Body"></a>
@@ -208,7 +208,7 @@ Get NetworkInfo structure with the network view from a particular node.
 | ----- | ---- | ----- | ----------- |
 | body | [NetworkInfoRequest.Body](#neo.fs.v2.netmap.NetworkInfoRequest.Body) |  | Body of the NetworkInfo request message |
 | meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
-| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: ignored since API v2.29. Clients SHOULD omit this field and servers MUST ignore it for requests with `meta_header.version` >= 2.29. Required for requests with `meta_header.version` <= 2.28. |
 
 
 <a name="neo.fs.v2.netmap.NetworkInfoRequest.Body"></a>

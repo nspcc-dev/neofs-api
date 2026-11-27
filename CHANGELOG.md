@@ -10,6 +10,7 @@
 ### Removed
 
 ### Deprecated
+- Request verification header for read-only service getters (`AccountingService.Balance`, `ContainerService.Get`, `ContainerService.List`, `ContainerService.GetExtendedACL`, `NetmapService.LocalNodeInfo`, `NetmapService.NetworkInfo`, `NetmapService.NetmapSnapshot`) (#465)
 
 ## [2.28.0] - 2026-10-22
 

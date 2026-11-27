@@ -56,6 +56,9 @@ message LocalNodeInfoRequest {
   // Carries request verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: ignored since API v2.29. Clients SHOULD omit this field and
+  // servers MUST ignore it for requests with `meta_header.version` >= 2.29.
+  // Required for requests with `meta_header.version` <= 2.28.
   neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
@@ -97,6 +100,9 @@ message NetworkInfoRequest {
   // Carries request verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: ignored since API v2.29. Clients SHOULD omit this field and
+  // servers MUST ignore it for requests with `meta_header.version` >= 2.29.
+  // Required for requests with `meta_header.version` <= 2.28.
   neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
@@ -137,6 +143,9 @@ message NetmapSnapshotRequest {
   // Carries request verification information. This header is used to
   // authenticate the nodes of the message route and check the correctness of
   // transmission.
+  // DEPRECATED: ignored since API v2.29. Clients SHOULD omit this field and
+  // servers MUST ignore it for requests with `meta_header.version` >= 2.29.
+  // Required for requests with `meta_header.version` <= 2.28.
   neo.fs.v2.session.RequestVerificationHeader verify_header = 3;
 }
 
