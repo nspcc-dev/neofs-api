@@ -582,7 +582,7 @@ default.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| count | [uint32](#uint32) |  | How many object replicas to put. Limited to 8. |
+| count | [uint32](#uint32) |  | How many object replicas to put. Limited to 8. Required, must not be zero. |
 | selector | [string](#string) |  | Named selector bucket to put replicas |
 
 

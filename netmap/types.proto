@@ -97,7 +97,7 @@ message Selector {
 // selector set, the root bucket containing all possible nodes will be used by
 // default.
 message Replica {
-  // How many object replicas to put. Limited to 8.
+  // How many object replicas to put. Limited to 8. Required, must not be zero.
   uint32 count = 1 [json_name = "count"];
 
   // Named selector bucket to put replicas

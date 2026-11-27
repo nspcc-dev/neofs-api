@@ -8,6 +8,7 @@
 
 ### Changed
 - EigenTrustAlpha definition in network info now follows real wire format (#447)
+- `REP 0` policy rules are explicitly forbidden now (#451)
 
 ### Removed
 
