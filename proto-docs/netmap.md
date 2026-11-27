@@ -474,7 +474,7 @@ storage policy definition languages.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | replicas | [Replica](#neo.fs.v2.netmap.Replica) | repeated | Rules to set number of object replicas and place each one into a named bucket. Limited to 256 items. |
-| container_backup_factor | [uint32](#uint32) |  | Container backup factor (CBF) controls how deep NeoFS will search for alternative nodes to include into container's nodes subset. In total, the number of container nodes is Selector (used by Replica) count times CBF. This number is limited to 64 per-Replica and 512 overall. |
+| container_backup_factor | [uint32](#uint32) |  | Container backup factor (CBF) controls how deep NeoFS will search for alternative nodes to include into container's nodes subset. In total, the number of container nodes is Selector (used by Replica) count times CBF. This number is limited to 64 per-Replica and 512 overall. Defaults to 3. |
 | selectors | [Selector](#neo.fs.v2.netmap.Selector) | repeated | Set of Selectors to form the container's nodes subset |
 | filters | [Filter](#neo.fs.v2.netmap.Filter) | repeated | List of named filters to reference in selectors |
 | subnet_id | [neo.fs.v2.refs.SubnetID](#neo.fs.v2.refs.SubnetID) |  | DEPRECATED. Was used for subnetwork ID to select nodes from, currently ignored. |

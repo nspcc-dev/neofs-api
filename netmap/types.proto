@@ -116,6 +116,7 @@ message PlacementPolicy {
   // alternative nodes to include into container's nodes subset. In total,
   // the number of container nodes is Selector (used by Replica) count
   // times CBF. This number is limited to 64 per-Replica and 512 overall.
+  // Defaults to 3.
   uint32 container_backup_factor = 2 [json_name = "containerBackupFactor"];
 
   // Set of Selectors to form the container's nodes subset
