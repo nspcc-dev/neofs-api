@@ -4,6 +4,7 @@
 
 ### Added
 - Support for container policies with limited number of additional nodes (#451)
+- Support for container policies with `SELECT *` (#451)
 
 ### Changed
 - EigenTrustAlpha definition in network info now follows real wire format (#447)

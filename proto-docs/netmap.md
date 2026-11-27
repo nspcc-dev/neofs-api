@@ -470,11 +470,15 @@ Set of rules to select a subset of nodes from `NetworkMap` able to store
 container's objects. The format is simple enough to transpile from different
 storage policy definition languages.
 
+Zero/omitted `Selector.count` leads to selection of all filtered nodes. It
+is only allowed with CBF = `4294967295`. In this case, the node limit is not
+working.
+
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | replicas | [Replica](#neo.fs.v2.netmap.Replica) | repeated | Rules to set number of object replicas and place each one into a named bucket. Limited to 256 items. |
-| container_backup_factor | [uint32](#uint32) |  | Container backup factor (CBF) provides option to control how deep NeoFS will search for alternative nodes to include into container's nodes subset. Value `4294967295` makes `Selector.count` to specify a maximum number of nodes (recommended setting). Otherwise, the number of container nodes is Selector (used by Replica) count times CBF. In this case, this number is limited to 64 per-Replica and 512 overall. Defaults to 3. |
+| container_backup_factor | [uint32](#uint32) |  | Container backup factor (CBF) controls how deep NeoFS will search for alternative nodes to include into container's nodes subset. Value `4294967295` makes `Selector.count` specify a maximum number of nodes (recommended setting), with the minimum defined by the corresponding `Replica.count` or `ECRule` (`data_part_num + parity_part_num`). Otherwise, the number of container nodes is `Selector.count` times CBF (zero/omitted CBF defaults to 3). Unless `Selector.count` is zero with CBF = `4294967295`, the resulting node count is limited to 64 per rule (Replica/ECRule) and 512 overall. |
 | selectors | [Selector](#neo.fs.v2.netmap.Selector) | repeated | Set of Selectors to form the container's nodes subset |
 | filters | [Filter](#neo.fs.v2.netmap.Filter) | repeated | List of named filters to reference in selectors |
 | subnet_id | [neo.fs.v2.refs.SubnetID](#neo.fs.v2.refs.SubnetID) |  | DEPRECATED. Was used for subnetwork ID to select nodes from, currently ignored. |
