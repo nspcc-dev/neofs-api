@@ -395,7 +395,7 @@ Get Extended ACL
 | ----- | ---- | ----- | ----------- |
 | body | [GetExtendedACLRequest.Body](#neo.fs.v2.container.GetExtendedACLRequest.Body) |  | Body of get extended acl request message. |
 | meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
-| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: ignored since API v2.29. Clients SHOULD omit this field and servers MUST ignore it for requests with `meta_header.version` >= 2.29. Required for requests with `meta_header.version` <= 2.28. |
 
 
 <a name="neo.fs.v2.container.GetExtendedACLRequest.Body"></a>
@@ -447,7 +447,7 @@ Get container structure
 | ----- | ---- | ----- | ----------- |
 | body | [GetRequest.Body](#neo.fs.v2.container.GetRequest.Body) |  | Body of container get request message. |
 | meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
-| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: ignored since API v2.29. Clients SHOULD omit this field and servers MUST ignore it for requests with `meta_header.version` >= 2.29. Required for requests with `meta_header.version` <= 2.28. |
 
 
 <a name="neo.fs.v2.container.GetRequest.Body"></a>
@@ -498,7 +498,7 @@ List containers
 | ----- | ---- | ----- | ----------- |
 | body | [ListRequest.Body](#neo.fs.v2.container.ListRequest.Body) |  | Body of list containers request message |
 | meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
-| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: ignored since API v2.29. Clients SHOULD omit this field and servers MUST ignore it for requests with `meta_header.version` >= 2.29. Required for requests with `meta_header.version` <= 2.28. |
 
 
 <a name="neo.fs.v2.container.ListRequest.Body"></a>

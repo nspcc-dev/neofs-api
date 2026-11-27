@@ -71,7 +71,7 @@ BalanceRequest message
 | ----- | ---- | ----- | ----------- |
 | body | [BalanceRequest.Body](#neo.fs.v2.accounting.BalanceRequest.Body) |  | Body of the balance request message. |
 | meta_header | [neo.fs.v2.session.RequestMetaHeader](#neo.fs.v2.session.RequestMetaHeader) |  | Carries request meta information. |
-| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. |
+| verify_header | [neo.fs.v2.session.RequestVerificationHeader](#neo.fs.v2.session.RequestVerificationHeader) |  | Carries request verification information. This header is used to authenticate the nodes of the message route and check the correctness of transmission. DEPRECATED: ignored since API v2.29. Clients SHOULD omit this field and servers MUST ignore it for requests with `meta_header.version` >= 2.29. Required for requests with `meta_header.version` <= 2.28. |
 
 
 <a name="neo.fs.v2.accounting.BalanceRequest.Body"></a>
@@ -79,8 +79,7 @@ BalanceRequest message
 ### Message BalanceRequest.Body
 To indicate the account for which the balance is requested, its identifier
 is used. It can be any existing account in FS chain `Balance` smart
-contract. If omitted, client implementation MUST set it to the request's
-signer `OwnerID`.
+contract.
 
 
 | Field | Type | Label | Description |

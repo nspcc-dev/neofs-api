@@ -147,8 +147,9 @@ with/without paddings are accepted.
 ### Message RequestSignData
 RequestSignData contains the data to be signed for a NeoFS API request.
 
-Starting from NeoFS API version 2.29, request signatures MUST be calculated
-over the stable marshaled representation of this message.
+Starting from NeoFS API version 2.29, request signatures for requests that
+require verification MUST be calculated over the stable marshaled
+representation of this message.
 
 The stable-marshaling format of the `request_hash` field MUST be deterministic
 and MUST be encoded in Protocol Buffers V3 format with fields in ascending
